@@ -2,9 +2,10 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"read_image": "00_core.ipynb",
+         "resize_image": "00_core.ipynb"}
 
-modules = []
+modules = ["core.py"]
 
 doc_url = "https://aniketmaurya.github.io/chitra/"
 
