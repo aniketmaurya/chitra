@@ -7,24 +7,21 @@ entries:
 - folders:
   - folderitems:
     - output: web,pdf
-      title: Export to modules
-      url: /export.html
+      title: Overview
+      url: /
     - output: web,pdf
-      title: Convert to html
-      url: /export2html.html
+      title: module name here
+      url: /core
     - output: web,pdf
-      title: Show doc
-      url: /showdoc.html
+      title: image
+      url: /image
     - output: web,pdf
-      title: Test functions
-      url: /test.html
+      title: dataloader
+      url: /dataloader
     - output: web,pdf
-      title: Core functions
-      url: /core.html
-    - output: web,pdf
-      title: Command line functions
-      url: /cli.html
+      title: classification
+      url: /classification
     output: web
-    title: Notebook
+    title: chitra
   output: web
   title: Sidebar
