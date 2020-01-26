@@ -15,7 +15,7 @@
 ## Loading data for image classification
 
 ```python
-from chitra.dataloader import Clf
+from chitra.dataloader import Clf, show_batch
 
 path = '/Users/aniketmaurya/Pictures/cats'
 
@@ -24,12 +24,12 @@ data = clf_dl.from_folder(path)
 
 print('class names:', clf_dl.CLASS_NAMES)
 
-for e in data.take(1):
-    print('image shape:', e[0].shape)
-    print('class:', e[1].numpy())
+show_batch(data, 6, (6,6))
 ```
 
-    class names: (b'whitecat', b'blackcat')
-    image shape: (1, 160, 160, 3)
-    class: b'whitecat'
+    class names: (b'blackcat', b'whitecat')
+
+
+
+![png](docs/images/output_5_1.png)
 
