@@ -1,5 +1,5 @@
 # Chitra
-> Image processing library for creating data pipeline.
+> Library for creating data input pipeline in pure Tensorflow 2.x
 
 
 .
@@ -16,32 +16,20 @@
 
 ```python
 from chitra.dataloader import Clf
-```
 
-```python
 path = '/Users/aniketmaurya/Pictures/cats'
 
 clf_dl = Clf()
 data = clf_dl.from_folder(path)
-```
 
-```python
-clf_dl.CLASS_NAMES
-```
+print('class names:', clf_dl.CLASS_NAMES)
 
-
-
-
-    (b'whitecat', b'blackcat')
-
-
-
-```python
 for e in data.take(1):
     print('image shape:', e[0].shape)
     print('class:', e[1].numpy())
 ```
 
+    class names: (b'whitecat', b'blackcat')
     image shape: (1, 160, 160, 3)
     class: b'whitecat'
 
