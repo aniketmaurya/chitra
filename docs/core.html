@@ -43,131 +43,14 @@ summary: "API details."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="resize_image" class="doc_header"><code>resize_image</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/core.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>resize_image</code>(<strong><code>image</code></strong>:<code>Tensor</code>, <strong><code>size</code></strong>:<code>Union</code>[<code>Tensor</code>, <code>tuple</code>])</p>
+<h4 id="remove_dsstore" class="doc_header"><code>remove_dsstore</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/core.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>remove_dsstore</code>(<strong><code>path</code></strong>)</p>
 </blockquote>
+<p>Deletes .DS_Store files from path and sub-folders of path.</p>
 
 </div>
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># img</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">160</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;tf.Tensor: id=53, shape=(160, 160, 3), dtype=float32, numpy=
-array([[[ 24.439453 ,  15.5859375,  18.707031 ],
-        [ 27.054688 ,  18.121094 ,  21.125    ],
-        [ 76.89258  ,  67.43164  ,  74.0918   ],
-        ...,
-        [ 23.853516 ,  14.853516 ,  18.853516 ],
-        [ 24.       ,  15.       ,  19.       ],
-        [ 21.626953 ,  12.626953 ,  16.626953 ]],
-
-       [[ 25.625    ,  18.25     ,  22.25     ],
-        [ 25.988281 ,  17.851562 ,  21.476562 ],
-        [ 71.228516 ,  63.148438 ,  61.210938 ],
-        ...,
-        [ 21.       ,  12.       ,  16.       ],
-        [ 24.       ,  15.       ,  19.       ],
-        [ 21.       ,  12.       ,  16.       ]],
-
-       [[ 25.375    ,  17.75     ,  21.75     ],
-        [ 29.335938 ,  20.960938 ,  23.878906 ],
-        [ 33.01367  ,  23.763672 ,  26.072266 ],
-        ...,
-        [ 21.       ,  12.       ,  16.       ],
-        [ 22.4375   ,  13.125    ,  17.4375   ],
-        [ 23.853516 ,  14.853516 ,  18.853516 ]],
-
-       ...,
-
-       [[ 87.09766  ,  84.09766  ,  83.09766  ],
-        [ 88.70703  ,  85.70703  ,  84.70703  ],
-        [ 91.14844  ,  87.61133  ,  86.07422  ],
-        ...,
-        [ 84.61914  ,  81.83789  ,  81.64844  ],
-        [ 82.66797  ,  79.833984 ,  79.833984 ],
-        [ 94.5625   ,  89.46875  ,  87.78125  ]],
-
-       [[ 89.       ,  86.       ,  85.       ],
-        [ 86.23828  ,  83.61914  ,  82.61914  ],
-        [ 87.35547  ,  84.35547  ,  83.35547  ],
-        ...,
-        [ 81.       ,  79.       ,  79.       ],
-        [ 82.13672  ,  79.56836  ,  79.56836  ],
-        [ 96.14453  ,  89.94336  ,  88.572266 ]],
-
-       [[ 87.       ,  84.       ,  83.       ],
-        [ 87.       ,  84.       ,  83.       ],
-        [ 87.125    ,  84.125    ,  83.125    ],
-        ...,
-        [ 82.46484  ,  79.73242  ,  79.73242  ],
-        [ 87.8125   ,  84.8457   ,  83.8457   ],
-        [103.       ,  92.       ,  92.       ]]], dtype=float32)&gt;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;/Users/aniketmaurya/Pictures/cats/blackcats/bat10.png&#39;</span><span class="p">)</span>
-<span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">decode_jpeg</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Image.fromarray(img.numpy())</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 

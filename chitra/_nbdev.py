@@ -2,8 +2,12 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"resize_image": "00_core.ipynb",
-         "read_image": "01_image.ipynb"}
+index = {"remove_dsstore": "00_core.ipynb",
+         "read_image": "01_image.ipynb",
+         "resize_image": "01_image.ipynb",
+         "AUTOTUNE": "02_dataloader.ipynb",
+         "get_basename": "02_dataloader.ipynb",
+         "Clf": "02_dataloader.ipynb"}
 
 modules = ["core.py",
            "image.py",
