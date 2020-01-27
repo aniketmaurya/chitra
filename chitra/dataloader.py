@@ -15,7 +15,6 @@ from typing import Union
 from .core import remove_dsstore
 from .image import read_image, resize_image
 
-
 # Cell
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
@@ -24,7 +23,8 @@ def get_basename(path: tf.string):
     assert isinstance(path, tf.Tensor)
     return tf.strings.split(path, os.path.sep)[-1]
 
-def show_batch(data: tf.data.Dataset, limit: int, figsize: tuple = (10,10)):
+
+def show_batch(data: tf.data.Dataset, limit: int, figsize: tuple = (10, 10)):
     """Visualize image and labels
 
     https://www.tensorflow.org/tutorials/load_data/images#load_using_keraspreprocessing
@@ -40,14 +40,14 @@ def show_batch(data: tf.data.Dataset, limit: int, figsize: tuple = (10,10)):
     assert isinstance(figsize, tuple)
 
     plt.figure(figsize=figsize)
-    sub_plot_size = math.ceil(limit/2)
+    sub_plot_size = math.ceil(limit / 2)
 
     for i, e in enumerate(data.take(limit)):
         image, label = e
-        image = image[0].numpy().astype('uint8')
+        image = image.numpy().astype('uint8')
         label = label.numpy().decode()
 
-        ax = plt.subplot(sub_plot_size,sub_plot_size, i+1)
+        ax = plt.subplot(sub_plot_size, sub_plot_size, i + 1)
 
         plt.imshow(image)
         plt.title(label.title())
@@ -58,6 +58,7 @@ class Clf(object):
 
     def __init__(self):
         self.CLASS_NAMES = None
+        self.data = None
 
     def _get_image_list(self, path: str):
         """`path`: pathlib.Path
@@ -68,15 +69,19 @@ class Clf(object):
         return list_images
 
     def _process_path(self, path: str, size: Union[None, tuple] = None):
-        """`path` :str
-        `size`: None or tuple
         """
-        assert isinstance(
-            path,
-            (str,
-             tf.Tensor)), f'type of path is {type(path)}, expected type str'
+        Args:
+            `path` :str
+            `size`: None or tuple
+        Returns:
+            image, label
+        """
+        assert isinstance(path,(str, tf.Tensor)), f'type of path is {type(path)}, expected type str'
         img = read_image(path)
-        img = tf.py_function(resize_image, [img, (160, 160)], [tf.float32])
+
+        # TODO: resizing should be done separately
+        # py_function will degrade performance
+        [img,] = tf.py_function(resize_image, [img, (160, 160)], [tf.float32])
 
         label = tf.strings.split(path, os.path.sep)[-2]
         return img, label
@@ -94,8 +99,13 @@ class Clf(object):
         list_folders = tf.data.Dataset.list_files(str(path / '*'))
         list_images = self._get_image_list(str(path))
 
-        self.CLASS_NAMES = tuple(get_basename(e).numpy() for e in list_folders)
+        self.CLASS_NAMES = tuple(
+            get_basename(e).numpy().decode().title() for e in list_folders)
 
         data = list_images.map(self._process_path, num_parallel_calls=AUTOTUNE)
-        data = data.prefetch(AUTOTUNE)
+        # data = data.map(self._resize)
+
+        # data = data.prefetch(AUTOTUNE)
+        self.data = data
+
         return data
