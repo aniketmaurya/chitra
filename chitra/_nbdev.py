@@ -3,10 +3,10 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"remove_dsstore": "00_core.ipynb",
+         "get_basename": "02_dataloader.ipynb",
          "read_image": "01_image.ipynb",
          "resize_image": "01_image.ipynb",
          "AUTOTUNE": "02_dataloader.ipynb",
-         "get_basename": "02_dataloader.ipynb",
          "show_batch": "02_dataloader.ipynb",
          "Clf": "02_dataloader.ipynb"}
 
