@@ -59,6 +59,7 @@ class Clf(object):
     def __init__(self):
         self.CLASS_NAMES = None
         self.data = None
+        self.shape = None
 
     def _get_image_list(self, path: str):
         """`path`: pathlib.Path
@@ -68,7 +69,7 @@ class Clf(object):
         list_images = tf.data.Dataset.list_files(f'{path}/*/*')
         return list_images
 
-    def _process_path(self, path: str, size: Union[None, tuple] = None):
+    def _process_path(self, path: str):
         """
         Args:
             `path` :str
@@ -76,31 +77,47 @@ class Clf(object):
         Returns:
             image, label
         """
-        assert isinstance(path,(str, tf.Tensor)), f'type of path is {type(path)}, expected type str'
+        assert isinstance(
+            path,
+            (str,
+             tf.Tensor)), f'type of path is {type(path)}, expected type str'
         img = read_image(path)
 
         # TODO: resizing should be done separately
         # py_function will degrade performance
-        [img,] = tf.py_function(resize_image, [img, (160, 160)], [tf.float32])
+        if self.shape:
+            [
+                img,
+            ] = tf.py_function(resize_image, [img, self.shape], [tf.float32])
 
         label = tf.strings.split(path, os.path.sep)[-2]
         return img, label
 
-    def from_folder(self, path: Union[str, pathlib.Path]):
+    def from_folder(self,
+                    path: Union[str, pathlib.Path],
+                    target_shape: Union[None, tuple] = (224, 224)):
         """Load dataset from given path.
         Args:
             path: string, path of folder containing dataset.
         Returns: image, label -> tf.data.Dataset prefetched with tf.data.AUTOTUNE
+
+        By default the loaded image size is 224x224, pass None to load original size.
+        You will get error on `batch()` method if all image size are not same.
         """
         assert isinstance(path, (str, pathlib.Path))
         path = pathlib.Path(path)
         remove_dsstore(path)
+
+        # TODO comments
+        self.shape = target_shape
 
         list_folders = tf.data.Dataset.list_files(str(path / '*'))
         list_images = self._get_image_list(str(path))
 
         self.CLASS_NAMES = tuple(
             get_basename(e).numpy().decode().title() for e in list_folders)
+
+        print(f'CLASSES FOUND: {self.CLASS_NAMES}')
 
         data = list_images.map(self._process_path, num_parallel_calls=AUTOTUNE)
         # data = data.map(self._resize)
