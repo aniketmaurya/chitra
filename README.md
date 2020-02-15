@@ -23,3 +23,10 @@ from chitra.dataloader import Clf, show_batch
 
 # show_batch(data, limit=6, figsize=(6,6))
 ```
+
+    CLASSES FOUND: ('Blackcat', 'Whitecat')
+
+
+
+![png](docs/images/output_4_1.png)
+
