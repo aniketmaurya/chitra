@@ -12,7 +12,6 @@
 ## Loading data for image classification
 
 ```python
-#export
 import tensorflow as tf
 import chitra
 from chitra.dataloader import Clf, show_batch
@@ -25,7 +24,7 @@ data = clf_dl.from_folder(path, target_shape=(224, 224))
 show_batch(data, limit=6, figsize=(6,6))
 ```
 
-    CLASSES FOUND: ('Whitecat', 'Blackcat')
+    CLASSES FOUND: ('Blackcat', 'Whitecat')
 
 
 
