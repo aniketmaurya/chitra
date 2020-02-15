@@ -24,7 +24,7 @@ data = clf_dl.from_folder(path, target_shape=(224, 224))
 show_batch(data, limit=6, figsize=(6,6))
 ```
 
-    CLASSES FOUND: ('Blackcat', 'Whitecat')
+    CLASSES FOUND: ('Whitecat', 'Blackcat')
 
 
 
