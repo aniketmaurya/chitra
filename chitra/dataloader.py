@@ -93,9 +93,15 @@ class Clf(object):
         label = tf.strings.split(path, os.path.sep)[-2]
         return img, label
 
+    def _ensure_shape(self, img, labels):
+        img = tf.ensure_shape(img, (*self.shape, 3), name='image')
+        return img, labels
+
+
     def from_folder(self,
                     path: Union[str, pathlib.Path],
-                    target_shape: Union[None, tuple] = (224, 224)):
+                    target_shape: Union[None, tuple] = (224, 224),
+                    rescale: float = 1. / 255):
         """Load dataset from given path.
         Args:
             path: string, path of folder containing dataset.
@@ -121,6 +127,8 @@ class Clf(object):
 
         data = list_images.map(self._process_path, num_parallel_calls=AUTOTUNE)
         # data = data.map(self._resize)
+
+        data = data.map(self._ensure_shape, num_parallel_calls=AUTOTUNE)
 
         # data = data.prefetch(AUTOTUNE)
         self.data = data
