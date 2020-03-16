@@ -1,9 +1,6 @@
 # Chitra
-> Library for creating data input pipeline in pure Tensorflow 2.x
+> Library for creating data input pipeline in Tensorflow
 
-
-.
-<!-- This file will become your README and also the index of your documentation. -->
 
 ## Install
 
@@ -15,21 +12,21 @@
 ## Loading data for image classification
 
 ```python
+import tensorflow as tf
+import chitra
 from chitra.dataloader import Clf, show_batch
 
 path = '/Users/aniketmaurya/Pictures/cats'
 
 clf_dl = Clf()
-data = clf_dl.from_folder(path)
+data = clf_dl.from_folder(path, target_shape=(224, 224))
 
-print('class names:', clf_dl.CLASS_NAMES)
-
-show_batch(data, 6, (6,6))
+clf_dl.show_batch(6, figsize=(6,6))
 ```
 
-    class names: (b'blackcat', b'whitecat')
+    CLASSES ENCODED: {'blackcat': 0, 'whitecat': 1}
 
 
 
-![png](docs/images/output_5_1.png)
+![png](docs/images/output_4_1.png)
 
