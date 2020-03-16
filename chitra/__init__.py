@@ -2,4 +2,4 @@ from . import dataloader
 from . import core
 from . import image
 
-__version__ = "0.0.8"
+__version__ = "0.0.9"

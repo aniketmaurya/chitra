@@ -8,12 +8,11 @@ from typing import Union
 
 # Cell
 
-
 def read_image(path: str, channels: int = 3):
     """Reads an image file from the path and return the rgb image in tf.Tensor format.
     """
     img: tf.Tensor = tf.io.read_file(path)
-    img: tf.Tensor = tf.io.decode_image(img, channels=channels)[..., :3]
+    img: tf.Tensor = tf.io.decode_image(img, channels=channels, expand_animations=False)
     return img
 
 
