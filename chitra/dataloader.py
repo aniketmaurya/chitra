@@ -147,7 +147,6 @@ class Clf(object):
         img = tf.ensure_shape(img, (*self.shape, 3), name='image')
         return img, labels
 
-    @tf.function
     def create_lookup_table(self):
         """Creates tf.lookup.StaticHashTable for encoding labels"""
 
@@ -169,7 +168,6 @@ class Clf(object):
         if encode_classes:
             self._encode_classes()
 
-    @tf.function
     def _encode_classes(self):
 
         class_names = sorted(self.CLASS_NAMES)

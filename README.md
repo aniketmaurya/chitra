@@ -1,5 +1,5 @@
 # Chitra
-> Library for creating data input pipeline in pure Tensorflow 2.x
+> Library for creating data input pipeline in Tensorflow
 
 
 ## Install
@@ -21,11 +21,10 @@ path = '/Users/aniketmaurya/Pictures/cats'
 clf_dl = Clf()
 data = clf_dl.from_folder(path, target_shape=(224, 224))
 
-show_batch(clf_dl, limit=6, figsize=(6,6))
+clf_dl.show_batch(6, figsize=(6,6))
 ```
 
-    CLASSES FOUND: ('blackcat', 'whitecat')
-    CLASSES ENCODED AS {'blackcat': 0, 'whitecat': 1}
+    CLASSES ENCODED: {'blackcat': 0, 'whitecat': 1}
 
 
 
