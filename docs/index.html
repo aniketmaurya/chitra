@@ -57,7 +57,7 @@ summary: "Library for creating data input pipeline in Tensorflow"
 <span class="kn">import</span> <span class="nn">chitra</span>
 <span class="kn">from</span> <span class="nn">chitra.dataloader</span> <span class="kn">import</span> <span class="n">Clf</span><span class="p">,</span> <span class="n">show_batch</span>
 
-<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/aniketmaurya/Pictures/cats&#39;</span>
+<span class="c1"># path = &#39;/Users/aniketmaurya/Pictures/cats&#39;</span>
 
 <span class="n">clf_dl</span> <span class="o">=</span> <span class="n">Clf</span><span class="p">()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">clf_dl</span><span class="o">.</span><span class="n">from_folder</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">target_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">))</span>

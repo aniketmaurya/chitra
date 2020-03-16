@@ -8,6 +8,7 @@ from typing import Union
 
 # Cell
 
+
 def read_image(path: str, channels: int = 3):
     """Reads an image file from the path and return the rgb image in tf.Tensor format.
     """
