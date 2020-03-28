@@ -102,7 +102,6 @@ class Clf(object):
             plt.title(label)
             plt.axis('off')
 
-    @tf.function
     def _get_image_list(self, path: str):
         """`path`: pathlib.Path
         Returns: list of images
@@ -128,12 +127,12 @@ class Clf(object):
 
         # TODO: resizing should be done separately
         # py_function will degrade performance
-        #         if self.shape:
-        #             [
-        #                 img,
-        #             ] = tf.py_function(resize_image, [img, self.shape], [tf.float32])
         if self.shape:
-            img = tf.image.resize(img, self.shape)
+            [
+                img,
+            ] = tf.py_function(resize_image, [img, self.shape], [tf.float32])
+        #         if self.shape:
+        #             img = tf.image.resize(img, self.shape)
 
         label = tf.strings.split(path, os.path.sep)[-2]
         label = self._lookup_class_to_idx.lookup(
@@ -205,16 +204,16 @@ class Clf(object):
         self.shape = target_shape
 
         list_folders = tf.data.Dataset.list_files(str(path / '*'))
-        list_images = self._get_image_list(str(path)).cache()
+
+        list_images = self._get_image_list(str(path))
+        if shuffle: list_images.shuffle(shuffle).cache()
+        else: list_images.cache()
+
 
         self._get_classnames(list_folders, encode_classes)
 
         if encode_classes: print(f'CLASSES ENCODED: {self.class_to_idx}')
         else: print(f'CLASSES FOUND: {self.CLASS_NAMES}')
-
-
-        if shuffle: list_images.shuffle(shuffle)
-
 
         data = list_images.map(self._process_path, num_parallel_calls=AUTOTUNE)
 

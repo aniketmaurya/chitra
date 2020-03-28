@@ -11,7 +11,7 @@
 <!-- Fill me in please! Don't forget code examples: -->
 ## Loading data for image classification
 
-```python
+```
 import tensorflow as tf
 import chitra
 from chitra.dataloader import Clf, show_batch
