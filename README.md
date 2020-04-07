@@ -1,5 +1,3 @@
-`https://github.com/aniketmaurya/chitra`
-
 # Chitra
 > Library for creating data input pipeline in Tensorflow
 
@@ -27,8 +25,4 @@ clf_dl.show_batch(8, figsize=(8,8))
 ```
 
     CLASSES ENCODED: {'cat': 0, 'dog': 1}
-
-
-
-![png](docs/images/output_4_1.png)
 
