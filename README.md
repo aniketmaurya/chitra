@@ -1,5 +1,5 @@
 # Chitra
-> Library for creating data input pipeline in Tensorflow
+> Image utility library for every Deep Learner
 
 
 ## Install
