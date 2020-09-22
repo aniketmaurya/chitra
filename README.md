@@ -56,6 +56,8 @@ plt.imshow(image)
 ## Visualization
 ### Image annotation
 
+Thanks to [fizyr](https://github.com/fizyr/keras-retinanet) keras-retinanet
+
 ```python
 from chitra.visualization import draw_annotations
 ```
