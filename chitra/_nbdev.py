@@ -8,11 +8,19 @@ index = {"remove_dsstore": "00_core.ipynb",
          "resize_image": "01_image.ipynb",
          "AUTOTUNE": "02_dataloader.ipynb",
          "show_batch": "02_dataloader.ipynb",
-         "Clf": "02_dataloader.ipynb"}
+         "Clf": "02_dataloader.ipynb",
+         "label_color": "03_visualization.ipynb",
+         "colors": "03_visualization.ipynb",
+         "draw_box": "03_visualization.ipynb",
+         "draw_caption": "03_visualization.ipynb",
+         "draw_boxes": "03_visualization.ipynb",
+         "draw_detections": "03_visualization.ipynb",
+         "draw_annotations": "03_visualization.ipynb"}
 
 modules = ["core.py",
            "image.py",
-           "dataloader.py"]
+           "dataloader.py",
+           "visualization.py"]
 
 doc_url = "https://aniketmaurya.github.io/chitra/"
 

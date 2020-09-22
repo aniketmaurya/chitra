@@ -1,9 +1,9 @@
 {
   "chitra": {
     "Overview": "/",
-    "module name here": "/core",
-    "image": "/image",
-    "dataloader": "/dataloader",
-    "classification": "/classification"
+    "module name here": "core.html",
+    "image": "image.html",
+    "dataloader": "dataloader.html",
+    "visualization": "visualization.html"
   }
 }

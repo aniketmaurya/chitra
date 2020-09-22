@@ -11,16 +11,16 @@ entries:
       url: /
     - output: web,pdf
       title: module name here
-      url: /core
+      url: core.html
     - output: web,pdf
       title: image
-      url: /image
+      url: image.html
     - output: web,pdf
       title: dataloader
-      url: /dataloader
+      url: dataloader.html
     - output: web,pdf
-      title: classification
-      url: /classification
+      title: visualization
+      url: visualization.html
     output: web
     title: chitra
   output: web
