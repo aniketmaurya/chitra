@@ -53,6 +53,9 @@ plt.imshow(image)
 ![png](docs/images/output_6_1.png)
 
 
+## Visualization
+### Image annotation
+
 ```python
 from chitra.visualization import draw_annotations
 ```
@@ -76,5 +79,5 @@ plt.imshow(image)
 
 
 
-![png](docs/images/output_9_1.png)
+![png](docs/images/output_10_1.png)
 
