@@ -2,7 +2,7 @@
 
 
 
-![logo](nbs/docs/images/company_logo.png)
+![logo](../../../../../docs/images/company_logo.png)
 
 
 
