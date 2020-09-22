@@ -13,7 +13,16 @@ It can also generate bounding-boxes from the annotated dataset.
 **If you have more use cases please raise an issue with the feature you want.**
 
 ## Installation
-**pip install -U chitra**
+
+### Using pip (recommended)
+**`pip install -U chitra`**
+
+### Manually
+`git clone https://github.com/aniketmaurya/chitra.git`
+
+`cd chitra`
+
+`pip install -e .`
 
 ## How to use
 
