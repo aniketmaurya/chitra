@@ -2,11 +2,9 @@
 
 
 
-![logo](../../../../../docs/images/company_logo.png)
+![logo](https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/chitra-logo.png "Image utility library for every Deep Learner")
 
-
-
-> Image utility library for every Deep Learner
+Image utility library for Deep Learning
 
 ## What is **CHITRA**
 
