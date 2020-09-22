@@ -1,6 +1,12 @@
-# Chitra
-> Image utility library for every Deep Learner
+# Title
 
+
+
+![logo](nbs/docs/images/company_logo.png)
+
+
+
+> Image utility library for every Deep Learner
 
 ## What is **CHITRA**
 
@@ -50,7 +56,7 @@ clf_dl.show_batch(8, figsize=(8,8))
 
 
 
-![png](docs/images/output_5_1.png)
+![png](docs/images/output_6_1.png)
 
 
 ```python
@@ -68,7 +74,7 @@ plt.imshow(image)
 
 
 
-![png](docs/images/output_6_1.png)
+![png](docs/images/output_7_1.png)
 
 
 ### Visualization
@@ -99,5 +105,5 @@ plt.imshow(image)
 
 
 
-![png](docs/images/output_10_1.png)
+![png](docs/images/output_11_1.png)
 
