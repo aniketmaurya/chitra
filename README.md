@@ -2,14 +2,23 @@
 > Image utility library for every Deep Learner
 
 
-## Install
+## What is **CHITRA**
 
-`pip install chitra`
+Chitra (चित्र) is an image utility library for Deep Learning tasks. *(It is not image-processing library.)*
+
+Chitra reduces image data loading boilerplates for classification and object-detection.
+
+It can also generate bounding-boxes from the annotated dataset.
+
+**If you have more use cases please raise an issue with the feature you want.**
+
+## Installation
+**pip install -U chitra**
 
 ## How to use
 
 <!-- Fill me in please! Don't forget code examples: -->
-## Loading data for image classification
+### Loading data for image classification
 
 ```python
 import numpy as np
@@ -53,8 +62,8 @@ plt.imshow(image)
 ![png](docs/images/output_6_1.png)
 
 
-## Visualization
-### Image annotation
+### Visualization
+#### Image annotation
 
 Thanks to [fizyr](https://github.com/fizyr/keras-retinanet) keras-retinanet
 
