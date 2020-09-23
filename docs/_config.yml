@@ -3,13 +3,13 @@ output: web
 topnav_title: chitra
 site_title: chitra
 company_name: Aniket Maurya
-description: Image processing framework in Tensorflow 2.x
+description: Image utility library for Deep Learning
 # Set to false to disable KaTeX math
 use_math: true
 # Add Google analytics id if you have one and want to use it here
 google_analytics:
 # See http://nbdev.fast.ai/search for help with adding Search
-google_search:
+google_search: 350c3ff2aa64c8a64
 
 host: 127.0.0.1
 # the preview server used. Leave as is.
