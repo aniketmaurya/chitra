@@ -20,11 +20,11 @@ If you have more use cases please [**raise an issue**](https://github.com/aniket
 
 ## From source
 
-`git clone https://github.com/aniketmaurya/chitra.git`
-
-`cd chitra`
-
-`pip install -e .`
+```
+git clone https://github.com/aniketmaurya/chitra.git
+cd chitra
+pip install -e .
+```
 
 # Usage
 
