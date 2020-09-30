@@ -2,7 +2,7 @@
 <img src="./chitra_banner.png" alt="chitra">
 </p>
 
-## What is **chitra**?
+# What is **chitra**?
 
 **chitra** (**चित्र**) is an image utility library for Deep Learning tasks. *(It is not image-processing library)*
 
@@ -12,22 +12,23 @@ It can also generate bounding-boxes from the annotated dataset.
 
 If you have more use cases please [**raise an issue**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
 
-## Installation
+# Installation
 
-### Using pip (recommended)
-**`pip install -U chitra`**
+## Using pip (recommended)
 
-### Manually
+`pip install -U chitra`
+
+## From source
+
 `git clone https://github.com/aniketmaurya/chitra.git`
 
 `cd chitra`
 
 `pip install -e .`
 
-## How to use
+# Usage
 
-<!-- Fill me in please! Don't forget code examples: -->
-### Loading data for image classification
+## Loading data for image classification
 
 ```python
 import numpy as np
@@ -71,11 +72,11 @@ plt.imshow(image)
 ![png](docs/images/output_7_1.png)
 
 
-### Visualization
+## Visualization
 
-#### Image annotation
+### Image annotation
 
-Thanks to [fizyr](https://github.com/fizyr/keras-retinanet) keras-retinanet
+Thanks to [**fizyr**](https://github.com/fizyr/keras-retinanet) keras-retinanet.
 
 ```python
 from chitra.visualization import draw_annotations
@@ -102,3 +103,6 @@ plt.imshow(image)
 
 ![png](docs/images/output_11_1.png)
 
+# Contributing
+
+Contributions of any kind are welcome. Please check the [**Contributing Guidelines**](https://github.com/aniketmaurya/chitra/blob/master/CONTRIBUTING.md) before contributing.
