@@ -1,20 +1,16 @@
-# Chitra
+<p align="center">
+<img src="./chitra_banner.png" alt="chitra">
+</p>
 
+## What is **chitra**?
 
+**chitra** (**चित्र**) is an image utility library for Deep Learning tasks. *(It is not image-processing library)*
 
-![logo](https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/chitra-logo.png)
-
-Image utility library for Deep Learning
-
-## What is **CHITRA**
-
-Chitra (चित्र) is an image utility library for Deep Learning tasks. *(It is not image-processing library.)*
-
-Chitra reduces image data loading boilerplates for classification and object-detection.
+chitra reduces image data loading boilerplates for classification and object-detection.
 
 It can also generate bounding-boxes from the annotated dataset.
 
-**If you have more use cases please raise an issue with the feature you want.**
+If you have more use cases please [**raise an issue**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
 
 ## Installation
 
