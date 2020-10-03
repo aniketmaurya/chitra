@@ -1,16 +1,10 @@
-<p align="center">
-<img src="./chitra_banner.png" alt="chitra">
-</p>
-
 # What is **chitra**?
 
-**chitra** (**चित्र**) is an image utility library for Deep Learning tasks. *(It is not image-processing library)*
 
-chitra reduces image data loading boilerplates for classification and object-detection.
 
-It can also generate bounding-boxes from the annotated dataset.
-
-If you have more use cases please [**raise an issue**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
+<p align="center">
+<img src="nbs/../assets/chitra_banner.png" alt="chitra">
+</p>
 
 # Installation
 
@@ -29,6 +23,8 @@ pip install -e .
 # Usage
 
 ## Loading data for image classification
+
+
 
 ```python
 import numpy as np
@@ -51,7 +47,7 @@ clf_dl.show_batch(8, figsize=(8,8))
 
 
 
-![png](docs/images/output_6_1.png)
+![png](docs/images/output_4_1.png)
 
 
 ```python
@@ -59,17 +55,11 @@ for e in data.take(1):
     image = e[0].numpy().astype('uint8')
     label = e[1].numpy()
 plt.imshow(image)
+plt.show()
 ```
 
 
-
-
-    <matplotlib.image.AxesImage at 0x7fee1000df10>
-
-
-
-
-![png](docs/images/output_7_1.png)
+![png](docs/images/output_5_0.png)
 
 
 ## Visualization
@@ -80,9 +70,7 @@ Thanks to [**fizyr**](https://github.com/fizyr/keras-retinanet) keras-retinanet.
 
 ```python
 from chitra.visualization import draw_annotations
-```
 
-```python
 labels = np.array([label])
 bbox = np.array([[30, 50, 170, 190]])
 label_to_name = lambda x: 'Cat' if x==0 else 'Dog'
@@ -91,17 +79,12 @@ label_to_name = lambda x: 'Cat' if x==0 else 'Dog'
 ```python
 draw_annotations(image, ({'bboxes': bbox, 'labels':labels,}), label_to_name=label_to_name)
 plt.imshow(image)
+plt.show()
 ```
 
 
+![png](docs/images/output_8_0.png)
 
-
-    <matplotlib.image.AxesImage at 0x7fee0fe37890>
-
-
-
-
-![png](docs/images/output_11_1.png)
 
 # Contributing
 
