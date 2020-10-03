@@ -3,7 +3,7 @@
 
 
 <p align="center">
-<img src="nbs/../assets/chitra_banner.png" alt="chitra">
+<img src="nbs/assets/chitra_banner.png" alt="chitra">
 </p>
 
 # Installation
