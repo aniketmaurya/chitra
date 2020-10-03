@@ -1,10 +1,16 @@
-# What is **chitra**?
-
-
-
 <p align="center">
 <img src="nbs/assets/chitra_banner.png" alt="chitra">
 </p>
+
+# What is **chitra**?
+
+**chitra** (**चित्र**) is an image utility library for Deep Learning tasks. *(It is not image-processing library)*
+
+chitra reduces image data loading boilerplates for classification and object-detection.
+
+It can also generate bounding-boxes from the annotated dataset.
+
+If you have more use cases please [**raise an issue**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
 
 # Installation
 
