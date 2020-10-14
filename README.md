@@ -2,7 +2,7 @@
 
 
 
-# What is chitra?
+## What is chitra?
 
 **chitra** (**चित्र**) is an image utility library for Deep Learning tasks. *(It is not image-processing library)*
 
@@ -12,13 +12,13 @@ It can also generate bounding-boxes from the annotated dataset.
 
 If you have more use cases please [**raise an issue**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
 
-# Installation
+## Installation
 
-## Using pip (recommended)
+### Using pip (recommended)
 
 `pip install -U chitra`
 
-## From source
+### From source
 
 ```
 git clone https://github.com/aniketmaurya/chitra.git
@@ -26,9 +26,9 @@ cd chitra
 pip install -e .
 ```
 
-# Usage
+## Usage
 
-## Loading data for image classification
+### Loading data for image classification
 
 
 
@@ -53,7 +53,7 @@ clf_dl.show_batch(8, figsize=(8,8))
 
 
 
-![png](docs/images/output_4_1.png)
+![svg](docs/images/output_4_1.svg)
 
 
 ```python
@@ -65,7 +65,7 @@ plt.show()
 ```
 
 
-![png](docs/images/output_5_0.png)
+![svg](docs/images/output_5_0.svg)
 
 
 ## Visualization
@@ -89,9 +89,9 @@ plt.show()
 ```
 
 
-![png](docs/images/output_8_0.png)
+![svg](docs/images/output_8_0.svg)
 
 
-# Contributing
+## Contributing
 
 Contributions of any kind are welcome. Please check the [**Contributing Guidelines**](https://github.com/aniketmaurya/chitra/blob/master/CONTRIBUTING.md) before contributing.
