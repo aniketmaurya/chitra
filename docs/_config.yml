@@ -60,5 +60,13 @@ sidebars:
 - home_sidebar
 permalink: pretty
 
+# Github and twitter are optional:
+minima:
+  social_links:
+    twitter: aniketmaurya
+    github: aniketmaurya
+
 theme: jekyll-theme-cayman
-baseurl: /chitra/
+url: "https://chitra.aniketmaurya.ml" # the base hostname & protocol for your site, e.g. http://example.com
+
+baseurl: ""
