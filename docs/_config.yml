@@ -1,9 +1,9 @@
 repository: aniketmaurya/chitra
 output: web
 topnav_title: chitra
-site_title: chitra
+site_title: Image utility library for Deep Learning
 company_name: Aniket Maurya
-description: Image utility library for Deep Learning
+description: Image utility library for Deep Learning | Simplifies bounding box creation and image data loading
 # Set to false to disable KaTeX math
 use_math: true
 # Add Google analytics id if you have one and want to use it here
@@ -67,6 +67,6 @@ minima:
     github: aniketmaurya
 
 theme: jekyll-theme-cayman
-url: "https://chitra.aniketmaurya.ml" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://chitra.aniketmaurya.ml" # the base hostname & protocol for your site, e.g. http://example.com
 
 baseurl: ""
