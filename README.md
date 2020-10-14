@@ -2,6 +2,10 @@
 
 
 
+<p align="center">
+<img src="nbs/../chitra_banner.png" alt="chitra">
+</p>
+
 ## What is chitra?
 
 **chitra** (**चित्र**) is an image utility library for Deep Learning tasks. *(It is not image-processing library)*
@@ -53,7 +57,7 @@ clf_dl.show_batch(8, figsize=(8,8))
 
 
 
-![svg](docs/images/output_4_1.svg)
+![svg](docs/images/output_5_1.svg)
 
 
 ```python
@@ -65,7 +69,7 @@ plt.show()
 ```
 
 
-![svg](docs/images/output_5_0.svg)
+![svg](docs/images/output_6_0.svg)
 
 
 ## Visualization
@@ -89,7 +93,7 @@ plt.show()
 ```
 
 
-![svg](docs/images/output_8_0.svg)
+![svg](docs/images/output_9_0.svg)
 
 
 ## Contributing
