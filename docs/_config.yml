@@ -61,4 +61,5 @@ sidebars:
 permalink: pretty
 
 theme: jekyll-theme-cayman
-baseurl: chitra.aniketmaurya.ml
+baseurl: /chitra/
+url: chitra.aniketmaurya.ml
