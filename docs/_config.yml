@@ -1,3 +1,6 @@
+- name: fastpages: An easy to use blogging platform with support for Jupyter Notebooks.
+  uses: fastai/fastpages@v2.1.5
+
 repository: aniketmaurya/chitra
 output: web
 topnav_title: chitra
