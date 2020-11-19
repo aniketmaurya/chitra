@@ -3,7 +3,7 @@
 
 
 <p align="center">
-<img src="nbs/../chitra_banner.png" alt="chitra">
+<img src="nbs/chitra_banner.png" alt="chitra">
 </p>
 
 ## What is chitra?
@@ -57,7 +57,7 @@ clf_dl.show_batch(8, figsize=(8,8))
 
 
 
-![svg](docs/images/output_5_1.svg)
+![png](docs/images/output_5_1.png)
 
 
 ```python
@@ -69,7 +69,7 @@ plt.show()
 ```
 
 
-![svg](docs/images/output_6_0.svg)
+![png](docs/images/output_6_0.png)
 
 
 ## Visualization
@@ -93,7 +93,19 @@ plt.show()
 ```
 
 
-![svg](docs/images/output_9_0.svg)
+![png](docs/images/output_9_0.png)
+
+
+## Utils
+
+```python
+from chitra.utils import limit_gpu
+
+# limit the amount of GPU required for your training
+limit_gpu(gpu_id=0, memory_limit=1024*2)
+```
+
+    No GPU found in your system!
 
 
 ## Contributing

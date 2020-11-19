@@ -4,6 +4,7 @@
     "module name here": "core.html",
     "image": "image.html",
     "dataloader": "dataloader.html",
-    "visualization": "visualization.html"
+    "visualization": "visualization.html",
+    "utils": "utils.html"
   }
 }
