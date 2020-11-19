@@ -15,12 +15,14 @@ index = {"remove_dsstore": "00_core.ipynb",
          "draw_caption": "03_visualization.ipynb",
          "draw_boxes": "03_visualization.ipynb",
          "draw_detections": "03_visualization.ipynb",
-         "draw_annotations": "03_visualization.ipynb"}
+         "draw_annotations": "03_visualization.ipynb",
+         "limit_gpu": "04_utils.ipynb"}
 
 modules = ["core.py",
            "image.py",
            "dataloader.py",
-           "visualization.py"]
+           "visualization.py",
+           "utils.py"]
 
 doc_url = "https://aniketmaurya.github.io/chitra/"
 

@@ -13,7 +13,8 @@ from typing import Union
 
 # Cell
 def remove_dsstore(path):
-    """Deletes .DS_Store files from path and sub-folders of path.
+    """
+    Deletes .DS_Store files from path and sub-folders of path.
     """
     path = pathlib.Path(path)
 
