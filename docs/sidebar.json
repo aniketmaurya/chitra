@@ -1,10 +1,11 @@
 {
   "chitra": {
     "Overview": "/",
-    "module name here": "core.html",
+    "core": "core.html",
     "image": "image.html",
     "dataloader": "dataloader.html",
     "visualization": "visualization.html",
-    "utils": "utils.html"
+    "utils": "utils.html",
+    "datagenerator": "datagenerator.html"
   }
 }

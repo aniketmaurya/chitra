@@ -10,7 +10,7 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: module name here
+      title: core
       url: core.html
     - output: web,pdf
       title: image
@@ -24,6 +24,9 @@ entries:
     - output: web,pdf
       title: utils
       url: utils.html
+    - output: web,pdf
+      title: datagenerator
+      url: datagenerator.html
     output: web
     title: chitra
   output: web

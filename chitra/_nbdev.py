@@ -16,15 +16,20 @@ index = {"remove_dsstore": "00_core.ipynb",
          "draw_boxes": "03_visualization.ipynb",
          "draw_detections": "03_visualization.ipynb",
          "draw_annotations": "03_visualization.ipynb",
-         "limit_gpu": "04_utils.ipynb"}
+         "limit_gpu": "04_utils.ipynb",
+         "get_filenames": "05_datagenerator.ipynb",
+         "get_label": "05_datagenerator.ipynb",
+         "ImageSizeList": "05_datagenerator.ipynb",
+         "Dataset": "05_datagenerator.ipynb"}
 
 modules = ["core.py",
            "image.py",
            "dataloader.py",
            "visualization.py",
-           "utils.py"]
+           "utils.py",
+           "datagenerator.py"]
 
-doc_url = "https://aniketmaurya.github.io/chitra/"
+doc_url = "https://chitra.aniketmaurya.ml/chitra/"
 
 git_url = "https://github.com/aniketmaurya/chitra/tree/master/"
 

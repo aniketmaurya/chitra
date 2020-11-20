@@ -3,7 +3,7 @@
 
 
 <p align="center">
-<img src="nbs/chitra_banner.png" alt="chitra">
+<img src="nbs/../chitra_banner.png" alt="chitra">
 </p>
 
 ## What is chitra?
