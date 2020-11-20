@@ -89,18 +89,6 @@ plt.show()
 ![png](docs/images/output_9_0.png)
 
 
-## Utils
-
-```python
-from chitra.utils import limit_gpu
-
-# limit the amount of GPU required for your training
-limit_gpu(gpu_id=0, memory_limit=1024*2)
-```
-
-    No GPU found in your system!
-
-
 ## Image datagenerator
 Dataset class provides the flexibility to load image dataset by updating components of the class.
 
@@ -202,6 +190,18 @@ for img, label in ds.generator():
     first call to generator: (28, 28, 3)
     seconds call to generator: (32, 32, 3)
     third call to generator: (64, 64, 3)
+
+
+## Utils
+
+```python
+from chitra.utils import limit_gpu
+
+# limit the amount of GPU required for your training
+limit_gpu(gpu_id=0, memory_limit=1024*2)
+```
+
+    1 Physical GPUs, 1 Logical GPUs
 
 
 ## Contributing
