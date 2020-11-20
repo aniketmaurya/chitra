@@ -53,13 +53,6 @@ data = clf_dl.from_folder(path, target_shape=(224, 224))
 clf_dl.show_batch(8, figsize=(8,8))
 ```
 
-    CLASSES ENCODED: {'cat': 0, 'dog': 1}
-
-
-
-![png](docs/images/output_5_1.png)
-
-
 ```python
 for e in data.take(1):
     image = e[0].numpy().astype('uint8')
@@ -106,6 +99,109 @@ limit_gpu(gpu_id=0, memory_limit=1024*2)
 ```
 
     No GPU found in your system!
+
+
+## Image datagenerator
+Dataset class provides the flexibility to load image dataset by updating components of the class.
+
+Components of Dataset class are:
+- image file generator
+- resizer
+- label generator
+- image loader
+
+These components can be updated with custom function by the user according to their dataset structure. For example the Tiny Imagenet dataset is organized as-
+
+```
+train_folder/
+    folder1/
+               file.txt
+               folder2/
+                     image1.jpg
+                     image2.jpg
+                     .
+                     .
+                     .
+                     imageN.jpg
+                    
+                      
+```
+
+The inbuilt file generator search for images on the `folder1`, now we can just update the `image file generator` and rest of the functionality will remain same.
+
+Dataset also support progressive resizing of images.
+
+```python
+from chitra.datagenerator import Dataset
+from glob import glob
+```
+
+```python
+ds = Dataset('/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train')
+# it will load the folders and NOT images
+ds.filenames[:3]
+```
+
+    No item present in the image size list
+
+
+
+
+
+    ['/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train/n03584254',
+     '/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train/n02403003',
+     '/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train/n02056570']
+
+
+
+```python
+def new_image_fileloader(path): return glob(f'{path}/*/images/*')
+
+ds.update_component('get_filenames', new_image_fileloader)
+ds.filenames[:3]
+```
+
+    get_filenames updated with <function new_image_fileloader at 0x7f52094dce60>
+
+
+
+
+
+    ['/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train/n03584254/images/n03584254_251.JPEG',
+     '/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train/n03584254/images/n03584254_348.JPEG',
+     '/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train/n03584254/images/n03584254_465.JPEG']
+
+
+
+### Progressive resizing
+
+```python
+image_sz_list = [(28, 28), (32, 32), (64, 64)]
+
+ds = Dataset('/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train', image_size=image_sz_list)
+ds.update_component('get_filenames', new_image_fileloader)
+
+# first call to generator
+for img, label in ds.generator():
+    print('first call to generator:', img.shape)
+    break
+
+# seconds call to generator
+for img, label in ds.generator():
+    print('seconds call to generator:', img.shape)
+    break
+
+# third call to generator
+for img, label in ds.generator():
+    print('third call to generator:', img.shape)
+    break
+
+```
+
+    get_filenames updated with <function new_image_fileloader at 0x7f52094dce60>
+    first call to generator: (28, 28, 3)
+    seconds call to generator: (32, 32, 3)
+    third call to generator: (64, 64, 3)
 
 
 ## Contributing
