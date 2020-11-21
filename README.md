@@ -124,6 +124,8 @@ from chitra.datagenerator import Dataset
 from glob import glob
 ```
 
+### Updating component
+
 ```python
 ds = Dataset('/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train')
 # it will load the folders and NOT images
