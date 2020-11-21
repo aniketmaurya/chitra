@@ -117,7 +117,7 @@ train_folder/
 
 The inbuilt file generator search for images on the `folder1`, now we can just update the `image file generator` and rest of the functionality will remain same.
 
-Dataset also support progressive resizing of images.
+**Dataset also support progressive resizing of images.**
 
 ```python
 from chitra.datagenerator import Dataset
