@@ -149,7 +149,7 @@ ds.update_component('get_filenames', new_image_fileloader)
 ds.filenames[:3]
 ```
 
-    get_filenames updated with <function new_image_fileloader at 0x7f52094dce60>
+    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18f440>
 
 
 
@@ -186,10 +186,38 @@ for img, label in ds.generator():
 
 ```
 
-    get_filenames updated with <function new_image_fileloader at 0x7f52094dce60>
+    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18f440>
     first call to generator: (28, 28, 3)
     seconds call to generator: (32, 32, 3)
     third call to generator: (64, 64, 3)
+
+
+## tf.data support
+Creating a `tf.data` dataloader was never as easy as this one liner. It converts the Python generator into `tf.data.Dataset` for a faster data loading, prefetching, caching and everything provided by tf.data.
+
+```python
+image_sz_list = [(28, 28), (32, 32), (64, 64)]
+
+ds = Dataset('/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train', image_size=image_sz_list)
+ds.update_component('get_filenames', new_image_fileloader)
+
+dl = ds.get_tf_dataset()
+
+for e in dl.take(1):
+    print(e[0].shape)
+
+for e in dl.take(1):
+    print(e[0].shape)
+
+for e in dl.take(1):
+    print(e[0].shape)
+```
+
+    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18f440>
+    (32, 32, 3)
+    (64, 64, 3)
+    Returning the last set size which is: (64, 64)
+    (64, 64, 3)
 
 
 ## Utils

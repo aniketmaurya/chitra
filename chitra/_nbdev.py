@@ -20,6 +20,7 @@ index = {"remove_dsstore": "00_core.ipynb",
          "get_filenames": "05_datagenerator.ipynb",
          "get_label": "05_datagenerator.ipynb",
          "ImageSizeList": "05_datagenerator.ipynb",
+         "LabelEncoder": "05_datagenerator.ipynb",
          "Dataset": "05_datagenerator.ipynb"}
 
 modules = ["core.py",
