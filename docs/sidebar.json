@@ -4,8 +4,8 @@
     "core": "core.html",
     "image": "image.html",
     "dataloader": "dataloader.html",
+    "datagenerator": "datagenerator.html",
     "visualization": "visualization.html",
-    "utils": "utils.html",
-    "datagenerator": "datagenerator.html"
+    "utils": "utils.html"
   }
 }

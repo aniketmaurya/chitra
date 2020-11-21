@@ -19,14 +19,14 @@ entries:
       title: dataloader
       url: dataloader.html
     - output: web,pdf
+      title: datagenerator
+      url: datagenerator.html
+    - output: web,pdf
       title: visualization
       url: visualization.html
     - output: web,pdf
       title: utils
       url: utils.html
-    - output: web,pdf
-      title: datagenerator
-      url: datagenerator.html
     output: web
     title: chitra
   output: web

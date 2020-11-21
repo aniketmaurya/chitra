@@ -9,26 +9,26 @@ index = {"remove_dsstore": "00_core.ipynb",
          "AUTOTUNE": "02_dataloader.ipynb",
          "show_batch": "02_dataloader.ipynb",
          "Clf": "02_dataloader.ipynb",
-         "label_color": "03_visualization.ipynb",
-         "colors": "03_visualization.ipynb",
-         "draw_box": "03_visualization.ipynb",
-         "draw_caption": "03_visualization.ipynb",
-         "draw_boxes": "03_visualization.ipynb",
-         "draw_detections": "03_visualization.ipynb",
-         "draw_annotations": "03_visualization.ipynb",
-         "limit_gpu": "04_utils.ipynb",
-         "get_filenames": "05_datagenerator.ipynb",
-         "get_label": "05_datagenerator.ipynb",
-         "ImageSizeList": "05_datagenerator.ipynb",
-         "LabelEncoder": "05_datagenerator.ipynb",
-         "Dataset": "05_datagenerator.ipynb"}
+         "get_filenames": "03_datagenerator.ipynb",
+         "get_label": "03_datagenerator.ipynb",
+         "ImageSizeList": "03_datagenerator.ipynb",
+         "LabelEncoder": "03_datagenerator.ipynb",
+         "Dataset": "03_datagenerator.ipynb",
+         "label_color": "04_visualization.ipynb",
+         "colors": "04_visualization.ipynb",
+         "draw_box": "04_visualization.ipynb",
+         "draw_caption": "04_visualization.ipynb",
+         "draw_boxes": "04_visualization.ipynb",
+         "draw_detections": "04_visualization.ipynb",
+         "draw_annotations": "04_visualization.ipynb",
+         "limit_gpu": "05_utils.ipynb"}
 
 modules = ["core.py",
            "image.py",
            "dataloader.py",
+           "datagenerator.py",
            "visualization.py",
-           "utils.py",
-           "datagenerator.py"]
+           "utils.py"]
 
 doc_url = "https://chitra.aniketmaurya.ml/chitra/"
 
