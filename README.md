@@ -149,7 +149,7 @@ ds.update_component('get_filenames', new_image_fileloader)
 ds.filenames[:3]
 ```
 
-    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18f440>
+    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18fdd0>
 
 
 
@@ -186,7 +186,7 @@ for img, label in ds.generator():
 
 ```
 
-    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18f440>
+    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18fdd0>
     first call to generator: (28, 28, 3)
     seconds call to generator: (32, 32, 3)
     third call to generator: (64, 64, 3)
@@ -213,7 +213,7 @@ for e in dl.take(1):
     print(e[0].shape)
 ```
 
-    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18f440>
+    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18fdd0>
     (32, 32, 3)
     (64, 64, 3)
     Returning the last set size which is: (64, 64)

@@ -24,10 +24,10 @@ def get_label(filename):
 
 # Cell
 class ImageSizeList():
-    def __init__(self, img_sz_list=[]):
+    def __init__(self, img_sz_list=None):
 
-        if type(img_sz_list) in (list, tuple):
-            if not type(img_sz_list[0]) in (list, tuple):
+        if isinstance(img_sz_list, (list, tuple)):
+            if len(img_sz_list)!=0 and not isinstance(img_sz_list[0], (list, tuple)):
                 img_sz_list = [img_sz_list]
 
         self.start_size = None
@@ -79,7 +79,8 @@ class Dataset():
         self.root_dir = root_dir
         self.filenames = self.get_filenames(root_dir)
         self.num_files = len(self.filenames)
-        self.img_sz_list= ImageSizeList(image_size)
+        self.image_size = image_size
+        self.img_sz_list= ImageSizeList(self.image_size)
 
 
     def __len__(self): return len(self.filenames)
@@ -94,6 +95,7 @@ class Dataset():
     def _reload(self):
         self.filenames  = self.get_filenames(self.root_dir)
         self.num_files = len(self.filenames)
+        self.img_sz_list = ImageSizeList(self.image_size[:])
 
     def _capture_return_types(self):
         return_types = []
@@ -122,7 +124,7 @@ class Dataset():
         self._reload()
 
 
-    def generator(self,):
+    def generator(self):
         img_sz = self.img_sz_list.get_size()
         n = len(self.filenames)
         for i in range(n):
@@ -133,10 +135,12 @@ class Dataset():
 
 
     def get_tf_dataset(self, output_shape=None):
+        return_types = self._capture_return_types()
+        self._reload()
         datagen = tf.data.Dataset.from_generator(
             self.generator,
-            self._capture_return_types(),
+            return_types,
             output_shape
-
         )
+
         return datagen
