@@ -1,10 +1,6 @@
 # chitra
+> <p align="center">
 
-
-
-<p align="center">
-<img src="nbs/../chitra_banner.png" alt="chitra">
-</p>
 
 ## What is chitra?
 
@@ -55,7 +51,7 @@ clf_dl.show_batch(8, figsize=(8,8))
 
 
 
-![png](docs/images/output_5_1.png)
+![png](docs/images/output_4_1.png)
 
 
 ```python
@@ -67,7 +63,7 @@ plt.show()
 ```
 
 
-![png](docs/images/output_6_0.png)
+![png](docs/images/output_5_0.png)
 
 
 ## Visualization
@@ -91,7 +87,7 @@ plt.show()
 ```
 
 
-![png](docs/images/output_9_0.png)
+![png](docs/images/output_8_0.png)
 
 
 ## Image datagenerator
