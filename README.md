@@ -206,7 +206,7 @@ for img, label in ds.generator():
     third call to generator: (64, 64, 3)
 
 
-## tf.data support
+### tf.data support
 Creating a `tf.data` dataloader was never as easy as this one liner. It converts the Python generator into `tf.data.Dataset` for a faster data loading, prefetching, caching and everything provided by tf.data.
 
 ```python
