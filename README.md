@@ -45,13 +45,18 @@ import matplotlib.pyplot as plt
 ```
 
 ```python
-path = '/Users/aniket/Pictures/data/train'
-
 clf_dl = Clf()
-data = clf_dl.from_folder(path, target_shape=(224, 224))
+data = clf_dl.from_folder(cat_dog_path, target_shape=(224, 224))
 
 clf_dl.show_batch(8, figsize=(8,8))
 ```
+
+    CLASSES ENCODED: {'cat': 0, 'dog': 1}
+
+
+
+![png](docs/images/output_5_1.png)
+
 
 ```python
 for e in data.take(1):
@@ -102,15 +107,15 @@ These components can be updated with custom function by the user according to th
 
 ```
 train_folder/
-    folder1/
-               file.txt
-               folder2/
-                     image1.jpg
-                     image2.jpg
+.....folder1/
+    .....file.txt
+    .....folder2/
+           .....image1.jpg
+           .....image2.jpg
                      .
                      .
                      .
-                     imageN.jpg
+           ......imageN.jpg
                     
                       
 ```
@@ -127,7 +132,8 @@ from glob import glob
 ### Updating component
 
 ```python
-ds = Dataset('/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train')
+# data_path = '/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train'
+ds = Dataset(data_path)
 # it will load the folders and NOT images
 ds.filenames[:3]
 ```
@@ -145,13 +151,18 @@ ds.filenames[:3]
 
 
 ```python
-def new_image_fileloader(path): return glob(f'{path}/*/images/*')
+def load_files(path):
+    return glob(f'{path}/*/images/*')
 
-ds.update_component('get_filenames', new_image_fileloader)
+def get_label(path):
+    return path.split('/')[-3]
+    
+ds.update_component('get_filenames', load_files)
 ds.filenames[:3]
 ```
 
-    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18fdd0>
+    get_filenames updated with <function load_files at 0x7f5b72851b00>
+    No item present in the image size list
 
 
 
@@ -168,9 +179,12 @@ ds.filenames[:3]
 ```python
 image_sz_list = [(28, 28), (32, 32), (64, 64)]
 
-ds = Dataset('/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train', image_size=image_sz_list)
-ds.update_component('get_filenames', new_image_fileloader)
+ds = Dataset(data_path, image_size=image_sz_list)
+ds.update_component('get_filenames', load_files)
+ds.update_component('get_label', get_label)
 
+
+print()
 # first call to generator
 for img, label in ds.generator():
     print('first call to generator:', img.shape)
@@ -188,7 +202,9 @@ for img, label in ds.generator():
 
 ```
 
-    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18fdd0>
+    get_filenames updated with <function load_files at 0x7f5b72851b00>
+    get_label updated with <function get_label at 0x7f5b7b59d050>
+    
     first call to generator: (28, 28, 3)
     seconds call to generator: (32, 32, 3)
     third call to generator: (64, 64, 3)
@@ -200,8 +216,9 @@ Creating a `tf.data` dataloader was never as easy as this one liner. It converts
 ```python
 image_sz_list = [(28, 28), (32, 32), (64, 64)]
 
-ds = Dataset('/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train', image_size=image_sz_list)
-ds.update_component('get_filenames', new_image_fileloader)
+ds = Dataset(data_path, image_size=image_sz_list)
+ds.update_component('get_filenames', load_files)
+ds.update_component('get_label', get_label)
 
 dl = ds.get_tf_dataset()
 
@@ -215,24 +232,30 @@ for e in dl.take(1):
     print(e[0].shape)
 ```
 
-    get_filenames updated with <function new_image_fileloader at 0x7fd1dc18fdd0>
+    get_filenames updated with <function load_files at 0x7f5b72851b00>
+    get_label updated with <function get_label at 0x7f5b7b59d050>
+    (28, 28, 3)
     (32, 32, 3)
-    (64, 64, 3)
-    Returning the last set size which is: (64, 64)
     (64, 64, 3)
 
 
 ## Utils
 
+Limit GPU memory or enable dynamic GPU memory growth for Tensorflow
+
 ```python
-from chitra.utils import limit_gpu
+from chitra.utils import limit_gpu, gpu_dynamic_mem_growth
 
 # limit the amount of GPU required for your training
 limit_gpu(gpu_id=0, memory_limit=1024*2)
 ```
 
-    1 Physical GPUs, 1 Logical GPUs
+    Virtual devices cannot be modified after being initialized
 
+
+```python
+gpu_dynamic_mem_growth()
+```
 
 ## Contributing
 

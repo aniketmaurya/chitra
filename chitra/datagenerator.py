@@ -140,7 +140,7 @@ class Dataset():
         self.NUM_CLASSES = len(labels)
         self.label_to_idx = {label:i for i, label in enumerate(labels)}
 
-        return sorted(labels)
+        return labels
 
     def label_encoder(self, label): return self.label_to_idx[label]
 

@@ -238,7 +238,7 @@ Returning the last set size which is: None
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train&#39;</span><span class="p">,</span> <span class="n">image_size</span><span class="o">=</span><span class="p">[(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">),</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">image_size</span><span class="o">=</span><span class="p">[(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">),</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)])</span>
 <span class="c1"># ds = Dataset(&#39;/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train&#39;)</span>
 <span class="c1"># ds = Dataset(&#39;/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train&#39;, image_size=(224,224))</span>
 </pre></div>
@@ -293,8 +293,8 @@ Returning the last set size which is: None
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>get_filenames updated with &lt;function load_files at 0x7f5e91892e60&gt;
-get_label updated with &lt;function get_label at 0x7f5e91892f80&gt;
+<pre>get_filenames updated with &lt;function load_files at 0x7f059d710cb0&gt;
+get_label updated with &lt;function get_label at 0x7f059d69d440&gt;
 </pre>
 </div>
 </div>
@@ -327,8 +327,7 @@ get_label updated with &lt;function get_label at 0x7f5e91892f80&gt;
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Returning the last set size which is: (64, 64)
-&lt;dtype: &#39;float32&#39;&gt; 149
+<pre>&lt;dtype: &#39;float32&#39;&gt; 120
 </pre>
 </div>
 </div>
@@ -377,8 +376,38 @@ get_label updated with &lt;function get_label at 0x7f5e91892f80&gt;
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Returning the last set size which is: (64, 64)
-(64, 64, 3)
+<pre>(28, 28, 3)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nbdev.export</span> <span class="kn">import</span> <span class="n">notebook2script</span><span class="p">;</span><span class="n">notebook2script</span><span class="p">(</span><span class="s1">&#39;03_datagenerator.ipynb&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Converted 03_datagenerator.ipynb.
 </pre>
 </div>
 </div>
