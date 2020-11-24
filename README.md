@@ -161,7 +161,7 @@ ds.update_component('get_filenames', load_files)
 ds.filenames[:3]
 ```
 
-    get_filenames updated with <function load_files at 0x7f5b72851b00>
+    get_filenames updated with <function load_files at 0x7fe0a5aa9560>
     No item present in the image size list
 
 
@@ -202,8 +202,8 @@ for img, label in ds.generator():
 
 ```
 
-    get_filenames updated with <function load_files at 0x7f5b72851b00>
-    get_label updated with <function get_label at 0x7f5b7b59d050>
+    get_filenames updated with <function load_files at 0x7fe0a5aa9560>
+    get_label updated with <function get_label at 0x7fe14838ab00>
     
     first call to generator: (28, 28, 3)
     seconds call to generator: (32, 32, 3)
@@ -232,8 +232,8 @@ for e in dl.take(1):
     print(e[0].shape)
 ```
 
-    get_filenames updated with <function load_files at 0x7f5b72851b00>
-    get_label updated with <function get_label at 0x7f5b7b59d050>
+    get_filenames updated with <function load_files at 0x7fe0a5aa9560>
+    get_label updated with <function get_label at 0x7fe14838ab00>
     (28, 28, 3)
     (32, 32, 3)
     (64, 64, 3)
@@ -250,12 +250,15 @@ from chitra.utils import limit_gpu, gpu_dynamic_mem_growth
 limit_gpu(gpu_id=0, memory_limit=1024*2)
 ```
 
-    Virtual devices cannot be modified after being initialized
+    No GPU:0 found in your system!
 
 
 ```python
 gpu_dynamic_mem_growth()
 ```
+
+    No GPU found on the machine!
+
 
 ## Contributing
 
