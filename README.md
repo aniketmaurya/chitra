@@ -32,7 +32,7 @@ pip install -e .
 
 
 
-```python
+```
 import numpy as np
 import tensorflow as tf
 import chitra
@@ -40,7 +40,7 @@ from chitra.dataloader import Clf, show_batch
 import matplotlib.pyplot as plt
 ```
 
-```python
+```
 clf_dl = Clf()
 data = clf_dl.from_folder(cat_dog_path, target_shape=(224, 224))
 
@@ -54,7 +54,7 @@ clf_dl.show_batch(8, figsize=(8,8))
 ![png](docs/images/output_4_1.png)
 
 
-```python
+```
 for e in data.take(1):
     image = e[0].numpy().astype('uint8')
     label = e[1].numpy()
@@ -72,7 +72,7 @@ plt.show()
 
 Thanks to [**fizyr**](https://github.com/fizyr/keras-retinanet) keras-retinanet.
 
-```python
+```
 from chitra.visualization import draw_annotations
 
 labels = np.array([label])
@@ -80,7 +80,7 @@ bbox = np.array([[30, 50, 170, 190]])
 label_to_name = lambda x: 'Cat' if x==0 else 'Dog'
 ```
 
-```python
+```
 draw_annotations(image, ({'bboxes': bbox, 'labels':labels,}), label_to_name=label_to_name)
 plt.imshow(image)
 plt.show()
@@ -120,14 +120,14 @@ The inbuilt file generator search for images on the `folder1`, now we can just u
 
 **Dataset also support progressive resizing of images.**
 
-```python
+```
 from chitra.datagenerator import Dataset
 from glob import glob
 ```
 
 ### Updating component
 
-```python
+```
 # data_path = '/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train'
 ds = Dataset(data_path)
 # it will load the folders and NOT images
@@ -146,7 +146,7 @@ ds.filenames[:3]
 
 
 
-```python
+```
 def load_files(path):
     return glob(f'{path}/*/images/*')
 
@@ -172,7 +172,7 @@ ds.filenames[:3]
 
 ### Progressive resizing
 
-```python
+```
 image_sz_list = [(28, 28), (32, 32), (64, 64)]
 
 ds = Dataset(data_path, image_size=image_sz_list)
@@ -209,7 +209,7 @@ for img, label in ds.generator():
 ### tf.data support
 Creating a `tf.data` dataloader was never as easy as this one liner. It converts the Python generator into `tf.data.Dataset` for a faster data loading, prefetching, caching and everything provided by tf.data.
 
-```python
+```
 image_sz_list = [(28, 28), (32, 32), (64, 64)]
 
 ds = Dataset(data_path, image_size=image_sz_list)
@@ -235,11 +235,155 @@ for e in dl.take(1):
     (64, 64, 3)
 
 
+## Learner
+The Learner class inherits from `tf.keras.Model`, it contains everything that is required for training.
+
+```
+from chitra.learner import Learner
+from chitra.datagenerator import Dataset
+from PIL import Image
+```
+
+```
+ds = Dataset(cat_dog_path, image_size=(224,224))
+```
+
+```
+learner = Learner(ds, tf.keras.applications.MobileNetV2)
+```
+
+    WARNING:tensorflow:`input_shape` is undefined or non-square, or `rows` is not in [96, 128, 160, 192, 224]. Weights for input shape (224, 224) will be loaded as the default.
+
+
+```
+learner.summary()
+```
+
+    Model: "sequential_1"
+    _________________________________________________________________
+    Layer (type)                 Output Shape              Param #   
+    =================================================================
+    mobilenetv2_1.00_224 (Functi (None, None, None, 1280)  2257984   
+    _________________________________________________________________
+    global_average_pooling2d_1 ( (None, 1280)              0         
+    _________________________________________________________________
+    dropout_1 (Dropout)          (None, 1280)              0         
+    _________________________________________________________________
+    output (Dense)               (None, 1)                 1281      
+    =================================================================
+    Total params: 2,259,265
+    Trainable params: 2,225,153
+    Non-trainable params: 34,112
+    _________________________________________________________________
+
+
+```
+learner.compile(loss=tf.keras.losses.BinaryCrossentropy(), metrics=['binary_accuracy'])
+```
+
+```
+learner.cyclic_fit(epochs=10,
+                   batch_size=1,
+                   lr_range=(0.01, 0.01)
+                  )
+```
+
+    Returning the last set size which is: (224, 224)
+    Epoch 1/10
+    8/8 [==============================] - 1s 109ms/step - loss: 7.7125 - binary_accuracy: 0.5000
+    Epoch 2/10
+    Returning the last set size which is: (224, 224)
+    8/8 [==============================] - 1s 109ms/step - loss: 7.7125 - binary_accuracy: 0.5000
+    Epoch 3/10
+    Returning the last set size which is: (224, 224)
+    8/8 [==============================] - 1s 112ms/step - loss: 7.7125 - binary_accuracy: 0.5000
+    Epoch 4/10
+    Returning the last set size which is: (224, 224)
+    8/8 [==============================] - 1s 111ms/step - loss: 7.7125 - binary_accuracy: 0.5000
+    Epoch 5/10
+    Returning the last set size which is: (224, 224)
+    8/8 [==============================] - 1s 108ms/step - loss: 7.7125 - binary_accuracy: 0.5000
+    Epoch 6/10
+    Returning the last set size which is: (224, 224)
+    8/8 [==============================] - 1s 108ms/step - loss: 7.7125 - binary_accuracy: 0.5000
+    Epoch 7/10
+    Returning the last set size which is: (224, 224)
+    8/8 [==============================] - 1s 109ms/step - loss: 7.7125 - binary_accuracy: 0.5000
+    Epoch 8/10
+    Returning the last set size which is: (224, 224)
+    8/8 [==============================] - 1s 115ms/step - loss: 7.7125 - binary_accuracy: 0.5000
+    Epoch 9/10
+    Returning the last set size which is: (224, 224)
+    8/8 [==============================] - 1s 116ms/step - loss: 7.7125 - binary_accuracy: 0.5000
+    Epoch 10/10
+    Returning the last set size which is: (224, 224)
+    8/8 [==============================] - 1s 117ms/step - loss: 7.7125 - binary_accuracy: 0.5000
+
+
+
+
+
+    <tensorflow.python.keras.callbacks.History at 0x7fb21487d2d0>
+
+
+
+## Model Visualization
+
+```
+from chitra.learner import InterpretModel
+```
+
+```
+learner = Learner(ds, tf.keras.applications.Xception, include_top=True)
+model_interpret = InterpretModel(False, learner)
+```
+
+```
+image = ds[1][0].numpy().astype('uint8')
+image = Image.fromarray(image)
+model_interpret(image)
+```
+
+    Returning the last set size which is: (224, 224)
+    index: 285
+
+
+
+![png](docs/images/output_28_1.png)
+
+
+```
+IMAGENET_LABELS[285]
+```
+
+
+
+
+    'Egyptian Mau'
+
+
+
+```
+image = ds[3][0].numpy().astype('uint8')
+image = Image.fromarray(image)
+print(IMAGENET_LABELS[208])
+model_interpret(image)
+```
+
+    Labrador Retriever
+    Returning the last set size which is: (224, 224)
+    index: 208
+
+
+
+![png](docs/images/output_30_1.png)
+
+
 ## Utils
 
 Limit GPU memory or enable dynamic GPU memory growth for Tensorflow
 
-```python
+```
 from chitra.utils import limit_gpu, gpu_dynamic_mem_growth
 
 # limit the amount of GPU required for your training
@@ -249,7 +393,7 @@ limit_gpu(gpu_id=0, memory_limit=1024*2)
     No GPU:0 found in your system!
 
 
-```python
+```
 gpu_dynamic_mem_growth()
 ```
 

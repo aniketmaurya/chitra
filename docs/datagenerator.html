@@ -172,28 +172,20 @@ Returning the last set size which is: None
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-</div>
-    {% endraw %}
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">LabelEncoder</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_to_idx</span> <span class="o">=</span> <span class="p">{</span><span class="n">label</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">)}</span>
+        
+    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_to_idx</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+</pre></div>
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="LabelEncoder" class="doc_header"><code>class</code> <code>LabelEncoder</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L58" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LabelEncoder</code>(<strong><code>labels</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
+    </div>
 </div>
 </div>
 
@@ -218,7 +210,7 @@ Returning the last set size which is: None
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L67" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>root_dir</code></strong>, <strong><code>image_size</code></strong>=<em><code>[]</code></em>, <strong><code>transforms</code></strong>=<em><code>None</code></em>, <strong><code>default_encode</code></strong>=<em><code>True</code></em>, <strong>**<code>kwargs</code></strong>)</p>
+<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L58" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>root_dir</code></strong>, <strong><code>image_size</code></strong>=<em><code>[]</code></em>, <strong><code>transforms</code></strong>=<em><code>None</code></em>, <strong><code>default_encode</code></strong>=<em><code>True</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -238,7 +230,7 @@ Returning the last set size which is: None
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">image_size</span><span class="o">=</span><span class="p">[(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">),</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">cat_dog_path</span><span class="p">,</span> <span class="n">image_size</span><span class="o">=</span><span class="p">[(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">),</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)])</span>
 <span class="c1"># ds = Dataset(&#39;/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train&#39;)</span>
 <span class="c1"># ds = Dataset(&#39;/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train&#39;, image_size=(224,224))</span>
 </pre></div>
@@ -318,20 +310,6 @@ get_label updated with &lt;function get_label at 0x7f059d69d440&gt;
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>&lt;dtype: &#39;float32&#39;&gt; 120
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 

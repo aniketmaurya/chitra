@@ -43,6 +43,15 @@ def create_classifier(base_model_fn:callable, num_classes:int,
 
 # Cell
 class Learner(Model):
+    """
+    The Learner class inherits tf.keras.Model and contains everything a model needs for training.
+    It exposes learner.cyclic_fit method which trains the model using Cyclic Learning rate discovered by Leslie Smith.
+
+    Arguments:
+    ds: Dataset object
+    base_model: callable function from keras.applications
+
+    """
     _AUTOTUNE = tf.data.experimental.AUTOTUNE
 
     def __init__(self, ds: Dataset, base_model_fn:callable, pretrained:bool=True, include_top=False, **kwargs):
@@ -109,6 +118,7 @@ class Learner(Model):
 
 
     def _prepare_dl(self, bs=8, shuffle=True):
+        ds = self.ds
         dl = ds.get_tf_dataset(shuffle=shuffle)
         dl = dl.map(self.rescale, Learner._AUTOTUNE)
         return dl.batch(bs).prefetch(Learner._AUTOTUNE)
@@ -125,8 +135,12 @@ class Learner(Model):
                    *args,
                    **kwargs
                   ):
+        """Trains model on ds as train data with cyclic learning rate.
+        Dataset will be automatically converted into `tf.data` format and images will be prewhitened in range of [-1, 1].
+        """
 
         self.max_lr, self.min_lr = lr_range
+        ds = self.ds
 
         step_size = 2 * len(self.ds)//batch_size
 
@@ -198,8 +212,6 @@ class InterpretModel():
 
         if self.learner.include_top is not True:
             self.gradcam._find_penultimate_output = self.patch
-
-
 
 
     def __call__(self, image:Image.Image, auto_resize:bool=True, image_size=None):
