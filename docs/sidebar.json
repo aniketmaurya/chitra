@@ -6,6 +6,7 @@
     "dataloader": "dataloader.html",
     "datagenerator": "datagenerator.html",
     "visualization": "visualization.html",
-    "utils": "utils.html"
+    "utils": "utils.html",
+    "learner": "learner.html"
   }
 }

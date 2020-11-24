@@ -21,14 +21,17 @@ index = {"remove_dsstore": "00_core.ipynb",
          "draw_boxes": "04_visualization.ipynb",
          "draw_detections": "04_visualization.ipynb",
          "draw_annotations": "04_visualization.ipynb",
-         "limit_gpu": "05_utils.ipynb"}
+         "limit_gpu": "05_utils.ipynb",
+         "create_classifier": "06_learner.ipynb",
+         "Learner": "06_learner.ipynb"}
 
 modules = ["core.py",
            "image.py",
            "dataloader.py",
            "datagenerator.py",
            "visualization.py",
-           "utils.py"]
+           "utils.py",
+           "learner.py"]
 
 doc_url = "https://chitra.aniketmaurya.ml/chitra/"
 

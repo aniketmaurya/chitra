@@ -27,6 +27,9 @@ entries:
     - output: web,pdf
       title: utils
       url: utils.html
+    - output: web,pdf
+      title: learner
+      url: learner.html
     output: web
     title: chitra
   output: web

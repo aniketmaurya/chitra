@@ -61,7 +61,7 @@ nb_path: "nbs/03_datagenerator.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_filenames" class="doc_header"><code>get_filenames</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_filenames</code>(<strong><code>root_dir</code></strong>)</p>
+<h4 id="get_filenames" class="doc_header"><code>get_filenames</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L18" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_filenames</code>(<strong><code>root_dir</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -85,7 +85,7 @@ nb_path: "nbs/03_datagenerator.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_label" class="doc_header"><code>get_label</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_label</code>(<strong><code>filename</code></strong>)</p>
+<h4 id="get_label" class="doc_header"><code>get_label</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_label</code>(<strong><code>filename</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -116,7 +116,7 @@ nb_path: "nbs/03_datagenerator.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ImageSizeList" class="doc_header"><code>class</code> <code>ImageSizeList</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L26" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ImageSizeList</code>(<strong><code>img_sz_list</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="ImageSizeList" class="doc_header"><code>class</code> <code>ImageSizeList</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L27" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ImageSizeList</code>(<strong><code>img_sz_list</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -180,7 +180,7 @@ Returning the last set size which is: None
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="LabelEncoder" class="doc_header"><code>class</code> <code>LabelEncoder</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L57" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LabelEncoder</code>(<strong><code>labels</code></strong>)</p>
+<h2 id="LabelEncoder" class="doc_header"><code>class</code> <code>LabelEncoder</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L58" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>LabelEncoder</code>(<strong><code>labels</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -211,7 +211,7 @@ Returning the last set size which is: None
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L66" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>root_dir</code></strong>, <strong><code>image_size</code></strong>=<em><code>None</code></em>, <strong><code>transforms</code></strong>=<em><code>None</code></em>, <strong><code>label_encoder</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/datagenerator.py#L67" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>root_dir</code></strong>, <strong><code>image_size</code></strong>=<em><code>[]</code></em>, <strong><code>transforms</code></strong>=<em><code>None</code></em>, <strong><code>default_encode</code></strong>=<em><code>True</code></em>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -239,6 +239,8 @@ Returning the last set size which is: None
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train&#39;</span><span class="p">,</span> <span class="n">image_size</span><span class="o">=</span><span class="p">[(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">),</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)])</span>
+<span class="c1"># ds = Dataset(&#39;/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train&#39;)</span>
+<span class="c1"># ds = Dataset(&#39;/data/aniket/tiny-imagenet/data/tiny-imagenet-200/train&#39;, image_size=(224,224))</span>
 </pre></div>
 
     </div>
@@ -291,8 +293,8 @@ Returning the last set size which is: None
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>get_filenames updated with &lt;function load_files at 0x7ffaca6ba3b0&gt;
-get_label updated with &lt;function get_label at 0x7ffaca6ba290&gt;
+<pre>get_filenames updated with &lt;function load_files at 0x7f5e91892e60&gt;
+get_label updated with &lt;function get_label at 0x7f5e91892f80&gt;
 </pre>
 </div>
 </div>
@@ -310,7 +312,7 @@ get_label updated with &lt;function get_label at 0x7ffaca6ba290&gt;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">generator</span><span class="p">():</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">generator</span><span class="p">(</span><span class="kc">True</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">break</span>
 </pre></div>
@@ -325,7 +327,8 @@ get_label updated with &lt;function get_label at 0x7ffaca6ba290&gt;
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&lt;dtype: &#39;float32&#39;&gt; n03584254
+<pre>Returning the last set size which is: (64, 64)
+&lt;dtype: &#39;float32&#39;&gt; 149
 </pre>
 </div>
 </div>

@@ -6,9 +6,10 @@ __all__ = ['get_filenames', 'get_label', 'ImageSizeList', 'LabelEncoder', 'Datas
 import tensorflow as tf
 import numpy as np
 from glob import glob
+import random
 import os
 import pathlib
-
+from functools import partial
 from typing import Union
 
 from .image import read_image, resize_image
@@ -28,7 +29,7 @@ class ImageSizeList():
 
         if isinstance(img_sz_list, (list, tuple)):
             if len(img_sz_list)!=0 and not isinstance(img_sz_list[0], (list, tuple)):
-                img_sz_list = [img_sz_list]
+                img_sz_list = [img_sz_list][:]
 
         self.start_size = None
         self.last_size = None
@@ -69,18 +70,20 @@ class Dataset():
 
         }
 
-    def __init__(self, root_dir, image_size=None, transforms=None, label_encoder=None):
+    def __init__(self, root_dir, image_size=[], transforms=None, default_encode=True, **kwargs):
         self.get_filenames = get_filenames
         self.read_image = read_image
         self.get_label = get_label
-        self.label_encoder = label_encoder
         self.transforms = transforms
 
         self.root_dir = root_dir
+        self.default_encode = default_encode
         self.filenames = self.get_filenames(root_dir)
         self.num_files = len(self.filenames)
         self.image_size = image_size
-        self.img_sz_list= ImageSizeList(self.image_size)
+        self.img_sz_list= ImageSizeList(self.image_size[:])
+
+        self.labels = kwargs.get('labels', self.get_labels())
 
 
     def __len__(self): return len(self.filenames)
@@ -95,7 +98,8 @@ class Dataset():
     def _reload(self):
         self.filenames  = self.get_filenames(self.root_dir)
         self.num_files = len(self.filenames)
-        self.img_sz_list = ImageSizeList(self.image_size[:])
+        self.img_sz_list = ImageSizeList(None or self.image_size[:])
+        self.labels = self.get_labels()
 
     def _capture_return_types(self):
         return_types = []
@@ -124,21 +128,42 @@ class Dataset():
         self._reload()
 
 
-    def generator(self):
+    def get_labels(self):
+        # get labels should also update self.num_classes
+        root_dir = self.root_dir
+        labels = set()
+        folders = glob(f'{root_dir}/*')
+        for folder in folders:
+            labels.add(os.path.basename(folder))
+
+        labels = sorted(labels)
+        self.NUM_CLASSES = len(labels)
+        self.label_to_idx = {label:i for i, label in enumerate(labels)}
+
+        return sorted(labels)
+
+    def label_encoder(self, label): return self.label_to_idx[label]
+
+
+    def generator(self, shuffle=False):
+        if shuffle: random.shuffle(self.filenames)
         img_sz = self.img_sz_list.get_size()
         n = len(self.filenames)
         for i in range(n):
             image, label = self.__getitem__(i)
             if img_sz: image = resize_image(image, img_sz)
             if self.transforms: image = self.transforms(image)
+            if self.default_encode is True:
+                label = self.label_encoder(label)
             yield image, label
 
 
-    def get_tf_dataset(self, output_shape=None):
+    def get_tf_dataset(self, output_shape=None, shuffle=True):
         return_types = self._capture_return_types()
         self._reload()
+        generator = partial(self.generator, shuffle=shuffle)
         datagen = tf.data.Dataset.from_generator(
-            self.generator,
+            generator,
             return_types,
             output_shape
         )
