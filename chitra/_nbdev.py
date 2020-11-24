@@ -25,7 +25,8 @@ index = {"remove_dsstore": "00_core.ipynb",
          "limit_gpu": "05_utils.ipynb",
          "gpu_dynamic_mem_growth": "05_utils.ipynb",
          "create_classifier": "06_learner.ipynb",
-         "Learner": "06_learner.ipynb"}
+         "Learner": "06_learner.ipynb",
+         "InterpretModel": "06_learner.ipynb"}
 
 modules = ["core.py",
            "image.py",

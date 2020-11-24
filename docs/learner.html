@@ -185,84 +185,30 @@ to do prediction with <code>model.predict()</code>.</p>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">InterpretModel</span><span class="p">():</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gradcam_pp</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span> <span class="n">learner</span><span class="p">:</span><span class="n">Learner</span><span class="p">,</span> <span class="n">clone</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Args:</span>
-<span class="sd">        gradcam_pp: if True GradCam class will be used else GradCamPlusplus</span>
-<span class="sd">        clone: whether GradCam will clone learner.model</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">gradcam_pp</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">gradcam_fn</span> <span class="o">=</span> <span class="n">GradcamPlusPlus</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">gradcam_fn</span> <span class="o">=</span> <span class="n">Gradcam</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">learner</span> <span class="o">=</span> <span class="n">learner</span>
-    
-        <span class="bp">self</span><span class="o">.</span><span class="n">gradcam</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradcam_fn</span><span class="p">(</span><span class="n">learner</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
-                                      <span class="bp">self</span><span class="o">.</span><span class="n">model_modifier</span><span class="p">,</span>
-                                      <span class="n">clone</span><span class="o">=</span><span class="n">clone</span><span class="p">)</span>
-    
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">learner</span><span class="o">.</span><span class="n">include_top</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">gradcam</span><span class="o">.</span><span class="n">_find_penultimate_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">patch</span>
-        
-        
-        
-            
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span><span class="n">Image</span><span class="o">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">auto_resize</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">image_size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="c1">#assert check_argument_types()</span>
-        <span class="n">gradcam</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gradcam</span>
-        <span class="n">get_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_loss</span>
-        <span class="k">if</span> <span class="n">auto_resize</span> <span class="ow">and</span> <span class="n">image_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">image_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learner</span><span class="o">.</span><span class="n">ds</span><span class="o">.</span><span class="n">img_sz_list</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">image_size</span><span class="p">:</span>
-            <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image_size</span><span class="p">)</span>
-        
-        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learner</span><span class="o">.</span><span class="n">prewhiten</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        
-        <span class="n">cam</span> <span class="o">=</span> <span class="n">gradcam</span><span class="p">(</span><span class="n">get_loss</span><span class="p">,</span>
-                      <span class="n">X</span><span class="p">,</span>
-                      <span class="n">penultimate_layer</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="c1"># model.layers number</span>
-                      <span class="n">seek_penultimate_conv_layer</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                     <span class="p">)</span>
-        <span class="n">cam</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">cam</span><span class="p">)</span>
-        <span class="n">heatmap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">jet</span><span class="p">(</span><span class="n">cam</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-        
-    
-    <span class="k">def</span> <span class="nf">patch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Path _find_penultimate_output method of tf_keras_vis&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">learner</span><span class="o">.</span><span class="n">include_top</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">learner</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">output</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">learner</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_output_at</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    
-    
-    <span class="k">def</span> <span class="nf">model_modifier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Sets last activation to linear</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">m</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">activations</span><span class="o">.</span><span class="n">linear</span>
-        <span class="k">return</span> <span class="n">m</span>
-    
-    <span class="k">def</span> <span class="nf">get_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">learner</span><span class="o">.</span><span class="n">NUM_CLASSES</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">ret</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">preds</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="c1"># print(index, preds.shape)</span>
-            <span class="n">ret</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="p">]</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;index: </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ret</span>
-</pre></div>
+<div class="output_wrapper">
+<div class="output">
 
-    </div>
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="InterpretModel" class="doc_header"><code>class</code> <code>InterpretModel</code><a href="https://github.com/aniketmaurya/chitra/tree/master/chitra/learner.py#L183" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>InterpretModel</code>(<strong><code>gradcam_pp</code></strong>:<code>bool</code>, <strong><code>learner</code></strong>:<a href="/learner.html#Learner"><code>Learner</code></a>, <strong><code>clone</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
