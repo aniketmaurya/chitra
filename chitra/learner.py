@@ -8,22 +8,36 @@ import tensorflow_addons as tfa
 from tensorflow.keras.models import Model
 from .datagenerator import Dataset
 
-from functools import partial
-
-import sys, inspect
+from typeguard import check_argument_types, check_return_type
 
 # Cell
-def create_classifier(base_model_fn:callable, num_outputs, weights='imagenet', dropout=0.5, name=None):
+from PIL import Image
+import numpy as np
+from tf_keras_vis.utils import normalize
+from tf_keras_vis.gradcam import GradcamPlusPlus, Gradcam
+from functools import partial
+
+import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+
+# Cell
+def create_classifier(base_model_fn:callable, num_classes:int,
+                      weights='imagenet', dropout=0,
+                      include_top=False,
+                      name=None):
+
+    outputs = 1 if num_classes == 2 else num_classes
+
     base_model = base_model_fn(
-        include_top=False,
-        input_shape=(None, None, 3),
+        include_top=include_top,
         weights=weights,
     )
+    if include_top: return base_model
     model = tf.keras.Sequential(name=name)
     model.add(base_model)
     model.add(tf.keras.layers.GlobalAveragePooling2D())
     model.add(tf.keras.layers.Dropout(dropout))
-    model.add(tf.keras.layers.Dense(num_outputs, name='output'))
+    model.add(tf.keras.layers.Dense(outputs, name='output'))
 
     return model
 
@@ -31,11 +45,15 @@ def create_classifier(base_model_fn:callable, num_outputs, weights='imagenet', d
 class Learner(Model):
     _AUTOTUNE = tf.data.experimental.AUTOTUNE
 
-    def __init__(self, ds: Dataset, base_model_fn:callable, pretrained=True, **kwargs):
+    def __init__(self, ds: Dataset, base_model_fn:callable, pretrained:bool=True, include_top=False, **kwargs):
+        assert check_argument_types()
+
         super(Learner, self).__init__()
         self.ds = ds
         self.total = len(ds)
         self.NUM_CLASSES = ds.NUM_CLASSES
+        self.gradcam = None
+        self.include_top = include_top
 
         weights = 'imagenet' if pretrained else None
 
@@ -44,6 +62,8 @@ class Learner(Model):
         self.model = create_classifier(
             base_model_fn,
             self.NUM_CLASSES,
+            dropout=kwargs.get('dropout', 0.5),
+            include_top=include_top,
             name=kwargs.get('name', None)
         )
 
@@ -62,9 +82,13 @@ class Learner(Model):
 
     def warmup(self):pass
 
-    def rescale(self, image, label):
+    def prewhiten(self, image):
         image = tf.cast(image, tf.float32)
         image = image / 127.5 - 1.0
+        return image
+
+    def rescale(self, image, label):
+        image = self.prewhiten(image)
         return image, label
 
     def _get_optimizer(self,
@@ -123,3 +147,33 @@ class Learner(Model):
             epochs=epochs,
             callbacks=callbacks
         )
+
+    def gradcam(self, image:Image.Image, image_size=None):
+        # assert check_argument_types()
+
+        def model_modifier(m):
+            """Converts sigmoid to linear
+            """
+            m.layers[-1].activation = tf.keras.activations.linear
+            return m
+
+
+        if image_size:
+            image_size = self.ds.img_sz_list.get_size()
+        image = image.resize(image_size)
+
+        X = np.asarray(image, np.float32)
+        X = self.prewhiten(X)
+        X = np.expand_dims(X, 0)
+
+        if self.gradcam is None:
+            self.gradcam = Gradcam(self.model,
+                              model_modifier,
+                              clone=True)
+
+        cam = gradcam(get_loss,
+              X,
+              penultimate_layer=-1, # model.layers number
+              seek_penultimate_conv_layer=False,
+
+             )

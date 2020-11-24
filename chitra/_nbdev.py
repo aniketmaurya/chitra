@@ -4,6 +4,7 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"remove_dsstore": "00_core.ipynb",
          "get_basename": "02_dataloader.ipynb",
+         "IMAGENET_LABELS": "00_core.ipynb",
          "read_image": "01_image.ipynb",
          "resize_image": "01_image.ipynb",
          "AUTOTUNE": "02_dataloader.ipynb",
@@ -22,6 +23,7 @@ index = {"remove_dsstore": "00_core.ipynb",
          "draw_detections": "04_visualization.ipynb",
          "draw_annotations": "04_visualization.ipynb",
          "limit_gpu": "05_utils.ipynb",
+         "gpu_dynamic_mem_growth": "05_utils.ipynb",
          "create_classifier": "06_learner.ipynb",
          "Learner": "06_learner.ipynb"}
 
@@ -33,7 +35,7 @@ modules = ["core.py",
            "utils.py",
            "learner.py"]
 
-doc_url = "https://chitra.aniketmaurya.ml/chitra/"
+doc_url = "https://chitra.aniketmaurya.ml/"
 
 git_url = "https://github.com/aniketmaurya/chitra/tree/master/"
 
