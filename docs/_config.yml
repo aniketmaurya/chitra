@@ -1,9 +1,9 @@
-repository: aniketmaurya/chitra
+repository: "aniketmaurya/chitra"
 output: web
 topnav_title: chitra
-site_title: Computer Vision library
-company_name: Aniket Maurya
-description: "Deep Learning Computer Vision models with easy data loading and model building"
+site_title: "Computer Vision library"
+company_name: "Aniket Maurya"
+description: "Deep Learning Computer Vision library for easy data loading and model building"
 # Set to false to disable KaTeX math
 use_math: true
 # Add Google analytics id if you have one and want to use it here
@@ -67,6 +67,6 @@ minima:
     github: aniketmaurya
 
 # theme: jekyll-theme-cayman
-# url: "http://chitra.aniketmaurya.ml" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://chitra.aniketmaurya.ml" # the base hostname & protocol for your site, e.g. http://example.com
 
 baseurl: /
