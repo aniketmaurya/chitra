@@ -10,9 +10,11 @@ index = {"remove_dsstore": "00_core.ipynb",
          "AUTOTUNE": "02_dataloader.ipynb",
          "show_batch": "02_dataloader.ipynb",
          "Clf": "02_dataloader.ipynb",
+         "benchmark": "03_datagenerator.ipynb",
          "get_filenames": "03_datagenerator.ipynb",
          "get_label": "03_datagenerator.ipynb",
          "ImageSizeList": "03_datagenerator.ipynb",
+         "Pipeline": "03_datagenerator.ipynb",
          "Dataset": "03_datagenerator.ipynb",
          "label_color": "04_visualization.ipynb",
          "colors": "04_visualization.ipynb",
@@ -24,9 +26,11 @@ index = {"remove_dsstore": "00_core.ipynb",
          "disable_gpu": "05_utils.ipynb",
          "limit_gpu": "05_utils.ipynb",
          "gpu_dynamic_mem_growth": "05_utils.ipynb",
-         "create_classifier": "06_learner.ipynb",
-         "Learner": "06_learner.ipynb",
-         "InterpretModel": "06_learner.ipynb"}
+         "MODEL_DICT": "06_trainer.ipynb",
+         "create_classifier": "06_trainer.ipynb",
+         "create_cnn": "06_trainer.ipynb",
+         "Trainer": "06_trainer.ipynb",
+         "InterpretModel": "06_trainer.ipynb"}
 
 modules = ["core.py",
            "image.py",
@@ -34,7 +38,7 @@ modules = ["core.py",
            "datagenerator.py",
            "visualization.py",
            "utils.py",
-           "learner.py"]
+           "trainer.py"]
 
 doc_url = "https://chitra.aniketmaurya.ml/"
 
