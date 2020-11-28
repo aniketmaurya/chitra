@@ -2,6 +2,9 @@
 > <p align="center">
 
 
+![](https://www.code-inspector.com/project/16652/score/svg)
+![](https://www.code-inspector.com/project/16652/status/svg)
+
 ## What is chitra?
 
 **chitra** (**चित्र**) is an image utility library for Deep Learning tasks. *(It is not image-processing library)*
@@ -56,7 +59,7 @@ plt.show()
 ```
 
 
-![png](docs/images/output_5_0.png)
+![png](docs/images/output_6_0.png)
 
 
 ## Image datagenerator
@@ -284,7 +287,7 @@ print(IMAGENET_LABELS[285])
 
 
 
-![png](docs/images/output_21_1.png)
+![png](docs/images/output_22_1.png)
 
 
     Egyptian Mau
@@ -309,7 +312,7 @@ plt.show()
 ```
 
 
-![png](docs/images/output_23_0.png)
+![png](docs/images/output_24_0.png)
 
 
 ## Utils
