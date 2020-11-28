@@ -32,7 +32,7 @@ pip install -e .
 
 
 
-```python
+```
 import numpy as np
 import tensorflow as tf
 import chitra
@@ -40,14 +40,14 @@ from chitra.dataloader import Clf, show_batch
 import matplotlib.pyplot as plt
 ```
 
-```python
+```
 clf_dl = Clf()
 data = clf_dl.from_folder(cat_dog_path, target_shape=(224, 224))
 
 clf_dl.show_batch(8, figsize=(8,8))
 ```
 
-```python
+```
 for e in data.take(1):
     image = e[0].numpy().astype('uint8')
     label = e[1].numpy()
@@ -91,7 +91,7 @@ The inbuilt file generator search for images on the `folder1`, now we can just u
 
 ### Updating component
 
-```python
+```
 from chitra.datagenerator import Dataset
 from glob import glob
 
@@ -112,7 +112,7 @@ ds.filenames[:3]
 
 
 
-```python
+```
 def load_files(path):
     return glob(f'{path}/*/images/*')
 
@@ -138,7 +138,7 @@ ds.filenames[:3]
 
 ### Progressive resizing
 
-```python
+```
 image_sz_list = [(28, 28), (32, 32), (64, 64)]
 
 ds = Dataset(data_path, image_size=image_sz_list)
@@ -175,7 +175,7 @@ for img, label in ds.generator():
 ### tf.data support
 Creating a `tf.data` dataloader was never as easy as this one liner. It converts the Python generator into `tf.data.Dataset` for a faster data loading, prefetching, caching and everything provided by tf.data.
 
-```python
+```
 image_sz_list = [(28, 28), (32, 32), (64, 64)]
 
 ds = Dataset(data_path, image_size=image_sz_list)
@@ -205,13 +205,13 @@ for e in dl.take(1):
 The Trainer class inherits from `tf.keras.Model`, it contains everything that is required for training.
 It exposes trainer.cyclic_fit method which trains the model using Cyclic Learning rate discovered by [Leslie Smith](https://arxiv.org/abs/1506.01186).
 
-```python
+```
 from chitra.trainer import Trainer, create_cnn
 from chitra.datagenerator import Dataset
 from PIL import Image
 ```
 
-```python
+```
 ds = Dataset(cat_dog_path, image_size=(224,224))
 model = create_cnn('mobilenetv2', num_classes=2, name='Cat_Dog_Model')
 trainer = Trainer(ds, model)
@@ -221,7 +221,7 @@ trainer = Trainer(ds, model)
     WARNING:tensorflow:`input_shape` is undefined or non-square, or `rows` is not in [96, 128, 160, 192, 224]. Weights for input shape (224, 224) will be loaded as the default.
 
 
-```python
+```
 trainer.compile2(batch_size=8,
                  optimizer=tf.keras.optimizers.SGD(1e-3, momentum=0.9, nesterov=True),
                  lr_range=(1e-6, 1e-3),
@@ -232,7 +232,7 @@ trainer.compile2(batch_size=8,
     Model compiled!
 
 
-```python
+```
 trainer.cyclic_fit(epochs=5,
                    batch_size=8,
                    lr_range=(0.00001, 0.0001),                   
@@ -266,13 +266,13 @@ trainer.cyclic_fit(epochs=5,
 ## Model Visualization
 It is important to understand what is going inside the model. Techniques like GradCam and Saliency Maps can visualize what the Network is learning. `trainer` module has InterpretModel class which creates GradCam and GradCam++ visualization with almost no additional code.
 
-```python
+```
 from chitra.trainer import InterpretModel
 trainer = Trainer(ds, create_cnn('mobilenetv2', num_classes=1000, keras_applications=False))
 model_interpret = InterpretModel(True, trainer)
 ```
 
-```python
+```
 image = ds[1][0].numpy().astype('uint8')
 image = Image.fromarray(image)
 model_interpret(image)
@@ -296,7 +296,7 @@ print(IMAGENET_LABELS[285])
 
 Thanks to [**fizyr**](https://github.com/fizyr/keras-retinanet) keras-retinanet.
 
-```python
+```
 from chitra.visualization import draw_annotations
 
 labels = np.array([label])
@@ -316,7 +316,7 @@ plt.show()
 
 Limit GPU memory or enable dynamic GPU memory growth for Tensorflow
 
-```python
+```
 from chitra.utils import limit_gpu, gpu_dynamic_mem_growth
 
 # limit the amount of GPU required for your training
@@ -326,7 +326,7 @@ limit_gpu(gpu_id=0, memory_limit=1024*2)
     No GPU:0 found in your system!
 
 
-```python
+```
 gpu_dynamic_mem_growth()
 ```
 

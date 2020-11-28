@@ -1,9 +1,9 @@
 repository: aniketmaurya/chitra
 output: web
 topnav_title: chitra
-site_title: Image utility library for Deep Learning
+site_title: Computer Vision library
 company_name: Aniket Maurya
-description: Image utility library for Deep Learning | Simplifies bounding box creation and image data loading
+description: "Deep Learning Computer Vision models with easy data loading and model building"
 # Set to false to disable KaTeX math
 use_math: true
 # Add Google analytics id if you have one and want to use it here
