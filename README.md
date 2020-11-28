@@ -208,8 +208,8 @@ for e in dl.take(1):
     (64, 64, 3)
 
 
-## Learner
-The Learner class inherits from `tf.keras.Model`, it contains everything that is required for training.
+## Trainer
+The Trainer class inherits from `tf.keras.Model`, it contains everything that is required for training.
 
 ```python
 from chitra.trainer import Trainer, create_cnn
