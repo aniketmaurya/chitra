@@ -3,7 +3,7 @@ output: web
 topnav_title: chitra
 site_title: "Computer Vision library"
 company_name: "Aniket Maurya"
-description: "Deep Learning Computer Vision library for easy data loading and model building"
+description: "Deep Learning Computer Vision library for easy data loading, model building and interpretation"
 # Set to false to disable KaTeX math
 use_math: true
 # Add Google analytics id if you have one and want to use it here
