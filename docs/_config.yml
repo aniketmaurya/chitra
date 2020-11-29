@@ -68,4 +68,4 @@ minima:
 # theme: jekyll-theme-cayman
 # url: "http://chitra.aniketmaurya.ml" # the base hostname & protocol for your site, e.g. http://example.com
 
-baseurl: http://chitra.aniketmaurya.ml/
+baseurl: /
