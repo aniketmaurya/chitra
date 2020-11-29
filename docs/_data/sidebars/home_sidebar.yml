@@ -11,25 +11,25 @@ entries:
       url: /
     - output: web,pdf
       title: core
-      url: core.html
+      url: core
     - output: web,pdf
       title: image
-      url: image.html
+      url: image
     - output: web,pdf
       title: dataloader
-      url: dataloader.html
+      url: dataloader
     - output: web,pdf
       title: datagenerator
-      url: datagenerator.html
+      url: datagenerator
     - output: web,pdf
       title: visualization
-      url: visualization.html
+      url: visualization
+    - output: web,pdf
+      title: trainer
+      url: trainer
     - output: web,pdf
       title: utils
-      url: utils.html
-    - output: web,pdf
-      title: learner
-      url: learner.html
+      url: utils
     output: web
     title: chitra
   output: web
