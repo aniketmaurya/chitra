@@ -1,7 +1,7 @@
 repository: "aniketmaurya/chitra"
 output: web
-topnav_title: chitra
-site_title: "Computer Vision library"
+topnav_title: "chitra"
+site_title: "chitra"
 company_name: "Aniket Maurya"
 description: "Deep Learning Computer Vision library for easy data loading, model building and interpretation"
 # Set to false to disable KaTeX math
@@ -56,8 +56,7 @@ defaults:
       search: true
       tooltip: true
 
-sidebars:
-- home_sidebar
+sidebars: [home_sidebar]
 permalink: pretty
 
 # Github and twitter are optional:
