@@ -1,12 +1,13 @@
 {
   "chitra": {
     "Overview": "/",
+    "example": "example_1",
     "core": "core",
     "image": "image",
     "dataloader": "dataloader",
     "datagenerator": "datagenerator",
-    "visualization": "visualization",
     "trainer": "trainer",
+    "visualization": "visualization",
     "utils": "utils"
   }
 }
