@@ -10,6 +10,6 @@
     "utils": "utils"
   },
   "Examples": {
-    "Image classification w Chitra": "example_01"
+    "Image classification w Chitra": "image-classification-example"
   }
 }
