@@ -7,11 +7,15 @@
 
 ## What is chitra?
 
-**chitra** (**चित्र**) is an image utility library for Deep Learning tasks. *(It is not image-processing library)*
+**chitra** (**चित्र**) is a Deep Learning Computer Vision library for easy data loading, model building and model interpretation with GradCAM/GradCAM++.
 
-chitra reduces image data loading boilerplates for classification and object-detection.
+Highlights:
+- Faster data loading without any boilerplate.
+- Progressive resizing of images.
+- Rapid experiments with different models using `chitra.trainer` module.
+- Train models with cyclic learning rate.
+- Model interpretation using GradCAM/GradCAM++ with no extra code.
 
-It can also generate bounding-boxes from the annotated dataset.
 
 If you have more use cases please [**raise an issue**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
 
@@ -140,6 +144,8 @@ ds.filenames[:3]
 
 
 ### Progressive resizing
+> It is the technique to sequentially resize all the images while training the CNNs on smaller to bigger image sizes. Progressive Resizing is described briefly in his terrific fastai course, “Practical Deep Learning for Coders”. A great way to use this technique is to train a model with smaller image size say 64x64, then use the weights of this model to train another model on images of size 128x128 and so on. Each larger-scale model incorporates the previous smaller-scale model layers and weights in its architecture.
+~[KDnuggets](https://www.kdnuggets.com/2019/05/boost-your-image-classification-model.html)
 
 ```
 image_sz_list = [(28, 28), (32, 32), (64, 64)]
