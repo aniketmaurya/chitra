@@ -1,7 +1,6 @@
 {
   "chitra": {
     "Overview": "/",
-    "example": "example_1",
     "core": "core",
     "image": "image",
     "dataloader": "dataloader",
@@ -9,5 +8,8 @@
     "trainer": "trainer",
     "visualization": "visualization",
     "utils": "utils"
+  },
+  "Examples": {
+    "Image classification w Chitra": "example_01"
   }
 }
