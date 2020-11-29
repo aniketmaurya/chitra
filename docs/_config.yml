@@ -66,6 +66,6 @@ minima:
     github: aniketmaurya
 
 # theme: jekyll-theme-cayman
-url: "http://chitra.aniketmaurya.ml" # the base hostname & protocol for your site, e.g. http://example.com
+# url: "http://chitra.aniketmaurya.ml" # the base hostname & protocol for your site, e.g. http://example.com
 
-baseurl: /
+baseurl: http://chitra.aniketmaurya.ml/
