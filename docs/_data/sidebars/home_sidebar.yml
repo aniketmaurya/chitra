@@ -22,15 +22,21 @@ entries:
       title: datagenerator
       url: datagenerator
     - output: web,pdf
-      title: visualization
-      url: visualization
-    - output: web,pdf
       title: trainer
       url: trainer
+    - output: web,pdf
+      title: visualization
+      url: visualization
     - output: web,pdf
       title: utils
       url: utils
     output: web
     title: chitra
+  - folderitems:
+    - output: web,pdf
+      title: Image classification w Chitra
+      url: example_01
+    output: web
+    title: Examples
   output: web
   title: Sidebar

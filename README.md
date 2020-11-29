@@ -37,7 +37,7 @@ pip install -e .
 
 ### Loading data for image classification
 
-
+Chitra `dataloader` and `datagenerator` modules for loading data. `dataloader` is a minimal dataloader that returns `tf.data.Dataset` object. `datagenerator` provides flexibility to users on how they want to load and manipulate the data.
 
 ```
 import numpy as np
