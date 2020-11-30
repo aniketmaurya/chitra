@@ -1,13 +1,13 @@
 ---
 
-title: Example - Image classification w Chitra
+title: Image classification with Chitra - Example 01
 
 
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Training Image classification model for Cats vs Dogs Kaggle dataset."
-description: "Training Image classification model for Cats vs Dogs Kaggle dataset."
+
+
 nb_path: "nbs/image-classification-example.ipynb"
 ---
 <!--
@@ -31,14 +31,7 @@ nb_path: "nbs/image-classification-example.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://colab.research.google.com/github/aniketmaurya/chitra/blob/master/examples/example_01.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="install-chitra">install chitra<a class="anchor-link" href="#install-chitra"> </a></h2><p><code>pip install --upgrade chitra==0.0.20</code></p>
+<p><a href="https://colab.research.google.com/github/aniketmaurya/chitra/blob/master/nbs/image-classification-example.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
 
 </div>
 </div>
@@ -63,7 +56,7 @@ nb_path: "nbs/image-classification-example.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>     |████████████████████████████████| 1.1MB 18.1MB/s eta 0:00:01
+<pre>     |████████████████████████████████| 1.1MB 18.1MB/s 
 </pre>
 </div>
 </div>
@@ -140,6 +133,13 @@ nb_path: "nbs/image-classification-example.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>copy your kaggle key to <code>/root/.kaggle/kaggle.json</code> for downloading the dataset.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -147,7 +147,8 @@ nb_path: "nbs/image-classification-example.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># !unzip -q dogs-cats-images.zip</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>kaggle datasets download -d chetankv/dogs-cats-images
+<span class="o">!</span>unzip -q dogs-cats-images.zip
 </pre></div>
 
     </div>
