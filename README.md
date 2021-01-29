@@ -3,7 +3,9 @@
 
 
 ![](https://www.code-inspector.com/project/16652/score/svg)
-![](https://www.code-inspector.com/project/16652/status/svg)
+[![CodeFactor](https://www.codefactor.io/repository/github/aniketmaurya/chitra/badge)](https://www.codefactor.io/repository/github/aniketmaurya/chitra)
+
+<!--- ![](https://www.code-inspector.com/project/16652/status/svg) -->
 
 ## What is chitra?
 
