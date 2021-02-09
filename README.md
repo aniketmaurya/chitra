@@ -10,6 +10,7 @@
 ## What is chitra?
 
 **chitra** (**चित्र**) is a Deep Learning Computer Vision library for easy data loading, model building and model interpretation with GradCAM/GradCAM++.
+> Library is not stable yet.
 
 Highlights:
 - Faster data loading without any boilerplate.
