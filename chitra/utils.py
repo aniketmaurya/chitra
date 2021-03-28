@@ -20,8 +20,6 @@ def limit_gpu(gpu_id: str, memory_limit:int):
     """
     limit the selected gpu [gpu_id] by [memory_limit] MB
     """
-    assert gpu_id>=0
-
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
     gpus = tf.config.list_physical_devices('GPU')
