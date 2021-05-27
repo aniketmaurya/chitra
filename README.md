@@ -33,6 +33,12 @@ cd chitra
 pip install -e .
 ```
 
+### From GitHub
+```
+pip install git+https://github.com/aniketmaurya/chitra@master
+
+```
+
 ## Usage
 
 ### Loading data for image classification
