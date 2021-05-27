@@ -6,6 +6,7 @@ index = {"remove_dsstore": "00_core.ipynb",
          "get_basename": "04_dataloader.ipynb",
          "IMAGENET_LABELS": "00_core.ipynb",
          "DATA_FORMATS": "01_image.ipynb",
+         "DEFAULT_MODE": "01_image.ipynb",
          "read_image": "01_image.ipynb",
          "resize_image": "01_image.ipynb",
          "Chitra": "01_image.ipynb",
@@ -31,9 +32,11 @@ index = {"remove_dsstore": "00_core.ipynb",
          "draw_boxes": "05_visualization.ipynb",
          "draw_detections": "05_visualization.ipynb",
          "draw_annotations": "05_visualization.ipynb",
-         "disable_gpu": "06_utils.ipynb",
-         "limit_gpu": "06_utils.ipynb",
-         "gpu_dynamic_mem_growth": "06_utils.ipynb"}
+         "disable_gpu": "06_tf_utils.ipynb",
+         "limit_gpu": "06_tf_utils.ipynb",
+         "gpu_dynamic_mem_growth": "06_tf_utils.ipynb",
+         "is_installed": "07_import_utils.ipynb",
+         "INSTALLED_MODULES": "07_import_utils.ipynb"}
 
 modules = ["core.py",
            "image.py",
@@ -41,7 +44,8 @@ modules = ["core.py",
            "trainer.py",
            "dataloader.py",
            "visualization.py",
-           "utils.py"]
+           "utility/tf_utils.py",
+           "utility/import_utils.py"]
 
 doc_url = "https://chitra.aniketmaurya.com/"
 
