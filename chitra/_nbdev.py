@@ -5,8 +5,10 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"remove_dsstore": "00_core.ipynb",
          "get_basename": "04_dataloader.ipynb",
          "IMAGENET_LABELS": "00_core.ipynb",
+         "DATA_FORMATS": "01_image.ipynb",
          "read_image": "01_image.ipynb",
          "resize_image": "01_image.ipynb",
+         "Chitra": "01_image.ipynb",
          "benchmark": "02_datagenerator.ipynb",
          "get_filenames": "02_datagenerator.ipynb",
          "get_label": "02_datagenerator.ipynb",
@@ -41,7 +43,7 @@ modules = ["core.py",
            "visualization.py",
            "utils.py"]
 
-doc_url = "https://chitra.aniketmaurya.ml/"
+doc_url = "https://chitra.aniketmaurya.com/"
 
 git_url = "https://github.com/aniketmaurya/chitra/tree/master/"
 
