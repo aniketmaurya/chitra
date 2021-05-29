@@ -3,14 +3,11 @@
 
 
 ![](https://www.code-inspector.com/project/16652/score/svg)
-[![CodeFactor](https://www.codefactor.io/repository/github/aniketmaurya/chitra/badge)](https://www.codefactor.io/repository/github/aniketmaurya/chitra)
-
-<!--- ![](https://www.code-inspector.com/project/16652/status/svg) -->
+![](https://www.code-inspector.com/project/16652/status/svg)
 
 ## What is chitra?
 
 **chitra** (**चित्र**) is a Deep Learning Computer Vision library for easy data loading, model building and model interpretation with GradCAM/GradCAM++.
-> Library is not stable yet.
 
 Highlights:
 - Faster data loading without any boilerplate.
@@ -34,6 +31,12 @@ If you have more use cases please [**raise an issue**](https://github.com/aniket
 git clone https://github.com/aniketmaurya/chitra.git
 cd chitra
 pip install -e .
+```
+
+### From GitHub
+```
+pip install git+https://github.com/aniketmaurya/chitra@master
+
 ```
 
 ## Usage
