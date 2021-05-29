@@ -69,7 +69,7 @@ plt.show()
 ```
 
 
-![png](docs/images/output_6_0.png)
+![png](docs/old_source/images/output_6_0.png)
 
 
 ## Image datagenerator
@@ -299,7 +299,7 @@ print(IMAGENET_LABELS[285])
 
 
 
-![png](docs/images/output_22_1.png)
+![png](docs/old_source/images/output_22_1.png)
 
 
     Egyptian Mau
@@ -324,7 +324,7 @@ plt.show()
 ```
 
 
-![png](docs/images/output_24_0.png)
+![png](docs/old_source/images/output_24_0.png)
 
 
 ## Utils
