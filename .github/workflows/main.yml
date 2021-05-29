@@ -31,23 +31,23 @@ jobs:
         pip install -qU fastcore
         # make test
 
-  fastpages-integration:
-    runs-on: ubuntu-latest
-    container: fastai/jekyll
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install nbdev
-      run: |
-        pip install -qe .
-        pip install -qU fastcore   
-    - uses: actions/checkout@v2
-      with:
-        repository: "fastai/fastpages"
-        path: "data"
-    - name: convert posts  
-      run: |
-        cd data
-        mkdir -p /fastpages
-        cp -r _action_files/* /fastpages/
-        /fastpages/action_entrypoint.sh
+#  fastpages-integration:
+#    runs-on: ubuntu-latest
+#    container: fastai/jekyll
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Install nbdev
+#      run: |
+#        pip install -qe .
+#        pip install -qU fastcore
+#    - uses: actions/checkout@v2
+#      with:
+#        repository: "fastai/fastpages"
+#        path: "data"
+#    - name: convert posts
+#      run: |
+#        cd data
+#        mkdir -p /fastpages
+#        cp -r _action_files/* /fastpages/
+#        /fastpages/action_entrypoint.sh
   

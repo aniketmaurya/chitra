@@ -1,0 +1,37 @@
+site_name: chitra
+theme:
+  name: material
+  logo: /assets/logo.png
+  favicon: /assets/favicon/favicon.ico
+  features:
+    - search.suggest
+    - search.highlight
+
+  # Necessary for search to work properly
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    logo: logo
+
+markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+plugins:
+  - git-revision-date-localized
+  - search
+
+
+repo_url: https://github.com/aniketmaurya/chitra/
+repo_name: aniketmaurya/chitra
+
+extra:
+  homepage: http://chitra.aniketmaurya.com
+
