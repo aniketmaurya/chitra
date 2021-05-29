@@ -36,7 +36,11 @@ index = {"remove_dsstore": "00_core.ipynb",
          "limit_gpu": "06_tf_utils.ipynb",
          "gpu_dynamic_mem_growth": "06_tf_utils.ipynb",
          "is_installed": "07_import_utils.ipynb",
-         "INSTALLED_MODULES": "07_import_utils.ipynb"}
+         "INSTALLED_MODULES": "07_import_utils.ipynb",
+         "pytorch_to_onnx": "08_model_converter.ipynb",
+         "onnx_to_pytorch": "08_model_converter.ipynb",
+         "tf2_to_onnx": "08_model_converter.ipynb",
+         "tf2_to_pytorch": "08_model_converter.ipynb"}
 
 modules = ["core.py",
            "image.py",
@@ -45,7 +49,8 @@ modules = ["core.py",
            "dataloader.py",
            "visualization.py",
            "utility/tf_utils.py",
-           "utility/import_utils.py"]
+           "utility/import_utils.py",
+           "converter/core.py"]
 
 doc_url = "https://chitra.aniketmaurya.com/"
 
