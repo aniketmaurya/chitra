@@ -1,4 +1,8 @@
 site_name: chitra
+site_description: Rapid Computer Vision experiments
+repo_url: https://github.com/aniketmaurya/chitra/
+repo_name: aniketmaurya/chitra
+
 theme:
   name: material
   logo: /assets/logo.png
@@ -11,14 +15,6 @@ theme:
   include_search_page: false
   search_index_only: true
 
-  # Default values, taken from mkdocs_theme.yml
-  language: en
-  font:
-    text: Roboto
-    code: Roboto Mono
-  icon:
-    logo: logo
-
 markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
@@ -27,13 +23,14 @@ markdown_extensions:
 plugins:
   - git-revision-date-localized
   - search
-  - macros
-
-
-repo_url: https://github.com/aniketmaurya/chitra/
-repo_name: aniketmaurya/chitra
 
 extra:
   homepage: http://chitra.aniketmaurya.com
   nbs_image:
     base_url: https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images
+
+nav:
+    - Introduction: 'index.md'
+    - Examples:
+        - Image Classification: 'image-classification-example/image-classification-example.md'
+    - License: 'license.md'
