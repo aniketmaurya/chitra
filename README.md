@@ -1,6 +1,4 @@
 # chitra
-> <p align="center">
-
 
 ![](https://www.code-inspector.com/project/16652/score/svg)
 ![](https://www.code-inspector.com/project/16652/status/svg)
@@ -17,7 +15,9 @@ Highlights:
 - Model interpretation using GradCAM/GradCAM++ with no extra code.
 
 
-If you have more use cases please [**raise an issue**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
+If you have more use case please [**raise an issue/PR**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
+
+## Join discord channel - https://discord.gg/TdnAfDw3kB
 
 ## Installation
 
