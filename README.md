@@ -15,9 +15,9 @@ Highlights:
 - Model interpretation using GradCAM/GradCAM++ with no extra code.
 
 
-If you have more use case please [**raise an issue/PR**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
+> 📢 If you have more use case please [**raise an issue/PR**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
 
-## Join discord channel - https://discord.gg/TdnAfDw3kB
+> 📢 Join discord channel - https://discord.gg/TdnAfDw3kB
 
 ## Installation
 
