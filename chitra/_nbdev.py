@@ -5,6 +5,8 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"remove_dsstore": "00_core.ipynb",
          "get_basename": "04_dataloader.ipynb",
          "IMAGENET_LABELS": "00_core.ipynb",
+         "tf": "01_image.ipynb",
+         "torch": "01_image.ipynb",
          "DATA_FORMATS": "01_image.ipynb",
          "DEFAULT_MODE": "01_image.ipynb",
          "read_image": "01_image.ipynb",
