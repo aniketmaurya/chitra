@@ -32,6 +32,6 @@ extra:
 nav:
     - Introduction: 'index.md'
     - Examples:
-        - Image Utility: 'examples/Image Utility/Image Utility.md'
+        - Play with Images: 'examples/chitra-class/chitra-class.md'
         - Image Classification: 'examples/image-classification.md'
     - License: 'license.md'
