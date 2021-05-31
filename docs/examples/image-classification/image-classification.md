@@ -1,6 +1,6 @@
 <a href="https://colab.research.google.com/github/aniketmaurya/chitra/blob/master/nbs/image-classification-example.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-# Image classification with Chitra - Example 01
+# Training Image classifier with Chitra
 Training Image classification model for Cats vs Dogs Kaggle dataset.
 
 To install chitra
