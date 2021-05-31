@@ -35,7 +35,7 @@ entries:
   - folderitems:
     - output: web,pdf
       title: Image classification w Chitra
-      url: image-classification-example
+      url: examples
     output: web
     title: Examples
   output: web

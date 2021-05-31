@@ -5,8 +5,8 @@ repo_name: aniketmaurya/chitra
 
 theme:
   name: material
-  logo: /assets/logo.png
-  favicon: /assets/favicon/favicon.ico
+  logo: https://ik.imagekit.io/aniket/chitra/logo_ddSLdaURS.png
+  favicon: https://ik.imagekit.io/aniket/chitra/favicon-32x32_zIf2gUdAN.png
   features:
     - search.suggest
     - search.highlight
@@ -32,5 +32,5 @@ extra:
 nav:
     - Introduction: 'index.md'
     - Examples:
-        - Image Classification: 'image-classification-example/image-classification-example.md'
+        - Image Classification: 'examples/examples.md'
     - License: 'license.md'
