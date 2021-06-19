@@ -25,7 +25,7 @@ plugins:
   - search
 
 extra:
-  homepage: http://chitra.aniketmaurya.com
+  homepage: https://chitra.readthedocs.io/en/latest
   nbs_image:
     base_url: https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images
 
