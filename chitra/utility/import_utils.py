@@ -5,6 +5,7 @@ __all__ = ['is_installed', 'INSTALLED_MODULES']
 # Cell
 import importlib
 
+
 # Cell
 def is_installed(module_name: str):
     return importlib.util.find_spec(module_name) is not None
@@ -16,7 +17,6 @@ _TORCH = "torch"
 _TORCHVISION = "torchvision"
 _JAX = "jax"
 _FLAX = "flax"
-
 
 INSTALLED_MODULES = {
     module: is_installed(module)

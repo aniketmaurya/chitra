@@ -2,9 +2,11 @@
 
 __all__ = ['disable_gpu', 'limit_gpu', 'gpu_dynamic_mem_growth']
 
+import os
+
 # Cell
 import tensorflow as tf
-import os
+
 
 # Cell
 def disable_gpu():
@@ -15,8 +17,8 @@ def disable_gpu():
     os.environ["CUDA_VISIBLE_DEVICES"] = str(-1)
 
 
-#export
-def limit_gpu(gpu_id: str, memory_limit:int):
+# export
+def limit_gpu(gpu_id: str, memory_limit: int):
     """
     limit the selected gpu [gpu_id] by [memory_limit] MB
     """
@@ -33,13 +35,13 @@ def limit_gpu(gpu_id: str, memory_limit:int):
                         memory_limit=memory_limit)
                 ])
             logical_gpus = tf.config.list_logical_devices('GPU')
-            print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
+            print(len(gpus), "Physical GPUs,", len(logical_gpus),
+                  "Logical GPUs")
         except RuntimeError as e:
             # Virtual devices must be set before GPUs have been initialized
             print(e)
     else:
         print(f'No GPU:{gpu_id} found in your system!')
-
 
 
 # Cell
@@ -55,6 +57,9 @@ def gpu_dynamic_mem_growth():
             for gpu in gpu_devices:
                 tf.config.experimental.set_memory_growth(gpu, True)
             print('GPU dynamic memory growth enabled')
-        else: print('No GPU found on the machine!')
+        else:
+            print('No GPU found on the machine!')
     except AttributeError:
-        print('Upgrade your tensorflow to 2.x to have the gpu_dynamic_mem_growth feature.')
+        print(
+            'Upgrade your tensorflow to 2.x to have the gpu_dynamic_mem_growth feature.'
+        )

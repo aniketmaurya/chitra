@@ -2,21 +2,21 @@
 
 __all__ = ['AUTOTUNE', 'get_basename', 'show_batch', 'Clf']
 
+import math
+import os
+import pathlib
+from typing import Union
+
+import matplotlib.pyplot as plt
 # Cell
 import tensorflow as tf
-import pathlib
-import os
-
-import math
-import matplotlib.pyplot as plt
-
-from typing import Union
 
 from .core import remove_dsstore
 from .image import read_image, resize_image
 
 # Cell
 AUTOTUNE = tf.data.experimental.AUTOTUNE
+
 
 # Cell
 def get_basename(path: tf.string):
@@ -56,9 +56,9 @@ def show_batch(clf, limit: int, figsize: tuple = (10, 10)):
         plt.title(label)
         plt.axis('off')
 
+
 # Cell
 class Clf(object):
-
     def __init__(self):
         self.CLASS_NAMES = None
         self.data = None
@@ -152,8 +152,8 @@ class Clf(object):
         keys = list(self.class_to_idx.keys())
         vals = list(self.class_to_idx.values())
 
-        keys_tensor = keys  #tf.constant(keys)
-        vals_tensor = vals  #tf.constant(vals)
+        keys_tensor = keys  # tf.constant(keys)
+        vals_tensor = vals  # tf.constant(vals)
 
         table_init = tf.lookup.KeyValueTensorInitializer(
             keys_tensor, vals_tensor)
@@ -195,7 +195,9 @@ class Clf(object):
         You will get error on `batch()` method if all image size are not same.
         """
         assert isinstance(path, (str, pathlib.Path))
-        assert isinstance(shuffle, (bool, int)), print(f'Arg: shuffle is either bool or int but got {shuffle} : {type(shuffle)}')
+        assert isinstance(shuffle, (bool, int)), print(
+            f'Arg: shuffle is either bool or int but got {shuffle} : {type(shuffle)}'
+        )
 
         path = pathlib.Path(path)
         remove_dsstore(path)
@@ -206,14 +208,17 @@ class Clf(object):
         list_folders = tf.data.Dataset.list_files(str(path / '*'))
 
         list_images = self._get_image_list(str(path))
-        if shuffle: list_images.shuffle(shuffle).cache()
-        else: list_images.cache()
-
+        if shuffle:
+            list_images.shuffle(shuffle).cache()
+        else:
+            list_images.cache()
 
         self._get_classnames(list_folders, encode_classes)
 
-        if encode_classes: print(f'CLASSES ENCODED: {self.class_to_idx}')
-        else: print(f'CLASSES FOUND: {self.CLASS_NAMES}')
+        if encode_classes:
+            print(f'CLASSES ENCODED: {self.class_to_idx}')
+        else:
+            print(f'CLASSES FOUND: {self.CLASS_NAMES}')
 
         data = list_images.map(self._process_path, num_parallel_calls=AUTOTUNE)
 
