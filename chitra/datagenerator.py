@@ -18,7 +18,7 @@ from typing import Callable, Union
 import tensorflow as tf
 from typeguard import check_argument_types, typechecked
 
-from .image import read_image, resize_image
+from .tf_image import read_image, resize_image
 
 
 # Cell

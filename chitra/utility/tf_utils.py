@@ -32,7 +32,7 @@ def limit_gpu(gpu_id: int, memory_limit: int):
                 ])
             logical_gpus = tf.config.list_logical_devices('GPU')
             print(len(gpus), "Physical GPUs,", len(logical_gpus),
-                "Logical GPUs")
+                  "Logical GPUs")
         except RuntimeError as e:
             # Virtual devices must be set before GPUs have been initialized
             print(e)
