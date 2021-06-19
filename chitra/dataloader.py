@@ -8,11 +8,10 @@ import pathlib
 from typing import Union
 
 import matplotlib.pyplot as plt
-# Cell
 import tensorflow as tf
 
 from .core import remove_dsstore
-from .image import read_image, resize_image
+from .tf_image import read_image, resize_image
 
 # Cell
 AUTOTUNE = tf.data.experimental.AUTOTUNE

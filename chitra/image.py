@@ -1,6 +1,5 @@
 __all__ = ['DATA_FORMATS', 'DEFAULT_MODE', 'BoundingBoxes', 'Chitra']
 
-# Cell
 import os
 from io import BytesIO
 
@@ -9,7 +8,8 @@ import numpy as np
 import requests
 from PIL import Image
 
-from .utility.import_utils import _TF, _TORCH, INSTALLED_MODULES
+from .constants import _TF, _TORCH
+from .utility.import_utils import INSTALLED_MODULES
 
 tf = None
 torch = None
