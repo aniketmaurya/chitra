@@ -4,7 +4,7 @@
 Training Image classification model for Cats vs Dogs Kaggle dataset.
 
 To install chitra
-`pip install --upgrade chitra==0.0.20`
+`pip install --upgrade chitra==0.0.22`
 
 
 ```python
@@ -12,7 +12,7 @@ To install chitra
 ```
 
     [K     |████████████████████████████████| 1.1MB 18.1MB/s eta 0:00:01
-    [?25h
+
 
 ## import functions and classes
 ### Dataset Class
@@ -36,10 +36,8 @@ from PIL import Image
 BS = 16
 IMG_SIZE_LST = [(128,128), (160, 160), (224,224)]
 AUTOTUNE = tf.data.experimental.AUTOTUNE
-```
 
 
-```python
 def tensor_to_image(tensor):
     return Image.fromarray(tensor.numpy().astype('uint8'))
 ```
@@ -51,12 +49,6 @@ copy your kaggle key to `/root/.kaggle/kaggle.json` for downloading the dataset.
 !kaggle datasets download -d chetankv/dogs-cats-images
 !unzip -q dogs-cats-images.zip
 ```
-
-    Warning: Your Kaggle API key is readable by other users on this system! To fix this, you can run 'chmod 600 /root/.kaggle/kaggle.json'
-    Downloading dogs-cats-images.zip to /content
-     98% 427M/435M [00:02<00:00, 161MB/s]
-    100% 435M/435M [00:02<00:00, 153MB/s]
-
 
 
 ```python
@@ -72,14 +64,8 @@ tensor_to_image(image).resize((224,224))
 
     dogs
 
-
-
-
-
     
 ![png](output_10_1.png)
-    
-
 
 
 ## Create Trainer
@@ -511,7 +497,7 @@ data = ds.get_tf_dataset().map((lambda x,y: (x/127.5-1.0, y)), AUTOTUNE).batch(B
 trainer.fit(data,
             epochs=10)
 ```
-
+<details><summary>Training loop...</summary>
     Epoch 1/10
     500/500 [==============================] - 38s 77ms/step - loss: 0.4070 - binary_accuracy: 0.8026
     Epoch 2/10
@@ -540,6 +526,7 @@ trainer.fit(data,
     Returning the last set size which is: (224, 224)
     500/500 [==============================] - 78s 156ms/step - loss: 0.0452 - binary_accuracy: 0.9829
 
+</details>
 
 
 

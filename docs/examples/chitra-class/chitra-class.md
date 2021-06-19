@@ -51,18 +51,4 @@ image.image = image.image.convert('RGB')
 plt.imshow(image.draw_boxes())
 ```
 
-
-
-
-    <matplotlib.image.AxesImage at 0x7fb0742e6250>
-
-
-
-
 ![png](output_8_1.png)
-
-
-
-```python
-
-```
