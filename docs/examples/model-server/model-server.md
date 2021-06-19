@@ -9,6 +9,8 @@
 
 ```python
 from chitra.serve import create_app
+from chitra.trainer import create_cnn
+
 ```
 
 ## What can it do?
@@ -17,7 +19,8 @@ from chitra.serve import create_app
 - Override custom preprocessing and Postprocessing function.
 
 ```python
-model = lambda x: x + 1
+model = create_cnn('mobilenetv2', num_classes=2)
+
 create_app(model, run=True)
 ```
 
