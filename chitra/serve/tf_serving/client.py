@@ -1,9 +1,14 @@
+from typing import Callable
+
 import grpc
 import tensorflow as tf
 from tensorflow_serving.apis import predict_pb2, prediction_service_pb2_grpc
 
 
-def create_grpc_stub(host='localhost', port='8500'):
+def create_grpc_stub(
+        host: str = 'localhost',
+        port: str = '8500'
+) -> prediction_service_pb2_grpc.PredictionServiceStub:
     hostport = f'{host}:{port}'
     channel = grpc.insecure_channel(hostport)
     stub = prediction_service_pb2_grpc.PredictionServiceStub(channel)
@@ -46,9 +51,9 @@ class GrpcClient:
                 input_name: str,
                 model_name: str,
                 signature_name: str,
-                callback=None,
-                grpc_timeout=20,
-                async_=False):
+                callback: Callable = None,
+                grpc_timeout: int = 20,
+                async_: bool = False):
         stub = self.stub
         response = grpc_request(stub, data_sample, input_name, model_name,
                                 signature_name, callback, grpc_timeout, async_)
