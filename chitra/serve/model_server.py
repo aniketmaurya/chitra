@@ -9,9 +9,11 @@ def create_app(model: Callable,
                postprocess: Optional[Callable] = None,
                run: bool = False,
                **kwargs):
-    title = kwargs.get('title', 'Chitra Model Server')
-    desc = kwargs.get('description',
-                      'https://chitra.readthedocs.io/en/latest/')
+    title = kwargs.get('title', 'Chitra Model Server 🔥')
+    desc = kwargs.get(
+        'description',
+        '<a href="https://chitra.readthedocs.io/en/latest">Goto Chitra Docs</a> 🔗'
+    )
     app = FastAPI(title=title, description=desc)
 
     @app.get('/healthz')

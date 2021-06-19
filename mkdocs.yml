@@ -34,4 +34,5 @@ nav:
     - Examples:
         - Play with Images: 'examples/chitra-class/chitra-class.md'
         - Image Classification: 'examples/image-classification/image-classification.md'
+        - Model Server: 'examples/model-server/model-server.md'
     - License: 'license.md'

@@ -84,7 +84,7 @@ trainer = Trainer(ds, create_cnn('mobilenetv2', num_classes=2))
 ```python
 trainer.summary()
 ```
-
+<details><summary>Model Summary</summary>
     Model: "functional_1"
     __________________________________________________________________________________________________
     Layer (type)                    Output Shape         Param #     Connected to                     
@@ -419,7 +419,7 @@ trainer.summary()
     Trainable params: 2,225,153
     Non-trainable params: 34,112
     __________________________________________________________________________________________________
-
+</details>
 
 
 ```python
