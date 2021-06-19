@@ -5,6 +5,16 @@ repo_name: aniketmaurya/chitra
 
 theme:
   name: material
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
   logo: https://ik.imagekit.io/aniket/chitra/logo_ddSLdaURS.png
   favicon: https://ik.imagekit.io/aniket/chitra/favicon-32x32_zIf2gUdAN.png
   features:
