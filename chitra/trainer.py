@@ -5,24 +5,24 @@ __all__ = [
     'InterpretModel', 'Learner'
 ]
 
-# Cell
 import inspect
-# Cell
 from functools import partial
-# Cell
 from typing import Union
 
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import numpy as np
+import pytorch_lightning as pl
 import tensorflow as tf
 import tensorflow_addons as tfa
 from PIL import Image
+from tensorflow import keras
 from tensorflow.keras.models import Model
 from tf_keras_vis.gradcam import Gradcam, GradcamPlusPlus
 from tf_keras_vis.utils import normalize
 from typeguard import check_argument_types, typechecked
 
+from .converter.core import pytorch_to_onnx, tf2_to_onnx
 from .datagenerator import Dataset
 
 MODEL_DICT = {}
@@ -401,16 +401,6 @@ class InterpretModel:
         return ret
 
 
-# Cell
-from typing import Union
-
-import pytorch_lightning as pl
-from tensorflow import keras
-
-from .converter.core import pytorch_to_onnx, tf2_to_onnx
-
-
-# Cell
 class Learner:
     TF = ("TF", "TENSORFLOW")
     PT = ("PYTORCH", "PT", "TORCH")

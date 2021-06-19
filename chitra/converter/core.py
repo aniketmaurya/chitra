@@ -4,10 +4,24 @@ __all__ = [
     'pytorch_to_onnx', 'onnx_to_pytorch', 'tf2_to_onnx', 'tf2_to_pytorch'
 ]
 
-# Cell
+from chitra.utility.import_utils import is_installed
 
-# Cell
-import torch.onnx
+onnx = None
+tf2onnx = None
+onnx2pytorch = None
+torch = None
+
+if is_installed('onnx'):
+    import onnx
+
+if is_installed('tf2onnx'):
+    import tf2onnx
+
+if is_installed('torch'):
+    import torch.onnx
+
+if is_installed('onnx2pytorch'):
+    from onnx2pytorch import ConvertModel
 
 
 def pytorch_to_onnx(model, tensor, export_path="temp.onnx"):
@@ -36,12 +50,6 @@ def pytorch_to_onnx(model, tensor, export_path="temp.onnx"):
         },
     )
     return export_path
-
-
-# Cell
-import onnx
-import tf2onnx
-from onnx2pytorch import ConvertModel
 
 
 def onnx_to_pytorch(onnx_model):
