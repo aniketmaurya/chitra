@@ -1,2 +1,2 @@
-tensorflow-serving-api
+tensorflow-serving-api==2.5.1
 grpc
