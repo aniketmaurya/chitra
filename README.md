@@ -1,15 +1,22 @@
 # chitra
+
+
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/chitra?style=flat)
 [![Downloads](https://pepy.tech/badge/chitra)](https://pepy.tech/project/chitra)
 [![Downloads](https://pepy.tech/badge/chitra/month)](https://pepy.tech/project/chitra)
 ![GitHub](https://img.shields.io/github/license/aniketmaurya/chitra?style=flat)
 
-
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=ncloc)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=alert_status)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 ![](https://www.code-inspector.com/project/16652/score/svg)
 ![](https://www.code-inspector.com/project/16652/status/svg)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=security_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 ![GitHub issues](https://img.shields.io/github/issues/aniketmaurya/chitra?style=flat)
 [![Documentation Status](https://readthedocs.org/projects/chitra/badge/?version=latest)](https://chitra.readthedocs.io/en/latest/?badge=latest)
 [![Discord](https://img.shields.io/discord/848469007443165184?style=flat)](https://discord.gg/TdnAfDw3kB)
+
 
 ## What is chitra?
 
@@ -101,8 +108,8 @@ train_folder/
                      .
                      .
            ......imageN.jpg
-                    
-                      
+
+
 ```
 
 The inbuilt file generator search for images on the `folder1`, now we can just update the `image file generator` and rest of the functionality will remain same.
@@ -134,7 +141,7 @@ def load_files(path):
 
 def get_label(path):
     return path.split('/')[-3]
-    
+
 ds.update_component('get_filenames', load_files)
 ds.filenames[:3]
 ```
@@ -179,7 +186,7 @@ for img, label in ds.generator():
 ```
     get_filenames updated with <function load_files at 0x7fad6916d0e0>
     get_label updated with <function get_label at 0x7fad6916d8c0>
-    
+
     first call to generator: (28, 28, 3)
     seconds call to generator: (32, 32, 3)
     third call to generator: (64, 64, 3)
@@ -238,7 +245,7 @@ trainer = Trainer(ds, model)
 trainer.compile2(batch_size=8,
                  optimizer=tf.keras.optimizers.SGD(1e-3, momentum=0.9, nesterov=True),
                  lr_range=(1e-6, 1e-3),
-                 loss='binary_crossentropy', 
+                 loss='binary_crossentropy',
                  metrics=['binary_accuracy'])
 ```
     Model compiled!
@@ -247,7 +254,7 @@ trainer.compile2(batch_size=8,
 ```python
 trainer.cyclic_fit(epochs=5,
                    batch_size=8,
-                   lr_range=(0.00001, 0.0001),                   
+                   lr_range=(0.00001, 0.0001),
                   )
 ```
 <details><summary>Training Loop...</summary>
