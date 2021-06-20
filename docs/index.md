@@ -111,7 +111,7 @@ The inbuilt file generator search for images on the `folder1`, now we can just u
 
 ### Updating component
 
-```
+```python
 from chitra.datagenerator import Dataset
 from glob import glob
 
