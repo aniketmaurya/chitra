@@ -3,4 +3,4 @@ tensorflow-addons
 tf-keras-vis>=0.5.3
 matplotlib
 pillow
-imgaug
+imgaug==0.4.0
