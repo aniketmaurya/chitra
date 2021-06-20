@@ -1,14 +1,11 @@
 # chitra
 
 
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=aniketmaurya_chitra)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/chitra?style=flat)
 [![Downloads](https://pepy.tech/badge/chitra)](https://pepy.tech/project/chitra)
 [![Downloads](https://pepy.tech/badge/chitra/month)](https://pepy.tech/project/chitra)
 ![GitHub](https://img.shields.io/github/license/aniketmaurya/chitra?style=flat)
-
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=ncloc)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=security_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
