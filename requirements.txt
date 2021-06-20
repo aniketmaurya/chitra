@@ -2,5 +2,5 @@ tensorflow~=2.3
 tensorflow-addons
 tf-keras-vis>=0.5.3
 matplotlib
-pillow
+pillow==8.2.0
 imgaug
