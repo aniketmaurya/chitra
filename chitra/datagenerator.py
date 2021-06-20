@@ -25,8 +25,8 @@ from .tf_image import read_image, resize_image
 def benchmark(dataset, num_epochs=2, fake_infer_time=0.001):
     """Use this function to benchmark your Dataset loading time"""
     start_time = time.perf_counter()
-    for epoch_num in range(num_epochs):
-        for sample in dataset:
+    for _ in range(num_epochs):
+        for _ in dataset:
             # Performing a training step
             time.sleep(fake_infer_time)
     tf.print(
@@ -48,10 +48,9 @@ def get_label(filename):
 class ImageSizeList:
     def __init__(self, img_sz_list=None):
 
-        if isinstance(img_sz_list, (list, tuple)):
-            if len(img_sz_list) != 0 and not isinstance(
-                    img_sz_list[0], (list, tuple)):
-                img_sz_list = [img_sz_list][:]
+        if isinstance(img_sz_list, (list, tuple)) and len(img_sz_list) != 0 and not isinstance(
+                img_sz_list[0], (list, tuple)):
+            img_sz_list = [img_sz_list][:]
 
         self.start_size = None
         self.last_size = None
@@ -62,7 +61,7 @@ class ImageSizeList:
             self.start_size = img_sz_list[0]
             self.last_size = img_sz_list[-1]
             self.curr_size = img_sz_list[0]
-        except (IndexError, TypeError) as e:
+        except (IndexError, TypeError):
             print("No item present in the image size list")
             self.curr_size = None  # no item present in the list
 
@@ -70,7 +69,7 @@ class ImageSizeList:
         img_sz_list = self.img_sz_list
         try:
             self.curr_size = img_sz_list.pop(0)
-        except (IndexError, AttributeError) as e:
+        except (IndexError, AttributeError):
             print(f"Returning the last set size which is: {self.curr_size}")
 
         return self.curr_size
@@ -79,7 +78,7 @@ class ImageSizeList:
 # Cell
 class Pipeline:
     @typechecked
-    def __init__(self, funcs: Union[Callable, list, tuple] = []):
+    def __init__(self, funcs: Union[Callable, list, tuple] = None):
         assert check_argument_types()
         if isinstance(funcs, list):
             self.funcs = funcs
@@ -114,12 +113,12 @@ class Dataset:
     }
 
     def __init__(
-        self,
-        train_dir: Union[str, Path],
-        image_size=[],
-        transforms=None,
-        default_encode=True,
-        **kwargs,
+            self,
+            train_dir: Union[str, Path],
+            image_size=None,
+            transforms=None,
+            default_encode=True,
+            **kwargs,
     ):
         """
         train_dir(str): Path for training data
@@ -147,9 +146,10 @@ class Dataset:
         return image, label
 
     def _reload(self):
+        image_size = self.image_size[:]
         self.filenames = self.get_filenames(self.root_dir)
         self.num_files = len(self.filenames)
-        self.img_sz_list = ImageSizeList(None or self.image_size[:])
+        self.img_sz_list = ImageSizeList(image_size)
         self.labels = self.get_labels()
 
     def _capture_return_types(self):
@@ -161,10 +161,9 @@ class Dataset:
             for ret_type in outputs:
                 return_types.append(
                     ret_type.dtype if tf.is_tensor(ret_type) else Dataset.
-                    MAPPINGS["PY_TO_TF"][type(ret_type)])
+                        MAPPINGS["PY_TO_TF"][type(ret_type)])
         else:
-            return_types.append(ret_type.dtype if tf.is_tensor(ret_type) else
-                                Dataset.MAPPINGS["PY_TO_TF"][type(ret_type)])
+            raise UserWarning("Unable to capture return type!")
         return tuple(return_types)
 
     def __getitem__(self, idx):
@@ -215,6 +214,6 @@ class Dataset:
         self._reload()
         generator = partial(self.generator, shuffle=shuffle)
         datagen = tf.data.Dataset.from_generator(generator, return_types,
-                                                 output_shape)
+            output_shape)
 
         return datagen
