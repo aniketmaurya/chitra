@@ -26,7 +26,7 @@ def benchmark(dataset, num_epochs=2, fake_infer_time=0.001):
     """Use this function to benchmark your Dataset loading time"""
     start_time = time.perf_counter()
     for _ in range(num_epochs):
-        for __ in dataset:
+        for _ in dataset:
             # Performing a training step
             time.sleep(fake_infer_time)
     tf.print(
@@ -149,7 +149,7 @@ class Dataset:
         image_size = self.image_size[:]
         self.filenames = self.get_filenames(self.root_dir)
         self.num_files = len(self.filenames)
-        self.img_sz_list = ImageSizeList(None or image_size)
+        self.img_sz_list = ImageSizeList(image_size)
         self.labels = self.get_labels()
 
     def _capture_return_types(self):
