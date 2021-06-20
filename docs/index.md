@@ -1,13 +1,13 @@
 # chitra
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/chitra?style=flat-square)
+![GitHub](https://img.shields.io/github/license/aniketmaurya/chitra?style=flat)
 
 
 ![](https://www.code-inspector.com/project/16652/score/svg)
 ![](https://www.code-inspector.com/project/16652/status/svg)
+![GitHub issues](https://img.shields.io/github/issues/aniketmaurya/chitra?style=flat)
 [![Documentation Status](https://readthedocs.org/projects/chitra/badge/?version=latest)](https://chitra.readthedocs.io/en/latest/?badge=latest)
-![GitHub issues](https://img.shields.io/github/issues/aniketmaurya/chitra?style=flat-square)
-![Discord](https://img.shields.io/discord/848469007443165184?style=flat-square)
-![GitHub](https://img.shields.io/github/license/aniketmaurya/chitra?style=flat-square)
+[![Discord](https://img.shields.io/discord/848469007443165184?style=flat)](https://discord.gg/TdnAfDw3kB)
 
 ## What is chitra?
 
