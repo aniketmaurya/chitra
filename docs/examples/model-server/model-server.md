@@ -1,14 +1,13 @@
 # Chitra Model Server
 
-> Serve your models easily with `chitra.serve`
+## Serve your models easily with `chitra.serve`
 
 ```python
-# For latest update install from master
-!pip install git+https://github.com/aniketmaurya/chitra@master -q
+pip install chitra==0.0.23
 ```
 
 ```python
-from chitra.serve import create_app
+from chitra.serve import create_api
 from chitra.trainer import create_cnn
 
 ```
@@ -21,10 +20,10 @@ from chitra.trainer import create_cnn
 ```python
 model = create_cnn('mobilenetv2', num_classes=2)
 
-create_app(model, run=True)
+create_api(model, run=True, api_type='image-classification')
 ```
 
-Open http://127.0.0.1:8000/docs in your browser and try out the API.
+Open `http://127.0.0.1:8000/docs` in your browser and try out the API.
 
 #### Preview
 ![png](preview.png)
