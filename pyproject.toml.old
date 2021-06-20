@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "chitra"
+version = "0.0.23"
+description = "A Deep Learning Computer Vision Utility library"
+authors = ["Aniket Maurya <hello@aniketmaury.com>"]
+license = "apache2"
+readme = "README.md"
+homepage = "https://github.com/aniketmaurya/chitra"
+repository = "https://github.com/aniketmaurya/chitra"
+documentation = "https://chitra.readthedocs.io/en/latest/"
+keywords = [
+    "Computer Vision",
+    "visualization",
+    "GradCAM",
+    "Keras",
+    "Data Loading"
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+tensorflow = "^2.3"
+tensorflow-addons = "^0.13.0"
+tf-keras-vis = "^0.5.3"
+matplotlib = "^3.4.2"
+Pillow = "^8.2.0"
+imgaug = "^0.4.0"
+
+[tool.poetry.dev-dependencies]
+python = "^3.7"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+#[tool.poetry-version-plugin]
+#source = "init"
