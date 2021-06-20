@@ -53,7 +53,7 @@ pip install git+https://github.com/aniketmaurya/chitra@master
 
 Chitra `dataloader` and `datagenerator` modules for loading data. `dataloader` is a minimal dataloader that returns `tf.data.Dataset` object. `datagenerator` provides flexibility to users on how they want to load and manipulate the data.
 
-```
+```python
 import numpy as np
 import tensorflow as tf
 import chitra
@@ -61,14 +61,13 @@ from chitra.dataloader import Clf, show_batch
 import matplotlib.pyplot as plt
 ```
 
-```
+```python
 clf_dl = Clf()
 data = clf_dl.from_folder(cat_dog_path, target_shape=(224, 224))
 
 clf_dl.show_batch(8, figsize=(8,8))
-```
 
-```
+
 for e in data.take(1):
     image = e[0].numpy().astype('uint8')
     label = e[1].numpy()
@@ -112,7 +111,7 @@ The inbuilt file generator search for images on the `folder1`, now we can just u
 
 ### Updating component
 
-```
+```python
 from chitra.datagenerator import Dataset
 from glob import glob
 
