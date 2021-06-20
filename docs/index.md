@@ -9,8 +9,6 @@
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=ncloc)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=alert_status)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
-![](https://www.code-inspector.com/project/16652/score/svg)
-![](https://www.code-inspector.com/project/16652/status/svg)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=security_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 ![GitHub issues](https://img.shields.io/github/issues/aniketmaurya/chitra?style=flat)
