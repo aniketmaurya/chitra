@@ -53,7 +53,7 @@ pip install git+https://github.com/aniketmaurya/chitra@master
 
 Chitra `dataloader` and `datagenerator` modules for loading data. `dataloader` is a minimal dataloader that returns `tf.data.Dataset` object. `datagenerator` provides flexibility to users on how they want to load and manipulate the data.
 
-```
+```python
 import numpy as np
 import tensorflow as tf
 import chitra
@@ -61,14 +61,13 @@ from chitra.dataloader import Clf, show_batch
 import matplotlib.pyplot as plt
 ```
 
-```
+```python
 clf_dl = Clf()
 data = clf_dl.from_folder(cat_dog_path, target_shape=(224, 224))
 
 clf_dl.show_batch(8, figsize=(8,8))
-```
 
-```
+
 for e in data.take(1):
     image = e[0].numpy().astype('uint8')
     label = e[1].numpy()
@@ -77,7 +76,7 @@ plt.show()
 ```
 
 
-![png]({{ nbs_image.base_url }}/output_6_0.png)
+![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images/output_6_0.png)
 
 
 ## Image datagenerator
@@ -292,7 +291,7 @@ print(IMAGENET_LABELS[285])
     index: 282
 
 
-![png]({{ nbs_image.base_url }}/output_22_1.png)
+![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images/output_22_1.png)
 
     Egyptian Mau
 
@@ -316,7 +315,7 @@ plt.show()
 ```
 
 
-![png]({{ nbs_image.base_url }}/output_24_0.png)
+![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images/output_24_0.png)
 
 
 ## Utils
