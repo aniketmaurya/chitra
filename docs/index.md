@@ -1,5 +1,7 @@
 # chitra
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/chitra?style=flat-square)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/chitra?style=flat)
+[![Downloads](https://pepy.tech/badge/chitra)](https://pepy.tech/project/chitra)
+[![Downloads](https://pepy.tech/badge/chitra/month)](https://pepy.tech/project/chitra)
 ![GitHub](https://img.shields.io/github/license/aniketmaurya/chitra?style=flat)
 
 
