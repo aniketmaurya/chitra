@@ -48,7 +48,9 @@ def get_label(filename):
 class ImageSizeList:
     def __init__(self, img_sz_list=None):
 
-        if isinstance(img_sz_list, (list, tuple)) and len(img_sz_list) != 0 and not isinstance(
+        if isinstance(
+                img_sz_list,
+            (list, tuple)) and len(img_sz_list) != 0 and not isinstance(
                 img_sz_list[0], (list, tuple)):
             img_sz_list = [img_sz_list][:]
 
@@ -113,12 +115,12 @@ class Dataset:
     }
 
     def __init__(
-            self,
-            train_dir: Union[str, Path],
-            image_size=None,
-            transforms=None,
-            default_encode=True,
-            **kwargs,
+        self,
+        train_dir: Union[str, Path],
+        image_size=None,
+        transforms=None,
+        default_encode=True,
+        **kwargs,
     ):
         """
         train_dir(str): Path for training data
@@ -161,7 +163,7 @@ class Dataset:
             for ret_type in outputs:
                 return_types.append(
                     ret_type.dtype if tf.is_tensor(ret_type) else Dataset.
-                        MAPPINGS["PY_TO_TF"][type(ret_type)])
+                    MAPPINGS["PY_TO_TF"][type(ret_type)])
         else:
             raise UserWarning("Unable to capture return type!")
         return tuple(return_types)
@@ -214,6 +216,6 @@ class Dataset:
         self._reload()
         generator = partial(self.generator, shuffle=shuffle)
         datagen = tf.data.Dataset.from_generator(generator, return_types,
-            output_shape)
+                                                 output_shape)
 
         return datagen
