@@ -2,16 +2,12 @@
 
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=alert_status)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
-[![Downloads](https://pepy.tech/badge/chitra)](https://pepy.tech/project/chitra)
-[![Downloads](https://pepy.tech/badge/chitra/month)](https://pepy.tech/project/chitra)
-![GitHub](https://img.shields.io/github/license/aniketmaurya/chitra?style=flat)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=ncloc)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=security_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 ![GitHub issues](https://img.shields.io/github/issues/aniketmaurya/chitra?style=flat)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/aniketmaurya/chitra/master.svg)](https://results.pre-commit.ci/latest/github/aniketmaurya/chitra/master)
 [![Documentation Status](https://readthedocs.org/projects/chitra/badge/?version=latest)](https://chitra.readthedocs.io/en/latest/?badge=latest)
 [![Discord](https://img.shields.io/discord/848469007443165184?style=flat)](https://discord.gg/TdnAfDw3kB)
 
@@ -33,6 +29,10 @@ Highlights:
 
 
 ## Installation
+
+[![Downloads](https://pepy.tech/badge/chitra)](https://pepy.tech/project/chitra)
+[![Downloads](https://pepy.tech/badge/chitra/month)](https://pepy.tech/project/chitra)
+![GitHub](https://img.shields.io/github/license/aniketmaurya/chitra?style=flat)
 
 ### Using pip (recommended)
 
@@ -81,7 +81,7 @@ plt.show()
 ```
 
 
-![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images/output_6_0.png)
+![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_6_0.png)
 
 
 ## Image datagenerator
@@ -296,7 +296,7 @@ print(IMAGENET_LABELS[285])
     index: 282
 
 
-![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images/output_22_1.png)
+![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_22_1.png)
 
     Egyptian Mau
 
@@ -320,7 +320,7 @@ plt.show()
 ```
 
 
-![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images/output_24_0.png)
+![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_24_0.png)
 
 
 ## Utils

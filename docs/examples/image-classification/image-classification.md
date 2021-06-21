@@ -4,7 +4,7 @@
 Training Image classification model for Cats vs Dogs Kaggle dataset.
 
 To install chitra
-`pip install --upgrade chitra==0.0.22`
+`pip install --upgrade chitra==0.0.24`
 
 
 ```python
@@ -22,17 +22,13 @@ Dataset class has API for loading `tf.data`, image augmentation and progressive 
 The Trainer class inherits from tf.keras.Model, it contains everything that is required for training. It exposes trainer.cyclic_fit method which trains the model using Cyclic Learning rate discovered by Leslie Smith.
 
 
-
 ```python
 import tensorflow as tf
 from chitra.datagenerator import Dataset
 from chitra.trainer import Trainer, create_cnn
-
 from PIL import Image
-```
 
 
-```python
 BS = 16
 IMG_SIZE_LST = [(128,128), (160, 160), (224,224)]
 AUTOTUNE = tf.data.experimental.AUTOTUNE
@@ -42,10 +38,10 @@ def tensor_to_image(tensor):
     return Image.fromarray(tensor.numpy().astype('uint8'))
 ```
 
-copy your kaggle key to `/root/.kaggle/kaggle.json` for downloading the dataset.
+Copy your kaggle key to `/root/.kaggle/kaggle.json` for downloading the dataset.
 
 
-```python
+```
 !kaggle datasets download -d chetankv/dogs-cats-images
 !unzip -q dogs-cats-images.zip
 ```
@@ -53,10 +49,8 @@ copy your kaggle key to `/root/.kaggle/kaggle.json` for downloading the dataset.
 
 ```python
 ds = Dataset('dog vs cat/dataset/training_set', image_size=IMG_SIZE_LST)
-```
 
 
-```python
 image, label = ds[0]
 print(label)
 tensor_to_image(image).resize((224,224))
@@ -80,11 +74,11 @@ trainer = Trainer(ds, create_cnn('mobilenetv2', num_classes=2))
     WARNING:tensorflow:`input_shape` is undefined or non-square, or `rows` is not in [96, 128, 160, 192, 224]. Weights for input shape (224, 224) will be loaded as the default.
 
 
-
 ```python
 trainer.summary()
 ```
 <details><summary>Model Summary</summary>
+
     Model: "functional_1"
     __________________________________________________________________________________________________
     Layer (type)                    Output Shape         Param #     Connected to
@@ -433,7 +427,6 @@ trainer.compile2(batch_size=BS,
     Model compiled!
 
 
-
 ```python
 trainer.cyclic_fit(10, batch_size=BS)
 ```
@@ -467,12 +460,7 @@ trainer.cyclic_fit(10, batch_size=BS)
     Returning the last set size which is: (224, 224)
     500/500 [==============================] - 79s 159ms/step - loss: 0.0172 - binary_accuracy: 0.9940
 
-
-
-
-
     <tensorflow.python.keras.callbacks.History at 0x7f67581730b8>
-
 
 
 Trainer also supports the regular keras `model.fit` api using `trainer.fit`
@@ -498,6 +486,7 @@ trainer.fit(data,
             epochs=10)
 ```
 <details><summary>Training loop...</summary>
+
     Epoch 1/10
     500/500 [==============================] - 38s 77ms/step - loss: 0.4070 - binary_accuracy: 0.8026
     Epoch 2/10
@@ -528,11 +517,7 @@ trainer.fit(data,
 
 </details>
 
-
-
-
     <tensorflow.python.keras.callbacks.History at 0x7f662f0af1d0>
-
 
 
 # What does model focus on while making a prediction?
@@ -542,23 +527,13 @@ trainer.fit(data,
 ```python
 from chitra.trainer import InterpretModel
 import random
+
+
 model_interpret = InterpretModel(True, trainer)
-```
-
-
-```python
 image_tensor = random.choice(ds)[0]
 image = tensor_to_image(image_tensor)
 model_interpret(image, auto_resize=False)
 ```
 
 
-
 ![png](output_21_0.png)
-
-
-
-
-```python
-
-```
