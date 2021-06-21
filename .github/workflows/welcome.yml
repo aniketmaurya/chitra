@@ -11,4 +11,3 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         issue-message: "👋 @${{github.actor}}! Thank you for opening your first issue in this repo.  We are so happy that you have decided to contribute and value your contribution. Please read these materials before proceeding: [Contributing Guide](https://github.com/fastai/fastai/blob/master/CONTRIBUTING.md) and [Code of Conduct](https://github.com/aniketmaurya/chitra/blob/master/CODE_OF_CONDUCT.md)."
         pr-message: "👋 @${{github.actor}}! Thank you for opening your first pull request in this repo. We are so happy that you have decided to contribute and value your contribution. Please read these materials before proceeding: [Contributing Guide](https://github.com/fastai/fastai/blob/master/CONTRIBUTING.md) and [Code of Conduct](https://github.com/aniketmaurya/chitra/blob/master/CODE_OF_CONDUCT.md)."
- 

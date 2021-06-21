@@ -1,8 +1,7 @@
 # chitra
 
 
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=aniketmaurya_chitra)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=alert_status)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Downloads](https://pepy.tech/badge/chitra)](https://pepy.tech/project/chitra)
 [![Downloads](https://pepy.tech/badge/chitra/month)](https://pepy.tech/project/chitra)
 ![GitHub](https://img.shields.io/github/license/aniketmaurya/chitra?style=flat)
@@ -12,6 +11,7 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 ![GitHub issues](https://img.shields.io/github/issues/aniketmaurya/chitra?style=flat)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/aniketmaurya/chitra/master.svg)](https://results.pre-commit.ci/latest/github/aniketmaurya/chitra/master)
 [![Documentation Status](https://readthedocs.org/projects/chitra/badge/?version=latest)](https://chitra.readthedocs.io/en/latest/?badge=latest)
 [![Discord](https://img.shields.io/discord/848469007443165184?style=flat)](https://discord.gg/TdnAfDw3kB)
 
