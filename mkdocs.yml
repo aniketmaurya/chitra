@@ -37,7 +37,7 @@ plugins:
 extra:
   homepage: https://chitra.readthedocs.io/en/latest
   nbs_image:
-    base_url: https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images
+    base_url: https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images
 
 nav:
     - Introduction: 'index.md'
