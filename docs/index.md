@@ -81,7 +81,7 @@ plt.show()
 ```
 
 
-![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images/output_6_0.png)
+![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_6_0.png)
 
 
 ## Image datagenerator
@@ -296,7 +296,7 @@ print(IMAGENET_LABELS[285])
     index: 282
 
 
-![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images/output_22_1.png)
+![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_22_1.png)
 
     Egyptian Mau
 
@@ -320,7 +320,7 @@ plt.show()
 ```
 
 
-![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/old_source/images/output_24_0.png)
+![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_24_0.png)
 
 
 ## Utils
