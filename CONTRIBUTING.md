@@ -1,32 +1,41 @@
-# How to contribute
+# Contributing guidelines
 
-## How to get started
+We welcome any kind of contribution to our software, from simple comment or question to a full fledged [pull request](https://help.github.com/articles/about-pull-requests/). Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
-Before anything else, please install the git hooks that run automatic scripts during each commit and merge to strip the notebooks of superfluous metadata (and avoid merge conflicts). After cloning the repository, run the following command inside it:
-```
-nbdev_install_git_hooks
-```
+A contribution can be one of the following cases:
 
-## Did you find a bug?
+1. you have a question;
+1. you think you may have found a bug (including unexpected behavior);
+1. you want to make some kind of change to the code base (e.g. to fix a bug, to add a new feature, to update documentation);
+1. you want to make a new release of the code base.
 
-* Ensure the bug was not already reported by searching on GitHub under Issues.
-* If you're unable to find an open issue addressing the problem, open a new one. Be sure to include a title and clear description, as much relevant information as possible, and a code sample or an executable test case demonstrating the expected behavior that is not occurring.
-* Be sure to add the complete error messages.
+The sections below outline the steps in each case.
 
-#### Did you write a patch that fixes a bug?
+## You have a question
 
-* Open a new GitHub pull request with the patch.
-* Ensure that your PR includes a test that fails without your patch, and pass with it.
-* Ensure the PR description clearly describes the problem and solution. Include the relevant issue number if applicable.
+1. use the search functionality [here](https://github.com/aniketmaurya/chitra/issues) to see if someone already filed the same issue;
+2. if your issue search did not yield any relevant results, make a new issue;
+3. apply the "Question" label; apply other labels when relevant.
 
-## PR submission guidelines
+## You think you may have found a bug
 
-* Keep each PR focused. While it's more convenient, do not combine several unrelated fixes together. Create as many branches as needing to keep each PR focused.
-* Do not mix style changes/fixes with "functional" changes. It's very difficult to review such PRs and it most likely get rejected.
-* Do not add/remove vertical whitespace. Preserve the original style of the file you edit as much as you can.
-* Do not turn an already submitted PR into your development playground. If after you submitted PR, you discovered that more work is needed - close the PR, do the required work and then submit a new PR. Otherwise each of your commits requires attention from maintainers of the project.
-* If, however, you submitted a PR and received a request for changes, you should proceed with commits inside that PR, so that the maintainer can see the incremental fixes and won't need to review the whole PR again. In the exception case where you realize it'll take many many commits to complete the requests, then it's probably best to close the PR, do the work and then submit it again. Use common sense where you'd choose one way over another.
+1. use the search functionality [here](https://github.com/aniketmaurya/chitra/issues) to see if someone already filed the same issue;
+1. if your issue search did not yield any relevant results, make a new issue, making sure to provide enough information to the rest of the community to understand the cause and context of the problem. Depending on the issue, you may want to include:
+    - the [SHA hashcode](https://help.github.com/articles/autolinked-references-and-urls/#commit-shas) of the commit that is causing your problem;
+    - some identifying information (name and version number) for dependencies you're using;
+    - information about the operating system;
+1. apply relevant labels to the newly created issue.
 
-## Do you want to contribute to the documentation?
+## You want to make some kind of change to the code base
 
-* Docs are automatically created from the notebooks in the nbs folder.
+1. (**important**) announce your plan to the rest of the community *before you start working*. This announcement should be in the form of a (new) issue;
+1. (**important**) wait until some kind of consensus is reached about your idea being a good idea;
+1. if needed, fork the repository to your own Github profile and create your own feature branch off of the latest master commit. While working on your feature branch, make sure to stay up to date with the master branch by pulling in changes, possibly from the 'upstream' repository (follow the instructions [here](https://help.github.com/articles/configuring-a-remote-for-a-fork/) and [here](https://help.github.com/articles/syncing-a-fork/));
+1. make sure the existing tests still work by running ``pytest``;
+1. add your own tests (if necessary);
+1. update or expand the documentation;
+1. update the `CHANGELOG.md` file with change;
+1. push your feature branch to (your fork of) the https://github.com/aniketmaurya/chitra repository on GitHub;
+1. create the pull request, e.g. following the instructions [here](https://help.github.com/articles/creating-a-pull-request/).
+
+In case you feel like you've made a valuable contribution, but you don't know how to write or run tests for it, or how to generate the documentation: don't let this discourage you from making the pull request; we can help you! Just go ahead and submit the pull request, but keep in mind that you might be asked to append additional commits to your pull request.
