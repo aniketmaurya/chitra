@@ -330,8 +330,11 @@ from chitra.trainer import create_cnn
 model = create_cnn('mobilenetv2', num_classes=2)
 create_api(model, run=True, api_type='image-classification')
 ```
+<details><summary>API Docs Preview</summary>
 
 ![Preview Model Server](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/examples/model-server/preview.png)
+
+</details>
 
 See [Example Section](https://chitra.readthedocs.io/en/latest/examples/model-server/model-server.html) for detailed explanation!
 
