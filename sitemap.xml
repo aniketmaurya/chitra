@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://chitra.aniketmaurya.com/</loc>
+  <lastmod>2021-06-21T18:44:36+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://chitra.aniketmaurya.com/index.html</loc>
+  <lastmod>2021-06-21T18:44:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://chitra.aniketmaurya.com/examples/chitra-class/chitra-class.html</loc>
+  <lastmod>2021-06-21T18:44:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://chitra.aniketmaurya.com/examples/image-classification/image-classification.html</loc>
+  <lastmod>2021-06-21T18:44:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://chitra.aniketmaurya.com/examples/model-server/model-server.html</loc>
+  <lastmod>2021-06-21T18:44:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://chitra.aniketmaurya.com/license.html</loc>
+  <lastmod>2021-06-21T18:44:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>

@@ -2,6 +2,9 @@ SRC = $(wildcard ./*.ipynb)
 
 all: chitra docs
 
+build_docs:
+	cp README.md docs/index.md
+
 docs_serve:
 	mkdocs serve
 

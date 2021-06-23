@@ -61,7 +61,6 @@ Chitra `dataloader` and `datagenerator` modules for loading data. `dataloader` i
 
 ```python
 import numpy as np
-import tensorflow as tf
 import chitra
 from chitra.dataloader import Clf, show_batch
 import matplotlib.pyplot as plt
@@ -70,19 +69,10 @@ import matplotlib.pyplot as plt
 ```python
 clf_dl = Clf()
 data = clf_dl.from_folder(cat_dog_path, target_shape=(224, 224))
-
 clf_dl.show_batch(8, figsize=(8,8))
-
-
-for e in data.take(1):
-    image = e[0].numpy().astype('uint8')
-    label = e[1].numpy()
-plt.imshow(image)
-plt.show()
 ```
 
-
-![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_6_0.png)
+![Show Batch](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_3_1.png)
 
 
 ## Image datagenerator
@@ -107,31 +97,30 @@ train_folder/
                      .
                      .
            ......imageN.jpg
-
-
 ```
 
 The inbuilt file generator search for images on the `folder1`, now we can just update the `image file generator` and rest of the functionality will remain same.
 
 **Dataset also support progressive resizing of images.**
 
+
 ### Updating component
 
 ```python
 from chitra.datagenerator import Dataset
-from glob import glob
 
 ds = Dataset(data_path)
 # it will load the folders and NOT images
 ds.filenames[:3]
 ```
+<details><summary>Output</summary>
 
     No item present in the image size list
 
     ['/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02795169/n02795169_boxes.txt',
      '/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02795169/images',
      '/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02769748/images']
-
+</details>
 
 
 ```python
@@ -144,6 +133,7 @@ def get_label(path):
 ds.update_component('get_filenames', load_files)
 ds.filenames[:3]
 ```
+<details><summary>Output</summary>
 
     get_filenames updated with <function load_files at 0x7fad6916d0e0>
     No item present in the image size list
@@ -152,9 +142,11 @@ ds.filenames[:3]
      '/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02795169/images/n02795169_386.JPEG',
      '/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02795169/images/n02795169_105.JPEG']
 
+</details>
 
 
 ### Progressive resizing
+
 > It is the technique to sequentially resize all the images while training the CNNs on smaller to bigger image sizes. Progressive Resizing is described briefly in his terrific fastai course, “Practical Deep Learning for Coders”. A great way to use this technique is to train a model with smaller image size say 64x64, then use the weights of this model to train another model on images of size 128x128 and so on. Each larger-scale model incorporates the previous smaller-scale model layers and weights in its architecture.
 ~[KDnuggets](https://www.kdnuggets.com/2019/05/boost-your-image-classification-model.html)
 
@@ -165,8 +157,6 @@ ds = Dataset(data_path, image_size=image_sz_list)
 ds.update_component('get_filenames', load_files)
 ds.update_component('get_label', get_label)
 
-
-print()
 # first call to generator
 for img, label in ds.generator():
     print('first call to generator:', img.shape)
@@ -181,14 +171,16 @@ for img, label in ds.generator():
 for img, label in ds.generator():
     print('third call to generator:', img.shape)
     break
-
 ```
+<details><summary>Output</summary>
+
     get_filenames updated with <function load_files at 0x7fad6916d0e0>
     get_label updated with <function get_label at 0x7fad6916d8c0>
 
     first call to generator: (28, 28, 3)
     seconds call to generator: (32, 32, 3)
     third call to generator: (64, 64, 3)
+</details>
 
 
 ### tf.data support
@@ -212,13 +204,14 @@ for e in dl.take(1):
 for e in dl.take(1):
     print(e[0].shape)
 ```
+<details><summary>Output</summary>
 
     get_filenames updated with <function load_files at 0x7fad6916d0e0>
-    get_label updated with <function get_label at 0x7fad6916d8c0>
+    get_label updated with <detn get_label at 0x7fad6916d8c0>
     (28, 28, 3)
     (32, 32, 3)
     (64, 64, 3)
-
+</details>
 
 ## Trainer
 The Trainer class inherits from `tf.keras.Model`, it contains everything that is required for training.
@@ -227,18 +220,13 @@ It exposes trainer.cyclic_fit method which trains the model using Cyclic Learnin
 ```python
 from chitra.trainer import Trainer, create_cnn
 from chitra.datagenerator import Dataset
-from PIL import Image
-```
 
-```python
+
 ds = Dataset(cat_dog_path, image_size=(224,224))
 model = create_cnn('mobilenetv2', num_classes=2, name='Cat_Dog_Model')
 trainer = Trainer(ds, model)
 # trainer.summary()
 ```
-
-    WARNING:tensorflow:`input_shape` is undefined or non-square, or `rows` is not in [96, 128, 160, 192, 224]. Weights for input shape (224, 224) will be loaded as the default.
-
 
 ```python
 trainer.compile2(batch_size=8,
@@ -246,11 +234,8 @@ trainer.compile2(batch_size=8,
                  lr_range=(1e-6, 1e-3),
                  loss='binary_crossentropy',
                  metrics=['binary_accuracy'])
-```
-    Model compiled!
 
 
-```python
 trainer.cyclic_fit(epochs=5,
                    batch_size=8,
                    lr_range=(0.00001, 0.0001),
@@ -295,38 +280,34 @@ print(IMAGENET_LABELS[285])
 
     Returning the last set size which is: (224, 224)
     index: 282
-
+    Egyptian Mau
 
 ![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_22_1.png)
-
-    Egyptian Mau
 
 
 ## Data Visualization
 
 ### Image annotation
 
-Thanks to [**fizyr**](https://github.com/fizyr/keras-retinanet) keras-retinanet.
+Bounding Box creation is based on top of `imgaug` library.
 
 ```python
-from chitra.visualization import draw_annotations
+from chitra.image import Chitra
 
-labels = np.array([label])
-bbox = np.array([[30, 50, 170, 190]])
-label_to_name = lambda x: 'Cat' if x==0 else 'Dog'
 
-draw_annotations(image, ({'bboxes': bbox, 'labels':labels,}), label_to_name=label_to_name)
-plt.imshow(image)
-plt.show()
+bbox = [ 70,  25, 190, 210]
+label = 'Dog'
+
+image = Chitra(image_path, bboxes=bbox, labels=label)
+plt.imshow(image.draw_boxes())
 ```
 
-
-![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_24_0.png)
+![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/preview-bounding-box.png)
 
 
 ## Utils
 
-Limit GPU memory or enable dynamic GPU memory growth for Tensorflow
+Limit GPU memory or enable dynamic GPU memory growth for Tensorflow.
 
 ```python
 from chitra.utils import limit_gpu, gpu_dynamic_mem_growth
