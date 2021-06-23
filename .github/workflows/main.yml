@@ -27,24 +27,20 @@ jobs:
           python --version
           pip --version
           pip install -r requirements/dev.txt
-
           pip list
         shell: bash
 
       - name: Generate coverage report
         run: |
           pip install -r requirements/test.txt
-          pytest --cov=./ --cov-report=xml
+          make coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage1.xml,./coverage2.xml
-          directory: ./coverage/reports/
+          file: ./coverage.xml
           flags: unittests
           env_vars: OS,PYTHON
           name: codecov-umbrella
-          fail_ci_if_error: true
-          path_to_write_report: ./coverage/codecov_report.txt
-          verbose: true
+          fail_ci_if_error: false
