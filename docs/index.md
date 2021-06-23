@@ -318,6 +318,22 @@ plt.imshow(image.draw_boxes())
 
 ![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/preview-bounding-box.png)
 
+See [Play with Images](https://chitra.readthedocs.io/en/latest/examples/chitra-class/chitra-class.html) for detailed example!
+
+## Model Serving (Framework Agnostic)
+
+Chitra can create API for Any Learning Model - ML, DL, Image Classification, NLP, Tensorflow or PyTorch.
+```python
+from chitra.serve import create_api
+from chitra.trainer import create_cnn
+
+model = create_cnn('mobilenetv2', num_classes=2)
+create_api(model, run=True, api_type='image-classification')
+```
+
+See [Example Section](https://chitra.readthedocs.io/en/latest/examples/model-server/model-server.html) for detailed explanation!
+
+
 ## Utils
 
 Limit GPU memory or enable dynamic GPU memory growth for Tensorflow.
