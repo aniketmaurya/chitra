@@ -21,8 +21,7 @@ visualization with GradCAM/GradCAM++ and Framework agnostic Model Serving.
 - Faster data loading without any boilerplate.
 - Progressive resizing of images.
 - Rapid experiments with different models using `chitra.trainer` module.
-- Train models with cyclic learning rate.
-- Model interpretation using GradCAM/GradCAM++ with no extra code.
+- Model interpretation using GradCAM/GradCAM++ with no extra code 🔥
 
 > If you have more use case please [**raise an issue/PR**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
 
