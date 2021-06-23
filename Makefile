@@ -20,8 +20,8 @@ clean:
 	rm -f .coverage
 
 style:
-	yapf -ir chitra
-	isort chitra
+	yapf -ir chitra tests
+	isort chitra tests
 
 dist: clean
 	flit build

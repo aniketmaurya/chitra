@@ -2,6 +2,7 @@ __all__ = ['DATA_FORMATS', 'DEFAULT_MODE', 'BoundingBoxes', 'Chitra']
 
 import os
 from io import BytesIO
+from os.path import basename
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -21,7 +22,7 @@ if INSTALLED_MODULES.get(_TORCH, None):
     import torch
 
 # Cell
-from typing import List, Optional, Union
+from typing import Any, List, Optional, Union
 
 DATA_FORMATS = Union[str, Image.Image, np.ndarray, tf.Tensor, torch.Tensor]
 DEFAULT_MODE = os.environ.get("CHITRA_DEFAULT_MODE", "TF")
@@ -29,11 +30,23 @@ DEFAULT_MODE = os.environ.get("CHITRA_DEFAULT_MODE", "TF")
 from imgaug.augmentables.bbs import BoundingBox, BoundingBoxesOnImage
 
 
-def _url_to_image(url: str) -> Image.Image:
+def _cache_image(image: Image.Image, image_path: str):
+    cache_dir = f'{os.path.curdir}/chitra_cache/image/'
+    os.makedirs(cache_dir, exist_ok=True)
+    image.save(cache_dir + basename(image_path))
+
+
+def _url_to_image(url: str, cache: bool) -> Image.Image:
     """returns Image from url"""
+    cache_file = f'{os.path.curdir}/chitra_cache/image/' + basename(url)
+    if cache and os.path.exists(cache_file):
+        return Image.open(cache_file)
+
     assert url.lower().startswith("http"), "invalid url, must start with http"
     content = requests.get(url).content
     image = Image.open(BytesIO(content))
+    if cache:
+        _cache_image(image, url)
     return image
 
 
@@ -142,23 +155,34 @@ class Chitra:
           3. Draw bounding boxes
     """
     def __init__(self,
-                 data,
-                 bboxes=None,
-                 labels=None,
-                 format=BoundingBoxes.CORNER,
+                 data: Any,
+                 bboxes: List = None,
+                 labels: List = None,
+                 format: str = BoundingBoxes.CORNER,
+                 cache: bool = False,
                  *args,
                  **kwargs) -> None:
-        """Args:
+        """
+
+        Args:
             data: numpy, url, filelike
+            bboxes:
+            labels:
+            format:
+            cache[bool]: Whether to cache downloaded image
+            *args:
+            **kwargs:
+
+
         """
         super().__init__()
-        self.image = self._load_image(data)
+        self.image = self._load_image(data, cache=cache)
         self.bboxes = None
 
         if bboxes is not None:
             self.bboxes = BoundingBoxes(bboxes, labels)
 
-    def _load_image(self, data: DATA_FORMATS):
+    def _load_image(self, data: DATA_FORMATS, cache: bool):
         if isinstance(data, Image.Image):
             return data
 
@@ -167,7 +191,8 @@ class Chitra:
 
         if isinstance(data, str):
             if data.startswith("http"):
-                image = _url_to_image(data)
+                image = _url_to_image(data, cache)
+
             else:
                 image = Image.open(data)
 
