@@ -5,7 +5,6 @@ from typing import Union
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import numpy as np
-import pytorch_lightning as pl
 import tensorflow as tf
 import tensorflow_addons as tfa
 from PIL import Image
@@ -15,8 +14,14 @@ from tf_keras_vis.gradcam import Gradcam, GradcamPlusPlus
 from tf_keras_vis.utils import normalize
 from typeguard import check_argument_types, typechecked
 
+from chitra.utility.import_utils import is_installed
+
 from .converter.core import pytorch_to_onnx, tf2_to_onnx
 from .datagenerator import Dataset
+
+pl = None
+if is_installed('pytorch_lightning'):
+    import pytorch_lightning as pl
 
 MODEL_DICT = {}
 for name, func in inspect.getmembers(tf.keras.applications):
@@ -60,7 +65,6 @@ def _add_output_layers(base_model: Model,
     return model
 
 
-# Cell
 def create_classifier(
     base_model_fn: callable,
     num_classes: int,
@@ -393,7 +397,7 @@ class Learner:
     PT = ("PYTORCH", "PT", "TORCH")
 
     def __init__(self,
-                 model: Union[pl.LightningModule, keras.models.Model],
+                 model: Union['pl.LightningModule', 'keras.models.Model'],
                  mode: str = "TF"):
         self.MODE = mode.upper()
         self.model = model
