@@ -24,7 +24,7 @@ if INSTALLED_MODULES.get(_TORCH, None):
 # Cell
 from typing import Any, List, Optional, Union
 
-DATA_FORMATS = Union[str, Image.Image, np.ndarray, tf.Tensor, torch.Tensor]
+DATA_FORMATS = Union[str, Image.Image, np.ndarray, 'tf.Tensor', 'torch.Tensor']
 DEFAULT_MODE = os.environ.get("CHITRA_DEFAULT_MODE", "TF")
 
 from imgaug.augmentables.bbs import BoundingBox, BoundingBoxesOnImage

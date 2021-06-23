@@ -36,7 +36,6 @@ for name, func in inspect.getmembers(tf.keras.optimizers):
         OPT_DICT[name.lower()] = func
 
 
-# Cell
 @typechecked
 def _get_base_cnn(
     base_model: Union[str, Model],

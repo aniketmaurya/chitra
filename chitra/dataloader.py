@@ -13,11 +13,9 @@ import tensorflow as tf
 from .core import remove_dsstore
 from .tf_image import read_image, resize_image
 
-# Cell
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
 
-# Cell
 def get_basename(path: tf.string):
     assert isinstance(path, tf.Tensor)
     return tf.strings.split(path, os.path.sep)[-1]
