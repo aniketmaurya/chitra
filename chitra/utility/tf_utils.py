@@ -1,5 +1,3 @@
-__all__ = ['disable_gpu', 'limit_gpu', 'gpu_dynamic_mem_growth']
-
 import os
 
 import tensorflow as tf
@@ -13,7 +11,6 @@ def disable_gpu():
     os.environ["CUDA_VISIBLE_DEVICES"] = str(-1)
 
 
-# export
 def limit_gpu(gpu_id: int, memory_limit: int):
     """
     limit the selected gpu [gpu_id] by [memory_limit] MB
@@ -40,13 +37,13 @@ def limit_gpu(gpu_id: int, memory_limit: int):
         print(f'No GPU:{gpu_id} found in your system!')
 
 
-# Cell
 def gpu_dynamic_mem_growth():
     """
     Borrowed from https://github.com/philipperemy/keract/tree/master/examples
+
+    Check for GPUs and set them to dynamically grow memory as needed
+    Avoids OOM from tensorflow greedily allocating GPU memory
     """
-    # Check for GPUs and set them to dynamically grow memory as needed
-    # Avoids OOM from tensorflow greedily allocating GPU memory
     try:
         gpu_devices = tf.config.list_physical_devices('GPU')
         if len(gpu_devices) > 0:

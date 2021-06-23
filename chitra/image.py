@@ -1,12 +1,12 @@
-__all__ = ['DATA_FORMATS', 'DEFAULT_MODE', 'BoundingBoxes', 'Chitra']
-
 import os
 from io import BytesIO
 from os.path import basename
+from typing import Any, List, Optional, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
 import requests
+from imgaug.augmentables.bbs import BoundingBox, BoundingBoxesOnImage
 from PIL import Image
 
 from .constants import _TF, _TORCH
@@ -21,13 +21,8 @@ if INSTALLED_MODULES.get(_TF, None):
 if INSTALLED_MODULES.get(_TORCH, None):
     import torch
 
-# Cell
-from typing import Any, List, Optional, Union
-
 DATA_FORMATS = Union[str, Image.Image, np.ndarray, 'tf.Tensor', 'torch.Tensor']
 DEFAULT_MODE = os.environ.get("CHITRA_DEFAULT_MODE", "TF")
-
-from imgaug.augmentables.bbs import BoundingBox, BoundingBoxesOnImage
 
 
 def _cache_image(image: Image.Image, image_path: str):
@@ -50,7 +45,6 @@ def _url_to_image(url: str, cache: bool) -> Image.Image:
     return image
 
 
-# Cell
 class BoundingBoxes:
     CENTER = "XXYY"
     CORNER = "XYXY"
@@ -147,7 +141,6 @@ class BoundingBoxes:
         return BoundingBoxesOnImage(self.bboxes, image_shape)
 
 
-# Cell
 class Chitra:
     """Ultimate image utility class.
           1. Load image from file, web url, numpy or bytes
