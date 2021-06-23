@@ -40,11 +40,6 @@ jobs:
           coverage report -m
           coverage xml
 
-      - name: Upload Coverage to Codacy
-        run: |
-        export CODACY_PROJECT_TOKEN=${{ secrets.CODACY_TOKEN }}
-        <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage.xml
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
