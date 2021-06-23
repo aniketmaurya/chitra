@@ -24,9 +24,7 @@ Highlights:
 - Train models with cyclic learning rate.
 - Model interpretation using GradCAM/GradCAM++ with no extra code.
 
-
 > If you have more use case please [**raise an issue/PR**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
-
 
 
 ## Installation
@@ -50,7 +48,6 @@ pip install -e .
 ### From GitHub
 ```
 pip install git+https://github.com/aniketmaurya/chitra@master
-
 ```
 
 ## Usage
@@ -64,9 +61,8 @@ import numpy as np
 import chitra
 from chitra.dataloader import Clf, show_batch
 import matplotlib.pyplot as plt
-```
 
-```python
+
 clf_dl = Clf()
 data = clf_dl.from_folder(cat_dog_path, target_shape=(224, 224))
 clf_dl.show_batch(8, figsize=(8,8))
