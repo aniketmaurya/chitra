@@ -73,16 +73,9 @@ data = clf_dl.from_folder(cat_dog_path, target_shape=(224, 224))
 
 clf_dl.show_batch(8, figsize=(8,8))
 
-
-for e in data.take(1):
-    image = e[0].numpy().astype('uint8')
-    label = e[1].numpy()
-plt.imshow(image)
-plt.show()
 ```
 
-
-![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_6_0.png)
+![Show Batch](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_3_1.png)
 
 
 ## Image datagenerator
@@ -107,13 +100,12 @@ train_folder/
                      .
                      .
            ......imageN.jpg
-
-
 ```
 
 The inbuilt file generator search for images on the `folder1`, now we can just update the `image file generator` and rest of the functionality will remain same.
 
 **Dataset also support progressive resizing of images.**
+
 
 ### Updating component
 
@@ -124,15 +116,13 @@ from glob import glob
 ds = Dataset(data_path)
 # it will load the folders and NOT images
 ds.filenames[:3]
-```
 
+```
     No item present in the image size list
 
     ['/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02795169/n02795169_boxes.txt',
      '/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02795169/images',
      '/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02769748/images']
-
-
 
 ```python
 def load_files(path):
@@ -155,6 +145,7 @@ ds.filenames[:3]
 
 
 ### Progressive resizing
+
 > It is the technique to sequentially resize all the images while training the CNNs on smaller to bigger image sizes. Progressive Resizing is described briefly in his terrific fastai course, “Practical Deep Learning for Coders”. A great way to use this technique is to train a model with smaller image size say 64x64, then use the weights of this model to train another model on images of size 128x128 and so on. Each larger-scale model incorporates the previous smaller-scale model layers and weights in its architecture.
 ~[KDnuggets](https://www.kdnuggets.com/2019/05/boost-your-image-classification-model.html)
 
@@ -165,8 +156,6 @@ ds = Dataset(data_path, image_size=image_sz_list)
 ds.update_component('get_filenames', load_files)
 ds.update_component('get_label', get_label)
 
-
-print()
 # first call to generator
 for img, label in ds.generator():
     print('first call to generator:', img.shape)
@@ -181,7 +170,6 @@ for img, label in ds.generator():
 for img, label in ds.generator():
     print('third call to generator:', img.shape)
     break
-
 ```
     get_filenames updated with <function load_files at 0x7fad6916d0e0>
     get_label updated with <function get_label at 0x7fad6916d8c0>
@@ -295,11 +283,9 @@ print(IMAGENET_LABELS[285])
 
     Returning the last set size which is: (224, 224)
     index: 282
-
+    Egyptian Mau
 
 ![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_22_1.png)
-
-    Egyptian Mau
 
 
 ## Data Visualization
@@ -320,13 +306,12 @@ plt.imshow(image)
 plt.show()
 ```
 
-
 ![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_24_0.png)
 
 
 ## Utils
 
-Limit GPU memory or enable dynamic GPU memory growth for Tensorflow
+Limit GPU memory or enable dynamic GPU memory growth for Tensorflow.
 
 ```python
 from chitra.utils import limit_gpu, gpu_dynamic_mem_growth
