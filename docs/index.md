@@ -292,21 +292,21 @@ print(IMAGENET_LABELS[285])
 
 ### Image annotation
 
-Thanks to [**fizyr**](https://github.com/fizyr/keras-retinanet) keras-retinanet.
+Bounding Box creation is based on top of `imgaug` library.
 
 ```python
-from chitra.visualization import draw_annotations
+from chitra.image import Chitra
 
-labels = np.array([label])
-bbox = np.array([[30, 50, 170, 190]])
-label_to_name = lambda x: 'Cat' if x==0 else 'Dog'
 
-draw_annotations(image, ({'bboxes': bbox, 'labels':labels,}), label_to_name=label_to_name)
-plt.imshow(image)
-plt.show()
+bbox = [ 70,  25, 190, 210]
+label = 'Dog'
+
+image = Chitra(image_path, bboxes=bbox, labels=label)
+image.image = image.image.resize((224, 224))
+plt.imshow(image.draw_boxes())
 ```
 
-![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_24_0.png)
+![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/preview-bounding-box.png)
 
 
 ## Utils
