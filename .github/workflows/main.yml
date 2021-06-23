@@ -26,6 +26,8 @@ jobs:
         run: |
           python --version
           pip --version
+          pip install flit
+          pip install .
           pip install -r requirements/dev.txt
           pip list
         shell: bash
