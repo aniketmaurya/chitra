@@ -331,6 +331,8 @@ model = create_cnn('mobilenetv2', num_classes=2)
 create_api(model, run=True, api_type='image-classification')
 ```
 
+![Preview Model Server](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/examples/model-server/preview.png)
+
 See [Example Section](https://chitra.readthedocs.io/en/latest/examples/model-server/model-server.html) for detailed explanation!
 
 
