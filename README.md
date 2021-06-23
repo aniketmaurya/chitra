@@ -61,7 +61,6 @@ Chitra `dataloader` and `datagenerator` modules for loading data. `dataloader` i
 
 ```python
 import numpy as np
-import tensorflow as tf
 import chitra
 from chitra.dataloader import Clf, show_batch
 import matplotlib.pyplot as plt
@@ -70,9 +69,7 @@ import matplotlib.pyplot as plt
 ```python
 clf_dl = Clf()
 data = clf_dl.from_folder(cat_dog_path, target_shape=(224, 224))
-
 clf_dl.show_batch(8, figsize=(8,8))
-
 ```
 
 ![Show Batch](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_3_1.png)
@@ -111,18 +108,20 @@ The inbuilt file generator search for images on the `folder1`, now we can just u
 
 ```python
 from chitra.datagenerator import Dataset
-from glob import glob
 
 ds = Dataset(data_path)
 # it will load the folders and NOT images
 ds.filenames[:3]
-
 ```
+<details><summary>Output</summary>
+
     No item present in the image size list
 
     ['/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02795169/n02795169_boxes.txt',
      '/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02795169/images',
      '/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02769748/images']
+</details>
+
 
 ```python
 def load_files(path):
@@ -134,6 +133,7 @@ def get_label(path):
 ds.update_component('get_filenames', load_files)
 ds.filenames[:3]
 ```
+<details><summary>Output</summary>
 
     get_filenames updated with <function load_files at 0x7fad6916d0e0>
     No item present in the image size list
@@ -142,6 +142,7 @@ ds.filenames[:3]
      '/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02795169/images/n02795169_386.JPEG',
      '/Users/aniket/Pictures/data/tiny-imagenet-200/train/n02795169/images/n02795169_105.JPEG']
 
+</details>
 
 
 ### Progressive resizing
@@ -171,12 +172,15 @@ for img, label in ds.generator():
     print('third call to generator:', img.shape)
     break
 ```
+<details><summary>Output</summary>
+
     get_filenames updated with <function load_files at 0x7fad6916d0e0>
     get_label updated with <function get_label at 0x7fad6916d8c0>
 
     first call to generator: (28, 28, 3)
     seconds call to generator: (32, 32, 3)
     third call to generator: (64, 64, 3)
+</details>
 
 
 ### tf.data support
@@ -200,13 +204,14 @@ for e in dl.take(1):
 for e in dl.take(1):
     print(e[0].shape)
 ```
+<details><summary>Output</summary>
 
     get_filenames updated with <function load_files at 0x7fad6916d0e0>
-    get_label updated with <function get_label at 0x7fad6916d8c0>
+    get_label updated with <detn get_label at 0x7fad6916d8c0>
     (28, 28, 3)
     (32, 32, 3)
     (64, 64, 3)
-
+</details>
 
 ## Trainer
 The Trainer class inherits from `tf.keras.Model`, it contains everything that is required for training.
@@ -215,18 +220,13 @@ It exposes trainer.cyclic_fit method which trains the model using Cyclic Learnin
 ```python
 from chitra.trainer import Trainer, create_cnn
 from chitra.datagenerator import Dataset
-from PIL import Image
-```
 
-```python
+
 ds = Dataset(cat_dog_path, image_size=(224,224))
 model = create_cnn('mobilenetv2', num_classes=2, name='Cat_Dog_Model')
 trainer = Trainer(ds, model)
 # trainer.summary()
 ```
-
-    WARNING:tensorflow:`input_shape` is undefined or non-square, or `rows` is not in [96, 128, 160, 192, 224]. Weights for input shape (224, 224) will be loaded as the default.
-
 
 ```python
 trainer.compile2(batch_size=8,
@@ -234,11 +234,8 @@ trainer.compile2(batch_size=8,
                  lr_range=(1e-6, 1e-3),
                  loss='binary_crossentropy',
                  metrics=['binary_accuracy'])
-```
-    Model compiled!
 
 
-```python
 trainer.cyclic_fit(epochs=5,
                    batch_size=8,
                    lr_range=(0.00001, 0.0001),
@@ -302,7 +299,6 @@ bbox = [ 70,  25, 190, 210]
 label = 'Dog'
 
 image = Chitra(image_path, bboxes=bbox, labels=label)
-image.image = image.image.resize((224, 224))
 plt.imshow(image.draw_boxes())
 ```
 
