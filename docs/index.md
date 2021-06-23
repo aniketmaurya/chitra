@@ -24,6 +24,8 @@ visualization with GradCAM/GradCAM++ and Framework agnostic Model Serving.
 - Model interpretation using GradCAM/GradCAM++ with no extra code 🔥
 
 > If you have more use case please [**raise an issue/PR**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
+> If you want to contribute, feel free to raise a PR. It doesn't need to be fully perfect.
+> We will help you get there.
 
 ## Installation
 
