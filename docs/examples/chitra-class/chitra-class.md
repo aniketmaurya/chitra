@@ -30,6 +30,16 @@ image.imshow()
 
 ![png](output_6_0.png)
 
+You can cache the image downloaded from internet URL by passing `cache=True` in argument.
+Second call to the same URL will not download from internet, instead image will be loaded from the local cache dir.
+```python
+# first call
+image = Chitra(url, cache=True)
+
+# second call
+image = Chitra(url, cache=True)
+```
+
 
 ### Plot bounding box and label for the handphone
 
