@@ -2,13 +2,11 @@
 
 __all__ = ['read_image', 'resize_image']
 
-# Cell
 from typing import Union
 
 import tensorflow as tf
 
 
-# Cell
 def read_image(path: str, channels: int = 3):
     """Reads an image file from the path and return the rgb image in tf.Tensor format."""
     img: tf.Tensor = tf.io.read_file(path)
