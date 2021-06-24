@@ -113,7 +113,13 @@ class Dataset:
         **kwargs,
     ):
         """
-        train_dir(str): Path for training data
+        Create a Dataset object that can generate tf.data.Dataset
+        Args:
+            train_dir:
+            image_size:
+            transforms:
+            default_encode:
+            **kwargs:
         """
         self.get_filenames = get_filenames
         self.read_image = read_image
@@ -125,7 +131,7 @@ class Dataset:
         self.filenames = self.get_filenames(train_dir)
         self.num_files = len(self.filenames)
         self.image_size = image_size
-        self.img_sz_list = ImageSizeList(self.image_size[:])
+        self.img_sz_list = ImageSizeList(self.image_size)
 
         self.labels = kwargs.get("labels", self.get_labels())
 
