@@ -1,14 +1,15 @@
-import os
 from io import BytesIO
+import os
 from os.path import basename
 from typing import Any, List, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
-import requests
 from PIL import Image
+import requests
 
-from .constants import _TF, _TORCH
+from .constants import _TF
+from .constants import _TORCH
 from .coordinates import BoundingBoxes
 from .utility.import_utils import INSTALLED_MODULES
 

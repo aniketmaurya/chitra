@@ -2,9 +2,9 @@ import os
 import pathlib
 from typing import Tuple
 
+from loguru import logger
 import requests
 import tensorflow as tf
-from loguru import logger
 
 from chitra.constants import IMAGENET_LABEL_URL
 

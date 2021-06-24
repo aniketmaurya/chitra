@@ -1,16 +1,18 @@
-import os
-import pathlib
-import random
-import time
 from functools import partial
 from glob import glob
+import os
+import pathlib
 from pathlib import Path
+import random
+import time
 from typing import Callable, Union
 
 import tensorflow as tf
-from typeguard import check_argument_types, typechecked
+from typeguard import check_argument_types
+from typeguard import typechecked
 
-from .tf_image import read_image, resize_image
+from .tf_image import read_image
+from .tf_image import resize_image
 
 
 def benchmark(dataset, num_epochs=2, fake_infer_time=0.001):

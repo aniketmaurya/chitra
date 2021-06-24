@@ -2,12 +2,17 @@ from functools import partial
 from io import BytesIO
 from typing import Callable, List, Optional, Tuple
 
+from fastapi import FastAPI
+from fastapi import File
+from fastapi import UploadFile
 import numpy as np
-import uvicorn
-from fastapi import FastAPI, File, UploadFile
 from PIL import Image
+import uvicorn
 
-from chitra.serve.schema import QnARequest, QnAResponse, Query, QueryResult
+from chitra.serve.schema import QnARequest
+from chitra.serve.schema import QnAResponse
+from chitra.serve.schema import Query
+from chitra.serve.schema import QueryResult
 
 IMAGE_CLF = "IMAGE-CLASSIFICATION"
 TXT_CLF = "TEXT-CLASSIFICATION"

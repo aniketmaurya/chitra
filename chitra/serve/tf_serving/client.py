@@ -2,7 +2,8 @@ from typing import Callable
 
 import grpc
 import tensorflow as tf
-from tensorflow_serving.apis import predict_pb2, prediction_service_pb2_grpc
+from tensorflow_serving.apis import predict_pb2
+from tensorflow_serving.apis import prediction_service_pb2_grpc
 
 
 def create_grpc_stub(
