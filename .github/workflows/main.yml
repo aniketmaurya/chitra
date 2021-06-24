@@ -18,7 +18,10 @@ jobs:
 
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
       - name: Setup Python
         uses: actions/setup-python@master
         with:
@@ -34,7 +37,7 @@ jobs:
           pip list
         shell: bash
 
-      - name: Generate coverage report
+      - name: Generate Coverage Report
         run: |
           pip install -r requirements/test.txt
           coverage erase
@@ -42,7 +45,7 @@ jobs:
           coverage report -m
           coverage xml
 
-      - name: Upload coverage to Codecov
+      - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
