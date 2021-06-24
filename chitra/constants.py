@@ -6,3 +6,5 @@ _TORCH = "torch"
 _TORCHVISION = "torchvision"
 _JAX = "jax"
 _FLAX = "flax"
+
+CHITRA_URL_SEP = '[CHITRA-URL-SEP]'

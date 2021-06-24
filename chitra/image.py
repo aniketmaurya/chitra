@@ -10,6 +10,7 @@ import requests
 
 from .constants import _TF
 from .constants import _TORCH
+from .constants import CHITRA_URL_SEP
 from .coordinates import BoundingBoxes
 from .utility.import_utils import INSTALLED_MODULES
 
@@ -34,7 +35,8 @@ def _cache_image(image: Image.Image, image_path: str):
 
 def _url_to_image(url: str, cache: bool) -> Image.Image:
     """returns Image from url"""
-    cache_file = f'{os.path.curdir}/chitra_cache/image/' + basename(url)
+    filename = basename(url).replace('/', CHITRA_URL_SEP)
+    cache_file = f'{os.path.curdir}/chitra_cache/image/' + filename
     if cache and os.path.exists(cache_file):
         return Image.open(cache_file)
 
