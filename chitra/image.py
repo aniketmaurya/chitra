@@ -1,6 +1,6 @@
 from io import BytesIO
 import os
-from os.path import basename
+from pathlib import Path
 from typing import Any, List, Union
 
 import matplotlib.pyplot as plt
@@ -11,6 +11,7 @@ import requests
 from .constants import _TF
 from .constants import _TORCH
 from .constants import CHITRA_URL_SEP
+from .constants import IMAGE_CACHE_DIR
 from .coordinates import BoundingBoxes
 from .utility.import_utils import INSTALLED_MODULES
 
@@ -28,15 +29,16 @@ DEFAULT_MODE = os.environ.get("CHITRA_DEFAULT_MODE", "TF")
 
 
 def _cache_image(image: Image.Image, image_path: str):
-    cache_dir = f'{os.path.curdir}/chitra_cache/image/'
+    cache_dir = Path(IMAGE_CACHE_DIR)
+    filename = image_path.replace('/', CHITRA_URL_SEP)
     os.makedirs(cache_dir, exist_ok=True)
-    image.save(cache_dir + basename(image_path))
+    image.save(cache_dir / filename)
 
 
 def _url_to_image(url: str, cache: bool) -> Image.Image:
     """returns Image from url"""
-    filename = basename(url).replace('/', CHITRA_URL_SEP)
-    cache_file = f'{os.path.curdir}/chitra_cache/image/' + filename
+    filename = url.replace('/', CHITRA_URL_SEP)
+    cache_file = Path(IMAGE_CACHE_DIR) / filename
     if cache and os.path.exists(cache_file):
         return Image.open(cache_file)
 
