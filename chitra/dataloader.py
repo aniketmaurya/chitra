@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 
 from .core import remove_dsstore
-from .tf_image import read_image, resize_image
+from .tf_image import read_image
+from .tf_image import resize_image
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
