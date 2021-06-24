@@ -4,7 +4,7 @@
 
 
 ```python
-# pip install -U chitra==0.1.0a0
+# pip install -U chitra==0.1.0a1
 
 from chitra.image import Chitra
 import matplotlib.pyplot as plt
