@@ -5,6 +5,7 @@ on:
   pull_request:
     branches: [ master ]
 
+
 jobs:
   pytest:
     runs-on: ${{ matrix.os }}
@@ -14,6 +15,7 @@ jobs:
     env:
       OS: ${{ matrix.os }}
       PYTHON: '3.7'
+
 
     steps:
       - uses: actions/checkout@master
