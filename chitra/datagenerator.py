@@ -90,7 +90,7 @@ class Pipeline:
             for func in self.funcs:
                 item = func(item)
         except Exception as e:
-            print(f"Error while applying function in pipeline!")
+            print("Error while applying function in pipeline!")
             raise e
         return item
 

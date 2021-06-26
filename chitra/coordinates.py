@@ -20,7 +20,7 @@ class BoundingBoxes:
         """
         assert format.upper() in (
             self.CENTER,
-            self.CORNER), f"bbox format must be either xyxy or xyhw"
+            self.CORNER), "bbox format must be either xyxy or xyhw"
         bboxes = self._listify(bboxes, 4)
         labels = self._listify(labels)
         assert len(bboxes) == len(
