@@ -38,7 +38,8 @@ class BoundingBoxes:
         if not isinstance(item, (list, tuple)):
             return [item]
 
-        if isinstance(item, (list, tuple)) and self.num_dim(item) == dim_trigger:
+        if isinstance(item,
+                      (list, tuple)) and self.num_dim(item) == dim_trigger:
             item = [item]
         return item
 

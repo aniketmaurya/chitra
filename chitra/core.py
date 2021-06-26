@@ -1,6 +1,6 @@
 import os
 import pathlib
-from typing import Tuple, Optional
+from typing import Optional, Tuple
 
 from loguru import logger
 import requests

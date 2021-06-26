@@ -1,15 +1,15 @@
-import inspect
 from functools import partial
+import inspect
 from typing import Any, List, Optional, Union
 
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import numpy as np
-import tensorflow as tf
-import tensorflow_addons as tfa
 from PIL import Image
 from tensorflow import keras
+import tensorflow as tf
 from tensorflow.keras.models import Model
+import tensorflow_addons as tfa
 from tf_keras_vis.gradcam import Gradcam
 from tf_keras_vis.gradcam import GradcamPlusPlus
 from tf_keras_vis.utils import normalize
@@ -17,6 +17,7 @@ from typeguard import check_argument_types
 from typeguard import typechecked
 
 from chitra.utility.import_utils import is_installed
+
 from .converter.core import pytorch_to_onnx
 from .converter.core import tf2_to_onnx
 from .datagenerator import Dataset
@@ -38,18 +39,18 @@ for name, func in inspect.getmembers(tf.keras.optimizers):
 
 @typechecked
 def _get_base_cnn(
-        base_model: Union[str, Model],
-        pooling: str = "avg",
-        weights: Union[str, None] = "imagenet",
-        include_top: bool = False,
+    base_model: Union[str, Model],
+    pooling: str = "avg",
+    weights: Union[str, None] = "imagenet",
+    include_top: bool = False,
 ) -> Model:
     if isinstance(base_model, str):
         assert (base_model in MODEL_DICT.keys()
                 ), f"base_model name must be in {tuple(MODEL_DICT.keys())}"
         base_model = MODEL_DICT[base_model]
         base_model = base_model(include_top=include_top,
-            pooling=pooling,
-            weights=weights)
+                                pooling=pooling,
+                                weights=weights)
     return base_model
 
 
@@ -68,11 +69,11 @@ def _add_output_layers(base_model: Model,
 
 
 def create_classifier(
-        base_model_fn: callable,
-        num_classes: int,
-        weights="imagenet",
-        dropout: Optional[float] = None,
-        include_top=False,
+    base_model_fn: callable,
+    num_classes: int,
+    weights="imagenet",
+    dropout: Optional[float] = None,
+    include_top=False,
 ):
     base_model = base_model_fn(
         include_top=include_top,
@@ -95,13 +96,13 @@ def create_classifier(
 
 @typechecked
 def create_cnn(
-        base_model: Union[str, Model],
-        num_classes: int,
-        drop_out=0.5,
-        keras_applications: bool = True,
-        pooling: str = "avg",
-        weights: Union[str, None] = "imagenet",
-        name: Optional[str] = None,
+    base_model: Union[str, Model],
+    num_classes: int,
+    drop_out=0.5,
+    keras_applications: bool = True,
+    pooling: str = "avg",
+    weights: Union[str, None] = "imagenet",
+    name: Optional[str] = None,
 ) -> Model:
     assert pooling in ("avg", "max")
 
@@ -115,14 +116,14 @@ def create_cnn(
 
     if isinstance(base_model, (str, Model)) and keras_applications:
         base_model = _get_base_cnn(base_model,
-            pooling=pooling,
-            weights=weights)
+                                   pooling=pooling,
+                                   weights=weights)
         assert ("pool" in base_model.layers[-1].name
                 ), f"base_model last layer must be a pooling layer"
         model = _add_output_layers(base_model,
-            outputs,
-            drop_out=drop_out,
-            name=name)
+                                   outputs,
+                                   drop_out=drop_out,
+                                   name=name)
 
     elif isinstance(base_model, Model) and keras_applications is False:
         model = base_model
@@ -169,11 +170,12 @@ class Trainer(Model):
         self.cyclic_opt_set = False
 
     def build(self):
-        raise NotImplementedError('Build method is not implemented in Trainer! Please use "model.model.build" instead.')
+        raise NotImplementedError(
+            'Build method is not implemented in Trainer! Please use "model.model.build" instead.'
+        )
 
     def summary(self):
         return self.model.summary()
-
 
     def compile(self, *args, **kwargs):
         return self.model.compile(*args, **kwargs)
@@ -185,7 +187,9 @@ class Trainer(Model):
         return self.model.fit(*args, **kwargs)
 
     def warmup(self):
-        raise NotImplementedError('warmup is not implemented yet! Would you like to raise a PR to chitra?')
+        raise NotImplementedError(
+            'warmup is not implemented yet! Would you like to raise a PR to chitra?'
+        )
 
     def prewhiten(self, image):
         image = tf.cast(image, tf.float32)
@@ -199,8 +203,8 @@ class Trainer(Model):
     def _get_optimizer(self, optimizer, momentum=0.9, **kwargs):
         if optimizer.__name__ == "SGD":
             optimizer = partial(optimizer,
-                momentum=momentum,
-                nesterov=kwargs.get("nesterov", True))
+                                momentum=momentum,
+                                nesterov=kwargs.get("nesterov", True))
         else:
             optimizer = partial(
                 optimizer,
@@ -215,16 +219,16 @@ class Trainer(Model):
         return dl.batch(bs).prefetch(Trainer._AUTOTUNE)
 
     def cyclic_fit(
-            self,
-            epochs: int,
-            batch_size: int,
-            lr_range: Union[tuple, list] = (1e-4, 1e-2),
-            optimizer: tf.keras.optimizers.Optimizer = tf.keras.optimizers.SGD,
-            momentum: float = 0.9,
-            validation_data: Any = None,
-            callbacks: Optional[List] = None,
-            *args,
-            **kwargs,
+        self,
+        epochs: int,
+        batch_size: int,
+        lr_range: Union[tuple, list] = (1e-4, 1e-2),
+        optimizer: tf.keras.optimizers.Optimizer = tf.keras.optimizers.SGD,
+        momentum: float = 0.9,
+        validation_data: Any = None,
+        callbacks: Optional[List] = None,
+        *args,
+        **kwargs,
     ):
         """Trains model on ds as train data with cyclic learning rate.
         Dataset will be automatically converted into `tf.data` format and images will be prewhitened in range of [-1, 1].
@@ -267,13 +271,13 @@ class Trainer(Model):
 
     @typechecked
     def compile2(
-            self,
-            batch_size: int,
-            optimizer: Union[str, tf.keras.optimizers.Optimizer] = "adam",
-            lr_range: Union[tuple, list] = (1e-4, 1e-2),
-            loss: Optional[tf.keras.losses.Loss] = None,
-            metrics=None,
-            **kwargs,
+        self,
+        batch_size: int,
+        optimizer: Union[str, tf.keras.optimizers.Optimizer] = "adam",
+        lr_range: Union[tuple, list] = (1e-4, 1e-2),
+        loss: Optional[tf.keras.losses.Loss] = None,
+        metrics=None,
+        **kwargs,
     ):
         """Compile2 compiles the model of Trainer for cyclic learning rate.
         Cyclical Learning Rates for Training Neural Networks: https://arxiv.org/abs/1506.01186
@@ -330,8 +334,8 @@ class InterpretModel:
         self.learner = learner
 
         self.gradcam = self.gradcam_fn(learner.model,
-            self.model_modifier,
-            clone=clone)
+                                       self.model_modifier,
+                                       clone=clone)
 
     def __call__(self,
                  image: Image.Image,
@@ -360,7 +364,7 @@ class InterpretModel:
         plt.imshow(heatmap, cmap="jet", alpha=0.5)
         plt.show()
 
-    def __patch(self, *args, **kwargs):
+    def __patch(self):
         """Path _find_penultimate_output method of tf_keras_vis"""
         if self.learner.include_top:
             return self.learner.model.layers[-1].output
