@@ -30,3 +30,9 @@ repos:
       args: ["clean"]
       language: system
       pass_filenames: false
+
+repos:
+- repo: https://github.com/kynan/nbstripout
+  rev: 0.4.0
+  hooks:
+    - id: nbstripout
