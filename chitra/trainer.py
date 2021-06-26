@@ -208,7 +208,6 @@ class Trainer(Model):
         else:
             optimizer = partial(
                 optimizer,
-                momentum=momentum,
             )
         return optimizer
 
