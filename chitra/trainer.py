@@ -112,14 +112,14 @@ def create_cnn(
         else:
             outputs = num_classes
     else:
-        print(f"num_classes is ignored. returning the passed model as it is.")
+        print("num_classes is ignored. returning the passed model as it is.")
 
     if isinstance(base_model, (str, Model)) and keras_applications:
         base_model = _get_base_cnn(base_model,
                                    pooling=pooling,
                                    weights=weights)
         assert ("pool" in base_model.layers[-1].name
-                ), f"base_model last layer must be a pooling layer"
+                ), "base_model last layer must be a pooling layer"
         model = _add_output_layers(base_model,
                                    outputs,
                                    drop_out=drop_out,
@@ -132,7 +132,7 @@ def create_cnn(
         model = _get_base_cnn(base_model, weights="imagenet", include_top=True)
 
     else:
-        print(f"Invalid arguments!")
+        print("Invalid arguments!")
     return model
 
 
@@ -191,7 +191,8 @@ class Trainer(Model):
             'warmup is not implemented yet! Would you like to raise a PR to chitra?'
         )
 
-    def prewhiten(self, image):
+    @staticmethod
+    def prewhiten(image):
         image = tf.cast(image, tf.float32)
         image = image / 127.5 - 1.0
         return image
@@ -206,9 +207,7 @@ class Trainer(Model):
                                 momentum=momentum,
                                 nesterov=kwargs.get("nesterov", True))
         else:
-            optimizer = partial(
-                optimizer,
-            )
+            optimizer = partial(optimizer, )
         return optimizer
 
     def _prepare_dl(self, bs: int = 8, shuffle: bool = True):

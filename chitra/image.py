@@ -42,7 +42,8 @@ def _url_to_image(url: str, cache: bool) -> Image.Image:
     if cache and os.path.exists(cache_file):
         return Image.open(cache_file)
 
-    assert url.lower().startswith("http"), "invalid url, must start with http"
+    if not url.lower().startswith("http"):
+        raise AssertionError("invalid url, must start with http")
     content = requests.get(url).content
     image = Image.open(BytesIO(content))
     if cache:
@@ -84,7 +85,8 @@ class Chitra:
         if bboxes is not None:
             self.bboxes = BoundingBoxes(bboxes, labels)
 
-    def _load_image(self, data: DATA_FORMATS, cache: bool):
+    @staticmethod
+    def _load_image(data: DATA_FORMATS, cache: bool):
         if isinstance(data, Image.Image):
             return data
 
