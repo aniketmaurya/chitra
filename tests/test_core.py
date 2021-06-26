@@ -1,5 +1,4 @@
 import os
-import subprocess
 
 import tensorflow as tf
 
@@ -10,9 +9,11 @@ from chitra.core import remove_dsstore
 
 def test_remove_dsstore():
     os.makedirs('chitra_temp', exist_ok=True)
-    subprocess.call('touch chitra_temp/.DS_Store', shell=True)
+    ds_store = 'chitra_temp/.DS_Store'
+    open(ds_store, 'w').close()
+    assert os.path.exists(ds_store)
     remove_dsstore('chitra_temp')
-    assert not os.path.exists('chitra_temp/.DS_Store')
+    assert not os.path.exists(ds_store)
     os.removedirs('chitra_temp')
 
 
