@@ -191,7 +191,8 @@ class Trainer(Model):
             'warmup is not implemented yet! Would you like to raise a PR to chitra?'
         )
 
-    def prewhiten(self, image):
+    @staticmethod
+    def prewhiten(image):
         image = tf.cast(image, tf.float32)
         image = image / 127.5 - 1.0
         return image

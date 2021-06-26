@@ -85,7 +85,8 @@ class Chitra:
         if bboxes is not None:
             self.bboxes = BoundingBoxes(bboxes, labels)
 
-    def _load_image(self, data: DATA_FORMATS, cache: bool):
+    @staticmethod
+    def _load_image(data: DATA_FORMATS, cache: bool):
         if isinstance(data, Image.Image):
             return data
 
