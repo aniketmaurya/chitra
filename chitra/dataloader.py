@@ -6,6 +6,7 @@ from typing import Union
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
+from .core import get_basename
 from .core import remove_dsstore
 from .tf_image import read_image
 from .tf_image import resize_image
@@ -13,12 +14,7 @@ from .tf_image import resize_image
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
 
-def get_basename(path: tf.string):
-    assert isinstance(path, tf.Tensor)
-    return tf.strings.split(path, os.path.sep)[-1]
-
-
-class Clf(object):
+class Clf:
     def __init__(self):
         self.CLASS_NAMES = None
         self.data = None
@@ -40,8 +36,10 @@ class Clf(object):
         Returns:
             Displays images and labels
         """
-        assert isinstance(limit, int)
-        assert isinstance(figsize, tuple)
+        if not isinstance(limit, int):
+            raise AssertionError
+        if not isinstance(figsize, tuple):
+            raise AssertionError
 
         data = self.data
         if data is None:
@@ -63,11 +61,13 @@ class Clf(object):
             plt.title(label)
             plt.axis('off')
 
-    def _get_image_list(self, path: str):
+    @staticmethod
+    def _get_image_list(path: str):
         """`path`: pathlib.Path
         Returns: list of images
         """
-        assert isinstance(path, str)
+        if not isinstance(path, str):
+            raise AssertionError
         list_images = tf.data.Dataset.list_files(f'{path}/*/*')
         return list_images
 
@@ -80,10 +80,9 @@ class Clf(object):
         Returns:
             image, label
         """
-        assert isinstance(
-            path,
-            (str,
-             tf.Tensor)), f'type of path is {type(path)}, expected type str'
+        if not isinstance(path, (str, tf.Tensor)):
+            raise AssertionError(
+                f'type of path is {type(path)}, expected type str')
         img = read_image(path)
 
         # TODO: resizing should be done separately
@@ -109,7 +108,6 @@ class Clf(object):
 
     def create_lookup_table(self):
         """Creates tf.lookup.StaticHashTable for encoding labels"""
-
         keys = list(self.class_to_idx.keys())
         vals = list(self.class_to_idx.values())
 
@@ -155,10 +153,13 @@ class Clf(object):
         By default the loaded image size is 224x224, pass None to load original size.
         You will get error on `batch()` method if all image size are not same.
         """
-        assert isinstance(path, (str, pathlib.Path))
-        assert isinstance(shuffle, (bool, int)), print(
-            f'Arg: shuffle is either bool or int but got {shuffle} : {type(shuffle)}'
-        )
+        if not isinstance(path, (str, pathlib.Path)):
+            raise AssertionError
+        if not isinstance(shuffle, (bool, int)):
+            raise AssertionError(
+                print(
+                    f'Arg: shuffle is either bool or int but got {shuffle} : {type(shuffle)}'
+                ))
 
         path = pathlib.Path(path)
         remove_dsstore(path)

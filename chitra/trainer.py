@@ -208,7 +208,6 @@ class Trainer(Model):
         else:
             optimizer = partial(
                 optimizer,
-                momentum=momentum,
             )
         return optimizer
 
@@ -315,7 +314,7 @@ class Trainer(Model):
 
         self.compile(optimizer=optimizer, loss=loss, metrics=metrics)
         self.cyclic_opt_set = True
-        print(f"Model compiled!")
+        print("Model compiled!")
 
 
 class InterpretModel:
@@ -364,13 +363,8 @@ class InterpretModel:
         plt.imshow(heatmap, cmap="jet", alpha=0.5)
         plt.show()
 
-    def __patch(self):
-        """Path _find_penultimate_output method of tf_keras_vis"""
-        if self.learner.include_top:
-            return self.learner.model.layers[-1].output
-        return self.learner.model.layers[0].get_output_at(-1)
-
-    def model_modifier(self, m):
+    @staticmethod
+    def model_modifier(m):
         """Sets last activation to linear"""
         m.layers[-1].activation = tf.keras.activations.linear
         return m
@@ -424,7 +418,7 @@ class Learner:
                 validation_data=val_data,
                 callbacks=callbacks,
             )
-        elif MODE in Learner.PT:
+        if MODE in Learner.PT:
             lit_confs = kwargs.get('LIT_TRAINER_CONFIG', {})
             if not self.trainer:
                 self.trainer = pl.Trainer(max_epochs=epochs, **lit_confs)

@@ -34,16 +34,19 @@ jobs:
           pip install flit
           pip install .
           pip install -r requirements/dev.txt
+          pip install -r requirements/test.txt
           pip list
         shell: bash
 
-      - name: Generate Coverage Report
+      - name: Run Test with Coverage
         run: |
-          pip install -r requirements/test.txt
           coverage erase
           coverage run -m pytest
-          coverage report -m
-          coverage xml
+
+      - name: Generate Coverage Report
+        run: |
+          coverage report -m -i
+          coverage xml -i
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v1
