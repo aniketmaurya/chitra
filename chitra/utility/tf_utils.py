@@ -19,11 +19,12 @@ def limit_gpu(gpu_id: int, memory_limit: int):
     os.environ["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
     gpus = tf.config.list_physical_devices('GPU')
 
+    assert len(gpus) < gpu_id + 1
     if gpus:
         # Restrict TensorFlow to only allocate [memory MB] of memory on the first GPU
         try:
             tf.config.experimental.set_virtual_device_configuration(
-                gpus[0], [
+                gpus[gpu_id], [
                     tf.config.experimental.VirtualDeviceConfiguration(
                         memory_limit=memory_limit)
                 ])
