@@ -45,7 +45,7 @@ jobs:
 
       - name: Generate Coverage Report
         run: |
-          coverage report -m
+          coverage report -m -i
           coverage xml -i
 
       - name: Upload Coverage to Codecov
