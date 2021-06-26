@@ -18,14 +18,16 @@ class BoundingBoxes:
                 - `xyxy` for corner points of bbox
                 - `xyhw` for x-center, y-center, height and width format of bbox
         """
-        assert format.upper() in (
+        if format.upper() not in (
             self.CENTER,
-            self.CORNER), f"bbox format must be either xyxy or xyhw"
+            self.CORNER):
+            raise AssertionError(f"bbox format must be either xyxy or xyhw")
         bboxes = self._listify(bboxes, 4)
         labels = self._listify(labels)
-        assert len(bboxes) == len(
+        if len(bboxes) != len(
             labels
-        ), f"len of boxes and labels not matching: {len(bboxes), len(labels)}"
+        ):
+            raise AssertionError(f"len of boxes and labels not matching: {len(bboxes), len(labels)}")
 
         self._format = format.upper()
         self.bboxes = self._list_to_bbox(bboxes, labels)

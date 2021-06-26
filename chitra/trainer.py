@@ -45,8 +45,9 @@ def _get_base_cnn(
     include_top: bool = False,
 ) -> Model:
     if isinstance(base_model, str):
-        assert (base_model in MODEL_DICT.keys()
-                ), f"base_model name must be in {tuple(MODEL_DICT.keys())}"
+        if (base_model not in MODEL_DICT.keys()
+                ):
+            raise AssertionError(f"base_model name must be in {tuple(MODEL_DICT.keys())}")
         base_model = MODEL_DICT[base_model]
         base_model = base_model(include_top=include_top,
                                 pooling=pooling,
@@ -104,7 +105,8 @@ def create_cnn(
     weights: Union[str, None] = "imagenet",
     name: Optional[str] = None,
 ) -> Model:
-    assert pooling in ("avg", "max")
+    if pooling not in ("avg", "max"):
+        raise AssertionError
 
     if keras_applications:
         if num_classes == 2:
@@ -118,8 +120,9 @@ def create_cnn(
         base_model = _get_base_cnn(base_model,
                                    pooling=pooling,
                                    weights=weights)
-        assert ("pool" in base_model.layers[-1].name
-                ), f"base_model last layer must be a pooling layer"
+        if ("pool" not in base_model.layers[-1].name
+                ):
+            raise AssertionError(f"base_model last layer must be a pooling layer")
         model = _add_output_layers(base_model,
                                    outputs,
                                    drop_out=drop_out,
@@ -156,7 +159,8 @@ class Trainer(Model):
                  model: Model,
                  num_classes: Union[int, None] = None,
                  **kwargs):
-        assert check_argument_types()
+        if not check_argument_types():
+            raise AssertionError
 
         super(Trainer, self).__init__()
         self.ds = ds

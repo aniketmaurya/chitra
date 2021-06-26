@@ -25,7 +25,8 @@ def remove_dsstore(path) -> None:
 
 
 def get_basename(path: tf.string) -> tf.string:
-    assert isinstance(path, tf.Tensor)
+    if not isinstance(path, tf.Tensor):
+        raise AssertionError
     return tf.strings.split(path, os.path.sep)[-1]
 
 
