@@ -32,7 +32,7 @@ def _default_preprocess(image_file, image_size: Tuple[int, int],
 
 
 def _default_postprocess(data) -> List:
-    if not isinstance(data, (np.ndarray, List, Tuple)):
+    if not isinstance(data, (np.ndarray, list, tuple)):
         data = data.numpy()
     data = data.tolist()
     return data
