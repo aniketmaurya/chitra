@@ -1,15 +1,15 @@
-from functools import partial
 import inspect
+from functools import partial
 from typing import Any, List, Optional, Union
 
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import numpy as np
+import tensorflow as tf
+import tensorflow_addons as tfa
 from PIL import Image
 from tensorflow import keras
-import tensorflow as tf
 from tensorflow.keras.models import Model
-import tensorflow_addons as tfa
 from tf_keras_vis.gradcam import Gradcam
 from tf_keras_vis.gradcam import GradcamPlusPlus
 from tf_keras_vis.utils import normalize
@@ -17,7 +17,6 @@ from typeguard import check_argument_types
 from typeguard import typechecked
 
 from chitra.utility.import_utils import is_installed
-
 from .converter.core import pytorch_to_onnx
 from .converter.core import tf2_to_onnx
 from .datagenerator import Dataset
@@ -39,18 +38,18 @@ for name, func in inspect.getmembers(tf.keras.optimizers):
 
 @typechecked
 def _get_base_cnn(
-    base_model: Union[str, Model],
-    pooling: str = "avg",
-    weights: Union[str, None] = "imagenet",
-    include_top: bool = False,
+        base_model: Union[str, Model],
+        pooling: str = "avg",
+        weights: Union[str, None] = "imagenet",
+        include_top: bool = False,
 ) -> Model:
     if isinstance(base_model, str):
         assert (base_model in MODEL_DICT.keys()
                 ), f"base_model name must be in {tuple(MODEL_DICT.keys())}"
         base_model = MODEL_DICT[base_model]
         base_model = base_model(include_top=include_top,
-                                pooling=pooling,
-                                weights=weights)
+            pooling=pooling,
+            weights=weights)
     return base_model
 
 
@@ -75,15 +74,14 @@ def create_classifier(
     dropout: Optional[float] = None,
     include_top=False,
 ):
-    outputs = 1 if num_classes == 2 else num_classes
-
     base_model = base_model_fn(
         include_top=include_top,
         weights=weights,
     )
     if include_top:
         return base_model
-    outputs = 1
+
+    outputs = 1 if num_classes == 2 else num_classes
 
     x = base_model.output
     x = tf.keras.layers.GlobalMaxPool2D()(x)
@@ -202,8 +200,8 @@ class Trainer(Model):
     def _get_optimizer(self, optimizer, momentum=0.9, **kwargs):
         if optimizer.__name__ == "SGD":
             optimizer = partial(optimizer,
-                                momentum=momentum,
-                                nesterov=kwargs.get("nesterov", True))
+                momentum=momentum,
+                nesterov=kwargs.get("nesterov", True))
         else:
             optimizer = partial(
                 optimizer,
@@ -218,16 +216,16 @@ class Trainer(Model):
         return dl.batch(bs).prefetch(Trainer._AUTOTUNE)
 
     def cyclic_fit(
-        self,
-        epochs: int,
-        batch_size: int,
-        lr_range: Union[tuple, list] = (1e-4, 1e-2),
-        optimizer: tf.keras.optimizers.Optimizer = tf.keras.optimizers.SGD,
-        momentum: float = 0.9,
-        validation_data: Any = None,
-        callbacks: Optional[List] = None,
-        *args,
-        **kwargs,
+            self,
+            epochs: int,
+            batch_size: int,
+            lr_range: Union[tuple, list] = (1e-4, 1e-2),
+            optimizer: tf.keras.optimizers.Optimizer = tf.keras.optimizers.SGD,
+            momentum: float = 0.9,
+            validation_data: Any = None,
+            callbacks: Optional[List] = None,
+            *args,
+            **kwargs,
     ):
         """Trains model on ds as train data with cyclic learning rate.
         Dataset will be automatically converted into `tf.data` format and images will be prewhitened in range of [-1, 1].
@@ -271,16 +269,16 @@ class Trainer(Model):
 
     @typechecked
     def compile2(
-        self,
-        batch_size: int,
-        optimizer: Union[str, tf.keras.optimizers.Optimizer] = "adam",
-        lr_range: Union[tuple, list] = (1e-4, 1e-2),
-        loss: Optional[tf.keras.losses.Loss] = None,
-        metrics=None,
-        loss_weights=None,
-        weighted_metrics=None,
-        run_eagerly=None,
-        **kwargs,
+            self,
+            batch_size: int,
+            optimizer: Union[str, tf.keras.optimizers.Optimizer] = "adam",
+            lr_range: Union[tuple, list] = (1e-4, 1e-2),
+            loss: Optional[tf.keras.losses.Loss] = None,
+            metrics=None,
+            loss_weights=None,
+            weighted_metrics=None,
+            run_eagerly=None,
+            **kwargs,
     ):
         """Compile2 compiles the model of Trainer for cyclic learning rate.
         Cyclical Learning Rates for Training Neural Networks: https://arxiv.org/abs/1506.01186
@@ -337,8 +335,8 @@ class InterpretModel:
         self.learner = learner
 
         self.gradcam = self.gradcam_fn(learner.model,
-                                       self.model_modifier,
-                                       clone=clone)
+            self.model_modifier,
+            clone=clone)
 
     def __call__(self,
                  image: Image.Image,

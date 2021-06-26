@@ -44,7 +44,8 @@ class Clf(object):
         assert isinstance(figsize, tuple)
 
         data = self.data
-        if data is None: raise Exception('TF.data not created yet!')
+        if data is None:
+            raise UserWarning('TF.data not created yet!')
         idx_to_class = self.idx_to_class
 
         plt.figure(figsize=figsize)
@@ -56,7 +57,7 @@ class Clf(object):
             label = idx_to_class[
                 label.numpy()] if idx_to_class else label.numpy()
 
-            ax = plt.subplot(sub_plot_size, sub_plot_size, i + 1)
+            plt.subplot(sub_plot_size, sub_plot_size, i + 1)
 
             plt.imshow(image)
             plt.title(label)
