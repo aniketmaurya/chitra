@@ -72,7 +72,8 @@ class ImageSizeList:
 class Pipeline:
     @typechecked
     def __init__(self, funcs: Union[Callable, list, tuple] = None):
-        assert check_argument_types()
+        if not check_argument_types():
+            raise AssertionError
         if isinstance(funcs, list):
             self.funcs = funcs
         elif callable(funcs):
@@ -82,7 +83,8 @@ class Pipeline:
 
     @typechecked
     def add(self, func: Callable):
-        assert check_argument_types()
+        if not check_argument_types():
+            raise AssertionError
         self.funcs.append(func)
 
     def __call__(self, item):
@@ -189,7 +191,8 @@ class Dataset:
 
     def label_encoder(self, label):
         idx = self.label_to_idx.get(label, None)
-        assert idx is not None, f"Error while converting label={label} to index!"
+        if idx is None:
+            raise AssertionError(f"Error while converting label={label} to index!")
         return idx
 
     def generator(self, shuffle=False):
