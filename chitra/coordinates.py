@@ -38,9 +38,9 @@ class BoundingBoxes:
         if not isinstance(item, (list, tuple)):
             return [item]
 
-        if isinstance(item, (list, tuple)):
-            if self.num_dim(item) == dim_trigger:
-                item = [item]
+        if isinstance(item,
+                      (list, tuple)) and self.num_dim(item) == dim_trigger:
+            item = [item]
         return item
 
     @staticmethod
@@ -72,17 +72,17 @@ class BoundingBoxes:
             labels: List[Union[str, int]] = None) -> List[bbs.BoundingBox]:
         """Converts bbox list into `imgaug BoundigBox` object
         """
-        format = self._format
+        _format = self._format
 
         if not bbox_list:
-            return None
+            return []
 
         if not labels:
             labels = [None] * self.num_dim(bbox_list)
 
         bbox_objects = []
         for bbox, label in zip(bbox_list, labels):
-            if format == self.CENTER:
+            if _format == self.CENTER:
                 bbox = self.center_to_corner(*bbox)
             bbox_objects.append(bbs.BoundingBox(*bbox, label))
         return bbox_objects

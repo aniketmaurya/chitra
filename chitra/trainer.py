@@ -75,15 +75,14 @@ def create_classifier(
     dropout: Optional[float] = None,
     include_top=False,
 ):
-    outputs = 1 if num_classes == 2 else num_classes
-
     base_model = base_model_fn(
         include_top=include_top,
         weights=weights,
     )
     if include_top:
         return base_model
-    outputs = 1
+
+    outputs = 1 if num_classes == 2 else num_classes
 
     x = base_model.output
     x = tf.keras.layers.GlobalMaxPool2D()(x)
@@ -171,12 +170,12 @@ class Trainer(Model):
         self.cyclic_opt_set = False
 
     def build(self):
-        pass
+        raise NotImplementedError(
+            'Build method is not implemented in Trainer! Please use "model.model.build" instead.'
+        )
 
     def summary(self):
         return self.model.summary()
-
-    # def get_layer(name=None, index=None): return self.model(name, index)
 
     def compile(self, *args, **kwargs):
         return self.model.compile(*args, **kwargs)
@@ -188,7 +187,9 @@ class Trainer(Model):
         return self.model.fit(*args, **kwargs)
 
     def warmup(self):
-        pass
+        raise NotImplementedError(
+            'warmup is not implemented yet! Would you like to raise a PR to chitra?'
+        )
 
     def prewhiten(self, image):
         image = tf.cast(image, tf.float32)
@@ -246,7 +247,6 @@ class Trainer(Model):
         """
         if not self.cyclic_opt_set:
             self.max_lr, self.min_lr = lr_range
-            ds = self.ds
             step_size = 2 * len(self.ds) // batch_size
             lr_schedule = tfa.optimizers.Triangular2CyclicalLearningRate(
                 initial_learning_rate=lr_range[0],
@@ -277,9 +277,6 @@ class Trainer(Model):
         lr_range: Union[tuple, list] = (1e-4, 1e-2),
         loss: Optional[tf.keras.losses.Loss] = None,
         metrics=None,
-        loss_weights=None,
-        weighted_metrics=None,
-        run_eagerly=None,
         **kwargs,
     ):
         """Compile2 compiles the model of Trainer for cyclic learning rate.
@@ -367,7 +364,7 @@ class InterpretModel:
         plt.imshow(heatmap, cmap="jet", alpha=0.5)
         plt.show()
 
-    def __patch(self, *args, **kwargs):
+    def __patch(self):
         """Path _find_penultimate_output method of tf_keras_vis"""
         if self.learner.include_top:
             return self.learner.model.layers[-1].output
@@ -383,7 +380,6 @@ class InterpretModel:
             ret = preds[0]
         else:
             index = tf.argmax(tf.math.softmax(preds), axis=1)[0]
-            # print(index, preds.shape)
             ret = preds[0, index]
             print(f"index: {index}")
         return ret

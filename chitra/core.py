@@ -1,6 +1,6 @@
 import os
 import pathlib
-from typing import Tuple
+from typing import Optional, Tuple
 
 from loguru import logger
 import requests
@@ -8,7 +8,7 @@ import tensorflow as tf
 
 from chitra.constants import IMAGENET_LABEL_URL
 
-IMAGENET_LABELS: Tuple[str] = None
+IMAGENET_LABELS: Optional[Tuple[str]] = None
 
 
 def remove_dsstore(path) -> None:
