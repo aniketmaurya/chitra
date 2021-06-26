@@ -1,9 +1,10 @@
+import pytest
 from tensorflow import keras
 
-from chitra.trainer import create_cnn
 from chitra.trainer import Dataset
 from chitra.trainer import InterpretModel
 from chitra.trainer import Trainer
+from chitra.trainer import create_cnn
 
 dataset = Dataset('./')
 cnn = create_cnn('mobilenetv2', num_classes=1000, keras_applications=False)
@@ -22,3 +23,8 @@ def test_trainer():
 
 def test_interpret_model():
     assert isinstance(model_interpret.learner, Trainer)
+
+
+def test_build():
+    with pytest.raises(NotImplementedError):
+        trainer.build()

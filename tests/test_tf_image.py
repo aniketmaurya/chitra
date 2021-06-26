@@ -11,11 +11,11 @@ image = Chitra(chitra_banner).image
 
 
 def test_read_image():
-    image.save('./temp.png')
+    image.save('./test_read_image.png')
     tf_image = read_image('./temp.png')
     assert 3 <= tf_image.shape[-1] <= 4
     assert isinstance(tf_image, tf.Tensor)
-    os.remove('./temp.png')
+    os.remove('./test_read_image.png')
 
 
 def test_resize_image():
