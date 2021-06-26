@@ -7,4 +7,4 @@ if is_installed('loguru'):
 else:
     import logging
 
-    logger = logging()
+    logger = logging.getLogger()
