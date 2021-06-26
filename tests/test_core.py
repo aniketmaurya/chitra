@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 import tensorflow as tf
 
@@ -9,7 +10,7 @@ from chitra.core import remove_dsstore
 
 def test_remove_dsstore():
     os.makedirs('chitra_temp', exist_ok=True)
-    os.system('touch chitra_temp/.DS_Store')
+    subprocess.call('touch chitra_temp/.DS_Store', shell=True)
     remove_dsstore('chitra_temp')
     assert not os.path.exists('chitra_temp/.DS_Store')
     os.removedirs('chitra_temp')
@@ -22,5 +23,5 @@ def test_get_basename():
 def test_load_imagenet_labels():
     labels = load_imagenet_labels()
 
-    assert not "\n" in labels
+    assert "\n" not in labels
     assert len(labels) == 1000 + 1
