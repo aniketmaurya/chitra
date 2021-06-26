@@ -2,11 +2,11 @@ import os
 import pathlib
 from typing import Optional, Tuple
 
-from loguru import logger
 import requests
 import tensorflow as tf
 
 from chitra.constants import IMAGENET_LABEL_URL
+from chitra.logging import logger
 
 IMAGENET_LABELS: Optional[Tuple[str]] = None
 
