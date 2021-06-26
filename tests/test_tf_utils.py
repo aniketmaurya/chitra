@@ -1,5 +1,6 @@
 from chitra.utility.tf_utils import disable_gpu
-from chitra.utility.tf_utils import limit_gpu, gpu_dynamic_mem_growth
+from chitra.utility.tf_utils import gpu_dynamic_mem_growth
+from chitra.utility.tf_utils import limit_gpu
 
 
 def test_disable_gpu():
