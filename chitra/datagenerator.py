@@ -192,7 +192,8 @@ class Dataset:
     def label_encoder(self, label):
         idx = self.label_to_idx.get(label, None)
         if idx is None:
-            raise AssertionError(f"Error while converting label={label} to index!")
+            raise AssertionError(
+                f"Error while converting label={label} to index!")
         return idx
 
     def generator(self, shuffle=False):

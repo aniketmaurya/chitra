@@ -207,9 +207,7 @@ class Trainer(Model):
                                 momentum=momentum,
                                 nesterov=kwargs.get("nesterov", True))
         else:
-            optimizer = partial(
-                optimizer,
-            )
+            optimizer = partial(optimizer, )
         return optimizer
 
     def _prepare_dl(self, bs: int = 8, shuffle: bool = True):

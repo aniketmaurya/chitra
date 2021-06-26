@@ -14,10 +14,9 @@ def read_image(path: str, channels: int = 3):
 
 def resize_image(image: tf.Tensor, size: Union[tf.Tensor, tuple], **kwargs):
     """Resize image to the target `size`: Union[tf.Tensor, tuple]"""
-    if not isinstance(
-        image,
-        tf.Tensor):
-        raise AssertionError(f"image must be of type tf.Tensor but passed {type(image)}")
+    if not isinstance(image, tf.Tensor):
+        raise AssertionError(
+            f"image must be of type tf.Tensor but passed {type(image)}")
     if not isinstance(size, (tuple, tf.Tensor)):
         raise AssertionError
     method = kwargs.get("method", "bilinear")
