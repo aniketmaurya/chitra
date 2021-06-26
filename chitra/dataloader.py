@@ -80,11 +80,9 @@ class Clf:
         Returns:
             image, label
         """
-        if not isinstance(
-            path,
-            (str,
-             tf.Tensor)):
-            raise AssertionError(f'type of path is {type(path)}, expected type str')
+        if not isinstance(path, (str, tf.Tensor)):
+            raise AssertionError(
+                f'type of path is {type(path)}, expected type str')
         img = read_image(path)
 
         # TODO: resizing should be done separately
@@ -158,9 +156,10 @@ class Clf:
         if not isinstance(path, (str, pathlib.Path)):
             raise AssertionError
         if not isinstance(shuffle, (bool, int)):
-            raise AssertionError(print(
-                f'Arg: shuffle is either bool or int but got {shuffle} : {type(shuffle)}'
-            ))
+            raise AssertionError(
+                print(
+                    f'Arg: shuffle is either bool or int but got {shuffle} : {type(shuffle)}'
+                ))
 
         path = pathlib.Path(path)
         remove_dsstore(path)
