@@ -68,11 +68,11 @@ def _add_output_layers(base_model: Model,
 
 
 def create_classifier(
-    base_model_fn: callable,
-    num_classes: int,
-    weights="imagenet",
-    dropout: Optional[float] = None,
-    include_top=False,
+        base_model_fn: callable,
+        num_classes: int,
+        weights="imagenet",
+        dropout: Optional[float] = None,
+        include_top=False,
 ):
     base_model = base_model_fn(
         include_top=include_top,
@@ -95,13 +95,13 @@ def create_classifier(
 
 @typechecked
 def create_cnn(
-    base_model: Union[str, Model],
-    num_classes: int,
-    drop_out=0.5,
-    keras_applications: bool = True,
-    pooling: str = "avg",
-    weights: Union[str, None] = "imagenet",
-    name: Optional[str] = None,
+        base_model: Union[str, Model],
+        num_classes: int,
+        drop_out=0.5,
+        keras_applications: bool = True,
+        pooling: str = "avg",
+        weights: Union[str, None] = "imagenet",
+        name: Optional[str] = None,
 ) -> Model:
     assert pooling in ("avg", "max")
 
@@ -115,14 +115,14 @@ def create_cnn(
 
     if isinstance(base_model, (str, Model)) and keras_applications:
         base_model = _get_base_cnn(base_model,
-                                   pooling=pooling,
-                                   weights=weights)
+            pooling=pooling,
+            weights=weights)
         assert ("pool" in base_model.layers[-1].name
                 ), f"base_model last layer must be a pooling layer"
         model = _add_output_layers(base_model,
-                                   outputs,
-                                   drop_out=drop_out,
-                                   name=name)
+            outputs,
+            drop_out=drop_out,
+            name=name)
 
     elif isinstance(base_model, Model) and keras_applications is False:
         model = base_model
@@ -169,12 +169,11 @@ class Trainer(Model):
         self.cyclic_opt_set = False
 
     def build(self):
-        pass
+        raise NotImplementedError('Build method is not implemented in Trainer! Please use "model.model.build" instead.')
 
     def summary(self):
         return self.model.summary()
 
-    # def get_layer(name=None, index=None): return self.model(name, index)
 
     def compile(self, *args, **kwargs):
         return self.model.compile(*args, **kwargs)
@@ -186,7 +185,7 @@ class Trainer(Model):
         return self.model.fit(*args, **kwargs)
 
     def warmup(self):
-        pass
+        raise NotImplementedError('warmup is not implemented yet! Would you like to raise a PR to chitra?')
 
     def prewhiten(self, image):
         image = tf.cast(image, tf.float32)
@@ -244,7 +243,6 @@ class Trainer(Model):
         """
         if not self.cyclic_opt_set:
             self.max_lr, self.min_lr = lr_range
-            ds = self.ds
             step_size = 2 * len(self.ds) // batch_size
             lr_schedule = tfa.optimizers.Triangular2CyclicalLearningRate(
                 initial_learning_rate=lr_range[0],
@@ -275,9 +273,6 @@ class Trainer(Model):
             lr_range: Union[tuple, list] = (1e-4, 1e-2),
             loss: Optional[tf.keras.losses.Loss] = None,
             metrics=None,
-            loss_weights=None,
-            weighted_metrics=None,
-            run_eagerly=None,
             **kwargs,
     ):
         """Compile2 compiles the model of Trainer for cyclic learning rate.
@@ -381,7 +376,6 @@ class InterpretModel:
             ret = preds[0]
         else:
             index = tf.argmax(tf.math.softmax(preds), axis=1)[0]
-            # print(index, preds.shape)
             ret = preds[0, index]
             print(f"index: {index}")
         return ret
