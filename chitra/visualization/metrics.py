@@ -45,16 +45,20 @@ def plot_confusion_matrix(y_pred: Union[np.ndarray, List],
         cmap = plt.get_cmap('Blues')
 
     cm = confusion_matrix(y_true, y_pred)
+    accuracy = cm_accuracy(cm)
+    error = 1 - accuracy
+
     plt.imshow(cm, cmap=cmap)
 
     if include_values:
         for i, j in product(range(n_classes), range(n_classes)):
             plt.text(i, j, "{:,}".format(cm[i, j]))
 
-    plt.title(title)
-    plt.xlabel('Predicted Label')
-    plt.ylabel('True Label')
     plt.xticks(tick_marks, display_labels, rotation=45)
     plt.yticks(tick_marks, display_labels)
+    plt.title(title)
+    plt.xlabel(
+        f'Predicted Label\nAccuracy={accuracy:0.4f}; Error={error:0.4f}')
+    plt.ylabel('True Label')
 
     plt.show()
