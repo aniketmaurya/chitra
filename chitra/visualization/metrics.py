@@ -14,8 +14,8 @@ def detect_multilabel(labels: Union[List, np.ndarray]):
         labels = np.unique(labels)
     else:
         raise UserWarning(
-            "expect data type for label was list or np.ndarray but got %s".
-            format(type(labels)))
+            f"expect data type for label was list or np.ndarray but got {type(labels)}"
+        )
 
     if len(labels) > 2:
         return True
