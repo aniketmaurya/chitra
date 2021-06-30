@@ -41,6 +41,7 @@ extra:
 
 nav:
     - Introduction: 'index.md'
+    - Visualization: 'source/visualization/metrics.md'
     - Examples:
         - Play with Images: 'examples/chitra-class/chitra-class.md'
         - Image Classification: 'examples/image-classification/image-classification.md'

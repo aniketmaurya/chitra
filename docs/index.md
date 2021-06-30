@@ -34,7 +34,7 @@ analysis with GradCAM/GradCAM++ and Framework agnostic Model Serving.
 
 ### Using pip (recommended)
 
-`pip install -U chitra==0.1.0a0`
+`pip install -U chitra==0.1.0b2`
 
 ### From source
 
