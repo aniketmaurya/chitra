@@ -1,3 +1,7 @@
+from unittest.mock import MagicMock
+from unittest.mock import Mock
+from unittest.mock import patch
+
 import numpy as np
 import pytest
 
@@ -19,9 +23,12 @@ def test_cm_accuracy():
     assert cm_accuracy(x) == 0.5
 
 
-def test_plot_confusion_matrix():
+@patch('chitra.visualization.metrics.plt')
+def test_plot_confusion_matrix(mock_plt: Mock):
+    mock_plt.show = MagicMock()
+
     y_pred = [1, 1, 0, 1]
     y_true = [0, 1, 0, 1]
-    display_labels = ('watermark', 'non watermark')
-    assert plot_confusion_matrix(y_pred, y_true,
-                                 display_labels=display_labels) is None
+
+    assert plot_confusion_matrix(y_pred, y_true) is None
+    mock_plt.show.assert_called_once()
