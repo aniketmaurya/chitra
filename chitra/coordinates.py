@@ -23,9 +23,11 @@ class BoundingBoxes:
             self.CORNER), "bbox format must be either xyxy or xyhw"
         bboxes = self._listify(bboxes, 4)
         labels = self._listify(labels)
-        assert len(bboxes) == len(
-            labels
-        ), f"len of boxes and labels not matching: {len(bboxes), len(labels)}"
+
+        if len(bboxes) != len(labels):
+            raise UserWarning(
+                f"len of boxes and labels not matching: {len(bboxes), len(labels)}"
+            )
 
         self._format = format.upper()
         self.bboxes = self._list_to_bbox(bboxes, labels)
