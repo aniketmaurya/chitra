@@ -17,7 +17,7 @@ def limit_gpu(gpu_id: int, memory_limit: int):
     """
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
-    gpus = tf.config.list_physical_devices('GPU')
+    gpus = tf.config.list_physical_devices("GPU")
 
     if len(gpus) >= gpu_id + 1:
         raise AssertionError
@@ -25,18 +25,20 @@ def limit_gpu(gpu_id: int, memory_limit: int):
         # Restrict TensorFlow to only allocate [memory MB] of memory on the first GPU
         try:
             tf.config.experimental.set_virtual_device_configuration(
-                gpus[gpu_id], [
+                gpus[gpu_id],
+                [
                     tf.config.experimental.VirtualDeviceConfiguration(
-                        memory_limit=memory_limit)
-                ])
-            logical_gpus = tf.config.list_logical_devices('GPU')
-            print(len(gpus), "Physical GPUs,", len(logical_gpus),
-                  "Logical GPUs")
+                        memory_limit=memory_limit
+                    )
+                ],
+            )
+            logical_gpus = tf.config.list_logical_devices("GPU")
+            print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
         except RuntimeError as e:
             # Virtual devices must be set before GPUs have been initialized
             print(e)
     else:
-        print(f'No GPU:{gpu_id} found in your system!')
+        print(f"No GPU:{gpu_id} found in your system!")
 
 
 def gpu_dynamic_mem_growth():
@@ -47,14 +49,14 @@ def gpu_dynamic_mem_growth():
     Avoids OOM from tensorflow greedily allocating GPU memory
     """
     try:
-        gpu_devices = tf.config.list_physical_devices('GPU')
+        gpu_devices = tf.config.list_physical_devices("GPU")
         if len(gpu_devices) > 0:
             for gpu in gpu_devices:
                 tf.config.experimental.set_memory_growth(gpu, True)
-            print('GPU dynamic memory growth enabled')
+            print("GPU dynamic memory growth enabled")
         else:
-            print('No GPU found on the machine!')
+            print("No GPU found on the machine!")
     except AttributeError:
         print(
-            'Upgrade your tensorflow to 2.x to have the gpu_dynamic_mem_growth feature.'
+            "Upgrade your tensorflow to 2.x to have the gpu_dynamic_mem_growth feature."
         )

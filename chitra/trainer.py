@@ -1,29 +1,26 @@
-from functools import partial
 import inspect
+from functools import partial
 from typing import Any, List, Optional, Union
 
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import numpy as np
+import tensorflow as tf
+import tensorflow_addons as tfa
 from PIL import Image
 from tensorflow import keras
-import tensorflow as tf
 from tensorflow.keras.models import Model
-import tensorflow_addons as tfa
-from tf_keras_vis.gradcam import Gradcam
-from tf_keras_vis.gradcam import GradcamPlusPlus
+from tf_keras_vis.gradcam import Gradcam, GradcamPlusPlus
 from tf_keras_vis.utils import normalize
-from typeguard import check_argument_types
-from typeguard import typechecked
+from typeguard import check_argument_types, typechecked
 
 from chitra.utility.import_utils import is_installed
 
-from .converter.core import pytorch_to_onnx
-from .converter.core import tf2_to_onnx
+from .converter.core import pytorch_to_onnx, tf2_to_onnx
 from .datagenerator import Dataset
 
 pl = None
-if is_installed('pytorch_lightning'):
+if is_installed("pytorch_lightning"):
     import pytorch_lightning as pl
 
 MODEL_DICT = {}
@@ -45,20 +42,23 @@ def _get_base_cnn(
     include_top: bool = False,
 ) -> Model:
     if isinstance(base_model, str):
-        assert (base_model in MODEL_DICT.keys()
-                ), f"base_model name must be in {tuple(MODEL_DICT.keys())}"
+        assert (
+            base_model in MODEL_DICT.keys()
+        ), f"base_model name must be in {tuple(MODEL_DICT.keys())}"
         base_model = MODEL_DICT[base_model]
-        base_model = base_model(include_top=include_top,
-                                pooling=pooling,
-                                weights=weights)
+        base_model = base_model(
+            include_top=include_top, pooling=pooling, weights=weights
+        )
     return base_model
 
 
 @typechecked
-def _add_output_layers(base_model: Model,
-                       outputs: int,
-                       drop_out: Union[float, None] = None,
-                       name: Optional[str] = None) -> Model:
+def _add_output_layers(
+    base_model: Model,
+    outputs: int,
+    drop_out: Union[float, None] = None,
+    name: Optional[str] = None,
+) -> Model:
     x = base_model.output
     if drop_out:
         x = tf.keras.layers.Dropout(drop_out)(x)
@@ -115,15 +115,11 @@ def create_cnn(
         print("num_classes is ignored. returning the passed model as it is.")
 
     if isinstance(base_model, (str, Model)) and keras_applications:
-        base_model = _get_base_cnn(base_model,
-                                   pooling=pooling,
-                                   weights=weights)
-        assert ("pool" in base_model.layers[-1].name
-                ), "base_model last layer must be a pooling layer"
-        model = _add_output_layers(base_model,
-                                   outputs,
-                                   drop_out=drop_out,
-                                   name=name)
+        base_model = _get_base_cnn(base_model, pooling=pooling, weights=weights)
+        assert (
+            "pool" in base_model.layers[-1].name
+        ), "base_model last layer must be a pooling layer"
+        model = _add_output_layers(base_model, outputs, drop_out=drop_out, name=name)
 
     elif isinstance(base_model, Model) and keras_applications is False:
         model = base_model
@@ -151,11 +147,9 @@ class Trainer(Model):
     _AUTOTUNE = tf.data.experimental.AUTOTUNE
 
     @typechecked
-    def __init__(self,
-                 ds: Dataset,
-                 model: Model,
-                 num_classes: Union[int, None] = None,
-                 **kwargs):
+    def __init__(
+        self, ds: Dataset, model: Model, num_classes: Union[int, None] = None, **kwargs
+    ):
         assert check_argument_types()
 
         super(Trainer, self).__init__()
@@ -188,7 +182,7 @@ class Trainer(Model):
 
     def warmup(self):
         raise NotImplementedError(
-            'warmup is not implemented yet! Would you like to raise a PR to chitra?'
+            "warmup is not implemented yet! Would you like to raise a PR to chitra?"
         )
 
     @staticmethod
@@ -203,11 +197,13 @@ class Trainer(Model):
 
     def _get_optimizer(self, optimizer, momentum=0.9, **kwargs):
         if optimizer.__name__ == "SGD":
-            optimizer = partial(optimizer,
-                                momentum=momentum,
-                                nesterov=kwargs.get("nesterov", True))
+            optimizer = partial(
+                optimizer, momentum=momentum, nesterov=kwargs.get("nesterov", True)
+            )
         else:
-            optimizer = partial(optimizer, )
+            optimizer = partial(
+                optimizer,
+            )
         return optimizer
 
     def _prepare_dl(self, bs: int = 8, shuffle: bool = True):
@@ -317,10 +313,7 @@ class Trainer(Model):
 
 
 class InterpretModel:
-    def __init__(self,
-                 gradcam_pp: bool,
-                 learner: Trainer,
-                 clone: bool = False):
+    def __init__(self, gradcam_pp: bool, learner: Trainer, clone: bool = False):
         """Args:
         gradcam_pp: if True GradCam class will be used else GradCamPlusplus
         clone: whether GradCam will clone learner.model
@@ -331,14 +324,11 @@ class InterpretModel:
             self.gradcam_fn = Gradcam
         self.learner = learner
 
-        self.gradcam = self.gradcam_fn(learner.model,
-                                       self.model_modifier,
-                                       clone=clone)
+        self.gradcam = self.gradcam_fn(learner.model, self.model_modifier, clone=clone)
 
-    def __call__(self,
-                 image: Image.Image,
-                 auto_resize: bool = True,
-                 image_size=None) -> None:
+    def __call__(
+        self, image: Image.Image, auto_resize: bool = True, image_size=None
+    ) -> None:
         gradcam = self.gradcam
         get_loss = self.get_loss
         if auto_resize and image_size is None:
@@ -382,9 +372,9 @@ class Learner:
     TF = ("TF", "TENSORFLOW")
     PT = ("PYTORCH", "PT", "TORCH")
 
-    def __init__(self,
-                 model: Union['pl.LightningModule', 'keras.models.Model'],
-                 mode: str = "TF"):
+    def __init__(
+        self, model: Union["pl.LightningModule", "keras.models.Model"], mode: str = "TF"
+    ):
         self.MODE = mode.upper()
         self.model = model
         self.epochs_trained = 0
@@ -392,13 +382,15 @@ class Learner:
         if self.MODE in Learner.PT:
             self.trainer = None
 
-    def fit(self,
-            train_data,
-            epochs,
-            val_data=None,
-            test_data=None,
-            callbacks=None,
-            **kwargs):
+    def fit(
+        self,
+        train_data,
+        epochs,
+        val_data=None,
+        test_data=None,
+        callbacks=None,
+        **kwargs,
+    ):
         """train models
         For TF:
             Just pass train data and start training
@@ -418,7 +410,7 @@ class Learner:
                 callbacks=callbacks,
             )
         if MODE in Learner.PT:
-            lit_confs = kwargs.get('LIT_TRAINER_CONFIG', {})
+            lit_confs = kwargs.get("LIT_TRAINER_CONFIG", {})
             if not self.trainer:
                 self.trainer = pl.Trainer(max_epochs=epochs, **lit_confs)
             return self.trainer.fit(self.model, train_data, val_data)

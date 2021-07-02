@@ -4,7 +4,7 @@ from chitra.image import Chitra
 
 
 def test__load_image():
-    url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png'
+    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
     image = Chitra(url, cache=True)
     assert isinstance(image.image, Image.Image)
 

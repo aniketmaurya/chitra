@@ -1,17 +1,14 @@
-from io import BytesIO
 import os
+from io import BytesIO
 from pathlib import Path
 from typing import Any, List, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
 import requests
+from PIL import Image
 
-from .constants import _TF
-from .constants import _TORCH
-from .constants import CHITRA_URL_SEP
-from .constants import IMAGE_CACHE_DIR
+from .constants import _TF, _TORCH, CHITRA_URL_SEP, IMAGE_CACHE_DIR
 from .coordinates import BoundingBoxes
 from .utility.import_utils import INSTALLED_MODULES
 
@@ -24,20 +21,20 @@ if INSTALLED_MODULES.get(_TF, None):
 if INSTALLED_MODULES.get(_TORCH, None):
     import torch
 
-DATA_FORMATS = Union[str, Image.Image, np.ndarray, 'tf.Tensor', 'torch.Tensor']
+DATA_FORMATS = Union[str, Image.Image, np.ndarray, "tf.Tensor", "torch.Tensor"]
 DEFAULT_MODE = os.environ.get("CHITRA_DEFAULT_MODE", "TF")
 
 
 def _cache_image(image: Image.Image, image_path: str):
     cache_dir = Path(IMAGE_CACHE_DIR)
-    filename = image_path.replace('/', CHITRA_URL_SEP)
+    filename = image_path.replace("/", CHITRA_URL_SEP)
     os.makedirs(cache_dir, exist_ok=True)
     image.save(cache_dir / filename)
 
 
 def _url_to_image(url: str, cache: bool) -> Image.Image:
     """returns Image from url"""
-    filename = url.replace('/', CHITRA_URL_SEP)
+    filename = url.replace("/", CHITRA_URL_SEP)
     cache_file = Path(IMAGE_CACHE_DIR) / filename
     if cache and os.path.exists(cache_file):
         return Image.open(cache_file)
@@ -53,18 +50,21 @@ def _url_to_image(url: str, cache: bool) -> Image.Image:
 
 class Chitra:
     """Ultimate image utility class.
-          1. Load image from file, web url, numpy or bytes
-          2. Plot image
-          3. Draw bounding boxes
+    1. Load image from file, web url, numpy or bytes
+    2. Plot image
+    3. Draw bounding boxes
     """
-    def __init__(self,
-                 data: Any,
-                 bboxes: List = None,
-                 labels: List = None,
-                 format: str = BoundingBoxes.CORNER,
-                 cache: bool = False,
-                 *args,
-                 **kwargs) -> None:
+
+    def __init__(
+        self,
+        data: Any,
+        bboxes: List = None,
+        labels: List = None,
+        format: str = BoundingBoxes.CORNER,
+        cache: bool = False,
+        *args,
+        **kwargs
+    ) -> None:
         """
 
         Args:
@@ -136,14 +136,12 @@ class Chitra:
         plt.imshow(self.numpy(), cmap, *args, **kwargs)
 
     def draw_boxes(
-            self,
-            marker_size: int = 2,
-            color=(0, 255, 0),
+        self,
+        marker_size: int = 2,
+        color=(0, 255, 0),
     ):
         if self.bboxes is None:
-            raise UserWarning('bboxes is None')
+            raise UserWarning("bboxes is None")
 
         bbox_on_image = self.bboxes.get_bounding_boxes_on_image(self.shape)
-        return bbox_on_image.draw_on_image(self.numpy(),
-                                           color=color,
-                                           size=marker_size)
+        return bbox_on_image.draw_on_image(self.numpy(), color=color, size=marker_size)
