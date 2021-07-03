@@ -1,13 +1,13 @@
-from unittest.mock import MagicMock
-from unittest.mock import Mock
-from unittest.mock import patch
+from unittest.mock import MagicMock, Mock, patch
 
 import numpy as np
 import pytest
 
-from chitra.visualization.metrics import cm_accuracy
-from chitra.visualization.metrics import detect_multilabel
-from chitra.visualization.metrics import plot_confusion_matrix
+from chitra.visualization.metrics import (
+    cm_accuracy,
+    detect_multilabel,
+    plot_confusion_matrix,
+)
 
 
 def test_detect_multilabel():
@@ -23,7 +23,7 @@ def test_cm_accuracy():
     assert cm_accuracy(x) == 0.5
 
 
-@patch('chitra.visualization.metrics.plt')
+@patch("chitra.visualization.metrics.plt")
 def test_plot_confusion_matrix(mock_plt: Mock):
     mock_plt.show = MagicMock()
 

@@ -1,6 +1,6 @@
 from chitra.trainer import Dataset
 
-dataset = Dataset('./')
+dataset = Dataset("./")
 
 
 def test__process():

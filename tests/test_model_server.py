@@ -1,5 +1,5 @@
-from fastapi import FastAPI
 import numpy as np
+from fastapi import FastAPI
 
 from chitra.serve import create_api
 from chitra.serve.model_server import _default_postprocess

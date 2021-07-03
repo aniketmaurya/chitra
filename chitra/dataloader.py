@@ -6,10 +6,8 @@ from typing import Union
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
-from .core import get_basename
-from .core import remove_dsstore
-from .tf_image import read_image
-from .tf_image import resize_image
+from .core import get_basename, remove_dsstore
+from .tf_image import read_image, resize_image
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
@@ -43,7 +41,7 @@ class Clf:
 
         data = self.data
         if data is None:
-            raise UserWarning('TF.data not created yet!')
+            raise UserWarning("TF.data not created yet!")
         idx_to_class = self.idx_to_class
 
         plt.figure(figsize=figsize)
@@ -51,15 +49,14 @@ class Clf:
 
         for i, e in enumerate(data.take(limit)):
             image, label = e
-            image = image.numpy().astype('uint8')
-            label = idx_to_class[
-                label.numpy()] if idx_to_class else label.numpy()
+            image = image.numpy().astype("uint8")
+            label = idx_to_class[label.numpy()] if idx_to_class else label.numpy()
 
             plt.subplot(sub_plot_size, sub_plot_size, i + 1)
 
             plt.imshow(image)
             plt.title(label)
-            plt.axis('off')
+            plt.axis("off")
 
     @staticmethod
     def _get_image_list(path: str):
@@ -68,7 +65,7 @@ class Clf:
         """
         if not isinstance(path, str):
             raise AssertionError
-        list_images = tf.data.Dataset.list_files(f'{path}/*/*')
+        list_images = tf.data.Dataset.list_files(f"{path}/*/*")
         return list_images
 
     @tf.function
@@ -81,8 +78,7 @@ class Clf:
             image, label
         """
         if not isinstance(path, (str, tf.Tensor)):
-            raise AssertionError(
-                f'type of path is {type(path)}, expected type str')
+            raise AssertionError(f"type of path is {type(path)}, expected type str")
         img = read_image(path)
 
         # TODO: resizing should be done separately
@@ -95,15 +91,17 @@ class Clf:
         #             img = tf.image.resize(img, self.shape)
 
         label = tf.strings.split(path, os.path.sep)[-2]
-        label = self._lookup_class_to_idx.lookup(
-            label) if self._lookup_class_to_idx else label
+        label = (
+            self._lookup_class_to_idx.lookup(label)
+            if self._lookup_class_to_idx
+            else label
+        )
         return img, label
 
     @tf.function
     def _ensure_shape(self, img, labels):
-        """Ensures the output shape of images (InputSpecs)
-        """
-        img = tf.ensure_shape(img, (*self.shape, 3), name='image')
+        """Ensures the output shape of images (InputSpecs)"""
+        img = tf.ensure_shape(img, (*self.shape, 3), name="image")
         return img, labels
 
     def create_lookup_table(self):
@@ -114,15 +112,13 @@ class Clf:
         keys_tensor = keys  # tf.constant(keys)
         vals_tensor = vals  # tf.constant(vals)
 
-        table_init = tf.lookup.KeyValueTensorInitializer(
-            keys_tensor, vals_tensor)
+        table_init = tf.lookup.KeyValueTensorInitializer(keys_tensor, vals_tensor)
 
         self._lookup_class_to_idx = tf.lookup.StaticHashTable(table_init, -1)
 
     def _get_classnames(self, list_folders, encode_classes: bool = True):
         """"""
-        self.CLASS_NAMES = tuple(
-            get_basename(e).numpy().decode() for e in list_folders)
+        self.CLASS_NAMES = tuple(get_basename(e).numpy().decode() for e in list_folders)
         if encode_classes:
             self._encode_classes()
 
@@ -136,11 +132,13 @@ class Clf:
 
         self.create_lookup_table()
 
-    def from_folder(self,
-                    path: Union[str, pathlib.Path],
-                    target_shape: Union[None, tuple] = (224, 224),
-                    shuffle: Union[bool, int] = True,
-                    encode_classes: bool = True):
+    def from_folder(
+        self,
+        path: Union[str, pathlib.Path],
+        target_shape: Union[None, tuple] = (224, 224),
+        shuffle: Union[bool, int] = True,
+        encode_classes: bool = True,
+    ):
         """Load dataset from given path.
         Args:
             path: string, path of folder containing dataset
@@ -158,8 +156,9 @@ class Clf:
         if not isinstance(shuffle, (bool, int)):
             raise AssertionError(
                 print(
-                    f'Arg: shuffle is either bool or int but got {shuffle} : {type(shuffle)}'
-                ))
+                    f"Arg: shuffle is either bool or int but got {shuffle} : {type(shuffle)}"
+                )
+            )
 
         path = pathlib.Path(path)
         remove_dsstore(path)
@@ -167,7 +166,7 @@ class Clf:
         # TODO comments
         self.shape = target_shape
 
-        list_folders = tf.data.Dataset.list_files(str(path / '*'))
+        list_folders = tf.data.Dataset.list_files(str(path / "*"))
 
         list_images = self._get_image_list(str(path))
         if shuffle:
@@ -178,9 +177,9 @@ class Clf:
         self._get_classnames(list_folders, encode_classes)
 
         if encode_classes:
-            print(f'CLASSES ENCODED: {self.class_to_idx}')
+            print(f"CLASSES ENCODED: {self.class_to_idx}")
         else:
-            print(f'CLASSES FOUND: {self.CLASS_NAMES}')
+            print(f"CLASSES FOUND: {self.CLASS_NAMES}")
 
         data = list_images.map(self._process_path, num_parallel_calls=AUTOTUNE)
 

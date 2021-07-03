@@ -26,12 +26,14 @@ def cm_accuracy(cm: np.ndarray):
     return np.trace(cm) / float(np.sum(cm))
 
 
-def plot_confusion_matrix(y_pred: Union[np.ndarray, List],
-                          y_true: Union[np.ndarray, List],
-                          display_labels=None,
-                          include_values: bool = True,
-                          title: str = 'Confusion Matrix',
-                          cmap: str = None):
+def plot_confusion_matrix(
+    y_pred: Union[np.ndarray, List],
+    y_true: Union[np.ndarray, List],
+    display_labels=None,
+    include_values: bool = True,
+    title: str = "Confusion Matrix",
+    cmap: str = None,
+):
     if detect_multilabel(y_true):
         logger.warning("You might want to use multi-label version!")
 
@@ -42,7 +44,7 @@ def plot_confusion_matrix(y_pred: Union[np.ndarray, List],
     tick_marks = np.arange(n_classes)
 
     if cmap is None:
-        cmap = plt.get_cmap('Blues')
+        cmap = plt.get_cmap("Blues")
 
     cm = confusion_matrix(y_true, y_pred)
     accuracy = cm_accuracy(cm)
@@ -57,8 +59,7 @@ def plot_confusion_matrix(y_pred: Union[np.ndarray, List],
     plt.xticks(tick_marks, display_labels, rotation=45)
     plt.yticks(tick_marks, display_labels)
     plt.title(title)
-    plt.xlabel(
-        f'Predicted Label\nAccuracy={accuracy:0.4f}; Error={error:0.4f}')
-    plt.ylabel('True Label')
+    plt.xlabel(f"Predicted Label\nAccuracy={accuracy:0.4f}; Error={error:0.4f}")
+    plt.ylabel("True Label")
 
     plt.show()

@@ -26,7 +26,7 @@ clean:
 	rm -f .coverage
 
 style:
-	yapf -ir chitra tests
+	black chitra tests
 	isort chitra tests
 
 dist: clean

@@ -5,7 +5,7 @@ from chitra.coordinates import BoundingBoxes
 
 def test_bounding_boxes():
     box = [1, 2, 3, 4]
-    label = ['Dog']
+    label = ["Dog"]
     bounding_box = BoundingBoxes(box, label)
     assert len(bounding_box.bboxes) == 1
     assert isinstance(bounding_box.bboxes, list)
