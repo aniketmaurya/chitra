@@ -4,7 +4,7 @@
 
 
 ```python
-# pip install -U chitra==0.1.0a1
+# pip install -U chitra==0.1.0b3
 
 from chitra.image import Chitra
 import matplotlib.pyplot as plt
@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 ### Load image from web url and show
 
 ```python
-url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png'
+url = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
 image = Chitra(url)
 image.imshow()
 ```
@@ -33,10 +33,10 @@ image.imshow()
 You can cache the image downloaded from internet URL by passing `cache=True` in argument.
 Second call to the same URL will not download from internet, instead image will be loaded from the local cache dir.
 ```python
-# first call
+# first call - image will be downloaded from internet and saved to local cache dir
 image = Chitra(url, cache=True)
 
-# second call
+# second call - image will be loaded from local cached dir
 image = Chitra(url, cache=True)
 ```
 
@@ -45,10 +45,22 @@ image = Chitra(url, cache=True)
 
 ```python
 box = [[600, 250, 900, 600.1]]
-label = ['hand']
+label = ['handphone']
 image = Chitra(url, box, label)
 image.image = image.image.convert('RGB')
 plt.imshow(image.draw_boxes())
 ```
 
 ![png](output_8_1.png)
+
+### Resize Image and Bounding at the same time
+Chitra can rescale your bounding box automatically based on the new image size.
+
+```python
+box = [[600, 250, 900, 600.1]]
+label = ['handphone']
+image = Chitra(url, box, label)
+image.resize_image_with_bbox((224, 224))
+print(image.bounding_boxes)
+plt.imshow(image.draw_boxes())
+```
