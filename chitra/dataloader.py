@@ -81,7 +81,6 @@ class Clf:
             raise AssertionError(f"type of path is {type(path)}, expected type str")
         img = read_image(path)
 
-        # TODO: resizing should be done separately
         # py_function will degrade performance
         if self.shape:
             [
@@ -163,7 +162,6 @@ class Clf:
         path = pathlib.Path(path)
         remove_dsstore(path)
 
-        # TODO comments
         self.shape = target_shape
 
         list_folders = tf.data.Dataset.list_files(str(path / "*"))

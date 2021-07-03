@@ -143,3 +143,9 @@ class Chitra:
 
         bbox_on_image = self.bboxes.get_bounding_boxes_on_image(self.shape)
         return bbox_on_image.draw_on_image(self.numpy(), color=color, size=marker_size)
+
+    def resize_image_with_bbox(self, size: List[int]):
+        old_size = self.shape
+        self.image = self.image.resize(size)
+        self.bboxes.resize_with_image(old_size, self.numpy())
+        return self.image, self.bboxes
