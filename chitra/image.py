@@ -60,7 +60,7 @@ class Chitra:
         data: Any,
         bboxes: List = None,
         labels: List = None,
-        format: str = BoundingBoxes.CORNER,
+        box_format: str = BoundingBoxes.CORNER,
         cache: bool = False,
         *args,
         **kwargs
@@ -71,12 +71,10 @@ class Chitra:
             data: numpy, url, filelike
             bboxes:
             labels:
-            format:
+            box_format:
             cache[bool]: Whether to cache downloaded image
             *args:
             **kwargs:
-
-
         """
         super().__init__()
         self.image = self._load_image(data, cache=cache)

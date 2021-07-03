@@ -11,16 +11,16 @@ class BoundingBoxes:
         self,
         bboxes: Optional[List[list]] = None,
         labels: Optional[List[Union[int, str]]] = None,
-        format: str = "xyxy",
+        box_format: str = "xyxy",
     ):
         """Args:
         bboxes: list of bounding boxes [(x1, y1, x2, y2), ...] or [(xc, yc, h, w), ...]
         labels: list of strings or integers
-        format:
+        box_format:
             - `xyxy` for corner points of bbox
             - `xyhw` for x-center, y-center, height and width format of bbox
         """
-        if format.upper() not in (
+        if box_format.upper() not in (
             self.CENTER,
             self.CORNER,
         ):
@@ -31,7 +31,7 @@ class BoundingBoxes:
             labels
         ), f"len of boxes and labels not matching: {len(bboxes), len(labels)}"
 
-        self._format = format.upper()
+        self._format = box_format.upper()
         self.bboxes = self._list_to_bbox(bboxes, labels)
         self._state = {}
 
