@@ -48,4 +48,4 @@ all = [
 ]
 
 [tool.isort]
-profile = "google"
+profile = "black"

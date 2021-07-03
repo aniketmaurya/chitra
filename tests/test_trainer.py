@@ -2,16 +2,13 @@ from unittest.mock import MagicMock
 
 import numpy as np
 import pytest
-from tensorflow import keras
 import tensorflow as tf
+from tensorflow import keras
 
-from chitra.trainer import create_cnn
-from chitra.trainer import Dataset
-from chitra.trainer import InterpretModel
-from chitra.trainer import Trainer
+from chitra.trainer import Dataset, InterpretModel, Trainer, create_cnn
 
-dataset = Dataset('./')
-cnn = create_cnn('mobilenetv2', num_classes=1000, keras_applications=False)
+dataset = Dataset("./")
+cnn = create_cnn("mobilenetv2", num_classes=1000, keras_applications=False)
 trainer = Trainer(dataset, cnn)
 model_interpret = InterpretModel(True, trainer)
 image_tensor = tf.random.normal((24, 24, 1))
@@ -42,7 +39,7 @@ def test_warmup():
 
 def test_prewhiten():
     rescaled_img = trainer.prewhiten(image_tensor).numpy()
-    restored_img = ((rescaled_img + 1) * 127.5)
+    restored_img = (rescaled_img + 1) * 127.5
 
     assert np.allclose(restored_img, image_tensor.numpy(), 1e-3, 1e-3)
 

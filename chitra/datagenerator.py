@@ -1,18 +1,16 @@
-from functools import partial
-from glob import glob
 import os
 import pathlib
-from pathlib import Path
 import random
 import time
+from functools import partial
+from glob import glob
+from pathlib import Path
 from typing import Callable, Union
 
 import tensorflow as tf
-from typeguard import check_argument_types
-from typeguard import typechecked
+from typeguard import check_argument_types, typechecked
 
-from .tf_image import read_image
-from .tf_image import resize_image
+from .tf_image import read_image, resize_image
 
 
 def benchmark(dataset, num_epochs=2, fake_infer_time=0.001):
@@ -39,10 +37,11 @@ def get_label(filename):
 class ImageSizeList:
     def __init__(self, img_sz_list=None):
 
-        if isinstance(
-                img_sz_list,
-            (list, tuple)) and len(img_sz_list) != 0 and not isinstance(
-                img_sz_list[0], (list, tuple)):
+        if (
+            isinstance(img_sz_list, (list, tuple))
+            and len(img_sz_list) != 0
+            and not isinstance(img_sz_list[0], (list, tuple))
+        ):
             img_sz_list = [img_sz_list][:]
 
         self.start_size = None
@@ -99,11 +98,7 @@ class Pipeline:
 
 class Dataset:
     MAPPINGS = {
-        "PY_TO_TF": {
-            str: tf.string,
-            int: tf.int32,
-            float: tf.float32
-        },
+        "PY_TO_TF": {str: tf.string, int: tf.int32, float: tf.float32},
     }
 
     def __init__(
@@ -160,8 +155,10 @@ class Dataset:
         if isinstance(outputs, tuple):
             for ret_type in outputs:
                 return_types.append(
-                    ret_type.dtype if tf.is_tensor(ret_type) else Dataset.
-                    MAPPINGS["PY_TO_TF"][type(ret_type)])
+                    ret_type.dtype
+                    if tf.is_tensor(ret_type)
+                    else Dataset.MAPPINGS["PY_TO_TF"][type(ret_type)]
+                )
         else:
             raise UserWarning("Unable to capture return type!")
         return tuple(return_types)
@@ -192,8 +189,7 @@ class Dataset:
     def label_encoder(self, label):
         idx = self.label_to_idx.get(label, None)
         if idx is None:
-            raise AssertionError(
-                f"Error while converting label={label} to index!")
+            raise AssertionError(f"Error while converting label={label} to index!")
         return idx
 
     def generator(self, shuffle=False):
@@ -215,7 +211,6 @@ class Dataset:
         return_types = self._capture_return_types()
         self._reload()
         generator = partial(self.generator, shuffle=shuffle)
-        datagen = tf.data.Dataset.from_generator(generator, return_types,
-                                                 output_shape)
+        datagen = tf.data.Dataset.from_generator(generator, return_types, output_shape)
 
         return datagen

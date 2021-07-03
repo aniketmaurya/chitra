@@ -7,27 +7,31 @@ class BoundingBoxes:
     CENTER = "XXYY"
     CORNER = "XYXY"
 
-    def __init__(self,
-                 bboxes: Optional[List[list]] = None,
-                 labels: Optional[List[Union[int, str]]] = None,
-                 format: str = 'xyxy'):
+    def __init__(
+        self,
+        bboxes: Optional[List[list]] = None,
+        labels: Optional[List[Union[int, str]]] = None,
+        box_format: str = "xyxy",
+    ):
         """Args:
-            bboxes: list of bounding boxes [(x1, y1, x2, y2), ...] or [(xc, yc, h, w), ...]
-            labels: list of strings or integers
-            format:
-                - `xyxy` for corner points of bbox
-                - `xyhw` for x-center, y-center, height and width format of bbox
+        bboxes: list of bounding boxes [(x1, y1, x2, y2), ...] or [(xc, yc, h, w), ...]
+        labels: list of strings or integers
+        box_format:
+            - `xyxy` for corner points of bbox
+            - `xyhw` for x-center, y-center, height and width format of bbox
         """
-        assert format.upper() in (
+        if box_format.upper() not in (
             self.CENTER,
-            self.CORNER), "bbox format must be either xyxy or xyhw"
+            self.CORNER,
+        ):
+            raise AssertionError("bbox format must be either xyxy or xyhw")
         bboxes = self._listify(bboxes, 4)
         labels = self._listify(labels)
         assert len(bboxes) == len(
             labels
         ), f"len of boxes and labels not matching: {len(bboxes), len(labels)}"
 
-        self._format = format.upper()
+        self._format = box_format.upper()
         self.bboxes = self._list_to_bbox(bboxes, labels)
         self._state = {}
 
@@ -38,8 +42,7 @@ class BoundingBoxes:
         if not isinstance(item, (list, tuple)):
             return [item]
 
-        if isinstance(item,
-                      (list, tuple)) and self.num_dim(item) == dim_trigger:
+        if isinstance(item, (list, tuple)) and self.num_dim(item) == dim_trigger:
             item = [item]
         return item
 
@@ -67,11 +70,11 @@ class BoundingBoxes:
         return cx, cy, h, w
 
     def _list_to_bbox(
-            self,
-            bbox_list: Optional[List[List[Union[int, float]]]],
-            labels: List[Union[str, int]] = None) -> List[bbs.BoundingBox]:
-        """Converts bbox list into `imgaug BoundigBox` object
-        """
+        self,
+        bbox_list: Optional[List[List[Union[int, float]]]],
+        labels: List[Union[str, int]] = None,
+    ) -> List[bbs.BoundingBox]:
+        """Converts bbox list into `imgaug BoundigBox` object"""
         _format = self._format
 
         if not bbox_list:
@@ -94,6 +97,5 @@ class BoundingBoxes:
         return str(self.bboxes)
 
     def get_bounding_boxes_on_image(self, image_shape):
-        """returns `imgaug BoundingBoxesOnImage` object which can be used to boxes on the image
-        """
+        """returns `imgaug BoundingBoxesOnImage` object which can be used to boxes on the image"""
         return bbs.BoundingBoxesOnImage(self.bboxes, image_shape)

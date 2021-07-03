@@ -17,10 +17,10 @@ def remove_dsstore(path) -> None:
     """
     path = pathlib.Path(path)
 
-    for e in path.glob('*.DS_Store'):
+    for e in path.glob("*.DS_Store"):
         os.remove(e)
 
-    for e in path.glob('*/*.DS_Store'):
+    for e in path.glob("*/*.DS_Store"):
         os.remove(e)
 
 
@@ -33,7 +33,8 @@ def get_basename(path: tf.string) -> tf.string:
 def load_imagenet_labels() -> Tuple[str]:
     global IMAGENET_LABELS
     if IMAGENET_LABELS is None:
-        logger.debug('Downloading imagenet labels...')
-        IMAGENET_LABELS = requests.get(IMAGENET_LABEL_URL).content.decode(
-            'UTF-8').split('\n')[1:]
+        logger.debug("Downloading imagenet labels...")
+        IMAGENET_LABELS = (
+            requests.get(IMAGENET_LABEL_URL).content.decode("UTF-8").split("\n")[1:]
+        )
     return IMAGENET_LABELS

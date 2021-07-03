@@ -4,7 +4,7 @@ import tensorflow as tf
 from chitra.dataloader import Clf
 
 shape = (32, 32)
-class_names = ('a', 'b')
+class_names = ("a", "b")
 clf = Clf()
 clf.shape = shape
 clf.CLASS_NAMES = class_names
@@ -12,7 +12,7 @@ clf.CLASS_NAMES = class_names
 
 def test__encode_classes():
     clf._encode_classes()
-    assert clf.class_to_idx == {'a': 0, 'b': 1}
+    assert clf.class_to_idx == {"a": 0, "b": 1}
 
 
 def test__ensure_shape():
@@ -23,4 +23,4 @@ def test__ensure_shape():
 
 
 def test__get_image_list():
-    assert len(clf._get_image_list('.')) != 0
+    assert len(clf._get_image_list(".")) != 0
