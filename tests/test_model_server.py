@@ -9,5 +9,5 @@ def dummy_model(x):
 
 
 def test_create_app():
-    app = create_api(dummy_model, "IMAGE-CLASSIFICATION")
-    assert isinstance(app, FastAPI)
+    api = create_api(dummy_model, "IMAGE-CLASSIFICATION")
+    assert isinstance(api.app, FastAPI)

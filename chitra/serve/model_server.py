@@ -154,3 +154,4 @@ def create_api(
 
     if run:
         api.run()
+    return api
