@@ -1,37 +1,131 @@
+import itertools
 from functools import partial
-from io import BytesIO
-from typing import Callable, List, Optional, Tuple
+from typing import Callable, Optional
 
-import numpy as np
 import uvicorn
 from fastapi import FastAPI, File, UploadFile
-from PIL import Image
 
-from chitra.serve.schema import QnARequest, QnAResponse, Query, QueryResult
+from .data_processing import DataProcessor, DefaultProcessor
+from .schema import QnARequest, Query
 
 IMAGE_CLF = "IMAGE-CLASSIFICATION"
+OBJECT_DETECTION = "OBJECT-DETECTION"
 TXT_CLF = "TEXT-CLASSIFICATION"
 QNA = "QUESTION-ANS"
-API_TYPES = (IMAGE_CLF, TXT_CLF, QNA)
+
+API_TYPES = {"VISION": (IMAGE_CLF, OBJECT_DETECTION), "NLP": (TXT_CLF, QNA)}
 
 
-def _default_preprocess(
-    image_file, image_size: Tuple[int, int], rescale: bool
-) -> np.ndarray:
-    image = Image.open(BytesIO(image_file)).convert("RGB")
-    image = image.resize(image_size)
-    image = np.asarray(image).astype(np.float32)
-    if rescale:
-        image = image / 127.5 - 1.0
-    image = np.expand_dims(image, 0)
-    return image
+def get_available_api_types():
+    return list(itertools.chain.from_iterable(API_TYPES.values()))
 
 
-def _default_postprocess(data) -> List:
-    if not isinstance(data, (np.ndarray, list, tuple)):
-        data = data.numpy()
-    data = data.tolist()
-    return data
+class ModelServer:
+    def __init__(
+        self,
+        api_type: str,
+        model: Callable,
+        preprocess_fn=None,
+        postprocess_fn=None,
+        **kwargs,
+    ):
+        self.api_type = api_type.upper()
+        self.model = model
+        self.data_processor: Optional[DataProcessor] = self.set_data_processor(
+            preprocess_fn, postprocess_fn
+        )
+
+    def set_data_processor(self, preprocess_fn: Callable, postprocess_fn: Callable):
+        if (preprocess_fn or postprocess_fn) is None:
+            return None
+        data_processor = DataProcessor(preprocess_fn, postprocess_fn)
+        return data_processor
+
+    def set_default_processor(self) -> DataProcessor:
+        api_type = self.api_type
+        if api_type in API_TYPES.get("VISION"):
+            self.data_processor = DefaultProcessor.vision
+        elif api_type in API_TYPES.get("NLP"):
+            self.data_processor = DefaultProcessor.nlp
+        else:
+            raise UserWarning(
+                f"{api_type} is not implemented! Available types are - {get_available_api_types()}"
+            )
+        return self.data_processor
+
+
+class API(ModelServer):
+    def __init__(
+        self,
+        api_type: str,
+        model: Callable,
+        preprocess_fn: Callable = None,
+        postprocess_fn: Callable = None,
+        **kwargs,
+    ):
+        super(API, self).__init__(
+            api_type, model, preprocess_fn, postprocess_fn, **kwargs
+        )
+        docs_url = kwargs.get("docs_url", "/docs")
+        title = kwargs.get("title", "Chitra Model Server 🔥")
+        desc = kwargs.get(
+            "description",
+            '<a href="https://chitra.readthedocs.io/en/latest">Goto Chitra Docs</a> 🔗',
+        )
+        self.app = FastAPI(title=title, description=desc, docs_url=docs_url)
+        self.setup_api(**kwargs)
+
+    async def predict_image(self, file: UploadFile = File(...)):
+        preprocess_fn = self.data_processor.preprocess_fn
+        postprocess_fn = self.data_processor.postprocess_fn
+
+        x = preprocess_fn(await file.read())
+        x = self.model(x)
+        x = postprocess_fn(x)
+        return x
+
+    async def predict_text(self, data: Query):
+        data_processor = self.data_processor
+        x = data.query
+        if data_processor.preprocess_fn:
+            x = data_processor.preprocess(x)
+        x = self.model(x)
+        if data_processor.postprocess_fn:
+            x = data_processor.postprocess(x)
+        return x
+
+    async def predict_question_answer(self, data: QnARequest):
+        data_processor = self.data_processor
+        x = data.query, data.question
+        if data_processor.preprocess_fn:
+            x = data_processor.preprocess(x)
+        x = self.model(x)
+        if data_processor.postprocess_fn:
+            x = data_processor.postprocess(x)
+        return x
+
+    def setup_api(self, **kwargs):
+        if self.data_processor is None:
+            data_processor = self.set_default_processor()
+            data_processor.preprocess_fn = partial(
+                data_processor.preprocess_fn, **kwargs
+            )
+            data_processor.postprocess_fn = partial(
+                data_processor.postprocess_fn, **kwargs
+            )
+            self.data_processor = data_processor
+
+        if self.api_type == IMAGE_CLF:
+            self.app.post("/api/predict-image")(self.predict_image)
+
+        elif self.api_type == TXT_CLF:
+            self.app.post("/api/predict-text")(self.predict_text)
+
+        elif self.api_type == QNA:
+            self.app.post("/api/QnA")(self.predict_question_answer)
+
+    def run(self):
+        uvicorn.run(self.app)
 
 
 def create_api(
@@ -40,7 +134,7 @@ def create_api(
     preprocess: Optional[Callable] = None,
     postprocess: Optional[Callable] = None,
     run: bool = False,
-    **kwargs
+    **kwargs,
 ) -> FastAPI:
     """
     Create ASGI API with using FastAPI.
@@ -52,69 +146,10 @@ def create_api(
         run[bool]: Whether to the the API or not.
         **kwargs:
             image_size[tuple]: if the api type is image-classification then size of target image.
-
     Returns:
         FastAPI app
-
     """
-    api_type = api_type.upper()
-    docs_url = kwargs.get("docs_url", "/docs")
-    title = kwargs.get("title", "Chitra Model Server 🔥")
-    desc = kwargs.get(
-        "description",
-        '<a href="https://chitra.readthedocs.io/en/latest">Goto Chitra Docs</a> 🔗',
-    )
-    app = FastAPI(title=title, description=desc, docs_url=docs_url)
-
-    @app.get("/healthz")
-    def health():
-        return {"OK": True}
-
-    if api_type == IMAGE_CLF:
-
-        @app.post("/api/predict-image")
-        async def predict_image(file: UploadFile = File(...)):
-            preprocess_fn = preprocess
-            postprocess_fn = postprocess
-            if preprocess is None:
-                preprocess_fn = partial(
-                    _default_preprocess,
-                    image_size=kwargs.get("image_size", (224, 224)),
-                    rescale=kwargs.get("rescale", True),
-                )
-            if postprocess_fn is None:
-                postprocess_fn = _default_postprocess
-
-            x = preprocess_fn(await file.read())
-            x = model(x)
-            x = postprocess_fn(x)
-            return x
-
-        if api_type == TXT_CLF:
-
-            @app.post("/api/predict-text", response_model=QueryResult)
-            async def predict_text(data: Query):
-                x = data.query
-                if preprocess:
-                    x = preprocess(x)
-                x = model(x)
-                if postprocess:
-                    x = postprocess(x)
-                return x
-
-    if api_type == QNA:
-
-        @app.post("/api/QnA", response_model=QnAResponse)
-        async def predict_question_answer(data: QnARequest):
-            query = data.query
-            question = data.question
-            if preprocess:
-                x = preprocess(query, question)
-            x = model(x)
-            if postprocess:
-                x = postprocess(x)
-            return x
+    api = API(api_type, model, preprocess, postprocess, **kwargs)
 
     if run:
-        uvicorn.run(app)
-    return app
+        api.run()
