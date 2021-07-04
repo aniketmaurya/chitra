@@ -44,7 +44,7 @@ nav:
     - image: 'source/image/chitra-class.md'
     - Visualization: 'source/visualization/metrics.md'
     - Examples:
-        - Play with Images: 'examples/chitra-class/chitra-class.md'
+        - Play with Images: 'source/image/chitra-class.md'
         - Image Classification: 'examples/image-classification/image-classification.md'
         - Model Server: 'examples/model-server/model-server.md'
     - License: 'license.md'
