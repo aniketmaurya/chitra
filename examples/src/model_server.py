@@ -1,16 +1,8 @@
-# from chitra.serve import create_api
-
-# app = create_api(lambda x: x, run=True, api_type='question-ans')
-
-import numpy as np
-
-from chitra.serve.model_serverv2 import API
+from chitra.serve import create_api
 
 
 def model(x):
-    return np.asarray([1])
+    return x
 
 
-api = API(api_type="image-classification", model=model)
-
-api.run()
+app = create_api(model, run=True, api_type="question-ans")

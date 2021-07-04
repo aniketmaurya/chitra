@@ -26,8 +26,8 @@ clean:
 	rm -f .coverage
 
 style:
-	black chitra tests
-	isort chitra tests
+	black chitra tests examples
+	isort chitra tests examples
 
 dist: clean
 	flit build

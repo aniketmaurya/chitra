@@ -1,5 +1,5 @@
-import rich
 import numpy as np
+import rich
 
 from chitra.coordinates import BoundingBoxes
 
