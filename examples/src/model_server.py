@@ -1,3 +1,8 @@
 from chitra.serve import create_api
 
-app = create_api(lambda x: x, run=True, api_type='question-ans')
+
+def model(x):
+    return x
+
+
+app = create_api(model, run=True, api_type="question-ans")
