@@ -11,11 +11,11 @@ def default_preprocess(
 ) -> np.ndarray:
     image = Image.open(BytesIO(image_file)).convert("RGB")
 
-    if kwargs.get("image_size", None):
+    if kwargs.get("image_size"):
         image = image.resize(kwargs.get("image_size"))
 
     image = np.asarray(image).astype(np.float32)
-    if kwargs.get("rescale", None):
+    if kwargs.get("rescale"):
         image = image / 127.5 - 1.0
     image = np.expand_dims(image, 0)
     return image

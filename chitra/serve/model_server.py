@@ -35,7 +35,8 @@ class ModelServer:
             preprocess_fn, postprocess_fn
         )
 
-    def set_data_processor(self, preprocess_fn: Callable, postprocess_fn: Callable):
+    @staticmethod
+    def set_data_processor(preprocess_fn: Callable, postprocess_fn: Callable):
         if (preprocess_fn or postprocess_fn) is None:
             return None
         data_processor = DataProcessor(preprocess_fn, postprocess_fn)
