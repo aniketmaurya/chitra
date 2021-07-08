@@ -9,7 +9,7 @@ repos:
       - id: check-added-large-files
 
   - repo: https://github.com/psf/black
-    rev: stable
+    rev: 21.6b0
     hooks:
       - id: black
         name: "Black: The uncompromising Python code formatter"
@@ -33,6 +33,6 @@ repos:
         pass_filenames: false
 
   - repo: https://github.com/kynan/nbstripout
-    rev: 0.4.0
+    rev: 0.5.0
     hooks:
       - id: nbstripout
