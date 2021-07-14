@@ -8,17 +8,17 @@ author = "Aniket Maurya"
 author-email = "hello@aniketmaury.com"
 home-page = "https://github.com/aniketmaurya/chitra"
 classifiers = [
-    "License :: OSI Approved :: Apache Software License",
-    "Intended Audience :: Information Technology",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Software Development :: Libraries",
     "Topic :: Software Development",
+    "License :: OSI Approved :: Apache Software License",
+    "Intended Audience :: Information Technology",
+    "Operating System :: OS Independent",
     "Typing :: Typed",
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
@@ -27,6 +27,7 @@ requires = [
     "tensorflow >= 2.3",
     "tensorflow-addons>=0.13.0",
     "tf-keras-vis>=0.5.3",
+    "pytorch-lightning",
     "matplotlib",
     "pillow",
     "imgaug >=0.4.0",
@@ -40,10 +41,18 @@ requires-python = ">=3.7"
 Documentation = "https://chitra.readthedocs.io/en/latest"
 
 [tool.flit.metadata.requires-extra]
+serve = [
+    "fastapi", "uvicorn", "pydantic", "python-multipart"
+]
+tf = [
+    "tensorflow-serving-api"
+]
+converter = [
+    "onnx", "onnx2pytorch", "tf2onnx",
+]
 all = [
     "onnx", "onnx2pytorch", "tf2onnx",
     "fastapi", "uvicorn", "pydantic",
-    "tensorflow-serving-api",
     "torch",
 ]
 
