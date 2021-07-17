@@ -47,7 +47,7 @@ Or,
 ```
 git clone https://github.com/aniketmaurya/chitra.git
 cd chitra
-pip install -e .
+pip install .
 ```
 
 ## Usage
