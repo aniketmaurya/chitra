@@ -31,7 +31,6 @@ requires = [
     "matplotlib",
     "pillow",
     "imgaug >=0.4.0",
-    "requests >=2.24.0,<3.0.0",
     "scikit-learn",
 ]
 description-file = "README.md"

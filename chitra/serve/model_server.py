@@ -5,7 +5,7 @@ from typing import Callable, Optional
 import uvicorn
 from fastapi import FastAPI, File, UploadFile
 
-from chitra import __docs_url__
+from chitra.__about__ import __docs_url__
 from chitra.serve import schema
 from chitra.serve.data_processing import DataProcessor, DefaultProcessor
 

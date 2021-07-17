@@ -8,9 +8,9 @@ import numpy as np
 import requests
 from PIL import Image
 
-from .constants import _TF, _TORCH, CHITRA_URL_SEP, IMAGE_CACHE_DIR
-from .coordinates import BoundingBoxes
-from .utility.import_utils import INSTALLED_MODULES
+from chitra.constants import _TF, _TORCH, CHITRA_URL_SEP, IMAGE_CACHE_DIR
+from chitra.coordinates import BoundingBoxes
+from chitra.utility.import_utils import INSTALLED_MODULES
 
 tf = None
 torch = None
@@ -89,7 +89,7 @@ class Chitra:
             return data
 
         if isinstance(data, (tf.Tensor, torch.Tensor)):
-            data = data.numpy()
+            data = data.numpy().astype("uint8")
 
         if isinstance(data, str):
             if data.startswith("http"):
