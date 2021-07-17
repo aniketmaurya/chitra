@@ -10,15 +10,15 @@
 
 ## What is chitra?
 
-**chitra** (**चित्र**) is a Deep Learning Computer Vision library for easy data loading, data visualization, model building and model
-analysis with GradCAM/GradCAM++ and Framework agnostic Model Serving.
+**chitra** (**चित्र**) is a Deep Learning Computer Vision library for easy data loading, data visualization, model
+building and model analysis with GradCAM/GradCAM++ and Framework agnostic Model Serving.
 
 ### Highlights:
 
-- [New] Data Visualization, Bounding Box Visualization 🐶
 - [New] Framework Agnostic Model Serving ✨🌟
+- [New] Data Visualization, Bounding Box Visualization 🐶🎨
 - Faster data loading without any boilerplate 🤺
-- Progressive resizing of images
+- Progressive resizing of images 🎨
 - Rapid experiments with different models using `chitra.trainer` module 🚀
 - Model interpretation using GradCAM/GradCAM++ with no extra code 🔥
 
@@ -39,15 +39,15 @@ analysis with GradCAM/GradCAM++ and Framework agnostic Model Serving.
 ### From source
 
 ```
+pip install git+https://github.com/aniketmaurya/chitra@master
+```
+
+Or,
+
+```
 git clone https://github.com/aniketmaurya/chitra.git
 cd chitra
-pip install -e .
-```
-
-### From GitHub
-
-```
-pip install git+https://github.com/aniketmaurya/chitra@master
+pip install .
 ```
 
 ## Usage
@@ -316,11 +316,13 @@ plt.imshow(image.draw_boxes())
 
 ![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/preview-bounding-box.png)
 
-See [Play with Images](https://chitra.readthedocs.io/en/latest/examples/chitra-class/chitra-class.html) for detailed example!
+See [Play with Images](https://chitra.readthedocs.io/en/latest/examples/chitra-class/chitra-class.html) for detailed
+example!
 
 ## Model Serving (Framework Agnostic)
 
 Chitra can create API for Any Learning Model - ML, DL, Image Classification, NLP, Tensorflow or PyTorch.
+
 ```python
 from chitra.serve import create_api
 from chitra.trainer import create_cnn
@@ -328,14 +330,15 @@ from chitra.trainer import create_cnn
 model = create_cnn('mobilenetv2', num_classes=2)
 create_api(model, run=True, api_type='image-classification')
 ```
+
 <details><summary>API Docs Preview</summary>
 
 ![Preview Model Server](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/examples/model-server/preview.png)
 
 </details>
 
-See [Example Section](https://chitra.readthedocs.io/en/latest/examples/model-server/model-server.html) for detailed explanation!
-
+See [Example Section](https://chitra.readthedocs.io/en/latest/examples/model-server/model-server.html) for detailed
+explanation!
 
 ## Utils
 
@@ -356,7 +359,7 @@ gpu_dynamic_mem_growth()
 
     No GPU found on the machine!
 
-## Contributing
+## Contribute
 
 Contributions of any kind are welcome. Please check the [**Contributing
 Guidelines**](https://github.com/aniketmaurya/chitra/blob/master/CONTRIBUTING.md) before contributing.
@@ -367,3 +370,8 @@ We pledge to act and interact in ways that contribute to an open, welcoming, div
 
 Read full [**Contributor Covenant Code of
 Conduct**](https://github.com/aniketmaurya/chitra/blob/master/CODE_OF_CONDUCT.md)
+
+## Acknowledgement
+
+CHITRA is built with help of awesome libraries like [Tensorflow 2.x](https://github.com/tensorflow/tensorflow),
+[imgaug](https://github.com/aleju/imgaug) and [FastAPI](https://github.com/tiangolo/fastapi).
