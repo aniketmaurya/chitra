@@ -41,10 +41,10 @@ extra:
 
 nav:
     - Introduction: 'index.md'
-    - image: 'source/image/chitra-class.md'
-    - Visualization: 'source/visualization/metrics.md'
+    - image: 'source/api/image/chitra-class.md'
+    - Serve: 'source/api/serve/model_server.md'
+    - Visualization: 'source/api/visualization/metrics.md'
     - Examples:
-        - Play with Images: 'source/image/chitra-class.md'
         - Image Classification: 'examples/image-classification/image-classification.md'
         - Model Server: 'examples/model-server/model-server.md'
     - License: 'license.md'

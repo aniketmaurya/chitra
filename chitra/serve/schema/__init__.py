@@ -1,1 +1,1 @@
-from .text_models import QnARequest, QnAResponse, Query, QueryResult
+from chitra.serve.schema.text_models import QnARequest, QnAResponse, Query, QueryResult

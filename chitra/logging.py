@@ -1,6 +1,6 @@
-from chitra.utility.import_utils import is_installed
+from chitra.utility.import_utils import _LOGURU_INSTALLED
 
-if is_installed("loguru"):
+if _LOGURU_INSTALLED:
     from loguru import logger
 
     logger.debug("Using loguru for logging!")

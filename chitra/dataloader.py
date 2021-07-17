@@ -116,7 +116,7 @@ class Clf:
         self._lookup_class_to_idx = tf.lookup.StaticHashTable(table_init, -1)
 
     def _get_classnames(self, list_folders, encode_classes: bool = True):
-        """"""
+        """ """
         self.CLASS_NAMES = tuple(get_basename(e).numpy().decode() for e in list_folders)
         if encode_classes:
             self._encode_classes()
