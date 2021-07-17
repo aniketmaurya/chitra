@@ -1,5 +1,5 @@
 from io import BytesIO
-from typing import List, Optional, Tuple
+from typing import List
 
 import numpy as np
 from PIL import Image

@@ -5,8 +5,9 @@ from typing import Callable, Optional
 import uvicorn
 from fastapi import FastAPI, File, UploadFile
 
-from .data_processing import DataProcessor, DefaultProcessor
-from .schema import QnARequest, Query
+from chitra import __docs_url__
+from chitra.serve import schema
+from chitra.serve.data_processing import DataProcessor, DefaultProcessor
 
 IMAGE_CLF = "IMAGE-CLASSIFICATION"
 OBJECT_DETECTION = "OBJECT-DETECTION"
@@ -54,6 +55,10 @@ class ModelServer:
             )
         return self.data_processor
 
+    @staticmethod
+    def get_available_api_types():
+        return get_available_api_types()
+
 
 class API(ModelServer):
     def __init__(
@@ -71,9 +76,9 @@ class API(ModelServer):
         title = kwargs.get("title", "Chitra Model Server 🔥")
         desc = kwargs.get(
             "description",
-            '<a href="https://chitra.readthedocs.io/en/latest">Goto Chitra Docs</a> 🔗',
+            f"<a href={__docs_url__}>Goto Chitra Docs</a> 🔗",
         )
-        self.app = FastAPI(title=title, description=desc, docs_url=docs_url)
+        self.app: FastAPI = FastAPI(title=title, description=desc, docs_url=docs_url)
         self.setup_api(**kwargs)
 
     async def predict_image(self, file: UploadFile = File(...)):
@@ -85,7 +90,7 @@ class API(ModelServer):
         x = postprocess_fn(x)
         return x
 
-    async def predict_text(self, data: Query):
+    async def predict_text(self, data: schema.Query):
         data_processor = self.data_processor
         x = data.query
         if data_processor.preprocess_fn:
@@ -95,7 +100,7 @@ class API(ModelServer):
             x = data_processor.postprocess(x)
         return x
 
-    async def predict_question_answer(self, data: QnARequest):
+    async def predict_question_answer(self, data: schema.QnARequest):
         data_processor = self.data_processor
         x = data.query, data.question
         if data_processor.preprocess_fn:
@@ -136,19 +141,19 @@ def create_api(
     postprocess: Optional[Callable] = None,
     run: bool = False,
     **kwargs,
-) -> FastAPI:
+) -> API:
     """
-    Create ASGI API with using FastAPI.
+    Launch FastAPI app
     Args:
-        model[Callable]: any callable model -> pred = model(x)
-        api_type[str]: Type of API to be created -> {"IMAGE-CLASSIFICATION", "TEXT-CLASSIFICATION", "QUESTION-ANS"}
-        preprocess[Callable]: Preprocessing function for your data. (Default fn will be applied if None.)
-        postprocess[Callable]: Postprocessing function for your data. (Default fn will be applied if None.)
-        run[bool]: Whether to the the API or not.
+        model: Any ML/DL model
+        api_type: Type of the API task, see `chitra.serve.get_available_api_types()`
+        preprocess: Override default preprocessing function
+        postprocess: Override default postprocessing function
+        run: Set True to run the app
         **kwargs:
-            image_size[tuple]: if the api type is image-classification then size of target image.
+
     Returns:
-        FastAPI app
+        Object of `chitra.serve.API` class
     """
     api = API(api_type, model, preprocess, postprocess, **kwargs)
 
