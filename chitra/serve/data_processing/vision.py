@@ -1,29 +1,43 @@
 from io import BytesIO
-from typing import List
+from typing import List, Optional, Tuple
 
 import numpy as np
 from PIL import Image
 
+from chitra.image import Chitra
+
 
 def default_preprocess(
-    image_file,
+    data,
+    image_shape: Optional[Tuple[int, int]] = None,
+    rescale: bool = True,
+    expand_dims: bool = True,
     **kwargs,
 ) -> np.ndarray:
-    image = Image.open(BytesIO(image_file)).convert("RGB")
+    if isinstance(data, str):
+        image = Image.open(BytesIO(data)).convert("RGB")
+    elif isinstance(data, np.ndarray):
+        image = Chitra(data).image
+    else:
+        raise UserWarning(f"preprocessing not implemented for this data type -> {data}")
 
-    if kwargs.get("image_shape"):
-        image = image.resize(kwargs.get("image_shape"))
+    if image_shape:
+        image = image.resize(image_shape)
 
     image = np.asarray(image).astype(np.float32)
-    if kwargs.get("rescale"):
+    if rescale:
         image = image / 127.5 - 1.0
-    image = np.expand_dims(image, 0)
+    if expand_dims:
+        image = np.expand_dims(image, 0)
     return image
 
 
-def default_postprocess(data) -> List:
+def default_postprocess(data, return_type: Optional[str] = "list") -> List:
     if not isinstance(data, (np.ndarray, list, tuple, int, float)):
         data = data.numpy()
-    if isinstance(data, np.ndarray):
-        data = data.tolist()
+    if return_type == "list":
+        if isinstance(data, np.ndarray):
+            data = data.tolist()
+        else:
+            list(data)
     return data

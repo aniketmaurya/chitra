@@ -1,5 +1,5 @@
 from functools import partial
-from typing import Callable
+from typing import Callable, List, Optional, Union
 
 import gradio as gr
 import numpy as np
@@ -13,26 +13,51 @@ class GradioApp(ModelServer):
         self,
         api_type: str,
         model: Callable,
+        input_types: Optional[Union[List, str]] = None,
+        output_types: Optional[Union[List, str]] = None,
         preprocess_fn: Callable = None,
         postprocess_fn: Callable = None,
+        preprocess_conf: Optional[dict] = None,
+        postprocess_conf: Optional[dict] = None,
         **kwargs,
     ):
         super(GradioApp, self).__init__(
             api_type, model, preprocess_fn, postprocess_fn, **kwargs
         )
+        if not preprocess_conf:
+            preprocess_conf = {}
+        if not postprocess_conf:
+            postprocess_conf = {}
+        self.input_types = input_types
+        self.output_types = output_types
         self.api_type_func = {}
-        self.setup(**kwargs)
+        self.setup(preprocess_conf, postprocess_conf, **kwargs)
 
-    def setup(self, **kwargs):
+    def setup(
+        self,
+        preprocess_conf,
+        postprocess_conf,
+        **kwargs,
+    ):
+        assert self.data_processor.preprocess_fn is not None, "Preprocess func is None"
+        assert (
+            self.data_processor.postprocess_fn is not None
+        ), "Postprocess func is None"
+
         self.api_type_func[const.IMAGE_CLF] = self.image_classification
-        self.input_type = self.get_input_type(**kwargs)
-        if self.data_processor is None:
-            self.data_processor = self.set_default_processor()
-            self.data_processor.preprocess_fn = partial(
-                self.data_processor.preprocess_fn,
-                image_shape=kwargs.get("image_shape"),
-                rescale=kwargs.get("rescale"),
-            )
+
+        if not self.input_types:
+            self.input_types = self.get_input_type(**kwargs)
+
+        if not self.output_types:
+            self.output_types = "json"
+
+        self.data_processor.preprocess_fn = partial(
+            self.data_processor.preprocess_fn, **preprocess_conf
+        )
+        self.data_processor.postprocess_fn = partial(
+            self.data_processor.postprocess_fn, **postprocess_conf
+        )
 
     def get_input_type(self, **kwargs):
         label = kwargs.get("label", None)
@@ -58,11 +83,6 @@ class GradioApp(ModelServer):
     def run(self):
         gr.Interface(
             fn=self.api_type_func[self.api_type],
-            inputs=self.input_type,
-            outputs="label",
+            inputs=self.input_types,
+            outputs=self.output_types,
         ).launch()
-
-
-if __name__ == "__main__":
-    app = GradioApp("image-classification", lambda x: 1)
-    app.run()

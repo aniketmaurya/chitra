@@ -26,12 +26,13 @@ class ModelServer:
             preprocess_fn, postprocess_fn
         )
 
-    @staticmethod
-    def set_data_processor(preprocess_fn: Callable, postprocess_fn: Callable):
-        if (preprocess_fn or postprocess_fn) is None:
-            return None
-        data_processor = DataProcessor(preprocess_fn, postprocess_fn)
-        return data_processor
+    def set_data_processor(self, preprocess_fn: Callable, postprocess_fn: Callable):
+        data_preprocessor = self.set_default_processor()
+        if preprocess_fn:
+            data_preprocessor.preprocess_fn = preprocess_fn
+        if postprocess_fn:
+            data_preprocessor.postprocess_fn = postprocess_fn
+        return data_preprocessor
 
     def set_default_processor(self) -> DataProcessor:
         api_type = self.api_type
