@@ -1,1 +1,1 @@
-__docs_url__ = "https://chitra.readthedocs.io/en/latest"
+documentation_url = "https://chitra.readthedocs.io/en/latest"

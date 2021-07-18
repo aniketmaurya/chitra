@@ -4,7 +4,7 @@ from typing import Callable, Optional
 import uvicorn
 from fastapi import FastAPI, File, UploadFile
 
-from chitra.__about__ import __docs_url__
+from chitra.__about__ import documentation_url
 from chitra.serve import schema
 from chitra.serve.constants import IMAGE_CLF, OBJECT_DETECTION, QNA, TXT_CLF
 from chitra.serve.model_server import ModelServer
@@ -36,7 +36,7 @@ class API(ModelServer):
         title = kwargs.get("title", "Chitra Model Server 🔥")
         desc = kwargs.get(
             "description",
-            f"<a href={__docs_url__}>Goto Chitra Docs</a> 🔗",
+            f"<a href={documentation_url}>Goto Chitra Docs</a> 🔗",
         )
         self.app: FastAPI = FastAPI(title=title, description=desc, docs_url=docs_url)
         self.setup(**kwargs)
@@ -71,15 +71,13 @@ class API(ModelServer):
         return x
 
     def setup(self, **kwargs):
-        if self.data_processor is None:
-            data_processor = self.set_default_processor()
-            data_processor.preprocess_fn = partial(
-                data_processor.preprocess_fn, **kwargs
-            )
-            data_processor.postprocess_fn = partial(
-                data_processor.postprocess_fn, **kwargs
-            )
-            self.data_processor = data_processor
+        data_processor = self.data_processor
+        self.data_processor.preprocess_fn = partial(
+            data_processor.preprocess_fn, **kwargs
+        )
+        self.data_processor.postprocess_fn = partial(
+            data_processor.postprocess_fn, **kwargs
+        )
 
         if self.api_type in (IMAGE_CLF, OBJECT_DETECTION):
             self.app.post("/api/predict-image")(self.predict_image)
