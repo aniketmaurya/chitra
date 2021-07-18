@@ -19,6 +19,16 @@ class API(ModelServer):
         postprocess_fn: Callable = None,
         **kwargs,
     ):
+        """
+        Creates FastAPI app for `api_type`
+        Args:
+            api_type: Type of the API. See `API.available_api_types()`
+            model: Any ML/DL model
+            preprocess_fn: Override Data Preprocessing Function, data will be processed with this function
+            before calling model.
+            postprocess_fn: Override Data Postprocessing Function, model output will be passed into this function.
+            **kwargs:
+        """
         super(API, self).__init__(
             api_type, model, preprocess_fn, postprocess_fn, **kwargs
         )
@@ -29,7 +39,7 @@ class API(ModelServer):
             f"<a href={__docs_url__}>Goto Chitra Docs</a> 🔗",
         )
         self.app: FastAPI = FastAPI(title=title, description=desc, docs_url=docs_url)
-        self.setup_api(**kwargs)
+        self.setup(**kwargs)
 
     async def predict_image(self, file: UploadFile = File(...)):
         preprocess_fn = self.data_processor.preprocess_fn
@@ -60,7 +70,7 @@ class API(ModelServer):
             x = data_processor.postprocess(x)
         return x
 
-    def setup_api(self, **kwargs):
+    def setup(self, **kwargs):
         if self.data_processor is None:
             data_processor = self.set_default_processor()
             data_processor.preprocess_fn = partial(
