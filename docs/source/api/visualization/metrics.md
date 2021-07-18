@@ -1,3 +1,8 @@
+---
+title: Visualizing Metrics
+description: Plot confusion matrix
+---
+
 # Visualizing Metrics
 
 ## Plot Confusion Matrix
