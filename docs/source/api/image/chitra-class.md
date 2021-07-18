@@ -1,4 +1,9 @@
-# Play with Images
+---
+title: Play with Images
+description: "Load image from URL or plot bounding boxes on the images easily"
+---
+
+# Play with Images and Bounding Boxes
 
 > `Chitra` is an image utility class that can load image from filelike object, web url or numpy image. It offers drawing bounding box over the image.
 
@@ -18,6 +23,7 @@ import matplotlib.pyplot as plt
        - **Center(xywh):** center x,y and height width of bbox
        - **Corner(xyxy):** xmin ymin and xmax ymax
 - Plot bounding box on image
+- Resize Bounding Boxes with image resize
 
 
 ### Load image from web url and show
