@@ -1,12 +1,8 @@
 import itertools
 from typing import Callable, Optional
 
+from chitra.serve.constants import IMAGE_CLF, OBJECT_DETECTION, QNA, TXT_CLF
 from chitra.serve.data_processing import DataProcessor, DefaultProcessor
-
-IMAGE_CLF = "IMAGE-CLASSIFICATION"
-OBJECT_DETECTION = "OBJECT-DETECTION"
-TXT_CLF = "TEXT-CLASSIFICATION"
-QNA = "QUESTION-ANS"
 
 API_TYPES = {"VISION": (IMAGE_CLF, OBJECT_DETECTION), "NLP": (TXT_CLF, QNA)}
 

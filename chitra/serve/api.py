@@ -6,6 +6,7 @@ from fastapi import FastAPI, File, UploadFile
 
 from chitra.__about__ import __docs_url__
 from chitra.serve import schema
+from chitra.serve.constants import IMAGE_CLF, OBJECT_DETECTION, QNA, TXT_CLF
 from chitra.serve.model_server import ModelServer
 
 
@@ -70,7 +71,7 @@ class API(ModelServer):
             )
             self.data_processor = data_processor
 
-        if self.api_type == IMAGE_CLF:
+        if self.api_type in (IMAGE_CLF, OBJECT_DETECTION):
             self.app.post("/api/predict-image")(self.predict_image)
 
         elif self.api_type == TXT_CLF:
