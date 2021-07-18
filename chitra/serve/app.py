@@ -64,10 +64,11 @@ class GradioApp(ModelServer):
         if self.api_type in (const.IMAGE_CLF, const.OBJECT_DETECTION):
             return gr.inputs.Image(shape=kwargs.get("image_shape", None), label=label)
 
-        elif self.api_type == const.TXT_CLF:
+        if self.api_type == const.TXT_CLF:
             return gr.inputs.Textbox(
                 lines=2, placeholder=kwargs.get("text_placeholder", None), label=label
             )
+        raise NotImplementedError(f"{self.api_type} API Type is not implemented yet!")
 
     def image_classification(self, x: np.ndarray):
         preprocess_fn = self.data_processor.preprocess_fn
