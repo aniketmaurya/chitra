@@ -1,5 +1,5 @@
 site_name: chitra
-site_description: Computer Vision Utility library
+site_description: "Chitra is a Deep Learning library for easy data loading, data visualization, model building and model analysis with GradCAM/GradCAM++ and Framework agnostic Model Serving."
 repo_url: https://github.com/aniketmaurya/chitra/
 repo_name: aniketmaurya/chitra
 
