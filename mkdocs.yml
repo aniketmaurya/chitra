@@ -5,6 +5,7 @@ repo_name: aniketmaurya/chitra
 
 theme:
   name: material
+  custom_dir: docs/overrides
   palette:
     - scheme: default
       toggle:
@@ -26,6 +27,9 @@ theme:
   search_index_only: true
 
 markdown_extensions:
+  - meta
+  - pymdownx.highlight
+  - pymdownx.superfences
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
@@ -40,11 +44,11 @@ extra:
     base_url: https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images
 
 nav:
-    - Introduction: 'index.md'
-    - image: 'source/api/image/chitra-class.md'
-    - Serve: 'source/api/serve/model_server.md'
-    - Visualization: 'source/api/visualization/metrics.md'
-    - Examples:
-        - Image Classification: 'examples/image-classification/image-classification.md'
-        - Model Server: 'examples/model-server/model-server.md'
-    - License: 'license.md'
+  - Introduction: 'index.md'
+  - image: 'source/api/image/chitra-class.md'
+  - Serve: 'source/api/serve/model_server.md'
+  - Visualization: 'source/api/visualization/metrics.md'
+  - Examples:
+      - Image Classification: 'examples/image-classification/image-classification.md'
+      - Model Server: 'examples/model-server/model-server.md'
+  - License: 'license.md'
