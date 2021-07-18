@@ -51,4 +51,3 @@ nav:
   - Examples:
       - Image Classification: 'examples/image-classification/image-classification.md'
       - Model Server: 'examples/model-server/model-server.md'
-  - License: 'license.md'
