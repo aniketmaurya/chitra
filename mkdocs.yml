@@ -45,7 +45,7 @@ extra:
 
 nav:
   - Introduction: 'index.md'
-  - image: 'source/api/image/chitra-class.md'
+  - Image & Bounding Boxes: 'source/api/image/chitra-class.md'
   - Serve: 'source/api/serve/model_server.md'
   - Visualization: 'source/api/visualization/metrics.md'
   - Examples:
