@@ -28,10 +28,6 @@ def test_image_classification():
     def dummy_clf(x):
         return np.random.randn(1)
 
-    # def preprocess_fn(x, **kwargs):
-    #     print(kwargs)
-    #     return x
-
     def postprocess_fn(x, thresh: float):
         return (x > thresh)[0]
 
@@ -49,7 +45,5 @@ def test_image_classification():
     )
 
     print(app.data_processor.preprocess_fn)
-    # lines = inspect.getsource(app.data_processor.preprocess_fn)
-    # print(lines)
 
     assert app.image_classification(dummy_image) in (0, 1)
