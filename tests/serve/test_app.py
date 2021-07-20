@@ -35,19 +35,21 @@ def test_image_classification():
     def postprocess_fn(x, thresh: float):
         return (x > thresh)[0]
 
-    preprocess_conf = {"rescale": True, "expand_dims": True}
-    postprocess_conf = {"thresh": 0.5}
-
     dummy_image = np.random.randn(224, 224, 3)
+    preprocess_conf = {"rescale": True, "expand_dims": True, "image_shape": dummy_image.shape[:2]}
+    postprocess_conf = {"thresh": 0.5}
 
     app = GradioApp(
         const.IMAGE_CLF,
         model=dummy_clf,
-        image_shape=dummy_image.shape[:2],
         preprocess_fn=None,
         preprocess_conf=preprocess_conf,
         postprocess_fn=postprocess_fn,
         postprocess_conf=postprocess_conf,
     )
+
+    print(app.data_processor.preprocess_fn)
+    # lines = inspect.getsource(app.data_processor.preprocess_fn)
+    # print(lines)
 
     assert app.image_classification(dummy_image) in (0, 1)

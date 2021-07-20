@@ -1,4 +1,3 @@
-from functools import partial
 from typing import Callable, List, Optional, Union
 
 import gradio as gr
@@ -9,6 +8,8 @@ from chitra.serve.model_server import ModelServer
 
 
 class GradioApp(ModelServer):
+    API_TYPES = {"VISION": (const.IMAGE_CLF, const.OBJECT_DETECTION)}
+
     def __init__(
         self,
         api_type: str,
@@ -31,12 +32,12 @@ class GradioApp(ModelServer):
         self.input_types = input_types
         self.output_types = output_types
         self.api_type_func = {}
-        self.setup(preprocess_conf, postprocess_conf, **kwargs)
+        self.preprocess_conf = preprocess_conf
+        self.postprocess_conf = postprocess_conf
+        self.setup(**kwargs)
 
     def setup(
         self,
-        preprocess_conf,
-        postprocess_conf,
         **kwargs,
     ):
         assert self.data_processor.preprocess_fn is not None, "Preprocess func is None"
@@ -51,13 +52,6 @@ class GradioApp(ModelServer):
 
         if not self.output_types:
             self.output_types = "json"
-
-        self.data_processor.preprocess_fn = partial(
-            self.data_processor.preprocess_fn, **preprocess_conf
-        )
-        self.data_processor.postprocess_fn = partial(
-            self.data_processor.postprocess_fn, **postprocess_conf
-        )
 
     def get_input_type(self, **kwargs):
         label = kwargs.get("label", None)
@@ -75,10 +69,10 @@ class GradioApp(ModelServer):
         postprocess_fn = self.data_processor.postprocess_fn
 
         if preprocess_fn:
-            x = preprocess_fn(x)
+            x = preprocess_fn(x, **self.preprocess_conf)
         x = self.model(x)
         if postprocess_fn:
-            x = postprocess_fn(x)
+            x = postprocess_fn(x, **self.postprocess_conf)
         return x
 
     def run(self):
