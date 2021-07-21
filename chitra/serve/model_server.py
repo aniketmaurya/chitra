@@ -2,7 +2,11 @@ import itertools
 from typing import Callable, List, Optional
 
 from chitra.serve import constants as const
-from chitra.serve.data_processing import DataProcessor, DefaultProcessor
+from chitra.serve.data_processing import (
+    DataProcessor,
+    DefaultTextProcessor,
+    DefaultVisionProcessor,
+)
 
 
 class ModelServer:
@@ -42,9 +46,9 @@ class ModelServer:
     def set_default_processor(self) -> DataProcessor:
         api_type = self.api_type
         if api_type in ModelServer.API_TYPES.get("VISION"):
-            self.data_processor = DefaultProcessor.vision
+            self.data_processor = DefaultVisionProcessor.vision
         elif api_type in ModelServer.API_TYPES.get("NLP"):
-            self.data_processor = DefaultProcessor.nlp
+            self.data_processor = DefaultTextProcessor.nlp
         else:
             raise UserWarning(
                 f"{api_type} is not implemented! Available types are -\

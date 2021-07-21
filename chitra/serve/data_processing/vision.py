@@ -5,6 +5,7 @@ import numpy as np
 from PIL import Image
 
 from chitra.image import Chitra
+from chitra.serve.data_processing import DataProcessor
 
 
 def default_preprocess(
@@ -41,3 +42,11 @@ def default_postprocess(data, return_type: Optional[str] = "list") -> List:
         else:
             list(data)
     return data
+
+
+class DefaultVisionProcessor:
+    vision = DataProcessor(default_preprocess, default_postprocess)
+
+
+class DefaultTextProcessor:
+    nlp = DataProcessor(lambda x: x, lambda x: x)
