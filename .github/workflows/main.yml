@@ -62,7 +62,7 @@ jobs:
         shell: bash
 
       - name: SonarCloud Scan
-        if: [ runner.os != 'macOS' ] & [ -z "$secrets.SONAR_TOKEN" ]
+        if: runner.os != 'macOS' &&  env.SONAR_TOKEN != null
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
