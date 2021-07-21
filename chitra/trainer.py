@@ -161,6 +161,9 @@ class Trainer(Model):
         self.gradcam = None
         self.model = model
         self.cyclic_opt_set = False
+        self.max_lr, self.min_lr = None, None
+        self.batch_size = None
+        self.step_size = None
 
     def build(self):
         raise NotImplementedError(
@@ -233,7 +236,9 @@ class Trainer(Model):
             batch_size (int): batch size
             lr_range (tuple): learning rate will cycle from lr_min to lr_max
             optimizer (callable): Keras callable optimizer
-            momentum(int): momentum for the optimizer
+            momentum(float): momentum for the optimizer
+            validation_data: Data on which to evaluate
+            callbacks: List of `tf.keras.callbacks` instances.
         kwargs:
             step_size (int): step size for the Cyclic learning rate. By default it is `2 * len(self.ds)//batch_size`
             scale_mode (str): cycle or exp
@@ -388,7 +393,7 @@ class Learner:
         train_data,
         epochs,
         val_data=None,
-        test_data=None,
+        # test_data=None, learner.evaluate function for test data can be made
         callbacks=None,
         **kwargs,
     ):
