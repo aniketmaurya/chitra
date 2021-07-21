@@ -1,7 +1,7 @@
 import numpy as np
 from fastapi import FastAPI
 
-from chitra.serve import create_api, API
+from chitra.serve import API, create_api
 
 
 def dummy_model(x):

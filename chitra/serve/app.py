@@ -40,9 +40,9 @@ class GradioApp(ModelServer):
         self,
         **kwargs,
     ):
-        assert self.data_processor.preprocess_fn is not None, "Preprocess func is None"
+        assert self.data_processor._preprocess_fn is not None, "Preprocess func is None"
         assert (
-            self.data_processor.postprocess_fn is not None
+            self.data_processor._postprocess_fn is not None
         ), "Postprocess func is None"
 
         self.api_type_func[const.IMAGE_CLF] = self.image_classification
@@ -65,8 +65,8 @@ class GradioApp(ModelServer):
         raise NotImplementedError(f"{self.api_type} API Type is not implemented yet!")
 
     def image_classification(self, x: np.ndarray):
-        preprocess_fn = self.data_processor.preprocess_fn
-        postprocess_fn = self.data_processor.postprocess_fn
+        preprocess_fn = self.data_processor._preprocess_fn
+        postprocess_fn = self.data_processor._postprocess_fn
 
         if preprocess_fn:
             x = preprocess_fn(x, **self.preprocess_conf)

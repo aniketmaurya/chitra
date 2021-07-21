@@ -1,12 +1,15 @@
 import itertools
-from typing import Callable, Optional
+from typing import Callable, List, Optional
 
-from chitra.serve.constants import IMAGE_CLF, OBJECT_DETECTION, QNA, TXT_CLF
+from chitra.serve import constants as const
 from chitra.serve.data_processing import DataProcessor, DefaultProcessor
 
 
 class ModelServer:
-    API_TYPES = {"VISION": (IMAGE_CLF, OBJECT_DETECTION), "NLP": (TXT_CLF, QNA)}
+    API_TYPES = {
+        "VISION": (const.IMAGE_CLF, const.OBJECT_DETECTION),
+        "NLP": (const.TXT_CLF, const.QNA),
+    }
 
     def __init__(
         self,
@@ -23,7 +26,7 @@ class ModelServer:
         )
 
     @classmethod
-    def get_available_api_types(cls):
+    def get_available_api_types(cls) -> List[str]:
         return list(itertools.chain.from_iterable(cls.API_TYPES.values()))
 
     def set_data_processor(
@@ -31,9 +34,9 @@ class ModelServer:
     ) -> DataProcessor:
         data_preprocessor = self.set_default_processor()
         if preprocess_fn:
-            data_preprocessor.preprocess_fn = preprocess_fn
+            data_preprocessor._preprocess_fn = preprocess_fn
         if postprocess_fn:
-            data_preprocessor.postprocess_fn = postprocess_fn
+            data_preprocessor._postprocess_fn = postprocess_fn
         return data_preprocessor
 
     def set_default_processor(self) -> DataProcessor:

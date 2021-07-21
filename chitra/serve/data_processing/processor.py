@@ -1,8 +1,7 @@
 from typing import Callable, Optional
 
 from chitra.logging import logger
-
-from . import vision
+from chitra.serve.data_processing import vision
 
 
 class DataProcessor:
@@ -11,18 +10,18 @@ class DataProcessor:
         preprocess_fn: Optional[Callable] = None,
         postprocess_fn: Optional[Callable] = None,
     ):
-        self.preprocess_fn = preprocess_fn
-        self.postprocess_fn = postprocess_fn
+        self._preprocess_fn = preprocess_fn
+        self._postprocess_fn = postprocess_fn
 
     def preprocess(self, x):
-        if self.preprocess_fn is None:
-            logger.warning("preprocess method is not defined")
-        return self.preprocess_fn(x)
+        if self._preprocess_fn is None:
+            raise UserWarning("preprocess method is not defined")
+        return self._preprocess_fn(x)
 
     def postprocess(self, x):
-        if self.postprocess_fn is None:
-            logger.warning("postprocess method not defined")
-        return self.postprocess_fn(x)
+        if self._postprocess_fn is None:
+            raise UserWarning("postprocess method not defined")
+        return self._postprocess_fn(x)
 
 
 class DefaultProcessor:
