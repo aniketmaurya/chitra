@@ -3,6 +3,7 @@ from typing import Callable, List, Optional, Union
 import gradio as gr
 import numpy as np
 
+from chitra.__about__ import documentation_url
 from chitra.serve import constants as const
 from chitra.serve.model_server import ModelServer
 
@@ -29,6 +30,12 @@ class GradioApp(ModelServer):
             preprocess_conf = {}
         if not postprocess_conf:
             postprocess_conf = {}
+
+        self.title = kwargs.get("title", "Chitra Server")
+        self.desc = kwargs.get(
+            "description",
+            f"<a href={documentation_url}>Docs</a> 🔗",
+        )
         self.input_types = input_types
         self.output_types = output_types
         self.api_type_func = {}
@@ -78,5 +85,7 @@ class GradioApp(ModelServer):
             fn=self.api_type_func[self.api_type],
             inputs=self.input_types,
             outputs=self.output_types,
+            title=self.title,
+            description=self.desc,
             **gr_interface_conf,
         ).launch(share=share)
