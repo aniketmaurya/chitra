@@ -1,4 +1,4 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
 import numpy as np
 from tensorflow_serving.apis.prediction_service_pb2_grpc import PredictionServiceStub
