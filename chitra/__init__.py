@@ -1,6 +1,6 @@
 """A Deep Learning library."""
 
-__version__ = "0.1.0b3"
+__version__ = "0.1.0rc0"
 __license__ = "Apache License 2.0"
 
 from chitra.image import Chitra
