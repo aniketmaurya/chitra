@@ -21,4 +21,4 @@ app = GradioApp(
     postprocess_fn=postprocess,
 )
 
-app.run()
+app.run(share=True)
