@@ -23,7 +23,7 @@ class Clf:
         self._lookup_class_to_idx = None
 
     def show_batch(self, limit: int, figsize: tuple = (10, 10)):
-        """Visualize image and labels
+        """Visualize image and labels.
 
         https://www.tensorflow.org/tutorials/load_data/images#load_using_keraspreprocessing
 
@@ -104,7 +104,7 @@ class Clf:
         return img, labels
 
     def create_lookup_table(self):
-        """Creates tf.lookup.StaticHashTable for encoding labels"""
+        """Creates tf.lookup.StaticHashTable for encoding labels."""
         keys = list(self.class_to_idx.keys())
         vals = list(self.class_to_idx.values())
 
@@ -116,7 +116,7 @@ class Clf:
         self._lookup_class_to_idx = tf.lookup.StaticHashTable(table_init, -1)
 
     def _get_classnames(self, list_folders, encode_classes: bool = True):
-        """ """
+        """"""
         self.CLASS_NAMES = tuple(get_basename(e).numpy().decode() for e in list_folders)
         if encode_classes:
             self._encode_classes()
