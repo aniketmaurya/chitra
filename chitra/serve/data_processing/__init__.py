@@ -1,2 +1,5 @@
-from .processor import DataProcessor
-from .vision import DefaultTextProcessor, DefaultVisionProcessor
+from chitra.serve.data_processing.processor import DataProcessor
+from chitra.serve.data_processing.vision import (
+    DefaultTextProcessor,
+    DefaultVisionProcessor,
+)
