@@ -33,7 +33,7 @@ def _cache_image(image: Image.Image, image_path: str):
 
 
 def _url_to_image(url: str, cache: bool) -> Image.Image:
-    """returns Image from url"""
+    """returns Image from url."""
     filename = url.replace("/", CHITRA_URL_SEP)
     cache_file = Path(IMAGE_CACHE_DIR) / filename
     if cache and os.path.exists(cache_file):
@@ -50,6 +50,7 @@ def _url_to_image(url: str, cache: bool) -> Image.Image:
 
 class Chitra:
     """Ultimate image utility class.
+
     1. Load image from file, web url, numpy or bytes
     2. Plot image
     3. Draw bounding boxes

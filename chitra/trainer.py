@@ -133,15 +133,14 @@ def create_cnn(
 
 
 class Trainer(Model):
-    """
-    The Trainer class inherits tf.keras.Model and contains everything a model needs for training.
-    It exposes trainer.cyclic_fit method which trains the model using Cyclic Learning rate discovered by Leslie Smith.
+    """The Trainer class inherits tf.keras.Model and contains everything a
+    model needs for training. It exposes trainer.cyclic_fit method which trains
+    the model using Cyclic Learning rate discovered by Leslie Smith.
 
     Arguments:
     ds: Dataset object
     model: object of type tf.keras.Model
     num_classes (int, None): number of classes in the dataset. If None then will auto infer from Dataset
-
     """
 
     _AUTOTUNE = tf.data.experimental.AUTOTUNE
@@ -224,9 +223,10 @@ class Trainer(Model):
         *args,
         **kwargs,
     ):
-        """Trains model on ds as train data with cyclic learning rate.
-        Dataset will be automatically converted into `tf.data` format and images will be prewhitened in range of [-1, 1].
-        Cyclical Learning Rates for Training Neural Networks: https://arxiv.org/abs/1506.01186
+        """Trains model on ds as train data with cyclic learning rate. Dataset
+        will be automatically converted into `tf.data` format and images will
+        be prewhitened in range of [-1, 1]. Cyclical Learning Rates for
+        Training Neural Networks: https://arxiv.org/abs/1506.01186.
 
         Args:
             epochs (int): number of epochs for training
@@ -274,7 +274,8 @@ class Trainer(Model):
         **kwargs,
     ):
         """Compile2 compiles the model of Trainer for cyclic learning rate.
-        Cyclical Learning Rates for Training Neural Networks: https://arxiv.org/abs/1506.01186
+        Cyclical Learning Rates for Training Neural Networks:
+        https://arxiv.org/abs/1506.01186.
 
         Args:
             batch_size (int): batch size
@@ -354,7 +355,7 @@ class InterpretModel:
 
     @staticmethod
     def model_modifier(m):
-        """Sets last activation to linear"""
+        """Sets last activation to linear."""
         m.layers[-1].activation = tf.keras.activations.linear
         return m
 
@@ -391,11 +392,10 @@ class Learner:
         callbacks=None,
         **kwargs,
     ):
-        """train models
-        For TF:
-            Just pass train data and start training
-        For PyTorch:
-            You can enter configs to Lightning Trainer
+        """train models For TF:
+
+        Just pass train data and start training For PyTorch:     You can
+        enter configs to Lightning Trainer
         """
         MODE = self.MODE
         initial_epoch = self.epochs_trained

@@ -76,7 +76,7 @@ class BoundingBoxes:
         bbox_list: Optional[List[List[Union[int, float]]]],
         labels: List[Union[str, int]] = None,
     ) -> List[bbs.BoundingBox]:
-        """Converts bbox list into `imgaug BoundigBox` object"""
+        """Converts bbox list into `imgaug BoundigBox` object."""
         _format = self._format
 
         if not bbox_list:
@@ -101,7 +101,8 @@ class BoundingBoxes:
     def get_bounding_boxes_on_image(
         self, image_shape: Tuple[int]
     ) -> bbs.BoundingBoxesOnImage:
-        """returns `imgaug BoundingBoxesOnImage` object which can be used to boxes on the image"""
+        """returns `imgaug BoundingBoxesOnImage` object which can be used to
+        boxes on the image."""
         return bbs.BoundingBoxesOnImage(self.bboxes, image_shape)
 
     def resize_with_image(

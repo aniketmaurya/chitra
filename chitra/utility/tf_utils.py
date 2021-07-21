@@ -4,17 +4,13 @@ import tensorflow as tf
 
 
 def disable_gpu():
-    """
-    disable gpu for tensorflow
-    """
+    """disable gpu for tensorflow."""
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = str(-1)
 
 
 def limit_gpu(gpu_id: int, memory_limit: int):
-    """
-    limit the selected gpu [gpu_id] by [memory_limit] MB
-    """
+    """limit the selected gpu [gpu_id] by [memory_limit] MB."""
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
     gpus = tf.config.list_physical_devices("GPU")
@@ -42,8 +38,8 @@ def limit_gpu(gpu_id: int, memory_limit: int):
 
 
 def gpu_dynamic_mem_growth():
-    """
-    Borrowed from https://github.com/philipperemy/keract/tree/master/examples
+    """Borrowed from
+    https://github.com/philipperemy/keract/tree/master/examples.
 
     Check for GPUs and set them to dynamically grow memory as needed
     Avoids OOM from tensorflow greedily allocating GPU memory
