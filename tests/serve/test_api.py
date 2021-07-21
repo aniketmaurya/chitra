@@ -14,3 +14,10 @@ def test_create_app():
     for api_type in api_types:
         api = create_api(dummy_model, api_type)
         assert isinstance(api.app, FastAPI)
+
+
+def test_api():
+    api_types = API.get_available_api_types()
+    for api_type in api_types:
+        api = API(api_type, dummy_model)
+        assert isinstance(api.app, FastAPI)
