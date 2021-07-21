@@ -1,15 +1,18 @@
 ---
-title: Deep Learning Model Serving
-description: "Serve Any Machine Learning or Deep Learning Model with Tensorflow, PyTorch or SkLearn."
+title: "Model Serving API & UI"
+description: "Build API or Create Interactive UI for Any Machine Learning & Deep Learning  Model with Tensorflow, PyTorch or SkLearn."
 ---
 
-# Serve Deep Learning Model with CHITRA Model Server
+# Serving ML Models with API or UI
 
-Create Rest API or Interactive UI app for Any Learning Model - ML, DL, Image Classification, NLP, Tensorflow or PyTorch.
+Create Rest API or Interactive UI app for Any Learning Model - ML, DL, Image Classification, NLP, Tensorflow, PyTorch or
+SKLearn.
 
 ## What can it do?
 
-- Serve Any Learning Model
+- Create Rest API endpoint for Model Serving
+- Create Interactive UI for Model Prototype Demo
+- Share UI Demo with everyone by generating public url
 - Predefined processing functions for image classification (NLP processing functions coming soon)
 - Override custom preprocessing and Postprocessing function with your own.
 - Request Response Schema (JSON body) will be changed based on the `api_type`.
@@ -23,7 +26,9 @@ Create Rest API or Interactive UI app for Any Learning Model - ML, DL, Image Cla
 1. Text Classification
 1. Question Answering
 
-To get a full list of available API types you can call `chitra.serve.get_available_api_types()`.
+To get a full list of available API types you can call `chitra.serve.API.get_available_api_types()`.
+
+# Create Rest API
 
 ## Text Classification API
 
@@ -63,3 +68,54 @@ Open in your browser and try out the API. You can upload any image to try.
 ### Swagger UI Preview
 
 ![png](preview-qna.png)
+
+# Create Interactive UI with Gradio
+
+To get a full list of available `api_types` for `GradioApp` you can call `chitra.serve.GradioApp.get_available_api_types()`.
+
+## Image Classification Demo
+
+Instantiate ImageNet pretrained Model with Tensorflow
+
+```python
+import tensorflow as tf
+
+from chitra.core import load_imagenet_labels
+
+image_shape = (224, 224)
+model = tf.keras.applications.MobileNetV2(weights="imagenet")
+IMAGENET_LABELS = load_imagenet_labels()
+```
+
+Chitra will automatically create a preprocessing function based on `api_type`.
+But if you want to override and define
+your own then you can just pass any callable function.
+
+```python
+def postprocess(preds):
+    preds = tf.argmax(preds, 1).numpy()
+    label = IMAGENET_LABELS[preds[0]]
+    return label
+```
+
+Create GradioApp with `Chitra`
+
+```python
+from chitra.serve.app import GradioApp
+
+app = GradioApp(
+    "image-classification",
+    model=model,
+    image_shape=image_shape,
+    postprocess_fn=postprocess,
+)
+```
+
+If you want to share the live internet url then set `share=True`, it will create a public url that you can share with
+anyone over the internet.
+
+```python
+app.run(share=True)
+```
+### Preview
+![png](preview-app-image-clf.png)

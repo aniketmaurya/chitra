@@ -25,15 +25,15 @@ classifiers = [
 ]
 requires = [
     "tensorflow >= 2.3",
-    "tensorflow-addons>=0.13.0",
-    "tf-keras-vis>=0.5.3",
+    "tensorflow-addons >=0.13.0",
+    "tf-keras-vis >=0.5.3",
     "pytorch-lightning",
     "matplotlib",
     "pillow",
     "imgaug >=0.4.0",
     "scikit-learn",
     "typeguard",
-    "gradio>=2.2.2"
+    "gradio >=2.2.2",
 ]
 description-file = "README.md"
 requires-python = ">=3.7"

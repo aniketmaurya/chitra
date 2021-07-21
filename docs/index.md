@@ -10,17 +10,17 @@
 
 ## What is chitra?
 
-**chitra** (**चित्र**) is a Deep Learning Computer Vision library for easy data loading, data visualization, model
-building and model analysis with GradCAM/GradCAM++ and Framework agnostic Model Serving.
+**chitra** (**चित्र**) is a Deep Learning library for Model Building, Interpretability, Visualization, API Building & Deployment
 
 ### Highlights:
 
-- [New] Framework Agnostic Model Serving ✨🌟
+- [New] Framework Agnostic Model Serving & Interactive UI ✨🌟
 - [New] Data Visualization, Bounding Box Visualization 🐶🎨
+- Model interpretation using GradCAM/GradCAM++ with no extra code 🔥
 - Faster data loading without any boilerplate 🤺
 - Progressive resizing of images 🎨
 - Rapid experiments with different models using `chitra.trainer` module 🚀
-- Model interpretation using GradCAM/GradCAM++ with no extra code 🔥
+
 
 > If you have more use case please [**raise an issue/PR**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
 > If you want to contribute, feel free to raise a PR. It doesn't need to be perfect.
@@ -34,7 +34,7 @@ building and model analysis with GradCAM/GradCAM++ and Framework agnostic Model 
 
 ### Using pip (recommended)
 
-`pip install -U chitra==0.1.0b3`
+`pip install -U chitra==0.1.0rc0`
 
 ### From source
 
