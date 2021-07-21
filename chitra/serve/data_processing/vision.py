@@ -20,8 +20,7 @@ def default_preprocess(
     elif isinstance(data, np.ndarray):
         image = Chitra(data).image
     else:
-        raise UserWarning(
-            f"preprocessing not implemented for this data type -> {data}")
+        raise UserWarning(f"preprocessing not implemented for this data type -> {data}")
 
     if image_shape:
         image = image.resize(image_shape)
