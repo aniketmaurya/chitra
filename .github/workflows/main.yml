@@ -56,8 +56,13 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: false
 
+      - name: Sonar Availability
+        if: -z "$secrets.SONAR_TOKEN"
+        run: echo "Skipping SonarScan, token not set!"
+        shell: bash
+
       - name: SonarCloud Scan
-        if: runner.os != 'macOS'
+        if: [ runner.os != 'macOS' ] && [ -z "$secrets.SONAR_TOKEN" ]
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
