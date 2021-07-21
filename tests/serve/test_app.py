@@ -1,5 +1,8 @@
+from typing import Optional, Tuple
+
 import numpy as np
 
+from chitra import Chitra
 from chitra.serve import GradioApp
 from chitra.serve import constants as const
 
@@ -25,25 +28,30 @@ def test_gradio_app():
 
 
 def test_image_classification():
-    def dummy_clf(x):
+    def dummy_model(x):
         return np.random.randn(1)
+
+    def preprocess_fn(x, rescale: bool, expand_dims: bool):
+        if rescale:
+            x = x / 127.5 - 1.0
+        if expand_dims:
+            x = np.expand_dims(x, 0)
+        return x
 
     def postprocess_fn(x, thresh: float):
         return (x > thresh)[0]
 
     dummy_image = np.random.randn(224, 224, 3)
-    preprocess_conf = {"rescale": True, "expand_dims": True, "image_shape": dummy_image.shape[:2]}
+    preprocess_conf = {"rescale": True, "expand_dims": True}
     postprocess_conf = {"thresh": 0.5}
 
     app = GradioApp(
         const.IMAGE_CLF,
-        model=dummy_clf,
-        preprocess_fn=None,
+        model=dummy_model,
+        preprocess_fn=preprocess_fn,
         preprocess_conf=preprocess_conf,
         postprocess_fn=postprocess_fn,
         postprocess_conf=postprocess_conf,
     )
-
-    print(app.data_processor.preprocess_fn)
 
     assert app.image_classification(dummy_image) in (0, 1)
