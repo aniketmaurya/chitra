@@ -30,3 +30,10 @@ def test_data_processor():
     x = data_processor.preprocess(x)
     x = data_processor.postprocess(x)
     assert x == 5
+
+    data_processor_empty.set_preprocess_fn(dummy_preprocess)
+    data_processor_empty.set_postprocess_fn(dummy_postprocess)
+
+    x = data_processor_empty.preprocess(x)
+    x = data_processor_empty.postprocess(x)
+    assert x == 5

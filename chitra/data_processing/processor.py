@@ -10,6 +10,12 @@ class DataProcessor:
         self._preprocess_fn = preprocess_fn
         self._postprocess_fn = postprocess_fn
 
+    def set_preprocess_fn(self, func):
+        self._preprocess_fn = func
+
+    def set_postprocess_fn(self, func):
+        self._postprocess_fn = func
+
     def preprocess(self, x):
         if self._preprocess_fn is None:
             raise UserWarning("preprocess method is not defined")

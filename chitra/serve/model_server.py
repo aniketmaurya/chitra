@@ -1,12 +1,12 @@
 import itertools
 from typing import Callable, List, Optional
 
-from chitra.serve import constants as const
-from chitra.serve.data_processing import (
+from chitra.data_processing import (
     DataProcessor,
     DefaultTextProcessor,
     DefaultVisionProcessor,
 )
+from chitra.serve import constants as const
 
 
 class ModelServer:
@@ -38,9 +38,9 @@ class ModelServer:
     ) -> DataProcessor:
         data_preprocessor = self.set_default_processor()
         if preprocess_fn:
-            data_preprocessor._preprocess_fn = preprocess_fn
+            data_preprocessor.set_preprocess_fn(preprocess_fn)
         if postprocess_fn:
-            data_preprocessor._postprocess_fn = postprocess_fn
+            data_preprocessor.set_postprocess_fn(postprocess_fn)
         return data_preprocessor
 
     def set_default_processor(self) -> DataProcessor:
