@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Any, Callable, Optional
 
 import grpc
 import tensorflow as tf
@@ -15,14 +15,14 @@ def create_grpc_stub(
 
 
 def grpc_request(
-    stub,
-    data_sample,
+    stub: prediction_service_pb2_grpc.PredictionServiceStub,
+    data_sample: Any,
     input_name: str,
     model_name: str,
     signature_name: str,
-    callback=None,
-    grpc_timeout=20,
-    async_=False,
+    callback: Optional = None,
+    grpc_timeout: int = 20,
+    async_: bool = False,
 ):
     request = predict_pb2.PredictRequest()
     request.model_spec.name = model_name

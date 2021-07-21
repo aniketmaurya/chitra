@@ -6,14 +6,26 @@ from PIL import Image
 
 from chitra.image import Chitra
 
+from ..processor import DataProcessor
+
 
 def default_preprocess(
     data,
     image_shape: Optional[Tuple[int, int]] = None,
     rescale: bool = True,
     expand_dims: bool = True,
-    **kwargs,
 ) -> np.ndarray:
+    """
+    Supports image resize, rescaling and dimension expansion along 0th index
+    Args:
+        data: Image File buffer or numpy array
+        image_shape: Target image size
+        rescale: If true then image will be rescaled as [-1, 1]
+        expand_dims:
+
+    Returns:
+        preprocessed numpy array image
+    """
     if isinstance(data, str):
         image = Image.open(BytesIO(data)).convert("RGB")
     elif isinstance(data, np.ndarray):
@@ -41,3 +53,7 @@ def default_postprocess(data, return_type: Optional[str] = "list") -> List:
         else:
             list(data)
     return data
+
+
+class DefaultVisionProcessor:
+    vision = DataProcessor(default_preprocess, default_postprocess)

@@ -1,5 +1,4 @@
-from functools import partial
-from typing import Callable, Optional
+from typing import Callable, Dict, Optional
 
 import uvicorn
 from fastapi import FastAPI, File, UploadFile
@@ -15,8 +14,10 @@ class API(ModelServer):
         self,
         api_type: str,
         model: Callable,
-        preprocess_fn: Callable = None,
-        postprocess_fn: Callable = None,
+        preprocess_fn: Optional[Callable] = None,
+        preprocess_conf: Optional[Dict] = None,
+        postprocess_fn: Optional[Callable] = None,
+        postprocess_conf: Optional[Dict] = None,
         **kwargs,
     ):
         """
@@ -34,13 +35,21 @@ class API(ModelServer):
         super(API, self).__init__(
             api_type, model, preprocess_fn, postprocess_fn, **kwargs
         )
+
         docs_url = kwargs.get("docs_url", "/docs")
         title = kwargs.get("title", "Chitra Model Server 🔥")
         desc = kwargs.get(
             "description",
             f"<a href={documentation_url}>Goto Chitra Docs</a> 🔗",
         )
+
         self.app: FastAPI = FastAPI(title=title, description=desc, docs_url=docs_url)
+        if not preprocess_conf:
+            preprocess_conf = {}
+        if not postprocess_conf:
+            postprocess_conf = {}
+        self.preprocess_conf = preprocess_conf
+        self.postprocess_conf = postprocess_conf
         self.setup(**kwargs)
 
     async def predict_image(self, file: UploadFile = File(...)):
@@ -72,14 +81,7 @@ class API(ModelServer):
             x = data_processor.postprocess(x)
         return x
 
-    def setup(self, **kwargs):
-        data_processor = self.data_processor
-        self.data_processor.preprocess_fn = partial(
-            data_processor.preprocess_fn, **kwargs
-        )
-        self.data_processor.postprocess_fn = partial(
-            data_processor.postprocess_fn, **kwargs
-        )
+    def setup(self, **_):
 
         if self.api_type in (IMAGE_CLF, OBJECT_DETECTION):
             self.app.post("/api/predict-image")(self.predict_image)
@@ -97,8 +99,10 @@ class API(ModelServer):
 def create_api(
     model: Callable,
     api_type: str = "IMAGE-CLASSIFICATION",
-    preprocess: Optional[Callable] = None,
-    postprocess: Optional[Callable] = None,
+    preprocess_fn: Callable = None,
+    preprocess_conf: Optional[Dict] = None,
+    postprocess_fn: Callable = None,
+    postprocess_conf: Optional[Dict] = None,
     run: bool = False,
     **kwargs,
 ) -> API:
@@ -107,15 +111,25 @@ def create_api(
     Args:
         model: Any ML/DL model
         api_type: Type of the API task, see `chitra.serve.get_available_api_types()`
-        preprocess: Override default preprocessing function
-        postprocess: Override default postprocessing function
+        preprocess_fn: Override default preprocessing function
+        preprocess_conf: Arguments for preprocessing function
+        postprocess_fn: Override default postprocessing function
+        postprocess_conf: Arguments for postprocessing function
         run: Set True to run the app
         **kwargs:
 
     Returns:
         Object of `chitra.serve.API` class
     """
-    api = API(api_type, model, preprocess, postprocess, **kwargs)
+    api = API(
+        api_type,
+        model,
+        preprocess_fn=preprocess_fn,
+        preprocess_conf=preprocess_conf,
+        postprocess_fn=postprocess_fn,
+        postprocess_conf=postprocess_conf,
+        **kwargs,
+    )
 
     if run:
         api.run()

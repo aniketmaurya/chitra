@@ -1,8 +1,5 @@
-from typing import Optional, Tuple
-
 import numpy as np
 
-from chitra import Chitra
 from chitra.serve import GradioApp
 from chitra.serve import constants as const
 

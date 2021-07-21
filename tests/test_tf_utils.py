@@ -1,5 +1,3 @@
-import pytest
-
 from chitra.utility.tf_utils import disable_gpu, gpu_dynamic_mem_growth, limit_gpu
 
 
