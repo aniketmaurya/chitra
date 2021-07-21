@@ -44,8 +44,8 @@ class API(ModelServer):
         self.setup(**kwargs)
 
     async def predict_image(self, file: UploadFile = File(...)):
-        preprocess_fn = self.data_processor._preprocess_fn
-        postprocess_fn = self.data_processor._postprocess_fn
+        preprocess_fn = self.data_processor.preprocess_fn
+        postprocess_fn = self.data_processor.postprocess_fn
 
         x = preprocess_fn(await file.read())
         x = self.model(x)
@@ -55,30 +55,30 @@ class API(ModelServer):
     async def predict_text(self, data: schema.Query):
         data_processor = self.data_processor
         x = data.query
-        if data_processor._preprocess_fn:
+        if data_processor.preprocess_fn:
             x = data_processor.preprocess(x)
         x = self.model(x)
-        if data_processor._postprocess_fn:
+        if data_processor.postprocess_fn:
             x = data_processor.postprocess(x)
         return x
 
     async def predict_question_answer(self, data: schema.QnARequest):
         data_processor = self.data_processor
         x = data.query, data.question
-        if data_processor._preprocess_fn:
+        if data_processor.preprocess_fn:
             x = data_processor.preprocess(x)
         x = self.model(x)
-        if data_processor._postprocess_fn:
+        if data_processor.postprocess_fn:
             x = data_processor.postprocess(x)
         return x
 
     def setup(self, **kwargs):
         data_processor = self.data_processor
-        self.data_processor._preprocess_fn = partial(
-            data_processor._preprocess_fn, **kwargs
+        self.data_processor.preprocess_fn = partial(
+            data_processor.preprocess_fn, **kwargs
         )
-        self.data_processor._postprocess_fn = partial(
-            data_processor._postprocess_fn, **kwargs
+        self.data_processor.postprocess_fn = partial(
+            data_processor.postprocess_fn, **kwargs
         )
 
         if self.api_type in (IMAGE_CLF, OBJECT_DETECTION):
