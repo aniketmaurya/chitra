@@ -24,9 +24,11 @@ class API(ModelServer):
         Args:
             api_type: Type of the API. See `API.available_api_types()`
             model: Any ML/DL model
-            preprocess_fn: Override Data Preprocessing Function, data will be processed with this function
+            preprocess_fn: Override Data Preprocessing Function, data will
+            be processed with this function
             before calling model.
-            postprocess_fn: Override Data Postprocessing Function, model output will be passed into this function.
+            postprocess_fn: Override Data Postprocessing Function, model
+            output will be passed into this function.
             **kwargs:
         """
         super(API, self).__init__(

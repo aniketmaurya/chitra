@@ -44,6 +44,7 @@ class ModelServer:
             self.data_processor = DefaultProcessor.nlp
         else:
             raise UserWarning(
-                f"{api_type} is not implemented! Available types are - {ModelServer.get_available_api_types()}"
+                f"{api_type} is not implemented! Available types are -\
+                 {ModelServer.get_available_api_types()}"
             )
         return self.data_processor
