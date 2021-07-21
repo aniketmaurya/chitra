@@ -1,3 +1,5 @@
+import tempfile
+
 from chitra.utility.import_utils import is_installed
 
 onnx = None
@@ -59,7 +61,7 @@ def tf2_to_onnx(model, opset=None, output_path=None, **kwargs):
 def tf2_to_pytorch(model, opset=None, **kwargs):
     with tempfile.NamedTemporaryFile(mode="w") as fw:
         filename = fw.name
-        onnx_model = tf2_to_onnx(tf_model, opset, output_path=filename, **kwargs)
+        onnx_model = tf2_to_onnx(model, opset, output_path=filename, **kwargs)
         fw.seek(0)
         torch_model = onnx_to_pytorch(filename)
     return torch_model
