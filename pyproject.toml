@@ -43,23 +43,15 @@ Documentation = "https://chitra.readthedocs.io/en/latest"
 
 [tool.flit.metadata.requires-extra]
 serve = [
-    "fastapi", "uvicorn", "pydantic", "python-multipart"
-]
-tf = [
-    "tensorflow-serving-api"
+    "fastapi", "uvicorn", "pydantic", "python-multipart", "tensorflow-serving-api",
 ]
 converter = [
     "onnx", "onnx2pytorch", "tf2onnx",
 ]
-all = [
-    "onnx", "onnx2pytorch", "tf2onnx",
-    "fastapi", "uvicorn", "pydantic",
-    "torch",
-]
 test = [
     "pytest",
     "pytest-asyncio",
-    "coverage"
+    "coverage",
 ]
 
 [tool.isort]
