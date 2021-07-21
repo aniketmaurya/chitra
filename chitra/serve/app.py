@@ -11,16 +11,16 @@ class GradioApp(ModelServer):
     API_TYPES = {"VISION": (const.IMAGE_CLF, const.OBJECT_DETECTION)}
 
     def __init__(
-            self,
-            api_type: str,
-            model: Callable,
-            input_types: Optional[Union[List, str]] = None,
-            output_types: Optional[Union[List, str]] = None,
-            preprocess_fn: Callable = None,
-            postprocess_fn: Callable = None,
-            preprocess_conf: Optional[dict] = None,
-            postprocess_conf: Optional[dict] = None,
-            **kwargs,
+        self,
+        api_type: str,
+        model: Callable,
+        input_types: Optional[Union[List, str]] = None,
+        output_types: Optional[Union[List, str]] = None,
+        preprocess_fn: Callable = None,
+        postprocess_fn: Callable = None,
+        preprocess_conf: Optional[dict] = None,
+        postprocess_conf: Optional[dict] = None,
+        **kwargs,
     ):
         super(GradioApp, self).__init__(
             api_type, model, preprocess_fn, postprocess_fn, **kwargs
@@ -37,8 +37,8 @@ class GradioApp(ModelServer):
         self.setup(**kwargs)
 
     def setup(
-            self,
-            **kwargs,
+        self,
+        **kwargs,
     ):
 
         self.api_type_func[const.IMAGE_CLF] = self.image_classification
@@ -78,5 +78,5 @@ class GradioApp(ModelServer):
             fn=self.api_type_func[self.api_type],
             inputs=self.input_types,
             outputs=self.output_types,
-            **gr_interface_conf
+            **gr_interface_conf,
         ).launch(share=share)
