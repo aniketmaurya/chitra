@@ -14,7 +14,7 @@ from .tf_image import read_image, resize_image
 
 
 def benchmark(dataset, num_epochs=2, fake_infer_time=0.001):
-    """Use this function to benchmark your Dataset loading time"""
+    """Use this function to benchmark your Dataset loading time."""
     start_time = time.perf_counter()
     for _ in range(num_epochs):
         for _ in dataset:

@@ -12,9 +12,7 @@ IMAGENET_LABELS: Optional[Tuple[str]] = None
 
 
 def remove_dsstore(path) -> None:
-    """
-    Deletes .DS_Store files from path and sub-folders of path.
-    """
+    """Deletes .DS_Store files from path and sub-folders of path."""
     path = pathlib.Path(path)
 
     for e in path.glob("*.DS_Store"):

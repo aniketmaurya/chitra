@@ -374,4 +374,4 @@ Conduct**](https://github.com/aniketmaurya/chitra/blob/master/CODE_OF_CONDUCT.md
 ## Acknowledgement
 
 CHITRA is built with help of awesome libraries like [Tensorflow 2.x](https://github.com/tensorflow/tensorflow),
-[imgaug](https://github.com/aleju/imgaug) and [FastAPI](https://github.com/tiangolo/fastapi).
+[imgaug](https://github.com/aleju/imgaug), [FastAPI](https://github.com/tiangolo/fastapi) and [Gradio](https://gradio.app).
