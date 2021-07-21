@@ -5,7 +5,8 @@ import numpy as np
 from PIL import Image
 
 from chitra.image import Chitra
-from chitra.serve.data_processing.processor import DataProcessor
+
+from ..processor import DataProcessor
 
 
 def default_preprocess(

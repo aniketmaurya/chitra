@@ -1,4 +1,4 @@
-from chitra.serve.data_processing import DataProcessor
+from ..processor import DataProcessor
 
 
 class DefaultTextProcessor:
