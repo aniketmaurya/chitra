@@ -58,7 +58,8 @@ def test_image_classification():
 
 
 @pytest.mark.parametrize(
-    "test_input, expected", [(None, {}), ({"article": "chitra testing"}, {"article": "chitra testing"})]
+    "test_input, expected",
+    [(None, {}), ({"article": "chitra testing"}, {"article": "chitra testing"})],
 )
 @unittest.mock.patch("chitra.serve.app.gr")
 def test_run(mock_gr, test_input, expected):
