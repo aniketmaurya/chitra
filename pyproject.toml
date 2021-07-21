@@ -56,6 +56,11 @@ all = [
     "fastapi", "uvicorn", "pydantic",
     "torch",
 ]
+test = [
+    "pytest",
+    "pytest-asyncio",
+    "coverage"
+]
 
 [tool.isort]
 profile = "black"

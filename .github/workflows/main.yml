@@ -32,9 +32,7 @@ jobs:
           python --version
           pip --version
           pip install flit
-          pip install .
-          pip install -r requirements/dev.txt
-          pip install -r requirements/test.txt
+          pip install ".[all]"
           pip list
         shell: bash
 
