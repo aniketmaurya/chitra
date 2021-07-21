@@ -2,7 +2,7 @@ import asyncio
 from unittest.mock import MagicMock
 
 import numpy as np
-import pytest as pytest
+import pytest
 from fastapi import FastAPI
 
 from chitra.serve import API, create_api, constants as const
