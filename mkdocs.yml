@@ -1,5 +1,5 @@
 site_name: chitra
-site_description: "Deep Learning library for easy data loading, data visualization, model building & analysis with GradCAM and a Framework agnostic Model Serving"
+site_description: "chitra (चित्र) is a Deep Learning library for Model Building, Interpretability, Visualization, API Building & Deployment"
 repo_url: https://github.com/aniketmaurya/chitra/
 repo_name: aniketmaurya/chitra
 
