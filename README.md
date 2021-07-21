@@ -14,7 +14,7 @@
 
 ### Highlights:
 
-- [New] Framework Agnostic Model Serving & Interactive UI ✨🌟
+- [New] Framework Agnostic Model Serving & Interactive UI prototype app ✨🌟
 - [New] Data Visualization, Bounding Box Visualization 🐶🎨
 - Model interpretation using GradCAM/GradCAM++ with no extra code 🔥
 - Faster data loading without any boilerplate 🤺
@@ -321,7 +321,10 @@ example!
 
 ## Model Serving (Framework Agnostic)
 
-Chitra can create API for Any Learning Model - ML, DL, Image Classification, NLP, Tensorflow or PyTorch.
+Chitra can Create Rest API or Interactive UI app for Any Learning Model -
+ML, DL, Image Classification, NLP, Tensorflow, PyTorch or SKLearn.
+It provides `chitra.serve.GradioApp` for building Interactive UI prototype app
+and `chitra.serve.API` for building Rest API endpoint.
 
 ```python
 from chitra.serve import create_api

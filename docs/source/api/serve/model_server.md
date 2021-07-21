@@ -1,14 +1,14 @@
 ---
-title: "Model Serving API & UI"
+title: "Model Serving API & UI app"
 description: "Build API or Create Interactive UI for Any Machine Learning & Deep Learning  Model with Tensorflow, PyTorch or SkLearn."
 ---
 
-# Serving ML Models with API or UI
+# Serving ML Models with API or UI app
 
 Create Rest API or Interactive UI app for Any Learning Model - ML, DL, Image Classification, NLP, Tensorflow, PyTorch or
 SKLearn.
 
-## What can it do?
+### What can it do?
 
 - Create Rest API endpoint for Model Serving
 - Create Interactive UI for Model Prototype Demo
@@ -17,9 +17,9 @@ SKLearn.
 - Override custom preprocessing and Postprocessing function with your own.
 - Request Response Schema (JSON body) will be changed based on the `api_type`.
 
-> pip install -U "chitra[serve]"
+> install: `pip install -U "chitra[serve]"==0.1.0rc0"`
 
-### Default available API types are:
+Default available API types are:
 
 1. Image Classification
 1. Object Detection
@@ -28,9 +28,9 @@ SKLearn.
 
 To get a full list of available API types you can call `chitra.serve.API.get_available_api_types()`.
 
-# Create Rest API
+## Create Rest API
 
-## Text Classification API
+### Text Classification API
 
 You can easily create Sentiment Analysis API. In this example, I will use HuggingFace to load the Sentiment Analysis
 Model but feel free to use other models as well.
@@ -51,7 +51,7 @@ create_api(classifier, run=True, api_type="text-classification")
 
 You can open `http://127.0.0.1:8000/docs` Swagger UI in your browser to test the API 🔥
 
-## Image Classification API
+### Image Classification API
 
 ```python
 from chitra.serve import create_api
@@ -65,15 +65,15 @@ create_api(model, run=True, api_type='image-classification')
 
 Open in your browser and try out the API. You can upload any image to try.
 
-### Swagger UI Preview
+#### Preview
 
 ![png](preview-qna.png)
 
-# Create Interactive UI with Gradio
+## Create Interactive UI with Gradio
 
 To get a full list of available `api_types` for `GradioApp` you can call `chitra.serve.GradioApp.get_available_api_types()`.
 
-## Image Classification Demo
+### Image Classification Demo
 
 Instantiate ImageNet pretrained Model with Tensorflow
 
@@ -117,5 +117,5 @@ anyone over the internet.
 ```python
 app.run(share=True)
 ```
-### Preview
+#### Preview
 ![png](preview-app-image-clf.png)
