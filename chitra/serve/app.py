@@ -62,7 +62,8 @@ class GradioApp(ModelServer):
             return gr.inputs.Textbox(
                 lines=2, placeholder=kwargs.get("text_placeholder"), label=label
             )
-        raise NotImplementedError(f"{self.api_type} API Type is not implemented yet!")
+        raise NotImplementedError(
+            f"{self.api_type} API Type is not implemented yet!")
 
     def image_classification(self, x: np.ndarray):
         preprocess_fn = self.data_processor._preprocess_fn

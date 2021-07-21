@@ -40,7 +40,8 @@ class API(ModelServer):
             "description",
             f"<a href={documentation_url}>Goto Chitra Docs</a> 🔗",
         )
-        self.app: FastAPI = FastAPI(title=title, description=desc, docs_url=docs_url)
+        self.app: FastAPI = FastAPI(
+            title=title, description=desc, docs_url=docs_url)
         self.setup(**kwargs)
 
     async def predict_image(self, file: UploadFile = File(...)):
