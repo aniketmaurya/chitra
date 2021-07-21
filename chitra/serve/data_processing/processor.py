@@ -25,5 +25,6 @@ class DataProcessor:
 
 
 class DefaultProcessor:
-    vision = DataProcessor(vision.default_preprocess, vision.default_postprocess)
+    vision = DataProcessor(vision.default_preprocess,
+                           vision.default_postprocess)
     nlp = DataProcessor(lambda x: x, lambda x: x)
