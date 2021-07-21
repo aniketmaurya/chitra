@@ -1,6 +1,6 @@
 import pytest
 
-from chitra.serve.data_processing import DataProcessor
+from chitra.data_processing import DataProcessor
 
 
 def dummy_preprocess(x: int):
