@@ -54,13 +54,13 @@ class GradioApp(ModelServer):
             self.output_types = "json"
 
     def get_input_type(self, **kwargs):
-        label = kwargs.get("label", None)
+        label = kwargs.get("label")
         if self.api_type in (const.IMAGE_CLF, const.OBJECT_DETECTION):
-            return gr.inputs.Image(shape=kwargs.get("image_shape", None), label=label)
+            return gr.inputs.Image(shape=kwargs.get("image_shape"), label=label)
 
         if self.api_type == const.TXT_CLF:
             return gr.inputs.Textbox(
-                lines=2, placeholder=kwargs.get("text_placeholder", None), label=label
+                lines=2, placeholder=kwargs.get("text_placeholder"), label=label
             )
         raise NotImplementedError(f"{self.api_type} API Type is not implemented yet!")
 
