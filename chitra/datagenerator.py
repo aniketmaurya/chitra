@@ -167,7 +167,7 @@ class Dataset:
         filename = self.filenames[idx]
         return self._process(filename)
 
-    def update_component(self, component_name, new_component, reload=True):
+    def update_component(self, component_name, new_component):
         setattr(self, component_name, new_component)
         print(f"{component_name} updated with {new_component}")
         self._reload()
