@@ -17,8 +17,8 @@ theme:
         icon: material/toggle-switch
         name: Switch to light mode
 
-  logo: https://ik.imagekit.io/aniket/chitra/logo_ddSLdaURS.png
-  favicon: https://ik.imagekit.io/aniket/chitra/favicon-32x32_zIf2gUdAN.png
+  logo: https://ik.imagekit.io/aniket/chitra/logo_0.1.0_qhktxqokb.png
+  favicon: https://ik.imagekit.io/aniket/chitra/favicon/favicon_9A8ixLDnJ.ico
   features:
     - search.suggest
     - search.highlight
