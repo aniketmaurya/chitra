@@ -39,7 +39,7 @@ async def test_predict_image():
     app.data_processor.preprocess_fn = MagicMock()
     app.data_processor.postprocess_fn = lambda x: x
     file = MagicMock()
-    file.read = MagicMock(return_value=async_return("Example string"))
+    file.read = MagicMock(return_value=async_return("Sample string"))
     output = await app.predict_image(file)
     assert isinstance(output, np.ndarray)
     assert len(output) == 2

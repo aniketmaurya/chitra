@@ -393,7 +393,7 @@ class Learner:
         train_data,
         epochs,
         val_data=None,
-        # test_data=None, learner.evaluate function for test data can be made
+        test_data=None,
         callbacks=None,
         **kwargs,
     ):
