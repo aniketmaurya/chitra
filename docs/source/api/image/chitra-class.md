@@ -9,7 +9,7 @@ description: "Load image from Internet url, filepath or numpy array and plot bou
 
 
 ```python
-# pip install -U chitra==0.1.0b3
+# pip install -U chitra
 
 from chitra.image import Chitra
 import matplotlib.pyplot as plt
