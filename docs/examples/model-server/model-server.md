@@ -13,7 +13,7 @@ Create API for Any Learning Model - ML, DL, Image Classification, NLP, Tensorflo
 
 ```python
 # Install chitra
-# pip install chitra==0.1.0a0
+# pip install -U chitra
 
 from chitra.serve import create_api
 from chitra.trainer import create_cnn

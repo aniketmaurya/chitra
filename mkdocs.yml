@@ -1,5 +1,5 @@
 site_name: chitra
-site_description: "chitra (चित्र) is a Deep Learning library for Model Building, Interpretability, Visualization, API Building & Deployment"
+site_description: "chitra (चित्र) is a Deep Learning library for Model Building, Explainable AI, Data Visualization, API Building & Deployment."
 banner_url: https://ik.imagekit.io/aniket/chitra/chitra_banner_0.1.0_tIzHC3b-y.png
 repo_url: https://github.com/aniketmaurya/chitra/
 repo_name: aniketmaurya/chitra
@@ -17,8 +17,8 @@ theme:
         icon: material/toggle-switch
         name: Switch to light mode
 
-  logo: https://ik.imagekit.io/aniket/chitra/logo_ddSLdaURS.png
-  favicon: https://ik.imagekit.io/aniket/chitra/favicon-32x32_zIf2gUdAN.png
+  logo: https://ik.imagekit.io/aniket/chitra/logo_0.1.0_qhktxqokb.png
+  favicon: https://ik.imagekit.io/aniket/chitra/favicon/favicon_9A8ixLDnJ.ico
   features:
     - search.suggest
     - search.highlight

@@ -17,7 +17,7 @@ SKLearn.
 - Override custom preprocessing and Postprocessing function with your own.
 - Request Response Schema (JSON body) will be changed based on the `api_type`.
 
-> install: `pip install -U "chitra[serve]"==0.1.0rc0"`
+> install: `pip install -U "chitra[serve]"`
 
 Default available API types are:
 

@@ -1,6 +1,6 @@
 ---
 title: Play with Images
-description: "Load image from URL or plot bounding boxes on the images easily"
+description: "Load image from Internet url, filepath or numpy array and plot bounding boxes on the images easily"
 ---
 
 # Play with Images and Bounding Boxes
@@ -9,7 +9,7 @@ description: "Load image from URL or plot bounding boxes on the images easily"
 
 
 ```python
-# pip install -U chitra==0.1.0b3
+# pip install -U chitra
 
 from chitra.image import Chitra
 import matplotlib.pyplot as plt
