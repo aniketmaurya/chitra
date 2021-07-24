@@ -41,4 +41,4 @@ repos:
     rev: v1.3.1
     hooks:
       - id: docformatter
-        args: [ --in-place ]
+        args: [ '--in-place' ]
