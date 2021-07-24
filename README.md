@@ -32,7 +32,7 @@ Easily create UI for Machine Learning models or Rest API backend that can be dep
 > If you want to contribute, feel free to raise a PR. It doesn't need to be perfect.
 > We will help you get there.
 
-## Installation
+## 📀 Installation
 
 [![Downloads](https://pepy.tech/badge/chitra)](https://pepy.tech/project/chitra)
 [![Downloads](https://pepy.tech/badge/chitra/month)](https://pepy.tech/project/chitra)
@@ -56,7 +56,7 @@ cd chitra
 pip install .
 ```
 
-## Usage
+## 🧑‍💻 Usage
 
 ### Loading data for image classification
 
@@ -279,7 +279,7 @@ trainer.cyclic_fit(epochs=5,
 
 </details>
 
-## Model Visualization
+## ✨ Model Visualization
 
 It is important to understand what is going inside the model. Techniques like GradCam and Saliency Maps can visualize
 what the Network is learning. `trainer` module has InterpretModel class which creates GradCam and GradCam++
@@ -325,7 +325,7 @@ plt.imshow(image.draw_boxes())
 See [Play with Images](https://chitra.readthedocs.io/en/latest/examples/chitra-class/chitra-class.html) for detailed
 example!
 
-## Model Serving (Framework Agnostic)
+## 🚀 Model Serving (Framework Agnostic)
 
 Chitra can Create Rest API or Interactive UI app for Any Learning Model -
 ML, DL, Image Classification, NLP, Tensorflow, PyTorch or SKLearn.
@@ -349,7 +349,7 @@ create_api(model, run=True, api_type='image-classification')
 See [Example Section](https://chitra.readthedocs.io/en/latest/source/api/serve/model_server/) for detailed
 explanation!
 
-## Utils
+## 🛠 Utility
 
 Limit GPU memory or enable dynamic GPU memory growth for Tensorflow.
 
