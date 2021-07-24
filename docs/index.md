@@ -34,7 +34,7 @@
 
 ### Using pip (recommended)
 
-`pip install -U chitra==0.1.0rc0`
+`pip install -U chitra==0.1.0`
 
 ### From source
 
@@ -323,7 +323,7 @@ example!
 
 Chitra can Create Rest API or Interactive UI app for Any Learning Model -
 ML, DL, Image Classification, NLP, Tensorflow, PyTorch or SKLearn.
-It provides `chitra.serve.GradioApp` for building Interactive UI prototype app
+It provides `chitra.serve.GradioApp` for building Interactive UI app for ML/DL models
 and `chitra.serve.API` for building Rest API endpoint.
 
 ```python
@@ -340,7 +340,7 @@ create_api(model, run=True, api_type='image-classification')
 
 </details>
 
-See [Example Section](https://chitra.readthedocs.io/en/latest/examples/model-server/model-server.html) for detailed
+See [Example Section](https://chitra.readthedocs.io/en/latest/source/api/serve/model_server/) for detailed
 explanation!
 
 ## Utils
@@ -348,16 +348,16 @@ explanation!
 Limit GPU memory or enable dynamic GPU memory growth for Tensorflow.
 
 ```python
-from chitra.utils import limit_gpu, gpu_dynamic_mem_growth
+from chitra.utility import tf_limit_gpu, tf_gpu_dynamic_mem_growth
 
 # limit the amount of GPU required for your training
-limit_gpu(gpu_id=0, memory_limit=1024 * 2)
+tf_limit_gpu(gpu_id=0, memory_limit=1024 * 2)
 ```
 
     No GPU:0 found in your system!
 
 ```python
-gpu_dynamic_mem_growth()
+tf_gpu_dynamic_mem_growth()
 ```
 
     No GPU found on the machine!
@@ -376,5 +376,5 @@ Conduct**](https://github.com/aniketmaurya/chitra/blob/master/CODE_OF_CONDUCT.md
 
 ## Acknowledgement
 
-CHITRA is built with help of awesome libraries like [Tensorflow 2.x](https://github.com/tensorflow/tensorflow),
+*chitra* is built with help of awesome libraries like [Tensorflow 2.x](https://github.com/tensorflow/tensorflow),
 [imgaug](https://github.com/aleju/imgaug), [FastAPI](https://github.com/tiangolo/fastapi) and [Gradio](https://gradio.app).
