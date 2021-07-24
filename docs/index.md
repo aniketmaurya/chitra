@@ -10,9 +10,10 @@
 
 ## What is chitra?
 
-**chitra** (**चित्र**) is a Deep Learning library for Model Building, Interpretability, Visualization, API Building & Deployment
+**chitra** (**चित्र**) is a Deep Learning library for Model Building, Interpretability, Visualization, API Building & Deployment.
+Easily create UI for Machine Learning models or Rest API backend that can be deployed for serving ML Models in Production.
 
-### Highlights:
+### 📌 Highlights:
 
 - [New] Framework Agnostic Model Serving & Interactive UI prototype app ✨🌟
 - [New] Data Visualization, Bounding Box Visualization 🐶🎨
@@ -20,6 +21,11 @@
 - Faster data loading without any boilerplate 🤺
 - Progressive resizing of images 🎨
 - Rapid experiments with different models using `chitra.trainer` module 🚀
+
+### 🚘 Implementation Roadmap
+
+- One click deployment to `serverless` platform.
+- Auto Dockerization of Models.
 
 
 > If you have more use case please [**raise an issue/PR**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
@@ -297,7 +303,7 @@ print(IMAGENET_LABELS[285])
 
 ![png](https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/images/output_22_1.png)
 
-## Data Visualization
+## 🎨 Data Visualization
 
 ### Image annotation
 
@@ -362,7 +368,7 @@ tf_gpu_dynamic_mem_growth()
 
     No GPU found on the machine!
 
-## Contribute
+## 🤗 Contribute
 
 Contributions of any kind are welcome. Please check the [**Contributing
 Guidelines**](https://github.com/aniketmaurya/chitra/blob/master/CONTRIBUTING.md) before contributing.
