@@ -10,7 +10,9 @@
 
 ## What is chitra?
 
-**chitra** (**चित्र**) is a Deep Learning library for Model Building, Interpretability, Visualization, API Building & Deployment.
+**chitra** (**चित्र**) is a Deep Learning library for Model Building, Explainable AI, Data Visualization, API Building & Deployment.
+Load Image from Internet url, filepath or `numpy` array and plot Bounding Boxes on the images easily.
+Model Training and Explainable AI.
 Easily create UI for Machine Learning models or Rest API backend that can be deployed for serving ML Models in Production.
 
 ### 📌 Highlights:
@@ -279,7 +281,7 @@ trainer.cyclic_fit(epochs=5,
 
 </details>
 
-## ✨ Model Visualization
+## ✨ Model Interpretability
 
 It is important to understand what is going inside the model. Techniques like GradCam and Saliency Maps can visualize
 what the Network is learning. `trainer` module has InterpretModel class which creates GradCam and GradCam++
