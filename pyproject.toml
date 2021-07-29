@@ -58,4 +58,4 @@ test = [
 profile = "black"
 
 [tool.flit.scripts]
-chitra = "chitra.cli:app"
+chitra = "chitra.cli.main:app"
