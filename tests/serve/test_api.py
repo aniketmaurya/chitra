@@ -5,7 +5,9 @@ import numpy as np
 import pytest
 from fastapi import FastAPI
 
-from chitra.serve import API, create_api, constants as const
+from chitra.serve import API
+from chitra.serve import constants as const
+from chitra.serve import create_api
 
 
 def dummy_model(x):
