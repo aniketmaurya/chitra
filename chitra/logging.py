@@ -1,4 +1,4 @@
-from chitra.utility.import_utils import _LOGURU_INSTALLED
+from chitra.imports import _LOGURU_INSTALLED
 
 if _LOGURU_INSTALLED:
     from loguru import logger

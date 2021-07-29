@@ -10,11 +10,16 @@ from PIL import Image
 
 from chitra.constants import _TF, _TORCH, CHITRA_URL_SEP, IMAGE_CACHE_DIR
 from chitra.coordinates import BoundingBoxes
-from chitra.utility.import_utils import INSTALLED_MODULES
+from chitra.utility.import_utils import is_installed
 
 tf = None
 torch = None
 
+if is_installed(_TF):
+    import tensorflow as tf
+
+if is_installed(_TORCH):
+    import torch
 
 DATA_FORMATS = Union[str, Image.Image, np.ndarray, "tf.Tensor", "torch.Tensor"]
 DEFAULT_MODE = os.environ.get("CHITRA_DEFAULT_MODE", "TF")
@@ -50,12 +55,6 @@ class Chitra:
     2. Plot image
     3. Draw bounding boxes
     """
-
-    if INSTALLED_MODULES.get(_TF, None):
-        import tensorflow as tf
-
-    if INSTALLED_MODULES.get(_TORCH, None):
-        import torch
 
     def __init__(
         self,
