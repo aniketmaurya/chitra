@@ -1,9 +1,8 @@
 import typer
 
-from chitra import __version__
-from chitra.cli import app
+from chitra.cli import dockerizer, examples
 
+app = typer.Typer(name="chitra CLI ✨")
 
-@app.command()
-def hello():
-    typer.echo(f"Hey! You're running chitra version={__version__}")
+app.add_typer(dockerizer.app, name="dockerizer")
+app.add_typer(examples.app, name="examples")
