@@ -7,7 +7,7 @@ app = typer.Typer()
 
 
 @app.command()
-def dockerize(path: str = "./", port: str = "8080"):
+def run(path: str = "./", port: str = "8080"):
     typer.echo("I will dockerize your ML app ⛴")
     path = Path(path)
     files = glob(str(path / "*"))
