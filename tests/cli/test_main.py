@@ -12,4 +12,4 @@ def test_app():
     app.command()(version)
     result = runner.invoke(app)
     assert result.exit_code == 0
-    assert f"You're running chitra version" in result.stdout
+    assert "You're running chitra version" in result.stdout
