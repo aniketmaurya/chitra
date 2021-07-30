@@ -56,3 +56,6 @@ test = [
 
 [tool.isort]
 profile = "black"
+
+[tool.flit.scripts]
+chitra = "chitra.cli:app"
