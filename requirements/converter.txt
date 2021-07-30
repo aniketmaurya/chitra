@@ -1,3 +1,0 @@
-onnx
-onnx2pytorch
-tf2onnx
