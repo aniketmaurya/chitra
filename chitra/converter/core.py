@@ -1,5 +1,3 @@
-import tempfile
-
 from chitra.utility.import_utils import is_installed
 
 onnx = None
@@ -15,9 +13,6 @@ if is_installed("tf2onnx"):
 
 if is_installed("torch"):
     import torch.onnx
-
-if is_installed("onnx2pytorch"):
-    from onnx2pytorch import ConvertModel
 
 
 def pytorch_to_onnx(model, tensor, export_path="temp.onnx"):
@@ -42,26 +37,9 @@ def pytorch_to_onnx(model, tensor, export_path="temp.onnx"):
     return export_path
 
 
-def onnx_to_pytorch(onnx_model):
-    if isinstance(onnx_model, str):
-        onnx_model = onnx.load(onnx_model)
-    onnx.checker.check_model(onnx_model)
-    pytorch_model = ConvertModel(onnx_model)
-    return pytorch_model
-
-
 def tf2_to_onnx(model, opset=None, output_path=None, **kwargs):
     inputs_as_nchw = kwargs.get("inputs_as_nchw", "input0:0")
     onnx_model = tf2onnx.convert.from_keras(
         model, opset=opset, output_path=output_path, inputs_as_nchw=inputs_as_nchw
     )
     return onnx_model
-
-
-def tf2_to_pytorch(model, opset=None, **kwargs):
-    with tempfile.NamedTemporaryFile(mode="w") as fw:
-        filename = fw.name
-        onnx_model = tf2_to_onnx(model, opset, output_path=filename, **kwargs)
-        fw.seek(0)
-        torch_model = onnx_to_pytorch(filename)
-    return torch_model

@@ -34,6 +34,7 @@ requires = [
     "scikit-learn",
     "typeguard",
     "gradio >=2.2.2",
+    "typer",
 ]
 description-file = "README.md"
 requires-python = ">=3.7"
@@ -46,7 +47,7 @@ serve = [
     "fastapi", "uvicorn", "pydantic", "python-multipart", "tensorflow-serving-api",
 ]
 converter = [
-    "onnx", "onnx2pytorch", "tf2onnx",
+    "onnx", "tf2onnx",
 ]
 test = [
     "pytest",
@@ -56,3 +57,6 @@ test = [
 
 [tool.isort]
 profile = "black"
+
+[tool.flit.scripts]
+chitra = "chitra.cli.main:app"
