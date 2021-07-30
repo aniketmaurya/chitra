@@ -34,6 +34,7 @@ requires = [
     "scikit-learn",
     "typeguard",
     "gradio >=2.2.2",
+    "typer",
 ]
 description-file = "README.md"
 requires-python = ">=3.7"
@@ -42,7 +43,6 @@ requires-python = ">=3.7"
 Documentation = "https://chitra.readthedocs.io/en/latest"
 
 [tool.flit.metadata.requires-extra]
-cli = [ "typer" ]
 serve = [
     "fastapi", "uvicorn", "pydantic", "python-multipart", "tensorflow-serving-api",
 ]
