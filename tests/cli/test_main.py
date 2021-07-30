@@ -1,7 +1,6 @@
 import typer
 from typer.testing import CliRunner
 
-from chitra import __version__
 from chitra.cli.main import version
 
 runner = CliRunner()
