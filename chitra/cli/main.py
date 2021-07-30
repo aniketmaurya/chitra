@@ -9,10 +9,5 @@ app.add_typer(dockerize.app, name="dockerizer")
 
 
 @app.command()
-def hello():
+def version():
     typer.echo(f"Hey 👋! You're running chitra version={__version__} ✨")
-
-
-@app.command()
-def bye():
-    typer.echo("bye bye! 😊")
