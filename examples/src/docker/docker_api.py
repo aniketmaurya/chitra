@@ -12,5 +12,8 @@ classifier = pipeline("sentiment-analysis", model=model, tokenizer=tokenizer)
 api = create_api(classifier, run=False, api_type="text-classification")
 
 
-docker_cmd = dockerize_api("./", main_module_name='docker_api', )
+docker_cmd = dockerize_api(
+    "./",
+    main_module_name="docker_api",
+)
 print(docker_cmd)
