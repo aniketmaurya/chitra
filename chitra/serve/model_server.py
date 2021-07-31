@@ -55,3 +55,6 @@ class ModelServer:
                  {ModelServer.get_available_api_types()}"
             )
         return self.data_processor
+
+    def run(self, *_, **__):
+        raise NotImplementedError

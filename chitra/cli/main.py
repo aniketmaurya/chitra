@@ -1,4 +1,5 @@
 import typer
+import uvicorn
 
 from chitra import __version__
 from chitra.cli import dockerize
