@@ -6,7 +6,7 @@ from chitra.cli import dockerize
 
 app = typer.Typer(name="chitra CLI ✨")
 
-app.add_typer(dockerize.app, name="dockerizer")
+app.add_typer(dockerize.app, name="dockerizer", help="auto dockerization ✨")
 
 
 @app.command()

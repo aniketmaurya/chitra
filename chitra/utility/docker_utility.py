@@ -35,6 +35,5 @@ def build(
     fileobj = BytesIO(dockerfile.encode("utf-8"))
     response = []
     for line in client.build(fileobj=fileobj, rm=True, tag=tag, **docker_kwargs):
-        logger.info(line)
-        response.append(line)
+        yield line
     return response

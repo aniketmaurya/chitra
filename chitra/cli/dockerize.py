@@ -1,3 +1,4 @@
+import os
 from glob import glob
 from pathlib import Path
 from typing import List, Optional
@@ -13,23 +14,28 @@ app = typer.Typer()
 def file_check(files: List) -> None:
     if "requirements.txt" not in files:
         raise UserWarning("requirements.txt not found!")
-    if "configs.py" not in files:
-        raise UserWarning("configs.py not found")
+
     if "main.py" not in files:
         raise UserWarning(
             "main.py not found! Your main.py should contain app object of type chitra.serve.ModelServer"
         )
 
 
-@app.command(help="Dockerize chitra.serve.model_server")
+def text_to_file(text: str, path: str):
+    with open(path, "w") as fw:
+        fw.write(text)
+
+
+@app.command()
 def run(
     path: str = "./",
     port: Optional[str] = None,
     tag: Optional[str] = None,
-    docker_kwargs: Optional[dict] = None,
 ):
     if not port:
         port = "8080"
+    if not tag:
+        tag = "chitra-server"
 
     path = Path(path)
     files = glob(str(path / "*"))
@@ -41,5 +47,9 @@ def run(
         typer.echo(files)
 
     dockerfile = template.API_DOCKERFILE
-    dockerfile.replace("PORT", port)
-    du.build(dockerfile, tag, docker_kwargs)
+    dockerfile = dockerfile.replace("PORT", port)
+    typer.echo(dockerfile)
+    text_to_file(dockerfile, "Dockerfile")
+
+    typer.echo(f"Building Docker {tag} ⛴")
+    os.system(f"docker build --tag {tag} .")
