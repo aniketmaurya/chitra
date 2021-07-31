@@ -1,2 +1,2 @@
 transformers
-chitra==0.0.1
+chitra[serve]==0.1.0

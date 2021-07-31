@@ -6,7 +6,6 @@ from typing import List, Optional
 import typer
 
 from chitra.utility import docker_templates as template
-from chitra.utility import docker_utility as du
 
 app = typer.Typer()
 
