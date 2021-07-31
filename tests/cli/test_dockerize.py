@@ -7,6 +7,7 @@ from chitra.cli import dockerize
 
 runner = CliRunner()
 
+
 @patch("chitra.cli.dockerize.os")
 @patch("chitra.cli.dockerize.file_check")
 def test_app(mock_file_check, mock_os):
