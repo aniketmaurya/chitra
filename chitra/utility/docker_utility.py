@@ -5,6 +5,7 @@ from typing import Optional
 import docker
 
 from chitra.constants import DOCKER_BASE_URL
+from chitra.logging import logger
 
 client = docker.APIClient(base_url=os.environ.get("docker_base_url", DOCKER_BASE_URL))
 
@@ -32,8 +33,8 @@ def build(
         docker_kwargs = {}
 
     fileobj = BytesIO(dockerfile.encode("utf-8"))
-    response = [
-        line
-        for line in client.build(fileobj=fileobj, rm=True, tag=tag, **docker_kwargs)
-    ]
+    response = []
+    for line in client.build(fileobj=fileobj, rm=True, tag=tag, **docker_kwargs):
+        logger.info(line)
+        response.append(line)
     return response
