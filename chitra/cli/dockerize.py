@@ -1,4 +1,5 @@
 import os
+import shlex
 from glob import glob
 from pathlib import Path
 from typing import List, Optional
@@ -51,4 +52,5 @@ def run(
     text_to_file(dockerfile, "Dockerfile")
 
     typer.echo(f"Building Docker {tag} ⛴")
-    os.system(f"docker build --tag {tag} .")
+    cmd = shlex.quote(f"docker build --tag {tag} .")
+    os.system(cmd)
