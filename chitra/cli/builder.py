@@ -49,11 +49,8 @@ def create(
     path = Path(path)
     files = glob(str(path / "*"))
     file_check(files)
-
-    typer.echo(
-        f"Everything under {typer.style(path, fg=typer.colors.GREEN)} \
-    will be added to Docker image!"
-    )
+    style_path = typer.style(str(path), fg=typer.colors.GREEN)
+    typer.echo(f"Everything under {style_path} will be added to Docker image!")
     show_files = typer.confirm("Do you wish to see the files to be added?")
     if show_files:
         typer.echo(files)
