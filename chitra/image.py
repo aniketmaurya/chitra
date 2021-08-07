@@ -10,7 +10,7 @@ from PIL import Image
 
 from chitra.constants import _TF, _TORCH, CHITRA_URL_SEP, IMAGE_CACHE_DIR
 from chitra.coordinates import BoundingBoxes
-from chitra.utility.import_utils import is_installed
+from chitra.import_utils import is_installed
 
 tf = None
 torch = None

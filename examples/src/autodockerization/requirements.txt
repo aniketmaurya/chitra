@@ -1,0 +1,6 @@
+transformers
+fastapi
+uvicorn
+pillow
+gradio
+imgaug
