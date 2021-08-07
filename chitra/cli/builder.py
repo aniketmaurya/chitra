@@ -20,6 +20,7 @@ def get_dockerfile() -> str:
 
 
 def file_check(files: List) -> None:
+    files = map(os.path.basename, files)
     if "requirements.txt" not in files:
         raise UserWarning("requirements.txt not found!")
 
