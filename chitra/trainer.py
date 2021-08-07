@@ -14,7 +14,7 @@ from tf_keras_vis.gradcam import Gradcam, GradcamPlusPlus
 from tf_keras_vis.utils import normalize
 from typeguard import check_argument_types, typechecked
 
-from chitra.utility.import_utils import is_installed
+from chitra.import_utils import is_installed
 
 from .converter.core import pytorch_to_onnx, tf2_to_onnx
 from .datagenerator import Dataset

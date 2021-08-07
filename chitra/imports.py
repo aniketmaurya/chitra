@@ -1,5 +1,5 @@
 from chitra.constants import _FLAX, _JAX, _TF, _TF_GPU, _TORCH, _TORCHVISION
-from chitra.utility.import_utils import is_installed
+from chitra.import_utils import is_installed
 
 INSTALLED_MODULES = {
     module: is_installed(module)
