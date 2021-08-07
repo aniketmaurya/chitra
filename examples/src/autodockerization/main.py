@@ -2,11 +2,11 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipe
 
 from chitra.serve import create_api
 
-tokenizer = AutoTokenizer.from_pretrained("finiteautomata/beto-sentiment-analysis")
+tokenizer = AutoTokenizer.from_pretrained("microsoft/xtremedistil-l6-h256-uncased")
 model = AutoModelForSequenceClassification.from_pretrained(
-    "finiteautomata/beto-sentiment-analysis"
+    "microsoft/xtremedistil-l6-h256-uncased"
 )
-classifier = pipeline("sentiment-analysis", model=model, tokenizer=tokenizer)
+classifier = pipeline("text-classification", model=model, tokenizer=tokenizer)
 
 api = create_api(classifier, run=False, api_type="text-classification")
 
