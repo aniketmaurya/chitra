@@ -1,4 +1,6 @@
 import os
+import shlex
+import subprocess
 from glob import glob
 from pathlib import Path
 from typing import List, Optional
@@ -60,5 +62,14 @@ def create(
 
     typer.echo(f"Building Docker {tag} 🐳")
     cmd = f"docker build --tag {tag} ."
-    # cmd = shlex.quote(cmd)
-    os.system(cmd)
+    cmd = shlex.split(cmd)
+    process = subprocess.run(cmd, stdout=subprocess.PIPE, universal_newlines=True)
+    if process.returncode == 0:
+        typer.secho(
+            "Docker image has been created for your app! Check the image using ",
+            nl=False,
+            fg=typer.colors.GREEN,
+        )
+        typer.secho("docker images", fg=typer.colors.BRIGHT_BLUE)
+    else:
+        typer.secho("Docker build failed!", fg=typer.colors.RED)
