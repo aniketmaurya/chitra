@@ -1,14 +1,20 @@
 import os
-import shlex
 from glob import glob
 from pathlib import Path
 from typing import List, Optional
 
 import typer
 
-from chitra.utility import docker_templates as template
+import chitra
 
-app = typer.Typer()
+app = typer.Typer(name="builder")
+
+
+def get_dockerfile() -> str:
+    path = Path(os.path.dirname(chitra.__file__)) / "assets/API.Dockerfile"
+    with open(path, "r") as fr:
+        data = fr.read()
+    return data
 
 
 def file_check(files: List) -> None:
@@ -27,7 +33,7 @@ def text_to_file(text: str, path: str):
 
 
 @app.command()
-def run(
+def create(
     path: str = "./",
     port: Optional[str] = None,
     tag: Optional[str] = None,
@@ -46,11 +52,12 @@ def run(
     if show_files:
         typer.echo(files)
 
-    dockerfile = template.API_DOCKERFILE
+    dockerfile = get_dockerfile()
     dockerfile = dockerfile.replace("PORT", port)
     typer.echo(dockerfile)
     text_to_file(dockerfile, "Dockerfile")
 
-    typer.echo(f"Building Docker {tag} ⛴")
-    cmd = shlex.quote(f"docker build --tag {tag} .")
+    typer.echo(f"Building Docker {tag} 🐳")
+    cmd = f"docker build --tag {tag} ."
+    # cmd = shlex.quote(cmd)
     os.system(cmd)

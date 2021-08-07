@@ -1,7 +1,8 @@
-API_DOCKERFILE = """
-
 FROM python:3.7
-RUN apt install ffmpeg libsm6 libxext6  -y
+RUN \
+    apt-get update && \
+    apt-get install ffmpeg libsm6 libxext6  -y
+
 
 WORKDIR /app
 
@@ -17,4 +18,3 @@ COPY . .
 EXPOSE PORT
 
 CMD [ "uvicorn", "main:app", "--host=0.0.0.0", "--port=PORT"]
-"""
