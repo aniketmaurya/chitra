@@ -25,7 +25,8 @@ def file_check(files: List) -> None:
 
     if "main.py" not in files:
         raise UserWarning(
-            "main.py not found! Your main.py should contain app object of type chitra.serve.ModelServer"
+            "main.py not found! Your main.py should contain app \
+            object of type chitra.serve.ModelServer"
         )
 
 
@@ -49,7 +50,10 @@ def create(
     files = glob(str(path / "*"))
     file_check(files)
 
-    typer.echo(f"Everything under {path} will be added to Docker image!")
+    typer.echo(
+        f"Everything under {typer.style(path, fg=typer.colors.GREEN)} \
+    will be added to Docker image!"
+    )
     show_files = typer.confirm("Do you wish to see the files to be added?")
     if show_files:
         typer.echo(files)
