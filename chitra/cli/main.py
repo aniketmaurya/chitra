@@ -11,7 +11,6 @@ app = typer.Typer(
 app.add_typer(
     builder.app,
     name="builder",
-    help="Auto Build Docker image for Chitra Model Server 🐳",
 )
 
 
