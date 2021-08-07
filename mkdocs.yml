@@ -49,6 +49,7 @@ nav:
   - Image & Bounding Boxes: 'source/api/image/chitra-class.md'
   - Serve: 'source/api/serve/model_server.md'
   - Visualization: 'source/api/visualization/metrics.md'
+  - Auto Docker Building: 'source/cli/builder/builder-create.md'
   - Examples:
       - Image Classification: 'examples/image-classification/image-classification.md'
       - Model Server: 'examples/model-server/model-server.md'
