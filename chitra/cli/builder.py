@@ -54,7 +54,8 @@ def create(
 
     dockerfile = get_dockerfile()
     dockerfile = dockerfile.replace("PORT", port)
-    typer.echo(dockerfile)
+    if typer.confirm("Show Dockerfile"):
+        typer.echo(dockerfile)
     text_to_file(dockerfile, "Dockerfile")
 
     typer.echo(f"Building Docker {tag} 🐳")
