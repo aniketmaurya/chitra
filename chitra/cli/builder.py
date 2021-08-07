@@ -9,7 +9,12 @@ import typer
 
 import chitra
 
-app = typer.Typer(name="builder")
+app = typer.Typer(
+    help="""Auto Builds docker image for chitra ModelServer.
+    path should contain a `main.py` file which will have an object of type `chitra.serve.ModelServer` and
+    its name should be `app`. If you have any external Python dependency then create a `requirements.txt` file and
+    keep in the same directory."""
+)
 
 
 def get_dockerfile() -> str:
@@ -42,6 +47,18 @@ def create(
     port: Optional[str] = None,
     tag: Optional[str] = None,
 ):
+    """
+    Auto-builds Docker image for chitra ModelServer
+
+    Args:
+
+        path: file-location of main.py
+
+        port: port to expose
+
+        tag: tag of docker image
+
+    """
     if not port:
         port = "8080"
     if not tag:
