@@ -54,7 +54,7 @@ def test_image_classification():
         postprocess_conf=postprocess_conf,
     )
 
-    assert app.image_classification(dummy_image) in (0, 1)
+    assert app.single_x_classification(dummy_image) in (0, 1)
 
 
 @pytest.mark.parametrize(
