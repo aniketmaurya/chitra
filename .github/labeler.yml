@@ -7,3 +7,9 @@ example:
 
 test:
 - tests/**/*
+
+serve:
+- chitra/serve/**/*
+
+cli:
+- chitra/cli/**/*
