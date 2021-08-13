@@ -14,10 +14,9 @@ RATE_UNIT = {"m": Rate.MINUTES, "h": Rate.HOURS, "d": Rate.DAYS}
 def infer_location_type(path: str):
     if path.startswith("s3"):
         return S3
-    elif path.startswith("gcs"):
+    if path.startswith("gcs"):
         return GCS
-    else:
-        raise ValueError(f"Location type is not supported yet for path={path}")
+    raise ValueError(f"Location type is not supported yet for path={path}")
 
 
 def download_model(path: str):
