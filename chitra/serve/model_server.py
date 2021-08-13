@@ -21,10 +21,14 @@ class ModelServer:
         model: Callable,
         preprocess_fn=None,
         postprocess_fn=None,
+        preprocess_conf: Optional[dict] = None,
+        postprocess_conf: Optional[dict] = None,
         **kwargs,
     ):
         self.api_type = api_type.upper()
         self.model = model
+        self.preprocess_conf = preprocess_conf
+        self.postprocess_conf = postprocess_conf
         self.data_processor: Optional[DataProcessor] = self.set_data_processor(
             preprocess_fn, postprocess_fn
         )
