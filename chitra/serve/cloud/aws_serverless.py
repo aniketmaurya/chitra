@@ -42,7 +42,8 @@ class ChaliceServer(CloudServer):
 
         self.app = Chalice(app_name=kwargs.get("name", "chitra-server"))
 
-    def index(self):
+    @staticmethod
+    def index():
         return {"hello": "world"}
 
     def predict(self) -> dict:
