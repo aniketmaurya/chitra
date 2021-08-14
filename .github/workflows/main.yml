@@ -1,4 +1,4 @@
-name: Python Main CI
+name: pytest
 on:
   push:
     branches: [ master ]
