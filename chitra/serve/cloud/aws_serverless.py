@@ -19,7 +19,7 @@ def infer_location_type(path: str):
 
 
 class ChaliceServer(CloudServer):
-    INVOKE_METHODS = ("route", "schedule", "on_s3_event")
+    INVOKE_METHODS = ("route",)
 
     def __init__(
         self,
@@ -41,6 +41,9 @@ class ChaliceServer(CloudServer):
 
         self.app = Chalice(app_name=kwargs.get("name", "chitra-server"))
 
+    def index(self):
+        return {"hello": "world"}
+
     def predict(self, x) -> dict:
         data_processor = self.data_processor
 
@@ -60,7 +63,5 @@ class ChaliceServer(CloudServer):
 
         if invoke_method == "route":
             route_path = kwargs.get("path", "/predict")
-            self.app.route(route_path, methods=["GET"])(self.predict)
-
-        else:
-            raise NotImplementedError()
+            self.app.route("/", methods=["GET"])(self.index)
+            self.app.route(route_path, methods=["POST"])(self.predict)
