@@ -107,8 +107,8 @@ class Chitra:
     def size(self):
         return self.image.size
 
-    def imshow(self, cmap=plt.cm.Blues, *args, **kwargs):
-        plt.imshow(self.numpy(), cmap, *args, **kwargs)
+    def imshow(self, cmap=plt.cm.Blues, **kwargs):
+        plt.imshow(self.numpy(), cmap, **kwargs)
 
     def draw_boxes(
         self,
