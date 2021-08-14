@@ -44,6 +44,7 @@ dl = [
     "tensorflow-addons >=0.13.0",
     "tf-keras-vis >=0.5.3",
     "pytorch-lightning",
+    "timm",
 ]
 serve = [
     "fastapi", "uvicorn", "pydantic", "python-multipart", "tensorflow-serving-api",
@@ -56,9 +57,6 @@ test = [
     "pytest",
     "pytest-asyncio",
     "coverage",
-]
-example = [
-    "timm",
 ]
 
 [tool.isort]
