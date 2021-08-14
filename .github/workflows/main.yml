@@ -17,8 +17,6 @@ jobs:
             path: ~/.cache/pip
           - os: macos-latest
             path: ~/Library/Caches/pip
-          - os: windows-latest
-            path: ~\AppData\Local\pip\Cache
     env:
       OS: ${{ matrix.os }}
       PYTHON: '3.7'
