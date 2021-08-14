@@ -80,3 +80,8 @@ def test_run(mock_gr, test_input, expected):
 def test_setup():
     with pytest.raises(NotImplementedError):
         GradioApp("RANDOM", model=dummy_model)
+
+    with pytest.raises(NotImplementedError):
+        app = GradioApp(const.IMAGE_CLF, model=dummy_model)
+        app.api_type = "RANDOM"
+        app.setup()
