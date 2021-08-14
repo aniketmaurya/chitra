@@ -5,8 +5,8 @@ from fastapi import FastAPI, File, UploadFile
 
 from chitra.__about__ import documentation_url
 from chitra.serve import schema
+from chitra.serve.base import ModelServer
 from chitra.serve.constants import IMAGE_CLF, OBJECT_DETECTION, QNA, TXT_CLF
-from chitra.serve.model_server import ModelServer
 
 
 class API(ModelServer):

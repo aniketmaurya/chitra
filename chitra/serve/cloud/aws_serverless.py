@@ -3,7 +3,7 @@ from typing import Callable
 import requests
 from chalice import Chalice, Rate
 
-from chitra.serve.model_server import ModelServer
+from chitra.serve.base import ModelServer
 
 S3 = "s3"
 GCS = "gcs"

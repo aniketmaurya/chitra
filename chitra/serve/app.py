@@ -5,7 +5,7 @@ import numpy as np
 
 from chitra.__about__ import documentation_url
 from chitra.serve import constants as const
-from chitra.serve.model_server import ModelServer
+from chitra.serve.base import ModelServer
 
 
 class GradioApp(ModelServer):
