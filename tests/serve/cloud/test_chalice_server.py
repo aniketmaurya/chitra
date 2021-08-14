@@ -61,7 +61,7 @@ def test_predict():
         model_path=MODEL_PATH,
         model_loader=model_loader,
         preprocess_fn=preprocess,
-        postprocess_fn=postprocess
+        postprocess_fn=postprocess,
     )
     server.app.current_request = Dummy
     assert isinstance(server.predict(), str)
