@@ -1,6 +1,6 @@
 import io
 from abc import ABC
-from typing import Callable
+from typing import Callable, Optional
 
 import smart_open
 
@@ -13,8 +13,8 @@ class CloudServer(ModelServer, ABC):
         api_type: str,
         model_path: str,
         model_loader: Callable,
-        preprocess_fn: Callable,
-        postprocess_fn: Callable,
+        preprocess_fn: Optional[Callable] = None,
+        postprocess_fn: Optional[Callable] = None,
         **kwargs
     ):
         raw_model = self.download_model(model_path, **kwargs)
