@@ -43,7 +43,6 @@ class ChaliceServer(CloudServer):
         data_processor = self.data_processor
         x = self.app.current_request.raw_body
         logger.debug(f"raw body type={type(x)}")
-        logger.debug(x)
         if data_processor.preprocess_fn:
             x = data_processor.preprocess(x, **self.preprocess_conf)
         x = self.model(x)
