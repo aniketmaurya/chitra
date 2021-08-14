@@ -1,4 +1,4 @@
-.PHONY: build_docs build
+.PHONY: build_docs clean style build pypi
 
 build_docs:
 	cp README.md docs/index.md

@@ -68,4 +68,4 @@ class ModelServer:
 
     @abc.abstractmethod
     def run(self):
-        pass
+        raise NotImplementedError

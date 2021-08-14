@@ -1,4 +1,5 @@
 import io
+import os
 
 import numpy as np
 import torch
@@ -11,7 +12,9 @@ from chitra.serve.cloud import ChaliceServer
 
 LABELS = load_imagenet_labels()
 
-MODEL_PATH = "https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-weights/efficientnet_b0_ra-3dd342df.pth"
+MODEL_PATH = "examples/assets/model.pth"
+if not os.path.exists(MODEL_PATH):
+    MODEL_PATH = "https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-weights/efficientnet_b0_ra-3dd342df.pth"
 
 url = (
     "https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/logo.png"
