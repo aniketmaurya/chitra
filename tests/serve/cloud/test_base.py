@@ -21,6 +21,5 @@ def test_cloudserver():
         model_path=MODEL_PATH,
         model_loader=model_loader,
     )
-
     assert isinstance(server, Chalice)
     assert isinstance(server.model, torch.nn.Module)
