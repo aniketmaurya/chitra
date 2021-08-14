@@ -16,7 +16,6 @@ from typeguard import check_argument_types, typechecked
 
 from chitra.import_utils import is_installed
 
-from .converter.core import pytorch_to_onnx, tf2_to_onnx
 from .datagenerator import Dataset
 
 pl = None
@@ -272,7 +271,7 @@ class Trainer(Model):
     def compile2(
         self,
         batch_size: int,
-        optimizer: Union[str, tf.keras.optimizers.Optimizer] = "adam",
+        optimizer: Union[None, str, tf.keras.optimizers.Optimizer] = None,
         lr_range: Union[tuple, list] = (1e-4, 1e-2),
         loss: Optional[tf.keras.losses.Loss] = None,
         metrics=None,
@@ -292,6 +291,8 @@ class Trainer(Model):
             scale_mode (str): cycle or exp
             momentum(int): momentum for the optimizer when optimizer is of type str
         """
+        if not optimizer:
+            optimizer = "adam"
         self.max_lr, self.min_lr = lr_range
         self.batch_size = batch_size
 
@@ -419,11 +420,3 @@ class Learner:
             if not self.trainer:
                 self.trainer = pl.Trainer(max_epochs=epochs, **lit_confs)
             return self.trainer.fit(self.model, train_data, val_data)
-
-    def to_onnx(self, tensor=None, export_path=None):
-        MODE = self.MODE
-        if MODE in Learner.TF:
-            return tf2_to_onnx(self.model, output_path=export_path)
-
-        if MODE in Learner.PT:
-            return pytorch_to_onnx(self.model, tensor, export_path)
