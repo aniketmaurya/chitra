@@ -35,7 +35,7 @@ def test_index():
 
 def test_predict():
     class Dummy:
-        raw = url
+        raw_body = url
 
     server = ChaliceServer(
         "image-classification",
