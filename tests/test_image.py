@@ -60,3 +60,9 @@ def test__cache_image():
     image.save = MagicMock()
     _cache_image(image, "test_image.jpg")
     image.save.assert_called_once()
+
+
+def test_image_resize():
+    image = Chitra(url, cache=True)
+    image.resize((224, 224))
+    assert image.shape[:2] == (224, 224)
