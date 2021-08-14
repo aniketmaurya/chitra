@@ -24,11 +24,7 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
 ]
 requires = [
-    "tensorflow >= 2.3",
-    "tensorflow-addons >=0.13.0",
-    "tf-keras-vis >=0.5.3",
-    "pytorch-lightning",
-    "matplotlib",
+        "matplotlib",
     "pillow",
     "imgaug >=0.4.0",
     "scikit-learn",
@@ -43,6 +39,12 @@ requires-python = ">=3.7"
 Documentation = "https://chitra.readthedocs.io/en/latest"
 
 [tool.flit.metadata.requires-extra]
+dl = [
+    "tensorflow >= 2.3",
+    "tensorflow-addons >=0.13.0",
+    "tf-keras-vis >=0.5.3",
+    "pytorch-lightning",
+]
 serve = [
     "fastapi", "uvicorn", "pydantic", "python-multipart", "tensorflow-serving-api",
     "chalice", "smart_open"
