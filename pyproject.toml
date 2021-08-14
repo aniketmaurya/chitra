@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [tool.flit.metadata]
 module = "chitra"
 author = "Aniket Maurya"
-author-email = "hello@aniketmaury.com"
+author-email = "hello@aniketmaurya.com"
 home-page = "https://github.com/aniketmaurya/chitra"
 classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
