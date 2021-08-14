@@ -2,6 +2,7 @@ import io
 
 import numpy as np
 import torch
+from loguru import logger
 from timm import create_model
 
 from chitra.core import load_imagenet_labels
@@ -11,6 +12,7 @@ from chitra.serve.cloud.aws_serverless import ChaliceServer
 MODEL_PATH = "../../../nbs/model.pth"
 
 LABELS = load_imagenet_labels()
+logger.debug(f"labels={LABELS[:5]}...")
 
 
 def preprocess(content_raw_body) -> torch.Tensor:
@@ -24,11 +26,13 @@ def preprocess(content_raw_body) -> torch.Tensor:
 
 
 def postprocess(data: torch.Tensor) -> str:
-    return LABELS[data.argmax(1)]
+    logger.debug(f"predictions = {data}")
+    result = LABELS[data.argmax(1)]
+    return result
 
 
 def model_loader(buffer: io.BytesIO) -> torch.nn.Module:
-    model: torch.nn.Module = create_model("efficientnet_b0", pretrained=False)
+    model = create_model("efficientnet_b0", pretrained=False).eval()
     model.load_state_dict(torch.load(buffer))
     return model
 
