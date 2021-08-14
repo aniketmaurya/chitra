@@ -1,3 +1,4 @@
+import io
 import os
 from io import BytesIO
 from pathlib import Path
@@ -88,6 +89,9 @@ class Chitra:
     def _load_image(data: DATA_FORMATS, cache: bool):
         if isinstance(data, Image.Image):
             return data
+
+        elif isinstance(data, bytes):
+            return Image.open(io.BytesIO(data))
 
         if isinstance(data, (tf.Tensor, torch.Tensor)):
             data = data.numpy().astype("uint8")
