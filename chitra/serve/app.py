@@ -9,7 +9,10 @@ from chitra.serve.base import ModelServer
 
 
 class GradioApp(ModelServer):
-    API_TYPES = {"VISION": (const.IMAGE_CLF, const.OBJECT_DETECTION)}
+    API_TYPES = {
+        "VISION": (const.IMAGE_CLF, const.OBJECT_DETECTION),
+        "NLP": (const.TXT_CLF,),
+    }
 
     def __init__(
         self,

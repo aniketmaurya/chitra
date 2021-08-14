@@ -75,3 +75,8 @@ def test_run(mock_gr, test_input, expected):
         description=app.desc,
         **expected,
     )
+
+
+def test_setup():
+    with pytest.raises(NotImplementedError):
+        GradioApp("RANDOM", model=dummy_model)

@@ -39,6 +39,7 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+            ${{ runner.os }}-
 
       - name: Installation
         run: |

@@ -59,7 +59,7 @@ class ModelServer:
         elif api_type in ModelServer.API_TYPES.get("NLP"):
             self.data_processor = DefaultTextProcessor.nlp
         else:
-            raise UserWarning(
+            raise NotImplementedError(
                 f"{api_type} is not implemented! Available types are -\
                  {ModelServer.get_available_api_types()}"
             )
