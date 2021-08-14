@@ -65,7 +65,3 @@ class ModelServer:
                  {ModelServer.get_available_api_types()}"
             )
         return self.data_processor
-
-    @abc.abstractmethod
-    def run(self):
-        raise NotImplementedError
