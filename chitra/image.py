@@ -90,7 +90,7 @@ class Chitra:
         if isinstance(data, Image.Image):
             return data
 
-        elif isinstance(data, bytes):
+        if isinstance(data, bytes):
             return Image.open(io.BytesIO(data))
 
         if isinstance(data, (tf.Tensor, torch.Tensor)):

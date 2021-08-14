@@ -28,7 +28,8 @@ class CloudServer(ModelServer, ABC):
             **kwargs
         )
 
-    def download_model(self, path: str, **kwargs) -> io.BytesIO:
+    @staticmethod
+    def download_model(path: str, **kwargs) -> io.BytesIO:
         """
         Download model from cloud
         ref: http://5.9.10.113/67706477/load-pytorch-model-from-s3-bucket
