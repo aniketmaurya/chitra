@@ -17,7 +17,7 @@ logger.debug(f"labels={LABELS[:5]}...")
 
 def preprocess(content_raw_body) -> torch.Tensor:
     image = Chitra(content_raw_body)
-    image.resize((256, 256)).show()
+    image.resize((256, 256))
     x = image.numpy().astype(np.float32)
     x = x / 255.0
     x = torch.from_numpy(x)
@@ -36,10 +36,9 @@ def model_loader(buffer: io.BytesIO) -> torch.nn.Module:
     model.load_state_dict(torch.load(buffer))
     return model
 
-
 server = ChaliceServer(
-    "image-classification",
-    MODEL_PATH,
+    api_type="image-classification",
+    model_path=MODEL_PATH,
     model_loader=model_loader,
     preprocess_fn=preprocess,
     postprocess_fn=postprocess,
