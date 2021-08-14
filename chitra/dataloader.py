@@ -6,8 +6,9 @@ from typing import Union
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
+from chitra.image.tf_image import read_image, resize_image
+
 from .core import get_basename, remove_dsstore
-from .tf_image import read_image, resize_image
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
