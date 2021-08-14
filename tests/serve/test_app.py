@@ -54,7 +54,7 @@ def test_image_classification():
         postprocess_conf=postprocess_conf,
     )
 
-    assert app.image_classification(dummy_image) in (0, 1)
+    assert app.single_x_classification(dummy_image) in (0, 1)
 
 
 @pytest.mark.parametrize(
@@ -75,3 +75,13 @@ def test_run(mock_gr, test_input, expected):
         description=app.desc,
         **expected,
     )
+
+
+def test_setup():
+    with pytest.raises(NotImplementedError):
+        GradioApp("RANDOM", model=dummy_model)
+
+    with pytest.raises(NotImplementedError):
+        app = GradioApp(const.IMAGE_CLF, model=dummy_model)
+        app.api_type = "RANDOM"
+        app.setup()

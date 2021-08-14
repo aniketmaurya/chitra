@@ -1,3 +1,4 @@
+import io
 import os
 from io import BytesIO
 from pathlib import Path
@@ -89,6 +90,9 @@ class Chitra:
         if isinstance(data, Image.Image):
             return data
 
+        if isinstance(data, bytes):
+            return Image.open(io.BytesIO(data))
+
         if isinstance(data, (tf.Tensor, torch.Tensor)):
             data = data.numpy().astype("uint8")
 
@@ -146,6 +150,19 @@ class Chitra:
         return bbox_on_image.draw_on_image(
             self.numpy()[..., :3], color=color, size=marker_size
         )
+
+    def resize(self, *args, **kwargs) -> Image.Image:
+        """
+        Calls PIL.Image.resize method and passes the arguments
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+            resized PIL.Image
+        """
+        self.image = self.image.resize(*args, **kwargs)
+        return self.image
 
     def resize_image_with_bbox(self, size: List[int]):
         old_size = self.shape
