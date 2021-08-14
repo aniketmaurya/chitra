@@ -8,7 +8,7 @@ import tensorflow as tf
 
 from chitra.image.tf_image import read_image, resize_image
 
-from .core import get_basename, remove_dsstore
+from .core import remove_dsstore
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
