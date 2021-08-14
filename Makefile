@@ -1,6 +1,4 @@
-SRC = $(wildcard ./*.ipynb)
-
-all: chitra docs
+.PHONY: build_docs build
 
 build_docs:
 	cp README.md docs/index.md
@@ -29,10 +27,10 @@ style:
 	black chitra tests examples
 	isort chitra tests examples
 
-dist: clean
+build: clean
 	flit build
 
-pypi: dist
+pypi: build
 	flit publish
 
 push:
