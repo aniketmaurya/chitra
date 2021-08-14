@@ -42,7 +42,7 @@ Easily create UI for Machine Learning models or Rest API backend that can be dep
 
 ### Using pip (recommended)
 
-`pip install -U chitra==0.1.0`
+`pip install -U chitra`
 
 ### From source
 
