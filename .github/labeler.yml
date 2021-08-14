@@ -1,15 +1,16 @@
 # Add 'docs' to any changes within 'docs' folder or any subfolders
+# https://stackoverflow.com/questions/34691809/regex-match-folder-and-all-subfolders
 documentation:
 - docs/**/*
 
 example:
-- example/**/*
+- examples($|/.*)
 
 test:
 - tests/**/*
 
 serve:
-- chitra/serve/**/*
+- chitra/serve($|/.*)
 
 cli:
-- chitra/cli/**/*
+- chitra/cli($|/.*)
