@@ -48,7 +48,7 @@ nn = [
 ]
 serve = [
     "fastapi", "uvicorn", "pydantic", "python-multipart", "tensorflow-serving-api",
-    "chalice", "smart_open"
+    "chalice", "smart_open[all]"
 ]
 test = [
     "pytest",
