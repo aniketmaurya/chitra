@@ -1,8 +1,8 @@
 from typing import Callable, List, Optional
 
 from chalice import Chalice, Rate
-from loguru import logger
 
+from chitra.logging import logger
 from chitra.serve.cloud.base import CloudServer
 
 S3 = "s3"
