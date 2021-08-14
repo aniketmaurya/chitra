@@ -1,9 +1,11 @@
+import io
 from typing import Callable
 
 import requests
+import smart_open
 from chalice import Chalice, Rate
 
-from chitra.serve.base import ModelServer
+from chitra.serve.cloud.base import CloudServer
 
 S3 = "s3"
 GCS = "gcs"
@@ -19,11 +21,24 @@ def infer_location_type(path: str):
     raise ValueError(f"Location type is not supported yet for path={path}")
 
 
-def download_model(path: str):
-    return requests.get(path, stream=True).raw
+def download_model(path: str, **kwargs) -> io.BytesIO:
+    """
+    Download model from cloud
+    ref: http://5.9.10.113/67706477/load-pytorch-model-from-s3-bucket
+    Args:
+        path:
+        **kwargs:
+
+    Returns:
+
+    """
+
+    with smart_open.open(path, mode="rb", **kwargs) as fr:
+        data = io.BytesIO(fr.read())
+    return data
 
 
-class ChaliceServer(ModelServer):
+class ChaliceServer(CloudServer):
     INVOKE_METHODS = ("route", "schedule", "on_s3_event")
 
     def __init__(
@@ -35,9 +50,14 @@ class ChaliceServer(ModelServer):
         postprocess_fn: Callable = None,
         **kwargs,
     ):
-        infer_location_type(model_path)
-        model: Callable = model_loader(download_model(model_path))
-        super().__init__(api_type, model, preprocess_fn, postprocess_fn, **kwargs)
+        super().__init__(
+            api_type,
+            model_path=model_path,
+            model_loader=model_loader,
+            preprocess_fn=preprocess_fn,
+            postprocess_fn=postprocess_fn,
+            **kwargs,
+        )
 
         self.app = Chalice(app_name=kwargs.get("name", "chitra-server"))
 
