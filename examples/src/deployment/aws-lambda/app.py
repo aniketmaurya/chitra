@@ -36,6 +36,7 @@ def model_loader(buffer: io.BytesIO) -> torch.nn.Module:
     model.load_state_dict(torch.load(buffer))
     return model
 
+
 server = ChaliceServer(
     api_type="image-classification",
     model_path=MODEL_PATH,
