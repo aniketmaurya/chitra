@@ -17,9 +17,7 @@ def model_loader(buffer: io.BytesIO) -> torch.nn.Module:
 
 def test_cloudserver():
     server = CloudServer(
-        "image-classification",
-        model_path=MODEL_PATH,
-        model_loader=model_loader
+        "image-classification", model_path=MODEL_PATH, model_loader=model_loader
     )
 
     assert isinstance(server, Chalice)
