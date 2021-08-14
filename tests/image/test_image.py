@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 import numpy as np
 from PIL import Image
 
-from chitra.image import Chitra, _cache_image
+from chitra.image.image import Chitra, _cache_image
 
 url = (
     "https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/logo.png"

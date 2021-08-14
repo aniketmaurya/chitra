@@ -10,7 +10,7 @@ from typing import Callable, Union
 import tensorflow as tf
 from typeguard import check_argument_types, typechecked
 
-from .tf_image import read_image, resize_image
+from chitra.image.tf_image import read_image, resize_image
 
 
 def benchmark(dataset, num_epochs=2, fake_infer_time=0.001):
