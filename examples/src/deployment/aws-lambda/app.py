@@ -40,5 +40,5 @@ server = ChaliceServer(
     preprocess_fn=preprocess,
     postprocess_fn=postprocess,
 )
-
+app = server.app
 server.run("route")

@@ -25,6 +25,11 @@ class ModelServer:
         postprocess_conf: Optional[dict] = None,
         **kwargs,
     ):
+        if not preprocess_conf:
+            preprocess_conf = {}
+        if not postprocess_conf:
+            postprocess_conf = {}
+
         self.api_type = api_type.upper()
         self.model = model
         self.preprocess_conf = preprocess_conf
