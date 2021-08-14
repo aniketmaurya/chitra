@@ -1,3 +1,4 @@
+import abc
 import itertools
 from typing import Callable, List, Optional
 
@@ -65,5 +66,6 @@ class ModelServer:
             )
         return self.data_processor
 
-    def run(self, *_, **__):
-        raise NotImplementedError
+    @abc.abstractmethod
+    def run(self):
+        pass
