@@ -45,7 +45,3 @@ class CloudServer(ModelServer, ABC):
         with smart_open.open(path, mode="rb", **kwargs) as fr:
             data = io.BytesIO(fr.read())
         return data
-
-    @abc.abstractmethod
-    def run(self):
-        raise NotImplementedError
