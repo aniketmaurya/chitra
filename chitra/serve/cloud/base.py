@@ -1,3 +1,4 @@
+import abc
 import io
 from abc import ABC
 from typing import Callable, Optional
@@ -45,5 +46,6 @@ class CloudServer(ModelServer, ABC):
             data = io.BytesIO(fr.read())
         return data
 
-    def run(self, *_, **__):
+    @abc.abstractmethod
+    def run(self):
         raise NotImplementedError

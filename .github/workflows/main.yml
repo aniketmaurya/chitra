@@ -35,6 +35,7 @@ jobs:
           pip install ".[serve]"
           pip install ".[converter]"
           pip install ".[test]"
+          pip install ".[example]"
           pip list
         shell: bash
 

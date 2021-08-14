@@ -55,6 +55,9 @@ test = [
     "pytest-asyncio",
     "coverage",
 ]
+example = [
+    "timm",
+]
 
 [tool.isort]
 profile = "black"

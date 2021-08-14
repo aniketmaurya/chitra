@@ -11,14 +11,6 @@ GCS = "gcs"
 RATE_UNIT = {"m": Rate.MINUTES, "h": Rate.HOURS, "d": Rate.DAYS}
 
 
-def infer_location_type(path: str):
-    if path.startswith("s3"):
-        return S3
-    if path.startswith("gcs"):
-        return GCS
-    raise ValueError(f"Location type is not supported yet for path={path}")
-
-
 class ChaliceServer(CloudServer):
     INVOKE_METHODS = ("route",)
 
