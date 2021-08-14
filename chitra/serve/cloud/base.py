@@ -2,6 +2,8 @@ import io
 from abc import ABC
 from typing import Callable
 
+import smart_open
+
 from chitra.serve.base import ModelServer
 
 
@@ -27,5 +29,17 @@ class CloudServer(ModelServer, ABC):
         )
 
     def download_model(self, path: str, **kwargs) -> io.BytesIO:
-        """Download Model from cloud"""
-        raise NotImplementedError
+        """
+        Download model from cloud
+        ref: http://5.9.10.113/67706477/load-pytorch-model-from-s3-bucket
+        Args:
+            path:
+            **kwargs:
+
+        Returns:
+
+        """
+
+        with smart_open.open(path, mode="rb", **kwargs) as fr:
+            data = io.BytesIO(fr.read())
+        return data

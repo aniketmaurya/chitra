@@ -1,8 +1,5 @@
-import io
 from typing import Callable
 
-import requests
-import smart_open
 from chalice import Chalice, Rate
 
 from chitra.serve.cloud.base import CloudServer
@@ -19,23 +16,6 @@ def infer_location_type(path: str):
     if path.startswith("gcs"):
         return GCS
     raise ValueError(f"Location type is not supported yet for path={path}")
-
-
-def download_model(path: str, **kwargs) -> io.BytesIO:
-    """
-    Download model from cloud
-    ref: http://5.9.10.113/67706477/load-pytorch-model-from-s3-bucket
-    Args:
-        path:
-        **kwargs:
-
-    Returns:
-
-    """
-
-    with smart_open.open(path, mode="rb", **kwargs) as fr:
-        data = io.BytesIO(fr.read())
-    return data
 
 
 class ChaliceServer(CloudServer):
