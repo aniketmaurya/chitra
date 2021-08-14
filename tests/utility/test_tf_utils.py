@@ -1,6 +1,11 @@
 import tensorflow as tf
 
-from chitra.utility.tf_utils import disable_gpu, gpu_dynamic_mem_growth, limit_gpu, get_basename
+from chitra.utility.tf_utils import (
+    disable_gpu,
+    gpu_dynamic_mem_growth,
+    limit_gpu,
+    get_basename,
+)
 
 
 def test_disable_gpu():
