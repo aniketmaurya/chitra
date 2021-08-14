@@ -8,14 +8,14 @@ from chitra.core import load_imagenet_labels
 from chitra.image import Chitra
 from chitra.serve.cloud.aws_serverless import ChaliceServer
 
-MODEL_PATH = "s3://gflow-models/efficientnet_b0.pth"
+MODEL_PATH = "../../../nbs/model.pth"
 
 LABELS = load_imagenet_labels()
 
 
-def preprocess(data) -> torch.Tensor:
-    image = Chitra(data)
-    image.resize((256, 256))
+def preprocess(content_raw_body) -> torch.Tensor:
+    image = Chitra(content_raw_body)
+    image.resize((256, 256)).show()
     x = image.numpy().astype(np.float32)
     x = x / 255.0
     x = torch.from_numpy(x)
@@ -41,4 +41,4 @@ server = ChaliceServer(
     postprocess_fn=postprocess,
 )
 app = server.app
-server.run("route")
+server.run("route", content_types=["image/jpeg"])
