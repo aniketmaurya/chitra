@@ -2,9 +2,9 @@ import tensorflow as tf
 
 from chitra.utility.tf_utils import (
     disable_gpu,
+    get_basename,
     gpu_dynamic_mem_growth,
     limit_gpu,
-    get_basename,
 )
 
 

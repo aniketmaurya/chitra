@@ -29,7 +29,7 @@ requires = [
     "imgaug >=0.4.0",
     "scikit-learn",
     "typeguard",
-    "gradio >=2.2.2",
+
     "typer",
 ]
 description-file = "README.md"
@@ -48,7 +48,7 @@ nn = [
 ]
 serve = [
     "fastapi", "uvicorn", "pydantic", "python-multipart", "tensorflow-serving-api",
-    "chalice", "smart_open[all]"
+    "chalice", "smart_open[all]", "gradio >=2.2.2",
 ]
 test = [
     "pytest",
