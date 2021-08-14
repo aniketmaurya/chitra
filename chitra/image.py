@@ -1,6 +1,5 @@
 import io
 import os
-from io import BytesIO
 from pathlib import Path
 from typing import Any, List, Union
 
@@ -9,21 +8,10 @@ import numpy as np
 import requests
 from PIL import Image
 
-from chitra.constants import _TF, _TORCH, CHITRA_URL_SEP, IMAGE_CACHE_DIR
+from chitra.constants import CHITRA_URL_SEP, IMAGE_CACHE_DIR
 from chitra.coordinates import BoundingBoxes
-from chitra.import_utils import is_installed
 
-tf = None
-torch = None
-
-if is_installed(_TF):
-    import tensorflow as tf
-
-if is_installed(_TORCH):
-    import torch
-
-DATA_FORMATS = Union[str, Image.Image, np.ndarray, "tf.Tensor", "torch.Tensor"]
-DEFAULT_MODE = os.environ.get("CHITRA_DEFAULT_MODE", "TF")
+DATA_FORMATS = Union[str, Image.Image, np.ndarray]
 
 
 def _cache_image(image: Image.Image, image_path: str):
@@ -43,7 +31,7 @@ def _url_to_image(url: str, cache: bool) -> Image.Image:
     if not url.lower().startswith("http"):
         raise AssertionError("invalid url, must start with http")
     content = requests.get(url).content
-    image = Image.open(BytesIO(content))
+    image = Image.open(io.BytesIO(content))
     if cache:
         _cache_image(image, url)
     return image
@@ -93,9 +81,6 @@ class Chitra:
         if isinstance(data, bytes):
             return Image.open(io.BytesIO(data))
 
-        if isinstance(data, (tf.Tensor, torch.Tensor)):
-            data = data.numpy().astype("uint8")
-
         if isinstance(data, str):
             if data.startswith("http"):
                 image = _url_to_image(data, cache)
@@ -113,19 +98,6 @@ class Chitra:
 
     def numpy(self):
         return np.asarray(self.image)
-
-    def to_tensor(self, mode: str = DEFAULT_MODE):
-        """mode: tf/torch/pt"""
-        mode = mode.upper()
-        np_image = self.numpy()
-
-        if mode == "TF":
-            tensor = tf.constant(np_image)
-        elif mode in ("TORCH", "PT"):
-            tensor = torch.from_numpy(np_image)
-        else:
-            raise UserWarning("invalid mode!")
-        return tensor
 
     @property
     def shape(self):

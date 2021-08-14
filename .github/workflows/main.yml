@@ -45,11 +45,8 @@ jobs:
         run: |
           python --version
           pip --version
-          pip install .
-          pip install ".[serve]"
-          pip install ".[converter]"
-          pip install ".[test]"
-          pip install ".[example]"
+          pip install flit
+          flit install --deps all
           pip list
         shell: bash
 
