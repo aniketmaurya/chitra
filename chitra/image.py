@@ -147,6 +147,19 @@ class Chitra:
             self.numpy()[..., :3], color=color, size=marker_size
         )
 
+    def resize(self, *args, **kwargs) -> Image.Image:
+        """
+        Calls PIL.Image.resize method and passes the arguments
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+            resized PIL.Image
+        """
+        self.image = self.image.resize(*args, **kwargs)
+        return self.image
+
     def resize_image_with_bbox(self, size: List[int]):
         old_size = self.shape
         self.image = self.image.resize(size)
