@@ -9,7 +9,7 @@ from chitra.core import load_imagenet_labels
 from chitra.image import Chitra
 from chitra.serve.cloud.aws_serverless import ChaliceServer
 
-MODEL_PATH = "../../../nbs/model.pth"
+MODEL_PATH = "../../../assets/model.pth"
 
 LABELS = load_imagenet_labels()
 logger.debug(f"labels={LABELS[:5]}...")

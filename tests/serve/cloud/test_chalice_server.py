@@ -4,9 +4,10 @@ import torch
 from chalice import Chalice
 from timm import create_model
 
-from chitra.serve.cloud.base import CloudServer
+from chitra.serve.cloud import ChaliceServer
 
-MODEL_PATH = "https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-weights/efficientnet_b0_ra-3dd342df.pth"
+# MODEL_PATH = "https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-weights/efficientnet_b0_ra-3dd342df.pth"
+MODEL_PATH = "examples/assets/model.pth"
 
 
 def model_loader(buffer: io.BytesIO) -> torch.nn.Module:
@@ -16,10 +17,10 @@ def model_loader(buffer: io.BytesIO) -> torch.nn.Module:
 
 
 def test_cloudserver():
-    server = CloudServer(
+    server = ChaliceServer(
         "image-classification",
         model_path=MODEL_PATH,
         model_loader=model_loader,
     )
-    assert isinstance(server, Chalice)
+    assert isinstance(server.app, Chalice)
     assert isinstance(server.model, torch.nn.Module)

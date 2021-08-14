@@ -12,6 +12,13 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
+        include:
+          - os: ubuntu-latest
+            path: ~/.cache/pip
+          - os: macos-latest
+            path: ~/Library/Caches/pip
+          - os: windows-latest
+            path: ~\AppData\Local\pip\Cache
     env:
       OS: ${{ matrix.os }}
       PYTHON: '3.7'
@@ -30,13 +37,10 @@ jobs:
       - name: Cache pip
         uses: actions/cache@v2
         with:
-          # This path is specific to Ubuntu
-          path: ~/.cache/pip
-          # Look to see if there is a cache hit for the corresponding requirements file
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          path: ${{ matrix.path }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-            ${{ runner.os }}-
 
       - name: Installation
         run: |
