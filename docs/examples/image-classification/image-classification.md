@@ -4,14 +4,7 @@
 Training Image classification model for Cats vs Dogs Kaggle dataset.
 
 To install chitra
-`pip install --upgrade chitra`
-
-
-```python
-!pip install chitra -q
-```
-
-    [K     |████████████████████████████████| 1.1MB 18.1MB/s eta 0:00:01
+`pip install --upgrade "chitra[nn]"`
 
 
 ## import functions and classes

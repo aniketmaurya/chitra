@@ -1,9 +1,9 @@
-.PHONY: build_docs clean style build pypi
+.PHONY: build-docs clean style build pypi
 
-build_docs:
+build-docs:
 	cp README.md docs/index.md
 
-docs_serve:
+docs-serve: build-docs
 	mkdocs serve
 
 test:
