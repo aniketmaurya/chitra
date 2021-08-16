@@ -22,14 +22,13 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
 ]
 requires = [
     "matplotlib",
     "pillow",
     "imgaug >=0.4.0",
-    "scikit-learn",
     "typeguard",
-
     "typer",
 ]
 description-file = "README.md"
@@ -40,6 +39,7 @@ Documentation = "https://chitra.readthedocs.io/en/latest"
 
 [tool.flit.metadata.requires-extra]
 nn = [
+    "scikit-learn",
     "tensorflow >= 2.3",
     "tensorflow-addons >=0.13.0",
     "tf-keras-vis >=0.5.3",
@@ -47,8 +47,10 @@ nn = [
     "timm",
 ]
 serve = [
-    "fastapi", "uvicorn", "pydantic", "python-multipart", "tensorflow-serving-api",
-    "chalice", "smart_open[all]", "gradio >=2.2.2",
+    "fastapi", "uvicorn", "pydantic", "python-multipart",
+    "gradio >=2.2.2",
+    "tensorflow-serving-api",
+    "chalice", "smart_open[all]",
 ]
 test = [
     "pytest",
