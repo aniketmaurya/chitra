@@ -2,8 +2,8 @@ import os
 
 import tensorflow as tf
 
-from chitra import Chitra
-from chitra.tf_image import read_image, resize_image
+from chitra.image import Chitra
+from chitra.image.tf_image import read_image, resize_image
 
 chitra_banner = (
     "https://raw.githubusercontent.com/aniketmaurya/"

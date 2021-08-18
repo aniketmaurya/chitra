@@ -1,5 +1,5 @@
+import io
 import os
-from io import BytesIO
 from pathlib import Path
 from typing import Any, List, Union
 
@@ -8,21 +8,10 @@ import numpy as np
 import requests
 from PIL import Image
 
-from chitra.constants import _TF, _TORCH, CHITRA_URL_SEP, IMAGE_CACHE_DIR
+from chitra.constants import CHITRA_URL_SEP, IMAGE_CACHE_DIR
 from chitra.coordinates import BoundingBoxes
-from chitra.utility.import_utils import INSTALLED_MODULES
 
-tf = None
-torch = None
-
-if INSTALLED_MODULES.get(_TF, None):
-    import tensorflow as tf
-
-if INSTALLED_MODULES.get(_TORCH, None):
-    import torch
-
-DATA_FORMATS = Union[str, Image.Image, np.ndarray, "tf.Tensor", "torch.Tensor"]
-DEFAULT_MODE = os.environ.get("CHITRA_DEFAULT_MODE", "TF")
+DATA_FORMATS = Union[str, Image.Image, np.ndarray]
 
 
 def _cache_image(image: Image.Image, image_path: str):
@@ -42,7 +31,7 @@ def _url_to_image(url: str, cache: bool) -> Image.Image:
     if not url.lower().startswith("http"):
         raise AssertionError("invalid url, must start with http")
     content = requests.get(url).content
-    image = Image.open(BytesIO(content))
+    image = Image.open(io.BytesIO(content))
     if cache:
         _cache_image(image, url)
     return image
@@ -89,8 +78,8 @@ class Chitra:
         if isinstance(data, Image.Image):
             return data
 
-        if isinstance(data, (tf.Tensor, torch.Tensor)):
-            data = data.numpy().astype("uint8")
+        if isinstance(data, bytes):
+            return Image.open(io.BytesIO(data))
 
         if isinstance(data, str):
             if data.startswith("http"):
@@ -110,19 +99,6 @@ class Chitra:
     def numpy(self):
         return np.asarray(self.image)
 
-    def to_tensor(self, mode: str = DEFAULT_MODE):
-        """mode: tf/torch/pt"""
-        mode = mode.upper()
-        np_image = self.numpy()
-
-        if mode == "TF":
-            tensor = tf.constant(np_image)
-        elif mode in ("TORCH", "PT"):
-            tensor = torch.from_numpy(np_image)
-        else:
-            raise UserWarning("invalid mode!")
-        return tensor
-
     @property
     def shape(self):
         return self.numpy().shape
@@ -131,8 +107,8 @@ class Chitra:
     def size(self):
         return self.image.size
 
-    def imshow(self, cmap=plt.cm.Blues, *args, **kwargs):
-        plt.imshow(self.numpy(), cmap, *args, **kwargs)
+    def imshow(self, cmap=plt.cm.Blues, **kwargs):
+        plt.imshow(self.numpy(), cmap, **kwargs)
 
     def draw_boxes(
         self,
@@ -146,6 +122,19 @@ class Chitra:
         return bbox_on_image.draw_on_image(
             self.numpy()[..., :3], color=color, size=marker_size
         )
+
+    def resize(self, *args, **kwargs) -> Image.Image:
+        """
+        Calls PIL.Image.resize method and passes the arguments
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+            resized PIL.Image
+        """
+        self.image = self.image.resize(*args, **kwargs)
+        return self.image
 
     def resize_image_with_bbox(self, size: List[int]):
         old_size = self.shape

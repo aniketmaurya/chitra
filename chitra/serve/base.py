@@ -1,3 +1,4 @@
+import abc
 import itertools
 from typing import Callable, List, Optional
 
@@ -21,10 +22,19 @@ class ModelServer:
         model: Callable,
         preprocess_fn=None,
         postprocess_fn=None,
+        preprocess_conf: Optional[dict] = None,
+        postprocess_conf: Optional[dict] = None,
         **kwargs,
     ):
+        if not preprocess_conf:
+            preprocess_conf = {}
+        if not postprocess_conf:
+            postprocess_conf = {}
+
         self.api_type = api_type.upper()
         self.model = model
+        self.preprocess_conf = preprocess_conf
+        self.postprocess_conf = postprocess_conf
         self.data_processor: Optional[DataProcessor] = self.set_data_processor(
             preprocess_fn, postprocess_fn
         )
@@ -50,7 +60,7 @@ class ModelServer:
         elif api_type in ModelServer.API_TYPES.get("NLP"):
             self.data_processor = DefaultTextProcessor.nlp
         else:
-            raise UserWarning(
+            raise NotImplementedError(
                 f"{api_type} is not implemented! Available types are -\
                  {ModelServer.get_available_api_types()}"
             )

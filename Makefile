@@ -1,11 +1,9 @@
-SRC = $(wildcard ./*.ipynb)
+.PHONY: build-docs clean style build pypi
 
-all: chitra docs
-
-build_docs:
+build-docs:
 	cp README.md docs/index.md
 
-docs_serve:
+docs-serve: build-docs
 	mkdocs serve
 
 test:
@@ -18,7 +16,7 @@ coverage:  ## Run tests with coverage
 		coverage xml
 
 clean:
-	rm -rf dist
+	rm -rf dist/
 	find . -type f -name "*.DS_Store" -ls -delete
 	find . | grep -E "(__pycache__|\.pyc|\.pyo)" | xargs rm -rf
 	find . | grep -E ".pytest_cache" | xargs rm -rf
@@ -29,10 +27,10 @@ style:
 	black chitra tests examples
 	isort chitra tests examples
 
-dist: clean
+build: style clean
 	flit build
 
-pypi: dist
+pypi: build
 	flit publish
 
 push:

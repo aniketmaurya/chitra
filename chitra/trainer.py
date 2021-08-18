@@ -14,9 +14,8 @@ from tf_keras_vis.gradcam import Gradcam, GradcamPlusPlus
 from tf_keras_vis.utils import normalize
 from typeguard import check_argument_types, typechecked
 
-from chitra.utility.import_utils import is_installed
+from chitra.import_utils import is_installed
 
-from .converter.core import pytorch_to_onnx, tf2_to_onnx
 from .datagenerator import Dataset
 
 pl = None
@@ -161,6 +160,9 @@ class Trainer(Model):
         self.gradcam = None
         self.model = model
         self.cyclic_opt_set = False
+        self.max_lr, self.min_lr = None, None
+        self.batch_size = None
+        self.step_size = None
 
     def build(self):
         raise NotImplementedError(
@@ -233,7 +235,9 @@ class Trainer(Model):
             batch_size (int): batch size
             lr_range (tuple): learning rate will cycle from lr_min to lr_max
             optimizer (callable): Keras callable optimizer
-            momentum(int): momentum for the optimizer
+            momentum(float): momentum for the optimizer
+            validation_data: Data on which to evaluate
+            callbacks: List of `tf.keras.callbacks` instances.
         kwargs:
             step_size (int): step size for the Cyclic learning rate. By default it is `2 * len(self.ds)//batch_size`
             scale_mode (str): cycle or exp
@@ -267,7 +271,7 @@ class Trainer(Model):
     def compile2(
         self,
         batch_size: int,
-        optimizer: Union[str, tf.keras.optimizers.Optimizer] = "adam",
+        optimizer: Union[None, str, tf.keras.optimizers.Optimizer] = None,
         lr_range: Union[tuple, list] = (1e-4, 1e-2),
         loss: Optional[tf.keras.losses.Loss] = None,
         metrics=None,
@@ -287,6 +291,8 @@ class Trainer(Model):
             scale_mode (str): cycle or exp
             momentum(int): momentum for the optimizer when optimizer is of type str
         """
+        if not optimizer:
+            optimizer = "adam"
         self.max_lr, self.min_lr = lr_range
         self.batch_size = batch_size
 
@@ -414,11 +420,3 @@ class Learner:
             if not self.trainer:
                 self.trainer = pl.Trainer(max_epochs=epochs, **lit_confs)
             return self.trainer.fit(self.model, train_data, val_data)
-
-    def to_onnx(self, tensor=None, export_path=None):
-        MODE = self.MODE
-        if MODE in Learner.TF:
-            return tf2_to_onnx(self.model, output_path=export_path)
-
-        if MODE in Learner.PT:
-            return pytorch_to_onnx(self.model, tensor, export_path)

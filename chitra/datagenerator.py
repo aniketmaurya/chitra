@@ -10,7 +10,7 @@ from typing import Callable, Union
 import tensorflow as tf
 from typeguard import check_argument_types, typechecked
 
-from .tf_image import read_image, resize_image
+from chitra.image.tf_image import read_image, resize_image
 
 
 def benchmark(dataset, num_epochs=2, fake_infer_time=0.001):
@@ -167,7 +167,7 @@ class Dataset:
         filename = self.filenames[idx]
         return self._process(filename)
 
-    def update_component(self, component_name, new_component, reload=True):
+    def update_component(self, component_name, new_component):
         setattr(self, component_name, new_component)
         print(f"{component_name} updated with {new_component}")
         self._reload()

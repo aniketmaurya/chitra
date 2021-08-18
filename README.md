@@ -4,21 +4,23 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=security_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=coverage)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 ![GitHub issues](https://img.shields.io/github/issues/aniketmaurya/chitra?style=flat)
 [![Documentation Status](https://readthedocs.org/projects/chitra/badge/?version=latest)](https://chitra.readthedocs.io/en/latest/?badge=latest)
 [![Discord](https://img.shields.io/discord/848469007443165184?style=flat)](https://discord.gg/TdnAfDw3kB)
 
 ## What is chitra?
 
-**chitra** (**चित्र**) is a Deep Learning library for Model Building, Explainable AI, Data Visualization, API Building & Deployment.
+**chitra** (**चित्र**) is a multi functional library for full stack Deep Learning. It Simplifies Model Building, API development and Model Deployment.
+
 Load Image from Internet url, filepath or `numpy` array and plot Bounding Boxes on the images easily.
 Model Training and Explainable AI.
 Easily create UI for Machine Learning models or Rest API backend that can be deployed for serving ML Models in Production.
 
 ### 📌 Highlights:
-
-- [New] Framework Agnostic Model Serving & Interactive UI prototype app ✨🌟
-- [New] Data Visualization, Bounding Box Visualization 🐶🎨
+- [New] [Auto Dockerization of Models](https://chitra.readthedocs.io/en/latest/source/cli/builder/builder-create/) 🐳
+- [New] [Framework Agnostic Model Serving & Interactive UI prototype app](https://chitra.readthedocs.io/en/latest/source/api/serve/model_server/) ✨🌟
+- [New] [Data Visualization, Bounding Box Visualization](https://chitra.readthedocs.io/en/latest/source/api/image/chitra-class/) 🐶🎨
 - Model interpretation using GradCAM/GradCAM++ with no extra code 🔥
 - Faster data loading without any boilerplate 🤺
 - Progressive resizing of images 🎨
@@ -27,8 +29,6 @@ Easily create UI for Machine Learning models or Rest API backend that can be dep
 ### 🚘 Implementation Roadmap
 
 - One click deployment to `serverless` platform.
-- Auto Dockerization of Models.
-
 
 > If you have more use case please [**raise an issue/PR**](https://github.com/aniketmaurya/chitra/issues/new/choose) with the feature you want.
 > If you want to contribute, feel free to raise a PR. It doesn't need to be perfect.
@@ -41,8 +41,17 @@ Easily create UI for Machine Learning models or Rest API backend that can be dep
 ![GitHub License](https://img.shields.io/github/license/aniketmaurya/chitra?style=flat)
 
 ### Using pip (recommended)
+1. Minimum installation
+`pip install -U chitra`
 
-`pip install -U chitra==0.1.0`
+1. Full Installation
+`pip install -U 'chitra[all]'`
+
+1. Install for Training
+`pip install -U 'chitra[nn]'`
+
+1. Install for Serving
+`pip install -U 'chitra[serve]'`
 
 ### From source
 
@@ -313,7 +322,7 @@ Bounding Box creation is based on top of `imgaug` library.
 
 ```python
 from chitra.image import Chitra
-
+import matplotlib.pyplot as plt
 
 bbox = [70, 25, 190, 210]
 label = 'Dog'
@@ -356,16 +365,16 @@ explanation!
 Limit GPU memory or enable dynamic GPU memory growth for Tensorflow.
 
 ```python
-from chitra.utility import tf_limit_gpu, tf_gpu_dynamic_mem_growth
+from chitra.utility.tf_utils import limit_gpu, gpu_dynamic_mem_growth
 
 # limit the amount of GPU required for your training
-tf_limit_gpu(gpu_id=0, memory_limit=1024 * 2)
+limit_gpu(gpu_id=0, memory_limit=1024 * 2)
 ```
 
     No GPU:0 found in your system!
 
 ```python
-tf_gpu_dynamic_mem_growth()
+gpu_dynamic_mem_growth()
 ```
 
     No GPU found on the machine!
@@ -379,8 +388,7 @@ Guidelines**](https://github.com/aniketmaurya/chitra/blob/master/CONTRIBUTING.md
 
 We pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive, and healthy community.
 
-Read full [**Contributor Covenant Code of
-Conduct**](https://github.com/aniketmaurya/chitra/blob/master/CODE_OF_CONDUCT.md)
+Read full [**Contributor Covenant Code of Conduct**](https://github.com/aniketmaurya/chitra/blob/master/CODE_OF_CONDUCT.md)
 
 ## Acknowledgement
 

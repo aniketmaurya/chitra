@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [tool.flit.metadata]
 module = "chitra"
 author = "Aniket Maurya"
-author-email = "hello@aniketmaury.com"
+author-email = "hello@aniketmaurya.com"
 home-page = "https://github.com/aniketmaurya/chitra"
 classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
@@ -22,18 +22,14 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
 ]
 requires = [
-    "tensorflow >= 2.3",
-    "tensorflow-addons >=0.13.0",
-    "tf-keras-vis >=0.5.3",
-    "pytorch-lightning",
     "matplotlib",
     "pillow",
     "imgaug >=0.4.0",
-    "scikit-learn",
     "typeguard",
-    "gradio >=2.2.2",
+    "typer",
 ]
 description-file = "README.md"
 requires-python = ">=3.7"
@@ -42,11 +38,19 @@ requires-python = ">=3.7"
 Documentation = "https://chitra.readthedocs.io/en/latest"
 
 [tool.flit.metadata.requires-extra]
-serve = [
-    "fastapi", "uvicorn", "pydantic", "python-multipart", "tensorflow-serving-api",
+nn = [
+    "scikit-learn",
+    "tensorflow >= 2.3",
+    "tensorflow-addons >=0.13.0",
+    "tf-keras-vis >=0.5.3",
+    "pytorch-lightning",
+    "timm",
 ]
-converter = [
-    "onnx", "onnx2pytorch", "tf2onnx",
+serve = [
+    "fastapi", "uvicorn", "pydantic", "python-multipart",
+    "gradio >=2.2.2",
+    "tensorflow-serving-api",
+    "chalice", "smart_open[all]",
 ]
 test = [
     "pytest",
@@ -56,3 +60,6 @@ test = [
 
 [tool.isort]
 profile = "black"
+
+[tool.flit.scripts]
+chitra = "chitra.cli.main:app"

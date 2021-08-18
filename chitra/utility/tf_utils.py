@@ -9,6 +9,12 @@ def disable_gpu():
     os.environ["CUDA_VISIBLE_DEVICES"] = str(-1)
 
 
+def get_basename(path: tf.string) -> tf.string:
+    if not isinstance(path, tf.Tensor):
+        raise AssertionError
+    return tf.strings.split(path, os.path.sep)[-1]
+
+
 def limit_gpu(gpu_id: int, memory_limit: int):
     """limit the selected gpu [gpu_id] by [memory_limit] MB."""
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"

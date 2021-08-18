@@ -5,11 +5,14 @@ import numpy as np
 
 from chitra.__about__ import documentation_url
 from chitra.serve import constants as const
-from chitra.serve.model_server import ModelServer
+from chitra.serve.base import ModelServer
 
 
 class GradioApp(ModelServer):
-    API_TYPES = {"VISION": (const.IMAGE_CLF, const.OBJECT_DETECTION)}
+    API_TYPES = {
+        "VISION": (const.IMAGE_CLF, const.OBJECT_DETECTION),
+        "NLP": (const.TXT_CLF,),
+    }
 
     def __init__(
         self,
@@ -47,8 +50,12 @@ class GradioApp(ModelServer):
         self,
         **kwargs,
     ):
-
-        self.api_type_func[const.IMAGE_CLF] = self.image_classification
+        if self.api_type in (const.IMAGE_CLF, const.OBJECT_DETECTION):
+            self.api_type_func[self.api_type] = self.single_x_classification
+        elif self.api_type == const.TXT_CLF:
+            self.api_type_func[self.api_type] = self.single_x_classification
+        else:
+            raise NotImplementedError(f"api_type={self.api_type} not implemented yet!")
 
         if not self.input_types:
             self.input_types = self.get_input_type(**kwargs)
@@ -67,7 +74,7 @@ class GradioApp(ModelServer):
             )
         raise NotImplementedError(f"{self.api_type} API Type is not implemented yet!")
 
-    def image_classification(self, x: np.ndarray):
+    def single_x_classification(self, x: np.ndarray):
         data_processor = self.data_processor
 
         if data_processor.preprocess_fn:
