@@ -15,9 +15,7 @@
 
 ### Components
 
-[comment]: <> (![Chitra architecture]&#40;https://ik.imagekit.io/aniket/chitra/chitra-arch_Vw9AdA4aC.svg&#41;)
-
-<img src="https://ik.imagekit.io/aniket/chitra/chitra-arch_Vw9AdA4aC.svg" alt="arch">
+<img src="https://ik.imagekit.io/aniket/chitra/chitra-arch_Vw9AdA4aC.svg" alt="arch" style="width: 80%">
 
 
 Load Image from Internet url, filepath or `numpy` array and plot Bounding Boxes on the images easily.
