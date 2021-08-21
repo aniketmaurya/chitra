@@ -13,11 +13,11 @@
 
 **chitra** (**चित्र**) is a multi-functional library for full-stack Deep Learning. It simplifies Model Building, API development, and Model Deployment.
 
-### Components of Chitra
+### Components
 
-[comment]: <> (![Chitra architecture]&#40;docs/assets/images/chitra-arch.svg&#41;)
+[comment]: <> (![Chitra architecture]&#40;https://ik.imagekit.io/aniket/chitra/chitra-arch_Vw9AdA4aC.svg&#41;)
 
-<img src="/docs/assets/images/chitra-arch.png" alt="arch" style="height: 100px">
+<img src="https://ik.imagekit.io/aniket/chitra/chitra-arch_Vw9AdA4aC.svg" alt="arch">
 
 
 Load Image from Internet url, filepath or `numpy` array and plot Bounding Boxes on the images easily.
