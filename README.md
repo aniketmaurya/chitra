@@ -11,7 +11,10 @@
 
 ## What is chitra?
 
-**chitra** (**चित्र**) is a multi functional library for full stack Deep Learning. It Simplifies Model Building, API development and Model Deployment.
+**chitra** (**चित्र**) is a multi-functional library for full-stack Deep Learning. It simplifies Model Building, API development, and Model Deployment.
+
+### Components of Chitra
+![Chitra architecture](docs/assets/images/chitra-arch.svg)
 
 Load Image from Internet url, filepath or `numpy` array and plot Bounding Boxes on the images easily.
 Model Training and Explainable AI.
