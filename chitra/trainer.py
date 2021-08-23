@@ -239,7 +239,7 @@ class Trainer(Model):
             validation_data: Data on which to evaluate
             callbacks: List of `tf.keras.callbacks` instances.
         kwargs:
-            step_size (int): step size for the Cyclic learning rate. 
+            step_size (int): step size for the Cyclic learning rate.
             By default it is `2 * (self.ds.num_files//batch_size)`
             scale_mode (str): cycle or exp
             shuffle(bool): Dataset will be shuffle on each epoch if True
