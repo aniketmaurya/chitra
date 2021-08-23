@@ -244,10 +244,10 @@ class Trainer(Model):
             scale_mode (str): cycle or exp
             shuffle(bool): Dataset will be shuffle on each epoch if True
         """
+        self.step_size = 2 * (self.ds.num_files // batch_size)
+        self.ds.step_size = self.step_size
         if not self.cyclic_opt_set:
             self.max_lr, self.min_lr = lr_range
-            self.step_size = 2 * (self.ds.num_files // batch_size)
-            self.ds.step_size = self.step_size
             lr_schedule = tfa.optimizers.Triangular2CyclicalLearningRate(
                 initial_learning_rate=lr_range[0],
                 maximal_learning_rate=lr_range[1],
@@ -260,15 +260,12 @@ class Trainer(Model):
             self.model.optimizer = optimizer
             self.cyclic_opt_set = True
         else:
-            self.step_size = 2 * (self.ds.num_files // batch_size)
-            self.ds.step_size = self.step_size
             print("cyclic learning rate already set!")
 
         return self.model.fit(
             self._prepare_dl(batch_size, kwargs.get("shuffle", True)),
             steps_per_epoch=self.step_size,
             validation_data=validation_data,
-            validation_steps=None,
             epochs=epochs,
             callbacks=callbacks,
         )
@@ -401,7 +398,6 @@ class Learner:
         train_data,
         epochs,
         val_data=None,
-        test_data=None,
         callbacks=None,
         **kwargs,
     ):
