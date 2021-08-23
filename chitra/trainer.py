@@ -251,7 +251,7 @@ class Trainer(Model):
             lr_schedule = tfa.optimizers.Triangular2CyclicalLearningRate(
                 initial_learning_rate=lr_range[0],
                 maximal_learning_rate=lr_range[1],
-                step_size=kwargs.get("step_size", step_size),
+                self.step_size=kwargs.get("step_size", self.step_size),
                 scale_mode=kwargs.get("scale_mode", "cycle"),
             )
 
