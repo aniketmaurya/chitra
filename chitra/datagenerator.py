@@ -198,7 +198,7 @@ class Dataset:
             random.shuffle(self.filenames)
         img_sz = self.img_sz_list.get_size()
         counter = 0
-        
+
         while True:
             # restart counter to yeild data in the next epoch as well
             if counter >= self.num_files:
