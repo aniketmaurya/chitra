@@ -239,17 +239,19 @@ class Trainer(Model):
             validation_data: Data on which to evaluate
             callbacks: List of `tf.keras.callbacks` instances.
         kwargs:
-            step_size (int): step size for the Cyclic learning rate. By default it is `2 * len(self.ds)//batch_size`
+            step_size (int): step size for the Cyclic learning rate.
+            By default it is `2 * (self.ds.num_files//batch_size)`
             scale_mode (str): cycle or exp
             shuffle(bool): Dataset will be shuffle on each epoch if True
         """
+        self.step_size = 2 * (self.ds.num_files // batch_size)
+        self.ds.step_size = self.step_size
         if not self.cyclic_opt_set:
             self.max_lr, self.min_lr = lr_range
-            step_size = 2 * len(self.ds) // batch_size
             lr_schedule = tfa.optimizers.Triangular2CyclicalLearningRate(
                 initial_learning_rate=lr_range[0],
                 maximal_learning_rate=lr_range[1],
-                step_size=kwargs.get("step_size", step_size),
+                step_size=kwargs.get("step_size", self.step_size),
                 scale_mode=kwargs.get("scale_mode", "cycle"),
             )
 
@@ -262,6 +264,7 @@ class Trainer(Model):
 
         return self.model.fit(
             self._prepare_dl(batch_size, kwargs.get("shuffle", True)),
+            steps_per_epoch=self.step_size,
             validation_data=validation_data,
             epochs=epochs,
             callbacks=callbacks,
@@ -287,7 +290,8 @@ class Trainer(Model):
             optimizer (str, keras.optimizer.Optimizer): Keras optimizer
 
         kwargs:
-            step_size (int): step size for the Cyclic learning rate. By default it is `2 * len(self.ds)//batch_size`
+            step_size (int): step size for the Cyclic learning rate.
+            By default it is `2 * (self.ds.num_files // batch_size)`
             scale_mode (str): cycle or exp
             momentum(int): momentum for the optimizer when optimizer is of type str
         """
@@ -296,12 +300,12 @@ class Trainer(Model):
         self.max_lr, self.min_lr = lr_range
         self.batch_size = batch_size
 
-        self.step_size = step_size = 2 * len(self.ds) // batch_size
+        self.step_size = 2 * (self.ds.num_files // batch_size)
 
         lr_schedule = tfa.optimizers.Triangular2CyclicalLearningRate(
             initial_learning_rate=lr_range[0],
             maximal_learning_rate=lr_range[1],
-            step_size=kwargs.get("step_size", step_size),
+            step_size=kwargs.get("step_size", self.step_size),
             scale_mode=kwargs.get("scale_mode", "cycle"),
         )
 
@@ -394,7 +398,6 @@ class Learner:
         train_data,
         epochs,
         val_data=None,
-        test_data=None,
         callbacks=None,
         **kwargs,
     ):

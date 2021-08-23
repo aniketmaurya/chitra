@@ -129,7 +129,7 @@ class Dataset:
         self.num_files = len(self.filenames)
         self.image_size = image_size
         self.img_sz_list = ImageSizeList(self.image_size)
-
+        self.step_size = None
         self.labels = kwargs.get("labels", self.get_labels())
 
     def __len__(self):
