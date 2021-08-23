@@ -129,6 +129,7 @@ class Dataset:
         self.num_files = len(self.filenames)
         self.image_size = image_size
         self.img_sz_list = ImageSizeList(self.image_size)
+        self.step_size= None
 
         self.labels = kwargs.get("labels", self.get_labels())
 
@@ -196,15 +197,21 @@ class Dataset:
         if shuffle:
             random.shuffle(self.filenames)
         img_sz = self.img_sz_list.get_size()
-        n = len(self.filenames)
-        for i in range(n):
-            image, label = self.__getitem__(i)
+        counter= 0
+        
+        while True:
+            #restart counter to yeild data in the next epoch as well
+            if counter >= self.num_files:
+                counter = 0
+
+            image, label = self.__getitem__(counter)
             if img_sz:
                 image = resize_image(image, img_sz)
             if self.transforms:
                 image = self.transforms(image)
             if self.default_encode is True:
                 label = self.label_encoder(label)
+            counter += 1
             yield image, label
 
     def get_tf_dataset(self, output_shape=None, shuffle=True):
