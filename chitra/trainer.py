@@ -239,7 +239,8 @@ class Trainer(Model):
             validation_data: Data on which to evaluate
             callbacks: List of `tf.keras.callbacks` instances.
         kwargs:
-            step_size (int): step size for the Cyclic learning rate. By default it is `2 * (self.ds.num_files//batch_size)`
+            step_size (int): step size for the Cyclic learning rate. 
+            By default it is `2 * (self.ds.num_files//batch_size)`
             scale_mode (str): cycle or exp
             shuffle(bool): Dataset will be shuffle on each epoch if True
         """
@@ -265,9 +266,9 @@ class Trainer(Model):
 
         return self.model.fit(
             self._prepare_dl(batch_size, kwargs.get("shuffle", True)),
-            steps_per_epoch= self.step_size,
+            steps_per_epoch=self.step_size,
             validation_data=validation_data,
-            validation_steps= None,
+            validation_steps=None,
             epochs=epochs,
             callbacks=callbacks,
         )
