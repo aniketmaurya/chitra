@@ -129,7 +129,7 @@ class Dataset:
         self.num_files = len(self.filenames)
         self.image_size = image_size
         self.img_sz_list = ImageSizeList(self.image_size)
-        self.step_size= None
+        self.step_size = None
 
         self.labels = kwargs.get("labels", self.get_labels())
 
@@ -197,12 +197,13 @@ class Dataset:
         if shuffle:
             random.shuffle(self.filenames)
         img_sz = self.img_sz_list.get_size()
-        counter= 0
-
+        counter = 0
+        
         while True:
-            #restart counter to yeild data in the next epoch as well
+            # restart counter to yeild data in the next epoch as well
             if counter >= self.num_files:
                 counter = 0
+
             image, label = self.__getitem__(counter)
             if img_sz:
                 image = resize_image(image, img_sz)
