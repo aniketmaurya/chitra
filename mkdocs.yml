@@ -10,12 +10,16 @@ theme:
   custom_dir: docs/overrides
   palette:
     - scheme: default
+      primary: deep purple
+      accent: purple
       toggle:
-        icon: material/toggle-switch-off-outline
+        icon: material/weather-sunny
         name: Switch to dark mode
     - scheme: slate
+      primary: deep purple
+      accent: purple
       toggle:
-        icon: material/toggle-switch
+        icon: material/weather-night
         name: Switch to light mode
 
   logo: https://ik.imagekit.io/aniket/chitra/logo_0.1.0_qhktxqokb.png
