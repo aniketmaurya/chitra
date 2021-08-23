@@ -203,7 +203,6 @@ class Dataset:
             #restart counter to yeild data in the next epoch as well
             if counter >= self.num_files:
                 counter = 0
-
             image, label = self.__getitem__(counter)
             if img_sz:
                 image = resize_image(image, img_sz)
