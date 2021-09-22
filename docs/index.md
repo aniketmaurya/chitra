@@ -83,7 +83,7 @@ the data.
 ```python
 import numpy as np
 import chitra
-from chitra.dataloader import Clf, show_batch
+from chitra.dataloader import Clf
 import matplotlib.pyplot as plt
 
 
