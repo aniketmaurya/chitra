@@ -13,7 +13,7 @@ repos:
     hooks:
       - id: black
         name: "Black: The uncompromising Python code formatter"
-        files: chitra tests
+        files: chitra tests docs examples
 
   - repo: https://github.com/PyCQA/isort
     rev: 5.10.1
@@ -21,7 +21,7 @@ repos:
       - id: isort
         name: "Sort Imports"
         args: [ "--profile black" ]
-        files: chitra tests
+        files: chitra tests docs examples
 
   - repo: local
     hooks:
