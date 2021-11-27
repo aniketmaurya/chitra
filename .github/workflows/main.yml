@@ -9,9 +9,11 @@ on:
 jobs:
   pytest:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
+        python-version: [3.7, 3.8, 3.9]
         include:
           - os: ubuntu-latest
             path: ~/.cache/pip
@@ -19,7 +21,7 @@ jobs:
             path: ~/Library/Caches/pip
     env:
       OS: ${{ matrix.os }}
-      PYTHON: '3.7'
+      PYTHON: '3.8'
 
 
     steps:
@@ -27,10 +29,10 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
-      - name: Setup Python
-        uses: actions/setup-python@master
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.7
+          python-version: ${{ matrix.python-version }}
 
       - name: Cache pip
         uses: actions/cache@v2
@@ -41,14 +43,19 @@ jobs:
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
 
-      - name: Installation
+      - name: Install dependencies
         run: |
           python --version
           pip --version
+          python -m pip install --upgrade pip
           pip install flit
           flit install --deps all
           pip list
         shell: bash
+
+      - name: Prepare Test
+        run: |
+          python tests  # download test data
 
       - name: Run Test with Coverage
         run: |
@@ -61,6 +68,7 @@ jobs:
           coverage xml -i
 
       - name: Upload Coverage to Codecov
+        if: runner.os != 'macOS'
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -70,9 +78,9 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: false
 
-      - name: SonarCloud Scan
-        if: runner.os != 'macOS' &&  env.SONAR_TOKEN != null
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      - name: SonarCloud Scan
+#        if: runner.os != 'macOS' &&  env.SONAR_TOKEN != null
+#        uses: SonarSource/sonarcloud-github-action@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
