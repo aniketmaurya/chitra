@@ -13,5 +13,5 @@ jobs:
         with:
           python-version: 3.x
       - run: make build-docs # copy README.md to docs/index.MD
-      - run: pip install mkdocs-material mkdocs-git-revision-date-localized-plugin  mkdocs-macros-plugin
+      - run: pip install -r docs/requirements.txt
       - run: mkdocs gh-deploy --force
