@@ -4,8 +4,6 @@ from typing import List, Optional, Tuple
 import numpy as np
 from PIL import Image
 
-from chitra.image import Chitra
-
 from ..processor import DataProcessor
 
 
@@ -15,6 +13,8 @@ def default_preprocess(
     rescale: bool = True,
     expand_dims: bool = True,
 ) -> np.ndarray:
+    from chitra.image import Chitra
+
     """
     Supports image resize, rescaling and dimension expansion along 0th index
     Args:
