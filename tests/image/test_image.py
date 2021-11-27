@@ -5,9 +5,7 @@ from PIL import Image
 
 from chitra.image.image import Chitra, _cache_image
 
-url = (
-    "https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/logo.png"
-)
+url = "https://raw.githubusercontent.com/aniketmaurya/chitra/master/docs/assets/logo.png"
 image = Chitra(url, cache=True)
 
 

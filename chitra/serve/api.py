@@ -32,9 +32,7 @@ class API(ModelServer):
             output will be passed into this function.
             **kwargs:
         """
-        super(API, self).__init__(
-            api_type, model, preprocess_fn, postprocess_fn, **kwargs
-        )
+        super(API, self).__init__(api_type, model, preprocess_fn, postprocess_fn, **kwargs)
 
         docs_url = kwargs.get("docs_url", "/docs")
         title = kwargs.get("title", "Chitra Model Server 🔥")

@@ -30,9 +30,7 @@ class BoundingBoxes:
         labels = self._listify(labels)
 
         if len(bboxes) != len(labels):
-            raise UserWarning(
-                f"len of boxes and labels not matching: {len(bboxes), len(labels)}"
-            )
+            raise UserWarning(f"len of boxes and labels not matching: {len(bboxes), len(labels)}")
         self._format = box_format.upper()
         self.bboxes = self._list_to_bbox(bboxes, labels)
         self._state = {}
@@ -98,16 +96,12 @@ class BoundingBoxes:
     def __repr__(self):
         return str(self.bboxes)
 
-    def get_bounding_boxes_on_image(
-        self, image_shape: Tuple[int]
-    ) -> bbs.BoundingBoxesOnImage:
+    def get_bounding_boxes_on_image(self, image_shape: Tuple[int]) -> bbs.BoundingBoxesOnImage:
         """returns `imgaug BoundingBoxesOnImage` object which can be used to
         boxes on the image."""
         return bbs.BoundingBoxesOnImage(self.bboxes, image_shape)
 
-    def resize_with_image(
-        self, old_image_size: List[int], rescaled_image: np.ndarray
-    ) -> bbs.BoundingBoxesOnImage:
+    def resize_with_image(self, old_image_size: List[int], rescaled_image: np.ndarray) -> bbs.BoundingBoxesOnImage:
         bbox_on_image = self.get_bounding_boxes_on_image(old_image_size)
         bbox_on_rescaled_image = bbox_on_image.on(rescaled_image)
         self.bboxes = bbox_on_rescaled_image.bounding_boxes

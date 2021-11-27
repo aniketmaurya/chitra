@@ -26,9 +26,7 @@ class GradioApp(ModelServer):
         postprocess_conf: Optional[dict] = None,
         **kwargs,
     ):
-        super(GradioApp, self).__init__(
-            api_type, model, preprocess_fn, postprocess_fn, **kwargs
-        )
+        super(GradioApp, self).__init__(api_type, model, preprocess_fn, postprocess_fn, **kwargs)
         if not preprocess_conf:
             preprocess_conf = {}
         if not postprocess_conf:
@@ -69,9 +67,7 @@ class GradioApp(ModelServer):
             return gr.inputs.Image(shape=kwargs.get("image_shape"), label=label)
 
         if self.api_type == const.TXT_CLF:
-            return gr.inputs.Textbox(
-                lines=2, placeholder=kwargs.get("text_placeholder"), label=label
-            )
+            return gr.inputs.Textbox(lines=2, placeholder=kwargs.get("text_placeholder"), label=label)
         raise NotImplementedError(f"{self.api_type} API Type is not implemented yet!")
 
     def single_x_classification(self, x: np.ndarray):

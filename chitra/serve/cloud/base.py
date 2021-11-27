@@ -21,13 +21,7 @@ class CloudServer(ModelServer, ABC):
         raw_model = self.download_model(model_path, **kwargs)
         model = model_loader(raw_model)
 
-        super().__init__(
-            api_type,
-            model,
-            preprocess_fn=preprocess_fn,
-            postprocess_fn=postprocess_fn,
-            **kwargs
-        )
+        super().__init__(api_type, model, preprocess_fn=preprocess_fn, postprocess_fn=postprocess_fn, **kwargs)
 
     @staticmethod
     def download_model(path: str, **kwargs) -> io.BytesIO:

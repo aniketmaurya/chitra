@@ -63,6 +63,4 @@ class ChaliceServer(CloudServer):
         if invoke_method == "route":
             route_path = kwargs.get("path", "/predict")
             self.app.route("/", methods=["GET"])(self.index)
-            self.app.route(route_path, methods=["POST"], content_types=content_types)(
-                self.predict
-            )
+            self.app.route(route_path, methods=["POST"], content_types=content_types)(self.predict)
