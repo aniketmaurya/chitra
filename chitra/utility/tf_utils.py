@@ -28,11 +28,7 @@ def limit_gpu(gpu_id: int, memory_limit: int):
         try:
             tf.config.experimental.set_virtual_device_configuration(
                 gpus[gpu_id],
-                [
-                    tf.config.experimental.VirtualDeviceConfiguration(
-                        memory_limit=memory_limit
-                    )
-                ],
+                [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=memory_limit)],
             )
             logical_gpus = tf.config.list_logical_devices("GPU")
             print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
@@ -59,6 +55,4 @@ def gpu_dynamic_mem_growth():
         else:
             print("No GPU found on the machine!")
     except AttributeError:
-        print(
-            "Upgrade your tensorflow to 2.x to have the gpu_dynamic_mem_growth feature."
-        )
+        print("Upgrade your tensorflow to 2.x to have the gpu_dynamic_mem_growth feature.")

@@ -32,7 +32,5 @@ def load_imagenet_labels() -> Tuple[str]:
     global IMAGENET_LABELS
     if IMAGENET_LABELS is None:
         logger.debug("Downloading imagenet labels...")
-        IMAGENET_LABELS = (
-            requests.get(IMAGENET_LABEL_URL).content.decode("UTF-8").split("\n")[1:]
-        )
+        IMAGENET_LABELS = requests.get(IMAGENET_LABEL_URL).content.decode("UTF-8").split("\n")[1:]
     return IMAGENET_LABELS

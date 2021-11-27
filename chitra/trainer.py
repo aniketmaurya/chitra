@@ -42,13 +42,9 @@ def _get_base_cnn(
 ) -> Model:
     if isinstance(base_model, str):
         if base_model not in MODEL_DICT.keys():
-            raise AssertionError(
-                f"base_model name must be in {tuple(MODEL_DICT.keys())}"
-            )
+            raise AssertionError(f"base_model name must be in {tuple(MODEL_DICT.keys())}")
         base_model = MODEL_DICT[base_model]
-        base_model = base_model(
-            include_top=include_top, pooling=pooling, weights=weights
-        )
+        base_model = base_model(include_top=include_top, pooling=pooling, weights=weights)
     return base_model
 
 
@@ -145,9 +141,7 @@ class Trainer(Model):
     _AUTOTUNE = tf.data.experimental.AUTOTUNE
 
     @typechecked
-    def __init__(
-        self, ds: Dataset, model: Model, num_classes: Union[int, None] = None, **kwargs
-    ):
+    def __init__(self, ds: Dataset, model: Model, num_classes: Union[int, None] = None, **kwargs):
         assert check_argument_types()
 
         super(Trainer, self).__init__()
@@ -165,9 +159,7 @@ class Trainer(Model):
         self.step_size = None
 
     def build(self):
-        raise NotImplementedError(
-            'Build method is not implemented in Trainer! Please use "model.model.build" instead.'
-        )
+        raise NotImplementedError('Build method is not implemented in Trainer! Please use "model.model.build" instead.')
 
     def summary(self):
         return self.model.summary()
@@ -182,9 +174,7 @@ class Trainer(Model):
         return self.model.fit(*args, **kwargs)
 
     def warmup(self):
-        raise NotImplementedError(
-            "warmup is not implemented yet! Would you like to raise a PR to chitra?"
-        )
+        raise NotImplementedError("warmup is not implemented yet! Would you like to raise a PR to chitra?")
 
     @staticmethod
     def prewhiten(image):
@@ -198,9 +188,7 @@ class Trainer(Model):
 
     def _get_optimizer(self, optimizer, momentum=0.9, **kwargs):
         if optimizer.__name__ == "SGD":
-            optimizer = partial(
-                optimizer, momentum=momentum, nesterov=kwargs.get("nesterov", True)
-            )
+            optimizer = partial(optimizer, momentum=momentum, nesterov=kwargs.get("nesterov", True))
         else:
             optimizer = partial(
                 optimizer,
@@ -337,9 +325,7 @@ class InterpretModel:
 
         self.gradcam = self.gradcam_fn(learner.model, self.model_modifier, clone=clone)
 
-    def __call__(
-        self, image: Image.Image, auto_resize: bool = True, image_size=None
-    ) -> None:
+    def __call__(self, image: Image.Image, auto_resize: bool = True, image_size=None) -> None:
         gradcam = self.gradcam
         get_loss = self.get_loss
         if auto_resize and image_size is None:
@@ -383,9 +369,7 @@ class Learner:
     TF = ("TF", "TENSORFLOW")
     PT = ("PYTORCH", "PT", "TORCH")
 
-    def __init__(
-        self, model: Union["pl.LightningModule", "keras.models.Model"], mode: str = "TF"
-    ):
+    def __init__(self, model: Union["pl.LightningModule", "keras.models.Model"], mode: str = "TF"):
         self.MODE = mode.upper()
         self.model = model
         self.epochs_trained = 0
