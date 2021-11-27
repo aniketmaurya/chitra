@@ -74,9 +74,10 @@ nav:
       - Model Server: 'examples/model-server/model-server.md'
 
   - API References:
-      - Image: chitra/image
-      - Coordinates: chitra/coordinates
-      - serve: chitra/serve
-      - visualization: chitra/visualization
-      - Core: chitra/core
+      - Image: chitra/image.md
+      - Coordinates: chitra/coordinates.md
+      - serve: chitra/serve.md
+      - CLI: chitra/cli.md
+      - visualization: chitra/visualization.md
+      - Core: chitra/core.md
   - Release Notes: 'CHANGELOG.md'

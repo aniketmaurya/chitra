@@ -1,3 +1,4 @@
+git+https://github.com/aniketmaurya/chitra@master
 mkdocs>=1.2.2
 mkdocs-material>=7.2.4
 mkdocs-material-extensions==1.0.1
