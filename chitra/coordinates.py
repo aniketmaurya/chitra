@@ -2,14 +2,11 @@ from typing import TYPE_CHECKING, List, Optional, Tuple, Union
 
 import numpy as np
 
-bbs = None
-
 if TYPE_CHECKING:
     from imgaug.augmentables import bbs
 
 
 class BoundingBoxes:
-    global bbs
     from imgaug.augmentables import bbs
 
     CENTER = "XXYY"
