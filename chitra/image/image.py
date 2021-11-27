@@ -119,9 +119,7 @@ class Chitra:
             raise UserWarning("bboxes is None")
 
         bbox_on_image = self.bboxes.get_bounding_boxes_on_image(self.shape)
-        return bbox_on_image.draw_on_image(
-            self.numpy()[..., :3], color=color, size=marker_size
-        )
+        return bbox_on_image.draw_on_image(self.numpy()[..., :3], color=color, size=marker_size)
 
     def resize(self, *args, **kwargs) -> Image.Image:
         """

@@ -36,13 +36,27 @@ markdown_extensions:
   - meta
   - pymdownx.highlight
   - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.superfences
+  - admonition
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+  - toc:
+      permalink: true
 
 plugins:
   - git-revision-date-localized
   - search
+  - autorefs
+  - mkdocs-jupyter
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          rendering:
+            show_source: false
+
 
 extra:
   homepage: https://chitra.readthedocs.io/en/latest
@@ -58,3 +72,12 @@ nav:
   - Examples:
       - Image Classification: 'examples/image-classification/image-classification.md'
       - Model Server: 'examples/model-server/model-server.md'
+
+  - API References:
+      - Image: chitra/image.md
+      - Coordinates: chitra/coordinates.md
+      - serve: chitra/serve.md
+      - CLI: chitra/cli.md
+      - visualization: chitra/visualization.md
+      - Core: chitra/core.md
+  - Release Notes: 'CHANGELOG.md'

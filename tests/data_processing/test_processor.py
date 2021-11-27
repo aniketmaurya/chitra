@@ -23,9 +23,7 @@ def test_data_processor():
     with pytest.raises(UserWarning):
         data_processor_empty.postprocess(x)
 
-    data_processor = DataProcessor(
-        preprocess_fn=dummy_preprocess, postprocess_fn=dummy_postprocess
-    )
+    data_processor = DataProcessor(preprocess_fn=dummy_preprocess, postprocess_fn=dummy_postprocess)
 
     x = data_processor.preprocess(x)
     x = data_processor.postprocess(x)

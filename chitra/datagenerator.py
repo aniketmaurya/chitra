@@ -20,9 +20,7 @@ def benchmark(dataset, num_epochs=2, fake_infer_time=0.001):
         for _ in dataset:
             # Performing a training step
             time.sleep(fake_infer_time)
-    tf.print(
-        f"Execution time for {num_epochs} epochs: {time.perf_counter() - start_time :0.3f} seconds"
-    )
+    tf.print(f"Execution time for {num_epochs} epochs: {time.perf_counter() - start_time :0.3f} seconds")
 
 
 def get_filenames(root_dir):
@@ -155,9 +153,7 @@ class Dataset:
         if isinstance(outputs, tuple):
             for ret_type in outputs:
                 return_types.append(
-                    ret_type.dtype
-                    if tf.is_tensor(ret_type)
-                    else Dataset.MAPPINGS["PY_TO_TF"][type(ret_type)]
+                    ret_type.dtype if tf.is_tensor(ret_type) else Dataset.MAPPINGS["PY_TO_TF"][type(ret_type)]
                 )
         else:
             raise UserWarning("Unable to capture return type!")

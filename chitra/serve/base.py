@@ -35,17 +35,13 @@ class ModelServer:
         self.model = model
         self.preprocess_conf = preprocess_conf
         self.postprocess_conf = postprocess_conf
-        self.data_processor: Optional[DataProcessor] = self.set_data_processor(
-            preprocess_fn, postprocess_fn
-        )
+        self.data_processor: Optional[DataProcessor] = self.set_data_processor(preprocess_fn, postprocess_fn)
 
     @classmethod
     def get_available_api_types(cls) -> List[str]:
         return list(itertools.chain.from_iterable(cls.API_TYPES.values()))
 
-    def set_data_processor(
-        self, preprocess_fn: Callable, postprocess_fn: Callable
-    ) -> DataProcessor:
+    def set_data_processor(self, preprocess_fn: Callable, postprocess_fn: Callable) -> DataProcessor:
         data_preprocessor = self.set_default_processor()
         if preprocess_fn:
             data_preprocessor.set_preprocess_fn(preprocess_fn)

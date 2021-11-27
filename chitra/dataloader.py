@@ -92,11 +92,7 @@ class Clf:
         #             img = tf.image.resize(img, self.shape)
 
         label = tf.strings.split(path, os.path.sep)[-2]
-        label = (
-            self._lookup_class_to_idx.lookup(label)
-            if self._lookup_class_to_idx
-            else label
-        )
+        label = self._lookup_class_to_idx.lookup(label) if self._lookup_class_to_idx else label
         return img, label
 
     @tf.function
@@ -154,11 +150,7 @@ class Clf:
         if not isinstance(path, (str, pathlib.Path)):
             raise AssertionError
         if not isinstance(shuffle, (bool, int)):
-            raise AssertionError(
-                print(
-                    f"Arg: shuffle is either bool or int but got {shuffle} : {type(shuffle)}"
-                )
-            )
+            raise AssertionError(print(f"Arg: shuffle is either bool or int but got {shuffle} : {type(shuffle)}"))
 
         path = pathlib.Path(path)
         remove_dsstore(path)

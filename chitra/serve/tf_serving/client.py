@@ -5,9 +5,7 @@ import tensorflow as tf
 from tensorflow_serving.apis import predict_pb2, prediction_service_pb2_grpc
 
 
-def create_grpc_stub(
-    host: str = "localhost", port: str = "8500"
-) -> prediction_service_pb2_grpc.PredictionServiceStub:
+def create_grpc_stub(host: str = "localhost", port: str = "8500") -> prediction_service_pb2_grpc.PredictionServiceStub:
     hostport = f"{host}:{port}"
     channel = grpc.insecure_channel(hostport)
     stub = prediction_service_pb2_grpc.PredictionServiceStub(channel)
@@ -28,9 +26,7 @@ def grpc_request(
     request.model_spec.name = model_name
     request.model_spec.signature_name = signature_name
 
-    request.inputs[input_name].CopyFrom(
-        tf.make_tensor_proto(data_sample, shape=data_sample.shape)
-    )
+    request.inputs[input_name].CopyFrom(tf.make_tensor_proto(data_sample, shape=data_sample.shape))
 
     if async_:
         result_future = stub.Predict.future(request, 5)  # 5 seconds
