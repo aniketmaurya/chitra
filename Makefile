@@ -24,14 +24,14 @@ clean:
 	rm -f .coverage
 
 style:
-	black chitra tests examples
-	isort chitra tests examples
+	black .
+	isort --profile black .
 
 build: style clean
 	flit build
 
-pypi: build
-	flit publish
+#pypi: build
+#	flit publish
 
 push:
 	git push && git push --tags

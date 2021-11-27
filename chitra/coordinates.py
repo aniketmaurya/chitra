@@ -1,10 +1,14 @@
-from typing import List, Optional, Tuple, Union
+from typing import TYPE_CHECKING, List, Optional, Tuple, Union
 
 import numpy as np
-from imgaug.augmentables import bbs
+
+if TYPE_CHECKING:
+    from imgaug.augmentables import bbs
 
 
 class BoundingBoxes:
+    from imgaug.augmentables import bbs
+
     CENTER = "XXYY"
     CORNER = "XYXY"
 
