@@ -7,7 +7,6 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=coverage)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 ![GitHub issues](https://img.shields.io/github/issues/aniketmaurya/chitra?style=flat)
 [![Documentation Status](https://readthedocs.org/projects/chitra/badge/?version=latest)](https://chitra.readthedocs.io/en/latest/?badge=latest)
-[![Discord](https://img.shields.io/discord/848469007443165184?style=flat)](https://discord.gg/TdnAfDw3kB)
 
 ## What is chitra?
 
