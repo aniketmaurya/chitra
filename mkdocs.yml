@@ -79,5 +79,4 @@ nav:
       - serve: chitra/serve.md
       - CLI: chitra/cli.md
       - visualization: chitra/visualization.md
-#      - Core: chitra/core.md
   - Release Notes: 'CHANGELOG.md'
