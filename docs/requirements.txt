@@ -21,3 +21,5 @@ smart_open
 tensorflow-addons
 tf-keras-vis
 pytorch-lightning
+scikit-learn
+timm
