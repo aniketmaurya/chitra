@@ -1,1 +1,1 @@
-::: chitra.image
+::: chitra.image.image

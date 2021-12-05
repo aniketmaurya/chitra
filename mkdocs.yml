@@ -51,12 +51,13 @@ plugins:
   - autorefs
   - mkdocs-jupyter
   - mkdocstrings:
-      default_handler: python
       handlers:
         python:
-          rendering:
-            show_source: false
-
+          setup_commands:
+            - import sys
+            - sys.path.append('./')
+          selection:
+            new_path_syntax: true
 
 extra:
   homepage: https://chitra.readthedocs.io/en/latest
@@ -74,9 +75,9 @@ nav:
       - Model Server: 'examples/model-server/model-server.md'
 
   - API References:
-      - Image: chitra/image.md
-      - Coordinates: chitra/coordinates.md
-      - serve: chitra/serve.md
-      - CLI: chitra/cli.md
-      - visualization: chitra/visualization.md
+      - Image: 'chitra/image.md'
+      - Coordinates: 'chitra/coordinates.md'
+      - serve: 'chitra/serve.md'
+      - CLI: 'chitra/cli.md'
+      - visualization: 'chitra/visualization.md'
   - Release Notes: 'CHANGELOG.md'
