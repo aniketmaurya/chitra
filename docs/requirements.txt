@@ -1,6 +1,6 @@
 chitra
 git+https://github.com/aniketmaurya/chitra@master
-mkdocs==1.2.2
+mkdocs==1.2.3
 mkdocs-autorefs==0.2.1
 mkdocs-git-revision-date-localized-plugin==0.9.2
 mkdocs-jupyter==0.17.3
