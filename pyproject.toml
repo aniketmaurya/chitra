@@ -51,7 +51,7 @@ serve = [
     "fastapi", "uvicorn", "pydantic", "python-multipart",
     "gradio >=2.2.2",
     "tensorflow-serving-api",
-    "chalice", "smart_open[all]",
+        "chalice", "smart_open[all]",
 ]
 test = [
     "pytest",
