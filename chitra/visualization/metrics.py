@@ -32,6 +32,15 @@ def plot_confusion_matrix(
     title: str = "Confusion Matrix",
     cmap: str = None,
 ):
+    """Plots confusion matrix
+    Args:
+        y_pred: Sequence of predictions
+        y_true: Sequence of ground truth value
+        display_labels: Labels to display on the plot
+        include_values: Whether to keep values in the Matrix cells
+        title: Title of Matrix image 
+        cmap: color maps
+    """
     if detect_multilabel(y_true):
         logger.warning("You might want to use multi-label version!")
 
