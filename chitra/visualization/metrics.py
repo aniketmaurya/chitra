@@ -38,7 +38,7 @@ def plot_confusion_matrix(
         y_true: Sequence of ground truth value
         display_labels: Labels to display on the plot
         include_values: Whether to keep values in the Matrix cells
-        title: Title of Matrix image 
+        title: Title of Matrix image
         cmap: color maps
     """
     if detect_multilabel(y_true):
