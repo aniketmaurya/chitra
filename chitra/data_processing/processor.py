@@ -33,3 +33,18 @@ class DataProcessor:
         if self._postprocess_fn is None:
             raise UserWarning("postprocess method not defined")
         return self._postprocess_fn(x, **kwargs)
+
+
+def batchify(array: list, bs: int = 1, generator: bool = True):
+    """Convert any iterable into a list/generator with batch size `bs`"""
+
+    def list_to_batch(array, bs):
+        n = len(array)
+        for i in range(0, n, bs):
+            batch = array[i : i + bs]
+            yield batch
+
+    if generator:
+        return list_to_batch(array, bs)
+    else:
+        return list(list_to_batch(array, bs))

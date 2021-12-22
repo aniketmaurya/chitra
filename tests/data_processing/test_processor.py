@@ -1,6 +1,6 @@
 import pytest
 
-from chitra.data_processing import DataProcessor
+from chitra.data_processing import DataProcessor, batchify
 
 
 def dummy_preprocess(x: int):
@@ -35,3 +35,8 @@ def test_data_processor():
     x = data_processor_empty.preprocess(x)
     x = data_processor_empty.postprocess(x)
     assert x == 5
+
+
+def test_batchify():
+    x = list(range(1, 5))
+    assert batchify(x, 2, False) == [[1, 2], [3, 4]]
