@@ -36,7 +36,7 @@ def test_data_processor():
     x = data_processor_empty.postprocess(x)
     assert x == 5
 
-    
+
 def test_batchify():
     x = list(range(1, 5))
-    assert batchify(x, 2, False)==[[1,2], [3,4]]
+    assert batchify(x, 2, False) == [[1, 2], [3, 4]]
