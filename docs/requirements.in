@@ -23,4 +23,5 @@ tf-keras-vis
 pytorch-lightning
 scikit-learn
 timm
-numpy==1.21.5
+numpy==1.21.5 # numpy 1.22.0 is not not found on CI
+mistune>=2.0.1 # not directly required, pinned by Snyk to avoid a vulnerability
