@@ -387,8 +387,9 @@ notebook==6.4.6
     #   jupyter-contrib-nbextensions
     #   jupyter-latex-envs
     #   jupyter-nbextensions-configurator
-numpy==1.22.0
+numpy==1.21.5
     # via
+    #   -r requirements.in
     #   gradio
     #   h5py
     #   imageio
