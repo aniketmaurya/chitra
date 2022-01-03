@@ -62,22 +62,13 @@ class Clf:
             plt.axis("off")
 
     @staticmethod
-    def _get_image_list(path: str, allowed_ext: List[str]) -> tf.data.Dataset:
-        """
-        Args:
-            `path`: pathlib.Path
-            allowed_ext: Allowed image file extension
-
-        Returns: tf.data.Dataset which is a list of image filenames
-
+    def _get_image_list(path: str):
+        """`path`: pathlib.Path
+        Returns: list of images
         """
         if not isinstance(path, str):
             raise AssertionError
-        file_list = [glob(f"{path}/*/*.{ext}") for ext in allowed_ext]
-        file_ds_list: List[tf.data.Dataset] = [tf.data.Dataset.from_tensors(files) for files in file_list]
-        list_images = file_ds_list[0]
-        for file_ds in file_ds_list[1:]:
-            list_images = list_images.concatenate(file_ds)
+        list_images = tf.data.Dataset.list_files(f"{path}/*/*")
         return list_images
 
     @tf.function
@@ -170,7 +161,7 @@ class Clf:
 
         list_folders = tf.data.Dataset.list_files(str(path / "*"))
 
-        list_images = self._get_image_list(str(path), allowed_ext=allowed_ext)
+        list_images = self._get_image_list(str(path))
         if shuffle:
             list_images.shuffle(shuffle).cache()
         else:
