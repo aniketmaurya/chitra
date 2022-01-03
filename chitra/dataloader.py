@@ -1,7 +1,7 @@
 import math
 import os
 import pathlib
-from typing import Union
+from typing import Union, List
 
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -12,7 +12,7 @@ from .core import remove_dsstore
 from .utility.tf_utils import get_basename
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
-
+DEFAULT_EXT = ["png", "jpg", "jpeg"]
 
 class Clf:
     def __init__(self):
@@ -134,6 +134,7 @@ class Clf:
         target_shape: Union[None, tuple] = (224, 224),
         shuffle: Union[bool, int] = True,
         encode_classes: bool = True,
+        allowed_ext: Optional[List[str]] = DEFAULT_EXT
     ):
         """Load dataset from given path.
         Args:
@@ -142,6 +143,7 @@ class Clf:
             rescale: images will be multiplied by the given value
             shuffle: Shuffles the dataset randomly. Expects bool or int.
             encode_classes: Will sparse encode classes if True
+            allowed_ext: Allowed Image file extensions. Defaults are `jpg | png | jpeg`
         Returns: image, label -> tf.data.Dataset prefetched with tf.data.AUTOTUNE
 
         By default the loaded image size is 224x224, pass None to load original size.
@@ -157,7 +159,8 @@ class Clf:
 
         self.shape = target_shape
 
-        list_folders = tf.data.Dataset.list_files(str(path / "*"))
+        for ext in allowed_ext:
+            list_folders = tf.data.Dataset.concatenate(tf.data.Dataset.list_files(str(path / f"*.{ext}")))
 
         list_images = self._get_image_list(str(path))
         if shuffle:
