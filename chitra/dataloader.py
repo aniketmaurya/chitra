@@ -1,7 +1,7 @@
 import math
 import os
 import pathlib
-from typing import Union, List
+from typing import Union, List, Optional
 
 import matplotlib.pyplot as plt
 import tensorflow as tf
