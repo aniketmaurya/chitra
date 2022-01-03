@@ -1,7 +1,7 @@
 import math
 import os
 import pathlib
-from typing import Union, List, Optional
+from typing import List, Optional, Union
 
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -13,6 +13,7 @@ from .utility.tf_utils import get_basename
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 DEFAULT_EXT = ["png", "jpg", "jpeg"]
+
 
 class Clf:
     def __init__(self):
@@ -61,13 +62,17 @@ class Clf:
             plt.axis("off")
 
     @staticmethod
-    def _get_image_list(path: str):
+    def _get_image_list(path: str, allowed_ext: List[str]) -> tf.data.Dataset:
         """`path`: pathlib.Path
         Returns: list of images
         """
         if not isinstance(path, str):
             raise AssertionError
-        list_images = tf.data.Dataset.list_files(f"{path}/*/*")
+        file_ds_list: List[tf.data.Dataset] = [tf.data.Dataset.list_files(f"{path}/*/*.{ext}") for ext in allowed_ext]
+
+        list_images = file_ds_list[0]
+        for file_ds in file_ds_list[1:]:
+            list_images = list_images.concatenate(file_ds)
         return list_images
 
     @tf.function
@@ -134,7 +139,7 @@ class Clf:
         target_shape: Union[None, tuple] = (224, 224),
         shuffle: Union[bool, int] = True,
         encode_classes: bool = True,
-        allowed_ext: Optional[List[str]] = DEFAULT_EXT
+        allowed_ext: Optional[List[str]] = DEFAULT_EXT,
     ):
         """Load dataset from given path.
         Args:
@@ -159,8 +164,7 @@ class Clf:
 
         self.shape = target_shape
 
-        for ext in allowed_ext:
-            list_folders = tf.data.Dataset.concatenate(tf.data.Dataset.list_files(str(path / f"*.{ext}")))
+        list_folders = tf.data.Dataset.list_files(str(path / "*"))
 
         list_images = self._get_image_list(str(path))
         if shuffle:
