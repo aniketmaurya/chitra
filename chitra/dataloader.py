@@ -166,7 +166,7 @@ class Clf:
 
         list_folders = tf.data.Dataset.list_files(str(path / "*"))
 
-        list_images = self._get_image_list(str(path))
+        list_images = self._get_image_list(str(path), allowed_ext=allowed_ext)
         if shuffle:
             list_images.shuffle(shuffle).cache()
         else:
