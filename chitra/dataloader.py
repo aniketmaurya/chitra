@@ -1,6 +1,7 @@
 import math
 import os
 import pathlib
+from glob import glob
 from typing import List, Optional, Union
 
 import matplotlib.pyplot as plt
@@ -72,9 +73,8 @@ class Clf:
         """
         if not isinstance(path, str):
             raise AssertionError
-        file_ds_list: List[tf.data.Dataset] = [tf.data.Dataset.list_files(f"{path}/*/*.{ext}") for ext in allowed_ext]
-        if len(file_ds_list) == 0:
-            raise FileNotFoundError(f"No file found at path {path}")
+        file_list = [glob(f"{path}/*/*.{ext}") for ext in allowed_ext]
+        file_ds_list: List[tf.data.Dataset] = [tf.data.Dataset.from_tensors(files) for files in file_list]
         list_images = file_ds_list[0]
         for file_ds in file_ds_list[1:]:
             list_images = list_images.concatenate(file_ds)
