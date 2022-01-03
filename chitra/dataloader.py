@@ -12,7 +12,7 @@ from .core import remove_dsstore
 from .utility.tf_utils import get_basename
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
-DEFAULT_EXT = ["png", "jpg", "jpeg"]
+DEFAULT_EXT = ("png", "jpg", "jpeg")
 
 
 class Clf:
@@ -31,7 +31,6 @@ class Clf:
         https://www.tensorflow.org/tutorials/load_data/images#load_using_keraspreprocessing
 
         Args:
-            data: tf.data.Dataset containing image, label
             limit: number of images to display
             figsize: size of visualization
         Returns:
@@ -145,7 +144,6 @@ class Clf:
         Args:
             path: string, path of folder containing dataset
             target_shape: shape of output image
-            rescale: images will be multiplied by the given value
             shuffle: Shuffles the dataset randomly. Expects bool or int.
             encode_classes: Will sparse encode classes if True
             allowed_ext: Allowed Image file extensions. Defaults are `jpg | png | jpeg`
