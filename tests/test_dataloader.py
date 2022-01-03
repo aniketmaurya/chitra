@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
-from chitra.dataloader import Clf
+from chitra.dataloader import DEFAULT_EXT, Clf
 
 shape = (32, 32)
 class_names = ("a", "b")
@@ -23,4 +23,4 @@ def test__ensure_shape():
 
 
 def test__get_image_list():
-    assert len(clf._get_image_list(".")) != 0
+    assert len(clf._get_image_list(".", DEFAULT_EXT)) != 0

@@ -1,7 +1,8 @@
 import math
 import os
 import pathlib
-from typing import Union, List, Optional
+from glob import glob
+from typing import List, Optional, Union
 
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -12,7 +13,8 @@ from .core import remove_dsstore
 from .utility.tf_utils import get_basename
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
-DEFAULT_EXT = ["png", "jpg", "jpeg"]
+DEFAULT_EXT = ("png", "jpg", "jpeg")
+
 
 class Clf:
     def __init__(self):
@@ -30,7 +32,6 @@ class Clf:
         https://www.tensorflow.org/tutorials/load_data/images#load_using_keraspreprocessing
 
         Args:
-            data: tf.data.Dataset containing image, label
             limit: number of images to display
             figsize: size of visualization
         Returns:
@@ -61,13 +62,22 @@ class Clf:
             plt.axis("off")
 
     @staticmethod
-    def _get_image_list(path: str):
-        """`path`: pathlib.Path
-        Returns: list of images
+    def _get_image_list(path: str, allowed_ext: List[str]) -> tf.data.Dataset:
+        """
+        Args:
+            `path`: pathlib.Path
+            allowed_ext: Allowed image file extension
+
+        Returns: tf.data.Dataset which is a list of image filenames
+
         """
         if not isinstance(path, str):
             raise AssertionError
-        list_images = tf.data.Dataset.list_files(f"{path}/*/*")
+        file_list = [glob(f"{path}/*/*.{ext}") for ext in allowed_ext]
+        file_ds_list: List[tf.data.Dataset] = [tf.data.Dataset.from_tensors(files) for files in file_list]
+        list_images = file_ds_list[0]
+        for file_ds in file_ds_list[1:]:
+            list_images = list_images.concatenate(file_ds)
         return list_images
 
     @tf.function
@@ -134,13 +144,12 @@ class Clf:
         target_shape: Union[None, tuple] = (224, 224),
         shuffle: Union[bool, int] = True,
         encode_classes: bool = True,
-        allowed_ext: Optional[List[str]] = DEFAULT_EXT
+        allowed_ext: Optional[List[str]] = DEFAULT_EXT,
     ):
         """Load dataset from given path.
         Args:
             path: string, path of folder containing dataset
             target_shape: shape of output image
-            rescale: images will be multiplied by the given value
             shuffle: Shuffles the dataset randomly. Expects bool or int.
             encode_classes: Will sparse encode classes if True
             allowed_ext: Allowed Image file extensions. Defaults are `jpg | png | jpeg`
@@ -159,10 +168,9 @@ class Clf:
 
         self.shape = target_shape
 
-        for ext in allowed_ext:
-            list_folders = tf.data.Dataset.concatenate(tf.data.Dataset.list_files(str(path / f"*.{ext}")))
+        list_folders = tf.data.Dataset.list_files(str(path / "*"))
 
-        list_images = self._get_image_list(str(path))
+        list_images = self._get_image_list(str(path), allowed_ext=allowed_ext)
         if shuffle:
             list_images.shuffle(shuffle).cache()
         else:
