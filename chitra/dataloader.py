@@ -62,13 +62,19 @@ class Clf:
 
     @staticmethod
     def _get_image_list(path: str, allowed_ext: List[str]) -> tf.data.Dataset:
-        """`path`: pathlib.Path
-        Returns: list of images
+        """
+        Args:
+            `path`: pathlib.Path
+            allowed_ext: Allowed image file extension
+
+        Returns: tf.data.Dataset which is a list of image filenames
+
         """
         if not isinstance(path, str):
             raise AssertionError
         file_ds_list: List[tf.data.Dataset] = [tf.data.Dataset.list_files(f"{path}/*/*.{ext}") for ext in allowed_ext]
-
+        if len(file_ds_list) == 0:
+            raise FileNotFoundError(f"No file found at path {path}")
         list_images = file_ds_list[0]
         for file_ds in file_ds_list[1:]:
             list_images = list_images.concatenate(file_ds)
