@@ -25,8 +25,8 @@ def cm_accuracy(cm: np.ndarray):
 
 
 def plot_confusion_matrix(
-    y_pred: Union[np.ndarray, List],
     y_true: Union[np.ndarray, List],
+    y_pred: Union[np.ndarray, List],
     display_labels=None,
     include_values: bool = True,
     title: str = "Confusion Matrix",
@@ -34,8 +34,8 @@ def plot_confusion_matrix(
 ):
     """Plots confusion matrix
     Args:
-        y_pred: Sequence of predictions
         y_true: Sequence of ground truth value
+        y_pred: Sequence of predictions
         display_labels: Labels to display on the plot
         include_values: Whether to keep values in the Matrix cells
         title: Title of Matrix image
