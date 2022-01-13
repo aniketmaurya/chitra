@@ -1,5 +1,27 @@
+## Include files/folders
+
 include pyproject.toml
-include LICENSE
-include CONTRIBUTING.md
 include README.md
+include LICENSE
+include CITATION.cff
+include *.cff  # citation info
+
+## Exclude individual files (non-hidden)
+exclude CONTRIBUTING.md
+exclude CODE_OF_CONDUCT.md
+exclude Makefile
+exclude mkdocs.yml
+exclude sonar-project.properties
+
+## Exclude individual files (hidden)
+exclude .pep8speaks.yml
+exclude .readthedocs.yaml
+exclude .pre-commit-config.yaml
+
+
+## Recursive exclude folders
 recursive-exclude * __pycache__
+recursive-exclude tests *
+recursive-exclude docs *
+recursive-exclude examples *
+recursive-exclude .github *
