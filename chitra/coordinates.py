@@ -28,8 +28,8 @@ class BoundingBoxes:
             self.CORNER,
         ):
             raise AssertionError("bbox format must be either xyxy or xyhw")
-        bboxes = self._listify(bboxes, 4)
-        labels = self._listify(labels)
+        #bboxes = self._listify(bboxes)
+        #labels = self._listify(labels)
 
         if len(bboxes) != len(labels):
             raise UserWarning(f"len of boxes and labels not matching: {len(bboxes), len(labels)}")
