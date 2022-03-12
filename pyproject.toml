@@ -49,7 +49,7 @@ nn = [
 ]
 serve = [
     "fastapi", "uvicorn", "pydantic", "python-multipart",
-    "gradio >=2.2.2",
+    "gradio ==2.2.2",
     "tensorflow-serving-api",
     "chalice", "smart_open[all]",
 ]
