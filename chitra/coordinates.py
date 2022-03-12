@@ -39,7 +39,7 @@ class BoundingBoxes:
 
     def _listify(self, item, dim_trigger=None):
         if item is None:
-            return item
+            return []
 
         if not isinstance(item, (list, tuple)):
             return [item]
