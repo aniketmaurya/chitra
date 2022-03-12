@@ -22,12 +22,12 @@ class BoundingBoxes:
             - `xyxy` for corner points of bbox
             - `xyhw` for x-center, y-center, height and width format of bbox
         """
-
-        if box_format.upper() not in (
+        box_format = box_format.upper()
+        if box_format not in (
             self.CENTER,
             self.CORNER,
         ):
-            raise AssertionError("bbox format must be either xyxy or xyhw")
+            raise ValueError("bbox format must be either xyxy or xyhw")
         bboxes = self._listify(bboxes, 4)
         labels = self._listify(labels)
 
