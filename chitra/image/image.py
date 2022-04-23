@@ -1,7 +1,8 @@
 import io
 import os
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, List, Union
+from typing import Any, List, Optional, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -37,41 +38,36 @@ def _url_to_image(url: str, cache: bool) -> Image.Image:
     return image
 
 
+@dataclass(init=False)
 class Chitra:
     """Ultimate image utility class.
 
     1. Load image from file, web url, numpy or bytes
     2. Plot image
     3. Draw bounding boxes
+
+    Args:
+        data: numpy, url, filelike
+        bboxes:
+        labels:
+        box_format:
+        cache[bool]: Whether to cache downloaded image
     """
+
+    data: Any
+    bboxes: Optional[BoundingBoxes] = None
+    labels: Optional[List] = None
 
     def __init__(
         self,
         data: Any,
-        bboxes: List = None,
-        labels: List = None,
-        box_format: str = BoundingBoxes.CORNER,
+        bboxes: Optional[List] = None,
+        labels: Optional[List] = None,
+        box_format: Optional[str] = BoundingBoxes.CORNER,
         cache: bool = False,
-        *args,
-        **kwargs
     ) -> None:
-        """
-
-        Args:
-            data: numpy, url, filelike
-            bboxes:
-            labels:
-            box_format:
-            cache[bool]: Whether to cache downloaded image
-            *args:
-            **kwargs:
-        """
-        super().__init__()
         self.image = self._load_image(data, cache=cache)
-        self.bboxes = None
-
-        if bboxes is not None:
-            self.bboxes = BoundingBoxes(bboxes, labels)
+        self.bboxes = BoundingBoxes(bboxes, labels, box_format=box_format)
 
     @staticmethod
     def _load_image(data: DATA_FORMATS, cache: bool):
@@ -135,6 +131,7 @@ class Chitra:
         return self.image
 
     def resize_image_with_bbox(self, size: List[int]):
+        """Resize both image and the bounding boxes"""
         old_size = self.shape
         self.image = self.image.resize(size)
         self.bboxes.resize_with_image(old_size, self.numpy())
