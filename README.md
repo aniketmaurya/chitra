@@ -1,6 +1,6 @@
 # chitra
 
-[![CodeFactor](https://www.codefactor.io/repository/github/aniketmaurya/chitra/badge)](https://www.codefactor.io/repository/github/aniketmaurya/chitra)
+[![CodeFactor](https://www.codefactor.io/repository/github/gradsflow/chitra/badge)](https://www.codefactor.io/repository/github/gradsflow/chitra)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=aniketmaurya_chitra&metric=security_rating)](https://sonarcloud.io/dashboard?id=aniketmaurya_chitra)
