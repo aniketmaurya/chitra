@@ -34,7 +34,6 @@ def get_label(filename):
 
 class ImageSizeList:
     def __init__(self, img_sz_list=None):
-
         if (
             isinstance(img_sz_list, (list, tuple))
             and len(img_sz_list) != 0

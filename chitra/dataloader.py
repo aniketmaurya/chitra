@@ -120,7 +120,6 @@ class Clf:
             self._encode_classes()
 
     def _encode_classes(self):
-
         class_names = sorted(self.CLASS_NAMES)
 
         for i, e in enumerate(class_names):

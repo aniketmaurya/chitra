@@ -39,7 +39,6 @@ class ChaliceServer(CloudServer):
         return {"hello": "world"}
 
     def predict(self) -> dict:
-
         data_processor = self.data_processor
         x = self.app.current_request.raw_body
         logger.debug(f"raw body type={type(x)}")
