@@ -5,7 +5,6 @@ from imgaug.augmentables import bbs
 
 
 class BoundingBoxes:
-
     CENTER = "XXYY"
     CORNER = "XYXY"
 

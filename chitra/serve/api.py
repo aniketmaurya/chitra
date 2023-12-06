@@ -80,7 +80,6 @@ class API(ModelServer):
         return x
 
     def setup(self, **_):
-
         if self.api_type in (IMAGE_CLF, OBJECT_DETECTION):
             self.app.post("/api/predict-image")(self.predict_image)
 
